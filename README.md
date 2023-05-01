@@ -26,7 +26,7 @@ The purpose of this repository is to contain standards for the Sway Language whi
 
 Standards in this repository may be in various stages of development. Use of draft standards and feedback on the proposed standards is encouraged. To use a draft, search for a standard using the appropriate github label and implement the standard abi into your contract. 
 
-If you don't find what you're looking for, feel free to create and issue and propose a new standard!
+If you don't find what you're looking for, feel free to create an issue and propose a new standard!
 
 > **Note**
 > Sway is a language under heavy development therefore the standards may not be the most ergonomic. Over time they should receive updates / improvements in order to demonstrate how Sway can be used in real use cases.
