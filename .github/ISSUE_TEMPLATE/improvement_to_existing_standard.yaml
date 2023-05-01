@@ -1,0 +1,21 @@
+name: Improvement to standard
+description: If you are improving something that already exists then use this template!
+title: "<title>"
+labels: ["Improvement"]
+body:
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Describe the improvement, motivation behind it and write a specification
+      placeholder: |
+        #### Description
+        This improves the standard by ...
+
+        #### Motivation
+        It allows ...
+
+        #### Specification
+        ...
+    validations:
+      required: true
