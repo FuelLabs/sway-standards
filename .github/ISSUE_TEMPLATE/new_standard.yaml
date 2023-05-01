@@ -1,0 +1,36 @@
+name: Requesting New Standard
+description: If you are a completely new standard then use this template!
+title: "<title>"
+labels: ["New Standard"]
+body:
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Describe your standard, motivation behind it and write a specification
+      placeholder: |
+        # Abstract
+        This standard ...
+
+        # Motivation
+        It allows ...
+
+        # Prior Art
+        History and other examples include ...
+
+        # Specification
+        ## Required Functions
+
+        ## Extensions
+
+        ## Events
+
+        # Rationale
+
+        # Backwards Compatibility
+
+        # Security Considerations
+
+        # Example
+    validations:
+      required: true
