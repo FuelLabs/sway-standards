@@ -1,7 +1,7 @@
 library;
 
 /// Determines the state of ownership.
-/// 
+///
 /// ### Variants
 ///
 /// * `Uninitialized`: () - The ownership has not been set.
@@ -27,7 +27,7 @@ impl core::ops::Eq for State {
 }
 
 /// Error log for when access is denied.
-/// 
+///
 /// ### Errors
 ///
 /// * `NotOwner` - Emitted when the caller is not the owner of the contract.
@@ -36,7 +36,7 @@ pub enum AccessError {
 }
 
 /// Contains the ownership state.
-/// 
+///
 /// ### Fields
 ///
 /// * `owner`: `State` - Represents the state of ownership.
@@ -46,7 +46,7 @@ pub struct Ownership {
 
 impl StorageKey<Ownership> {
     /// Returns the owner.
-    /// 
+    ///
     /// ### Return Values
     ///
     /// * `State` - Represents the state of ownership for this contract.
