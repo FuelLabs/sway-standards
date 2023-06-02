@@ -35,6 +35,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 - [SRC-20; Token Standard](https://github.com/FuelLabs/sway-standards/issues/1) is currently in draft
 - [SRC-721; Non-Fungible Token Standard](https://github.com/FuelLabs/sway-standards/issues/2) is currently in draft
+- [SRC-4; Ownership Standard](./standards/src_5/) is used to restrict function calls to admin users in contracts.
 
 ## Using a standard
 
