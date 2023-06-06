@@ -44,67 +44,6 @@ pub struct Ownership {
     owner: State,
 }
 
-impl StorageKey<Ownership> {
-    /// Returns the owner.
-    ///
-    /// ### Return Values
-    ///
-    /// * `State` - Represents the state of ownership for this contract.
-    ///
-    /// ### Number of Storage Accesses
-    ///
-    /// * Reads: `1`
-    ///
-    /// ### Examples
-    ///
-    /// ```sway
-    /// use standards::src_5::Ownership;
-    ///
-    /// storage {
-    ///     owner: Ownership = Ownership::initalized(Identity::Address(Address::from(ZERO_B256))),
-    /// }
-    ///
-    /// fn foo() {
-    ///     let stored_owner = storage.owner.owner();
-    /// }
-    /// ```
-    #[storage(read)]
-    pub fn owner(self) -> State {
-        self.read().owner
-    }
-}
-
-impl StorageKey<Ownership> {
-    /// Ensures that the sender is the owner.
-    ///
-    /// ### Reverts
-    ///
-    /// * When the sender is not the owner.
-    ///
-    /// ### Number of Storage Accesses
-    ///
-    /// * Reads: `1`
-    ///
-    /// ### Examples
-    ///
-    /// ```sway
-    /// use standards::src_5::Ownership;
-    ///
-    /// storage {
-    ///     owner: Ownership = Ownership::initalized(Identity::Address(Address::from(ZERO_B256))),
-    /// }
-    ///
-    /// fn foo() {
-    ///     storage.owner.only_owner();
-    ///     // Do stuff here
-    /// }
-    /// ```
-    #[storage(read)]
-    pub fn only_owner(self) {
-        require(self.owner() == State::Initialized(msg_sender().unwrap()), AccessError::NotOwner);
-    }
-}
-
 abi SRC_5 {
     /// Returns the owner.
     ///
