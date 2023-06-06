@@ -43,7 +43,7 @@ This function SHALL be used as a check to ensure the current function caller is 
 This function MUST revert if the caller is not defined as an owner or admin.
 
 ### `fn owner() -> State`
-This function SHALL return the current state of ownership for the contract where `State` is either `Uninitialized`, `Initialized`, or `Revkoed`.
+This function SHALL return the current state of ownership for the contract where `State` is either `Uninitialized`, `Initialized`, or `Revoked`.
 
 ## Errors
 
