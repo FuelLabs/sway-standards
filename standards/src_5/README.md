@@ -23,7 +23,7 @@ Ownership libraries exist for other ecosystems such as OpenZeppelin's [Ownership
 
 ## State
 
-There shall be 3 states for any library implementing an ownership module, these are:
+There SHALL be 3 states for any library implementing an ownership module, these are:
 
 ### - `Uninitialized`
 The `Uninitialized` state SHALL be set as the initial state if no owner or admin is set. The `Uninitialized` state may be used when an owner or admin MAY be set in the future.
@@ -32,7 +32,7 @@ The `Uninitialized` state SHALL be set as the initial state if no owner or admin
 The `Initialized` state SHALL be set as the state if an owner or admin is set. 
 
 ### - `Revoked`
-The `Revoked` state SHALL be set when there is no owner or admin and there SHALL not be one set in the future.
+The `Revoked` state SHALL be set when there is no owner or admin and there SHALL NOT be one set in the future.
 
 ## Functions
 
@@ -47,7 +47,7 @@ This function SHALL return the current state of ownership for the contract where
 
 ## Errors
 
-There shall be error handling.
+There SHALL be error handling.
 
 ### - `NotOwner`
 This error MUST be emitted when `only_owner()` reverts.
@@ -91,3 +91,8 @@ impl SRC_5 for MyContract {
     }
 }
 ```
+
+
+The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”,
+“SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be
+interpreted as described in RFC 2119: https://www.ietf.org/rfc/rfc2119.txt
