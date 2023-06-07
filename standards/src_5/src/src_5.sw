@@ -1,15 +1,12 @@
 library;
 
 /// Determines the state of ownership.
-///
-/// ### Variants
-///
-/// * `Uninitialized`: () - The ownership has not been set.
-/// * `Initialized`: `Identity` - The user which has been given ownership.
-/// * `Revoked`: () - The ownership has been given up and can never be set again.
 pub enum State {
+    /// The ownership has not been set.
     Uninitialized: (),
+    /// The user which has been given ownership.
     Initialized: Identity,
+    /// The ownership has been given up and can never be set again.
     Revoked: (),
 }
 
@@ -27,20 +24,14 @@ impl core::ops::Eq for State {
 }
 
 /// Error log for when access is denied.
-///
-/// ### Errors
-///
-/// * `NotOwner` - Emitted when the caller is not the owner of the contract.
 pub enum AccessError {
+    /// Emitted when the caller is not the owner of the contract.
     NotOwner: (),
 }
 
 /// Contains the ownership state.
-///
-/// ### Fields
-///
-/// * `owner`: `State` - Represents the state of ownership.
 pub struct Ownership {
+    /// Represents the state of ownership.
     owner: State,
 }
 
@@ -49,14 +40,44 @@ abi SRC_5 {
     ///
     /// ### Return Values
     ///
-    /// * `State` - Represents the state of ownership for this contract.
+    /// * [State] - Represents the state of ownership for this contract.
+    ///
+    /// ### Examples
+    ///
+    /// ```sway
+    /// use standards::src_5::*;
+    ///
+    /// storage {
+    ///     owner: Ownership = Ownership::initalized(Identity::Address(Address::from(ZERO_B256))),
+    /// }
+    ///
+    /// fn foo() {
+    ///     let stored_owner = storage.owner.owner();
+    /// }
+    /// ```
     #[storage(read)]
     fn owner() -> State;
+
     /// Ensures that the sender is the owner.
     ///
     /// ### Reverts
     ///
     /// * When the sender is not the owner.
+    ///
+    /// ### Examples
+    ///
+    /// ```sway
+    /// use standards::src_5::*;
+    ///
+    /// storage {
+    ///     owner: Ownership = Ownership::initalized(Identity::Address(Address::from(ZERO_B256))),
+    /// }
+    ///
+    /// fn foo() {
+    ///     storage.owner.only_owner();
+    ///     // Do stuff here
+    /// }
+    /// ```
     #[storage(read)]
     fn only_owner();
 }
