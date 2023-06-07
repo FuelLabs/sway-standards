@@ -45,14 +45,8 @@ abi SRC_5 {
     /// ### Examples
     ///
     /// ```sway
-    /// use standards::src_5::*;
-    ///
-    /// storage {
-    ///     owner: Ownership = Ownership::initalized(Identity::Address(Address::from(ZERO_B256))),
-    /// }
-    ///
     /// fn foo() {
-    ///     let stored_owner = storage.owner.owner();
+    ///     let stored_owner = owner();
     /// }
     /// ```
     #[storage(read)]
@@ -65,16 +59,8 @@ abi SRC_5 {
     /// * When the sender is not the owner.
     ///
     /// ### Examples
-    ///
-    /// ```sway
-    /// use standards::src_5::*;
-    ///
-    /// storage {
-    ///     owner: Ownership = Ownership::initalized(Identity::Address(Address::from(ZERO_B256))),
-    /// }
-    ///
     /// fn foo() {
-    ///     storage.owner.only_owner();
+    ///     only_owner();
     ///     // Do stuff here
     /// }
     /// ```
