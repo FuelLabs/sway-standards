@@ -59,6 +59,7 @@ abi SRC_5 {
     /// * When the sender is not the owner.
     ///
     /// ### Examples
+    /// 
     /// fn foo() {
     ///     only_owner();
     ///     // Do stuff here
