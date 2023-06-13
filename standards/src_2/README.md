@@ -1,13 +1,13 @@
 <p align="center">
     <picture>
-        <source media="(prefers-color-scheme: dark)" srcset=".docs/src-5-logo-dark-theme.png">
-        <img alt="SRC-5 logo" width="400px" src=".docs/src-5-logo-light-theme.png">
+        <source media="(prefers-color-scheme: dark)" srcset=".docs/src-2-logo-dark-theme.png">
+        <img alt="SRC-5 logo" width="400px" src=".docs/src-2-logo-light-theme.png">
     </picture>
 </p>
 
 # Abstract
 
-The following standard intends to define the structure and organization of inline documentation for functions within the Sway Language. This will be a living standard.
+The following standard intends to define the structure and organization of inline documentation for functions, structs, enums, storage, configurables, and more within the Sway Language. This will be a living standard.
 
 # Motivation
 
@@ -21,7 +21,7 @@ A number of pre-existing functions in the [sway standard library](https://github
 
 ## Functions
 
-The following describes the structure and order of inline documentation for functions. Some sections may not apply to each function. When a section is not relevant it shall be omitted. 
+The following describes the structure and order of inline documentation for functions. Some sections MAY not apply to each function. When a section is not relevant it shall be omitted. 
 
 #### - Description
 
@@ -46,7 +46,7 @@ Example:
 #### - Arguments
 
 This section has a `h3` header.
-Lists the arguments of the function's definition with the `*` symbol and describes each one. The list shall provide the name, type, and description. The argument shall be encapsulated between two backticks: `argument`. The type shall be encapsulated between two square brackets: [type].
+Lists the arguments of the function's definition with the `*` symbol and describes each one. The list SHALL provide the name, type, and description. The argument SHALL be encapsulated between two backticks: `argument`. The type SHALL be encapsulated between two square brackets: [type].
 Example:
 ```rust
 /// ### Arguments
@@ -57,7 +57,7 @@ Example:
 #### - Returns
 
 This section has a `h3` header.
-Lists the return values of the function with the `*` symbol and describes each one. This list shall be in order of value and provide the type and description. The type shall be encapsulated between two square brackets: [type].
+Lists the return values of the function with the `*` symbol and describes each one. This list SHALL be in order of value and provide the type and description. The type SHALL be encapsulated between two square brackets: [type].
 Example:
 ```rust
 /// ### Returns
@@ -104,7 +104,7 @@ Example:
 
 ## Structs
 
-The following describes the structure and order of inline documentation for structs. Some sections may not apply to each struct. When a section is not relevant it shall be omitted. 
+The following describes the structure and order of inline documentation for structs. Some sections MAY NOT apply to each struct. When a section is not relevant it SHALL be omitted. 
 
 #### - Description
 
@@ -128,12 +128,12 @@ Example:
 
 ### - Fields
 
-The following describes the structure and order of inline documentation for fields within structs. Some sections may not apply to each field. When a section is not relevant it shall be omitted. 
+The following describes the structure and order of inline documentation for fields within structs. Some sections MAY NOT apply to each field. When a section is not relevant it SHALL be omitted. 
 
 #### Description
 
 This section has no header. 
-Each field shall have its own description with a simple explanation of the field's purpose or functionality. 
+Each field SHALL have its own description with a simple explanation of the field's purpose or functionality. 
 Example:
 ```rust
 /// This field represents an owner.
@@ -153,7 +153,7 @@ Example:
 
 ## Enums
 
-The following describes the structure and order of inline documentation for enums. Some sections may not apply to each enum. When a section is not relevant it shall be omitted. 
+The following describes the structure and order of inline documentation for enums. Some sections MAY NOT apply to each enum. When a section is not relevant it SHALL be omitted. 
 
 #### - Description
 
@@ -177,12 +177,12 @@ Example:
 
 ### - Variant 
 
-The following describes the structure and order of inline documentation for fields within enums. Some sections may not apply to each field. When a section is not relevant it shall be omitted. 
+The following describes the structure and order of inline documentation for fields within enums. Some sections MAY NOT apply to each field. When a section is not relevant it SHALL be omitted. 
 
 #### Description
 
 This section has no header. 
-Each variant shall have its own description with a simple explanation of the variant's purpose or functionality. 
+Each variant SHALL have its own description with a simple explanation of the variant's purpose or functionality. 
 Example:
 ```rust
 /// This variant represents the uninitialized state of a contract.
@@ -204,15 +204,15 @@ Example:
 
 ## Errors
 
-In Sway, errors are recommended to be enums. They shall follow the same structure and order for inline documentation as described above for enums. Some sections may not apply to each error. When a section is not relevant it shall be omitted. 
+In Sway, errors are recommended to be enums. They SHALL follow the same structure and order for inline documentation as described above for enums. Some sections MAY NOT apply to each error. When a section is not relevant it SHALL be omitted. 
 
 ## Logs
 
-In Sway, logs are recommended to be structs. They shall follow the same structure and order for inline documentation as described above for structs. Some sections may not apply to each log. When a section is not relevant it shall be omitted. 
+In Sway, logs are recommended to be structs. They SHALL follow the same structure and order for inline documentation as described above for structs. Some sections MAY NOT apply to each log. When a section is not relevant it SHALL be omitted. 
 
 ## Storage
 
-The following describes the structure and order of inline documentation for variables within the storage block. Some sections may not apply to each storage variable. When a section is not relevant it shall be omitted. 
+The following describes the structure and order of inline documentation for variables within the storage block. Some sections MAY NOT apply to each storage variable. When a section is not relevant it SHALL be omitted. 
 
 #### - Description
 
@@ -236,7 +236,7 @@ Example:
 
 ## Configurable
 
-The following describes the structure and order of inline documentation for variables in the configurable block. Some sections may not apply to each storage variable. When a section is not relevant it shall be omitted. 
+The following describes the structure and order of inline documentation for variables in the configurable block. Some sections MAY NOT apply to each storage variable. When a section is not relevant it SHALL be omitted. 
 
 #### - Description
 
