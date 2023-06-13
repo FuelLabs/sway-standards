@@ -21,7 +21,7 @@ A number of pre-existing functions in the [sway standard library](https://github
 
 ## Functions
 
-The following describes the structure and order of inline documentation for functions. Some sections MAY not apply to each function. When a section is not relevant it shall be omitted. 
+The following describes the structure and order of inline documentation for functions. Some sections MAY NOT apply to each function. When a section is not relevant it SHALL be omitted. 
 
 #### - Description
 
@@ -57,7 +57,7 @@ Example:
 #### - Returns
 
 This section has a `h3` header.
-Lists the return values of the function with the `*` symbol and describes each one. This list SHALL be in order of value and provide the type and description. The type SHALL be encapsulated between two square brackets: [type].
+Lists the return values of the function with the `*` symbol and describes each one. This list SHALL be in the order of the return index and provide the type and description. The type SHALL be encapsulated between two square brackets: [type].
 Example:
 ```rust
 /// ### Returns
@@ -68,7 +68,7 @@ Example:
 #### - Reverts
 
 This section has a `h3` header.
-Lists the cases in which the function will revert starting with the `*` symbol.
+Lists the cases in which the function will revert starting with the `*` symbol. The list SHALL be in the order of occurrence within the function.
 Example:
 ```rust
 /// ### Reverts
@@ -274,6 +274,8 @@ This standard will improve security by providing developers with relevant inform
 
 # Examples
 
+## Function Example
+
 ```rust 
 /// Ensures that the sender is the owner.
 ///
@@ -313,6 +315,8 @@ pub fn only_owner(self, number: u64) -> bool {
 }
 ```
 
+## Struct Examples
+
 ```rust
 /// Metadata that is tied to a token.
 pub struct NFTMetadata {
@@ -320,6 +324,18 @@ pub struct NFTMetadata {
     value: u64,
 }
 ```
+
+```rust
+/// Log of a bid.
+pub struct Bid {
+    /// The number of tokens that were bid.
+    amount: u64,
+    /// The user which placed this bid.
+    bidder: Identity,
+}
+```
+
+## Enum Examples
 
 ```rust
 /// Determines the state of ownership.
@@ -341,15 +357,7 @@ pub enum AccessError {
 }
 ```
 
-```rust
-/// Log of a bid.
-pub struct Bid {
-    /// The number of tokens that were bid.
-    amount: u64,
-    /// The user which placed this bid.
-    bidder: Identity,
-}
-```
+## Storage Examples
 
 ```rust
 storage {
@@ -363,6 +371,8 @@ storage {
     claims: StorageMap<Identity, ClaimState> = StorageMap {},
 }
 ```
+
+## Configurable Example
 
 ```rust
 configurable {
