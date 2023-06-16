@@ -32,7 +32,7 @@ pub enum AccessError {
 /// Contains the ownership state.
 pub struct Ownership {
     /// Represents the state of ownership.
-    owner: State,
+    state: State,
 }
 
 abi SRC_5 {
@@ -51,20 +51,4 @@ abi SRC_5 {
     /// ```
     #[storage(read)]
     fn owner() -> State;
-
-    /// Ensures that the sender is the owner.
-    ///
-    /// ### Reverts
-    ///
-    /// * When the sender is not the owner.
-    ///
-    /// ### Examples
-    ///
-    /// fn foo() {
-    ///     only_owner();
-    ///     // Do stuff here
-    /// }
-    /// ```
-    #[storage(read)]
-    fn only_owner();
 }

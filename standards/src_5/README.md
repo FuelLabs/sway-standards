@@ -23,7 +23,7 @@ Ownership libraries exist for other ecosystems such as OpenZeppelin's [Ownership
 
 ## State
 
-There SHALL be 3 states for any library implementing an ownership module, these are:
+There SHALL be 3 states for any library implementing an ownership module in the following order:
 
 ### - `Uninitialized`
 The `Uninitialized` state SHALL be set as the initial state if no owner or admin is set. The `Uninitialized` state MUST be used when an owner or admin MAY be set in the future.
@@ -34,13 +34,19 @@ The `Initialized` state SHALL be set as the state if an owner or admin is set.
 ### - `Revoked`
 The `Revoked` state SHALL be set when there is no owner or admin and there SHALL NOT be one set in the future.
 
+Example:
+
+```rust
+pub enum State {
+    Uninitialized: (),
+    Initialized: Identity,
+    Revoked: (),
+}
+```
+
 ## Functions
 
 The following functions MUST be implemented to follow the SRC-5 standard:
-
-### `fn only_owner()`
-This function SHALL be used as a check to ensure the current function caller is an owner or admin.
-This function MUST revert if the caller is not defined as an owner or admin.
 
 ### `fn owner() -> State`
 This function SHALL return the current state of ownership for the contract where `State` is either `Uninitialized`, `Initialized`, or `Revoked`.
@@ -81,13 +87,7 @@ storage {
 impl SRC_5 for MyContract {
     #[storage(read)]
     fn owner() -> State {
-        owner()
-    }
-
-    #[storage(read)]
-    fn only_owner() {
-        only_owner();
-        // Do stuff here
+        storage.owner.state
     }
 }
 ```
