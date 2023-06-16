@@ -11,7 +11,7 @@ The following standard intends to define the structure and organization of inlin
 
 # Motivation
 
-The standard seeks to provide a better developer experience using Fuel's tooling and the Language Server. This will allow for better interoperability between applicatons and allow for developers to get a faster understanding of ay external code they are using.
+The standard seeks to provide a better developer experience using Fuel's tooling and the Language Server. This will allow for better interoperability between applications and enable developers to quickly understand any external code they are using or implementing.
 
 # Prior Art
 
