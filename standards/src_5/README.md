@@ -29,7 +29,7 @@ There SHALL be 3 states for any library implementing an ownership module in the 
 The `Uninitialized` state SHALL be set as the initial state if no owner or admin is set. The `Uninitialized` state MUST be used when an owner or admin MAY be set in the future.
 
 ### - `Initialized`
-The `Initialized` state SHALL be set as the state if an owner or admin is set. 
+The `Initialized` state SHALL be set as the state if an owner or admin is set with an associated `Identity` type.
 
 ### - `Revoked`
 The `Revoked` state SHALL be set when there is no owner or admin and there SHALL NOT be one set in the future.
