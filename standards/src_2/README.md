@@ -7,11 +7,11 @@
 
 # Abstract
 
-The following standard intends to define the structure and organization of inline documentation for functions, structs, enums, storage, configurables, and more within the Sway Language. This will be a living standard.
+The following standard intends to define the structure and organization of inline documentation for functions, structs, enums, storage, configurables, and more within the Sway Language. This is a living standard.
 
 # Motivation
 
-The standard seeks to provide a better developer experience using Fuel's tooling.
+The standard seeks to provide a better developer experience using Fuel's tooling and the Language Server. This will allow for better interoperability between applicatons and allow for developers to get a faster understanding of ay external code they are using.
 
 # Prior Art
 
@@ -28,6 +28,7 @@ The following describes the structure and order of inline documentation for func
 This section has no header. 
 A simple explanation of the function's intent or functionality. 
 Example:
+
 ```rust
 /// This function computes the hash of two numbers.
 ```
@@ -37,6 +38,7 @@ Example:
 This section has a `h3` header.
 This section is directly below the description and can provide additional information beyond the function's intent or functionality.
 Example:
+
 ```rust
 /// ### Additional Information
 ///
@@ -48,6 +50,7 @@ Example:
 This section has a `h3` header.
 Lists the arguments of the function's definition with the `*` symbol and describes each one. The list SHALL provide the name, type, and description. The argument SHALL be encapsulated between two backticks: `argument`. The type SHALL be encapsulated between two square brackets: [type].
 Example:
+
 ```rust
 /// ### Arguments
 ///
@@ -59,6 +62,7 @@ Example:
 This section has a `h3` header.
 Lists the return values of the function with the `*` symbol and describes each one. This list SHALL be in the order of the return index and provide the type and description. The type SHALL be encapsulated between two square brackets: [type].
 Example:
+
 ```rust
 /// ### Returns
 ///
@@ -70,6 +74,7 @@ Example:
 This section has a `h3` header.
 Lists the cases in which the function will revert starting with the `*` symbol. The list SHALL be in the order of occurrence within the function.
 Example:
+
 ```rust
 /// ### Reverts
 ///
@@ -81,6 +86,7 @@ Example:
 This section has a `h3` header. 
 Provides information on how many storage reads, writes, and clears occur within the function.
 Example:
+
 ```rust
 /// ### Number of Storage Accesses
 ///
@@ -93,6 +99,7 @@ Example:
 This section has a `h3` header.
 This section provides an example of the use of the function. This section is not required to follow the SRC-2 standard however encouraged for auxiliary and library functions.
 Example:
+
 ```rust
 /// ### Examples
 ///
@@ -111,6 +118,7 @@ The following describes the structure and order of inline documentation for stru
 This section has no header. 
 A simple explanation of the struct's purpose or functionality. 
 Example:
+
 ```rust
 /// This struct contains information on an NFT.
 ```
@@ -120,6 +128,7 @@ Example:
 This section has a `h3` header.
 This section is directly below the description and can provide additional information beyond the struct's purpose or functionality.
 Example:
+
 ```rust
 /// ### Additional Information
 ///
@@ -135,6 +144,7 @@ The following describes the structure and order of inline documentation for fiel
 This section has no header. 
 Each field SHALL have its own description with a simple explanation of the field's purpose or functionality. 
 Example:
+
 ```rust
 /// This field represents an owner.
 field_1: Identity,
@@ -145,6 +155,7 @@ field_1: Identity,
 This section has a `h3` header.
 This section is directly below the description and can provide additional information beyond the field's purpose or functionality.
 Example:
+
 ```rust
 /// ### Additional Information
 ///
@@ -160,6 +171,7 @@ The following describes the structure and order of inline documentation for enum
 This section has no header. 
 A simple explanation of the enum's purpose or functionality. 
 Example:
+
 ```rust
 /// This enum holds the state of a contract.
 ```
@@ -169,6 +181,7 @@ Example:
 This section has a `h3` header.
 This section is directly below the description and can provide additional information beyond the enum's purpose or functionality.
 Example:
+
 ```rust
 /// ### Additional Information
 ///
@@ -184,6 +197,7 @@ The following describes the structure and order of inline documentation for fiel
 This section has no header. 
 Each variant SHALL have its own description with a simple explanation of the variant's purpose or functionality. 
 Example:
+
 ```rust
 /// This variant represents the uninitialized state of a contract.
 variant_1: (),
@@ -196,6 +210,7 @@ variant_2: Identity,
 This section has a `h3` header.
 This section is directly below the description and can provide additional information beyond the variant's purpose or functionality.
 Example:
+
 ```rust
 /// ### Additional Information
 ///
@@ -219,6 +234,7 @@ The following describes the structure and order of inline documentation for vari
 This section has no header. 
 A simple explanation of the storage variable's purpose or functionality. 
 Example:
+
 ```rust
 /// This storage variable is used for state.
 ```
@@ -228,6 +244,7 @@ Example:
 This section has a `h3` header.
 This section is directly below the description and can provide additional information beyond the storage variable's purpose or functionality.
 Example:
+
 ```rust
 /// ### Additional Information
 ///
@@ -243,6 +260,7 @@ The following describes the structure and order of inline documentation for vari
 This section has no header. 
 A simple explanation of the configurable variable's purpose or functionality. 
 Example:
+
 ```rust
 /// This configurable variable is used for an address.
 ```
@@ -252,6 +270,7 @@ Example:
 This section has a `h3` header.
 This section is directly below the description and can provide additional information beyond the configurable variable's purpose or functionality.
 Example:
+
 ```rust
 /// ### Additional Information
 ///
