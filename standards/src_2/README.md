@@ -35,60 +35,60 @@ Example:
 
 #### - Additional Information
 
-This section has a `h3` header.
+This section has a `h1` header.
 This section is directly below the description and can provide additional information beyond the function's intent or functionality.
 Example:
 
 ```rust
-/// ### Additional Information
+/// # Additional Information
 ///
 /// This function also has some complex behaviors.
 ```
 
 #### - Arguments
 
-This section has a `h3` header.
+This section has a `h1` header.
 Lists the arguments of the function's definition with the `*` symbol and describes each one. The list SHALL provide the name, type, and description. The argument SHALL be encapsulated between two backticks: `argument`. The type SHALL be encapsulated between two square brackets: [type].
 Example:
 
 ```rust
-/// ### Arguments
+/// # Arguments
 ///
 /// * `argument_1`: [Identity] - This argument is a user to be hashed.
 ```
 
 #### - Returns
 
-This section has a `h3` header.
+This section has a `h1` header.
 Lists the return values of the function with the `*` symbol and describes each one. This list SHALL be in the order of the return index and provide the type and description. The type SHALL be encapsulated between two square brackets: [type].
 Example:
 
 ```rust
-/// ### Returns
+/// # Returns
 ///
 /// * [u64] - The number of hashes performed.
 ```
 
 #### - Reverts
 
-This section has a `h3` header.
+This section has a `h1` header.
 Lists the cases in which the function will revert starting with the `*` symbol. The list SHALL be in the order of occurrence within the function.
 Example:
 
 ```rust
-/// ### Reverts
+/// # Reverts
 ///
 /// * When `argument_1` or `argument_2` are a zero [b256].
 ```
 
 #### - Number of Storage Accesses
 
-This section has a `h3` header. 
+This section has a `h1` header. 
 Provides information on how many storage reads, writes, and clears occur within the function.
 Example:
 
 ```rust
-/// ### Number of Storage Accesses
+/// # Number of Storage Accesses
 ///
 /// * Reads: `1`
 /// * Clears: `2`
@@ -96,12 +96,12 @@ Example:
 
 #### - Examples
 
-This section has a `h3` header.
+This section has a `h1` header.
 This section provides an example of the use of the function. This section is not required to follow the SRC-2 standard however encouraged for auxiliary and library functions.
 Example:
 
 ```rust
-/// ### Examples
+/// # Examples
 ///
 /// ```sway
 /// fn foo(argument_1: b256, argument_2: b256) {
@@ -125,12 +125,12 @@ Example:
 
 #### - Additional Information
 
-This section has a `h3` header.
+This section has a `h1` header.
 This section is directly below the description and can provide additional information beyond the struct's purpose or functionality.
 Example:
 
 ```rust
-/// ### Additional Information
+/// # Additional Information
 ///
 /// This struct also has some complex behaviors.
 ```
@@ -152,12 +152,12 @@ field_1: Identity,
 
 #### - Additional Information
 
-This section has a `h3` header.
+This section has a `h1` header.
 This section is directly below the description and can provide additional information beyond the field's purpose or functionality.
 Example:
 
 ```rust
-/// ### Additional Information
+/// # Additional Information
 ///
 /// This field also has some complex behaviors.
 ```
@@ -178,12 +178,12 @@ Example:
 
 #### - Additional Information
 
-This section has a `h3` header.
+This section has a `h1` header.
 This section is directly below the description and can provide additional information beyond the enum's purpose or functionality.
 Example:
 
 ```rust
-/// ### Additional Information
+/// # Additional Information
 ///
 /// This enum also has some complex behaviors.
 ```
@@ -207,12 +207,12 @@ variant_2: Identity,
 
 #### - Additional Information
 
-This section has a `h3` header.
+This section has a `h1` header.
 This section is directly below the description and can provide additional information beyond the variant's purpose or functionality.
 Example:
 
 ```rust
-/// ### Additional Information
+/// # Additional Information
 ///
 /// This variant also has some complex behaviors.
 ```
@@ -241,12 +241,12 @@ Example:
 
 #### - Additional Information
 
-This section has a `h3` header.
+This section has a `h1` header.
 This section is directly below the description and can provide additional information beyond the storage variable's purpose or functionality.
 Example:
 
 ```rust
-/// ### Additional Information
+/// # Additional Information
 ///
 /// This storage variable maps a user to a state.
 ```
@@ -267,12 +267,12 @@ Example:
 
 #### - Additional Information
 
-This section has a `h3` header.
+This section has a `h1` header.
 This section is directly below the description and can provide additional information beyond the configurable variable's purpose or functionality.
 Example:
 
 ```rust
-/// ### Additional Information
+/// # Additional Information
 ///
 /// This configurable variable makes security assumptions.
 ```
@@ -298,23 +298,23 @@ This standard will improve security by providing developers with relevant inform
 ```rust 
 /// Ensures that the sender is the owner.
 ///
-/// ### Arguments
+/// # Arguments
 ///
 /// * `number`: [u64] - A value that is checked to be 5.
 ///
-/// ### Returns
+/// # Returns
 ///
 /// * [bool] - Determines whether `number` is or is not 5.
 ///
-/// ### Reverts
+/// # Reverts
 ///
 /// * When the sender is not the owner.
 ///
-/// ### Number of Storage Accesses
+/// # Number of Storage Accesses
 ///
 /// * Reads: `1`
 ///
-/// ### Examples
+/// # Examples
 ///
 /// ```sway
 /// use ownable::Ownership;
@@ -384,7 +384,7 @@ storage {
     asset: Option<ContractId> = Option::None,
     /// Stores the ClaimState of users that have interacted with the Airdrop Distrubutor contract.
     ///
-    /// ### Additional Information
+    /// # Additional Information
     ///
     /// Maps (user => claim)
     claims: StorageMap<Identity, ClaimState> = StorageMap {},
