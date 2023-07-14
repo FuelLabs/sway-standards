@@ -34,7 +34,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 ## Standards
 
 - [SRC-20; Token Standard](https://github.com/FuelLabs/sway-standards/issues/1) is currently in draft
-- [SRC-721; Non-Fungible Token Standard](https://github.com/FuelLabs/sway-standards/issues/2) is currently in draft
+- [SRC-2; Inline Documentation](./standards/src_2/) defines how to document your Sway files.
 - [SRC-5; Ownership Standard](./standards/src_5/) is used to restrict function calls to admin users in contracts.
 
 ## Using a standard
