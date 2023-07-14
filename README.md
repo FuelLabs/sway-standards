@@ -35,6 +35,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 - [SRC-20; Token Standard](https://github.com/FuelLabs/sway-standards/issues/1) is currently in draft
 - [SRC-721; Non-Fungible Token Standard](https://github.com/FuelLabs/sway-standards/issues/2) is currently in draft
+- [SRC-5; Ownership Standard](./standards/src_5/) is used to restrict function calls to admin users in contracts.
 
 ## Using a standard
 
@@ -66,3 +67,6 @@ use standard::src_20;
 
 Check out the [book](https://fuellabs.github.io/sway-libs/book/index.html) for more info! 
 -->
+
+> **Note**
+> The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in these documents are to be interpreted as described in RFC 2119: https://www.ietf.org/rfc/rfc2119.txt
