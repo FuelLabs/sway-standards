@@ -69,14 +69,14 @@ Example:
 /// * [u64] - The number of hashes performed.
 ```
 
-#### - Panics
+#### - Reverts
 
 This section has a `h1` header.
-Lists the cases in which the function will panic starting with the `*` symbol. The list SHALL be in the order of occurrence within the function.
+Lists the cases in which the function will revert starting with the `*` symbol. The list SHALL be in the order of occurrence within the function.
 Example:
 
 ```rust
-/// # Panics
+/// # Reverts
 ///
 /// * When `argument_1` or `argument_2` are a zero [b256].
 ```
@@ -306,7 +306,7 @@ This standard will improve security by providing developers with relevant inform
 ///
 /// * [bool] - Determines whether `number` is or is not 5.
 ///
-/// # Panics
+/// # Reverts
 ///
 /// * When the sender is not the owner.
 ///
