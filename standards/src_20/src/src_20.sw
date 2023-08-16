@@ -3,7 +3,7 @@ library;
 use std::string::String;
 
 abi SRC20 {
-    /// Returns the total number of assets that have been minted for this contract. 
+    /// Returns the total number of assets that have been minted for this contract.
     ///
     /// # Returns
     ///
@@ -13,7 +13,7 @@ abi SRC20 {
     ///
     /// ```sway
     /// use src20::SRC20;
-    /// 
+    ///
     /// fn foo(contract: ContractId) {
     ///     let contract_abi = abi(SRC20, contract);
     ///     let total_assets = contract_abi.total_assets();
@@ -23,7 +23,7 @@ abi SRC20 {
     #[storage(read)]
     fn total_assets() -> u64;
 
-    /// Returns the total supply of tokens that have been minted for an asset. 
+    /// Returns the total supply of tokens that have been minted for an asset.
     ///
     /// # Arguments
     ///
@@ -37,7 +37,7 @@ abi SRC20 {
     ///
     /// ```sway
     /// use src20::SRC20;
-    /// 
+    ///
     /// fn foo(contract: ContractId, asset: AssetId) {
     ///     let contract_abi = abi(SRC20, contract);
     ///     let total_supply = contract_abi.total_supply(asset);
@@ -62,7 +62,7 @@ abi SRC20 {
     /// ```sway
     /// use src20::SRC20;
     /// use std::string::String;
-    /// 
+    ///
     /// fn foo(contract: ContractId, asset: AssetId) {
     ///     let contract_abi = abi(SRC20, contract);
     ///     let name = contract_abi.name(asset);
@@ -71,7 +71,6 @@ abi SRC20 {
     /// ```
     #[storage(read)]
     fn name(asset: AssetId) -> String;
-
     /// Returns the symbol of the asset, such as “ETH”.
     ///
     /// # Arguments
@@ -87,7 +86,7 @@ abi SRC20 {
     /// ```sway
     /// use src20::SRC20;
     /// use std::string::String;
-    /// 
+    ///
     /// fn foo(contract: ContractId, asset: AssetId) {
     ///     let contract_abi = abi(SRC20, contract);
     ///     let symbol = contract_abi.symbol(asset);
@@ -96,8 +95,7 @@ abi SRC20 {
     /// ```
     #[storage(read)]
     fn symbol(asset: AssetId) -> String;
-
-    /// Returns the number of decimals the asset uses. 
+    /// Returns the number of decimals the asset uses.
     ///
     /// # Additional Information
     ///
@@ -115,7 +113,7 @@ abi SRC20 {
     ///
     /// ```sway
     /// use src20::SRC20;
-    /// 
+    ///
     /// fn foo(contract: ContractId, asset: AssedId) {
     ///     let contract_abi = abi(SRC20, contract);
     ///     let decimals = contract_abi.decimals(asset);
