@@ -30,7 +30,7 @@ The following functions MUST be implemented to follow the SRC-20 standard:
 ### `fn name(asset: AssetId) -> String` 
 Returns the name of the asset, such as “Ether”.
 
-### `fn total_supply(asset: b256) -> u64`
+### `fn total_supply(asset: AssetId) -> u64`
 Returns the total supply of tokens that have been minted for an asset. 
 
 ### `fn total_assets() -> u64`
