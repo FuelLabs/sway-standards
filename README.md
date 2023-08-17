@@ -58,7 +58,7 @@ use src20::SRC20;
 ```
 
 > **Note**
-> All standards currently use `forc v0.38.0`.
+> All standards currently use `forc v0.44.0`.
 
 <!-- TODO:
 ## Contributing
