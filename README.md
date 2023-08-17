@@ -33,7 +33,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 ## Standards
 
-- [SRC-20; Token Standard](./standards/src_20/) defines the implementation of a standard API for [Native Assets](https://fuellabs.github.io/sway/v0.38.0/book/blockchain-development/native_assets.html) using the Sway Language.
+- [SRC-20; Token Standard](./standards/src_20/) defines the implementation of a standard API for [Native Assets](https://fuellabs.github.io/sway/v0.44.0/book/blockchain-development/native_assets.html) using the Sway Language.
 - [SRC-2; Inline Documentation](./standards/src_2/) defines how to document your Sway files.
 - [SRC-5; Ownership Standard](./standards/src_5/) is used to restrict function calls to admin users in contracts.
 

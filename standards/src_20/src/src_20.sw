@@ -3,7 +3,7 @@ library;
 use std::string::String;
 
 abi SRC20 {
-    /// Returns the total number of assets that have been minted for this contract.
+    /// Returns the total number of individual assets that have been minted for this contract.
     ///
     /// # Returns
     ///
@@ -69,6 +69,7 @@ abi SRC20 {
     ///     assert(name.len() != 0);
     /// }
     /// ```
+
     #[storage(read)]
     fn name(asset: AssetId) -> String;
     /// Returns the symbol of the asset, such as “ETH”.
@@ -93,6 +94,7 @@ abi SRC20 {
     ///     assert(symbol.len() != 0);
     /// }
     /// ```
+    
     #[storage(read)]
     fn symbol(asset: AssetId) -> String;
     /// Returns the number of decimals the asset uses.
