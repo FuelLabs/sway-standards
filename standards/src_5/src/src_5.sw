@@ -38,15 +38,19 @@ pub struct Ownership {
 abi SRC_5 {
     /// Returns the owner.
     ///
-    /// ### Return Values
+    /// # Return Values
     ///
     /// * [State] - Represents the state of ownership for this contract.
     ///
-    /// ### Examples
+    /// # Examples
     ///
     /// ```sway
     /// fn foo() {
-    ///     let stored_owner = owner();
+    ///     match owner() {
+    ///         State::Uninitalized => log("The ownership is uninitalized"),
+    ///         State::Initialized(owner) => log("The ownership is initalized"),
+    ///         State::Revoked => log("The ownership is revoked"),
+    ///     }
     /// }
     /// ```
     #[storage(read)]
