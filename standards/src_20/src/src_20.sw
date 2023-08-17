@@ -69,7 +69,6 @@ abi SRC20 {
     ///     assert(name.len() != 0);
     /// }
     /// ```
-
     #[storage(read)]
     fn name(asset: AssetId) -> String;
     /// Returns the symbol of the asset, such as “ETH”.
@@ -94,7 +93,6 @@ abi SRC20 {
     ///     assert(symbol.len() != 0);
     /// }
     /// ```
-    
     #[storage(read)]
     fn symbol(asset: AssetId) -> String;
     /// Returns the number of decimals the asset uses.
