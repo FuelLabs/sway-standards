@@ -60,7 +60,7 @@ use standard::src_20;
 > **NOTE** The SRC-20 standard is currently in draft. This cannot be imported until the standard is finalized. You may implement your own abi using the standard in order to prepare for the standard's release.
 
 > **Note**
-> All standards currently use `forc v0.38.0`.
+> All standards currently use `forc v0.44.0`.
 
 <!-- TODO:
 ## Contributing
