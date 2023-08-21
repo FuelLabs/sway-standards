@@ -35,6 +35,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 - [SRC-20; Token Standard](https://github.com/FuelLabs/sway-standards/issues/1) is currently in draft
 - [SRC-2; Inline Documentation](./standards/src_2/) defines how to document your Sway files.
+- [SRC-3; Mint and Burn](./standards/src_3/) is used to enabling mint and burn functionality for Native Assets.
 - [SRC-5; Ownership Standard](./standards/src_5/) is used to restrict function calls to admin users in contracts.
 
 ## Using a standard
