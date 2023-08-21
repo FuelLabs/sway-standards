@@ -24,7 +24,7 @@ abi SRC3 {
     /// Mints new tokens using the `sub_id` sub-identifier.
     ///
     /// # Arguments
-    /// 
+    ///
     /// * `recipient`: [Identity] - The user to which the newly minted tokens are transferred to.
     /// * `sub_id`: [SubId] - The sub-identifier of the newly minted token.
     /// * `amount`: [u64] - The amount of tokens to mint.
@@ -68,4 +68,3 @@ abi SRC3 {
     /// ```
     fn burn(sub_id: SubId);
 }
-

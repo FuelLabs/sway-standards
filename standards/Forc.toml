@@ -1,2 +1,2 @@
 [workspace]
-members = ["src_5"]
+members = ["src_3", "src_5"]
