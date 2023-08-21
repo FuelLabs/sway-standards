@@ -34,7 +34,7 @@ This function MUST emit the `Mint` event.
 
 ### `fn burn(sub_id: SubId)`
 
-This function MUST burn all assets sent to the contract in this function invocation with the sub-identifier `sub_id` and MUST ensure the `AssetId` of the token is the sha-256 hash of `(ContractId, SubId)` for the implementing contract.
+This function MUST burn all assets sent to the contract in this function invocation with the sub-identifier `sub_id` and MUST ensure the `AssetId` of the token is the sha-256 hash of `(ContractId, SubId)` for the implementing contract. The function MUST update the total supply within the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard.
 
 ##### Arguments
 
