@@ -33,11 +33,11 @@ Returns the name of the asset, such as “Ether”.
 
 ### `fn total_supply(asset: AssetId) -> u64`
 
-Returns the total supply of tokens that have been minted for an asset. 
+Returns the total supply of tokens for an asset.
 
 ### `fn total_assets() -> u64`
 
-Returns the total number of individual assets that have been minted for this contract. 
+Returns the total number of individual assets for a contract.
 
 ### `fn decimals(asset: AssetId) -> u8`
 

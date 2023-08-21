@@ -3,7 +3,7 @@ library;
 use std::string::String;
 
 abi SRC20 {
-    /// Returns the total number of individual assets that have been minted for this contract.
+    /// Returns the total number of individual assets for a contract.
     ///
     /// # Returns
     ///
@@ -23,7 +23,7 @@ abi SRC20 {
     #[storage(read)]
     fn total_assets() -> u64;
 
-    /// Returns the total supply of tokens that have been minted for an asset.
+    /// Returns the total supply of tokens for an asset.
     ///
     /// # Arguments
     ///
