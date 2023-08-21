@@ -90,7 +90,7 @@ This standard has been added to enable compatibility between applications and al
 
 # Backwards Compatibility
 
-This standard is compatible with Fuel's [Native Assets](https://fuellabs.github.io/sway/v0.38.0/book/blockchain-development/native_assets.html) ensuring it's compatibility for both the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard and the [SRC-721(https://github.com/FuelLabs/sway-standards/issues/2) standard.
+This standard is compatible with Fuel's [Native Assets](https://fuellabs.github.io/sway/v0.38.0/book/blockchain-development/native_assets.html) ensuring it's compatibility with the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard.
 
 # Security Considerations
 
