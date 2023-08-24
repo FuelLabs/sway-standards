@@ -27,11 +27,11 @@ There has also been a Fungible Token Standard and Non-Fungible Token Standard im
 
 The following functions MUST be implemented to follow the SRC-20 standard:
 
-### `fn name(asset: AssetId) -> String` 
+### `fn name(asset: AssetId) -> Option<String>` 
 
 Returns the name of the asset, such as “Ether”.
 
-### `fn total_supply(asset: AssetId) -> u64`
+### `fn total_supply(asset: AssetId) -> Option<u64>`
 
 Returns the total supply of tokens for an asset.
 
@@ -39,11 +39,11 @@ Returns the total supply of tokens for an asset.
 
 Returns the total number of individual assets for a contract.
 
-### `fn decimals(asset: AssetId) -> u8`
+### `fn decimals(asset: AssetId) -> Option<u8>`
 
 Returns the number of decimals the asset uses - e.g. 8, means to divide the token amount by 100000000 to get its user representation.
 
-### `fn symbol(asset: AssetId) -> String`
+### `fn symbol(asset: AssetId) -> Option<String>`
 
 Returns the symbol of the asset, such as “ETH”.
 

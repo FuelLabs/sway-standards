@@ -31,7 +31,7 @@ abi SRC20 {
     ///
     /// # Returns
     ///
-    /// * [u64] - The total supply of tokens for `asset`.
+    /// * [Option<u64>] - The total supply of tokens for `asset`.
     ///
     /// # Examples
     ///
@@ -45,7 +45,7 @@ abi SRC20 {
     /// }
     /// ```
     #[storage(read)]
-    fn total_supply(asset: AssetId) -> u64;
+    fn total_supply(asset: AssetId) -> Option<u64>;
 
     /// Returns the name of the asset, such as “Ether”.
     ///
@@ -55,7 +55,7 @@ abi SRC20 {
     ///
     /// # Returns
     ///
-    /// * [String] - The name of `asset`.
+    /// * [Option<String>] - The name of `asset`.
     ///
     /// # Examples
     ///
@@ -70,7 +70,7 @@ abi SRC20 {
     /// }
     /// ```
     #[storage(read)]
-    fn name(asset: AssetId) -> String;
+    fn name(asset: AssetId) -> Option<String>;
     /// Returns the symbol of the asset, such as “ETH”.
     ///
     /// # Arguments
@@ -79,7 +79,7 @@ abi SRC20 {
     ///
     /// # Returns
     ///
-    /// * [String] - The symbol of `asset`.
+    /// * [Option<String>] - The symbol of `asset`.
     ///
     /// # Examples
     ///
@@ -94,7 +94,7 @@ abi SRC20 {
     /// }
     /// ```
     #[storage(read)]
-    fn symbol(asset: AssetId) -> String;
+    fn symbol(asset: AssetId) -> Option<String>;
     /// Returns the number of decimals the asset uses.
     ///
     /// # Additional Information
@@ -107,7 +107,7 @@ abi SRC20 {
     ///
     /// # Returns
     ///
-    /// * [u8] - The decimal precision used by `asset`.
+    /// * [Option<u8>] - The decimal precision used by `asset`.
     ///
     /// # Examples
     ///
@@ -121,5 +121,5 @@ abi SRC20 {
     /// }
     /// ```
     #[storage(read)]
-    fn decimals(asset: AssetId) -> u8;
+    fn decimals(asset: AssetId) -> Option<u8>;
 }
