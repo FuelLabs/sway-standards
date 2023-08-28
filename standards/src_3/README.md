@@ -20,25 +20,30 @@ The following functions MUST be implemented to follow the SRC-3 standard:
 
 ### `fn mint(recipient: Identity,  sub_id: SubId, amount: u64)`
 
-This function MUST mint `amount` tokens with sub-identifier `sub_id` and transfer them to the `recipient`. This function MAY contain arbitrary conditions for minting, and revert if those conditions are not met.
+This function MUST mint `amount` tokens with sub-identifier `sub_id` and transfer them to the `recipient`. 
+This function MAY contain arbitrary conditions for minting, and revert if those conditions are not met.
 
 ##### Arguments
 
 * `recipient` - The `Identity` to which the newly minted tokens are transferred to.
-* `sub_id` - The sub-identifier of the token to mint.
+* `sub_id` - The sub-identifier of the asset to mint.
 * `amount` - The quantity of tokens to mint.
 
 ##### Events
 
 This function MUST emit the `Mint` event.
 
-### `fn burn(sub_id: SubId)`
+### `fn burn(sub_id: SubId, amount: u64)`
 
-This function MUST burn all assets sent to the contract in this function invocation with the sub-identifier `sub_id` and MUST ensure the `AssetId` of the token is the sha-256 hash of `(ContractId, SubId)` for the implementing contract. The function MUST update the total supply within the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard.
+This function MUST burn `amount` tokens sent to the contract in this function invocation with the sub-identifier `sub_id` and MUST ensure the `AssetId` of the token is the sha-256 hash of `(ContractId, SubId)` for the implementing contract. 
+The function MUST ensure at least `amount` tokens have been transfered to the implementing contract. 
+The function MUST update the total supply defined in the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard. 
+This function MAY contain arbitrary conditions for burning, and revert if those conditions are not met.
 
 ##### Arguments
 
-* `subId` - The sub-identifier of the sent token to burn.
+* `sub_id` - The sub-identifier of the asset to burn.
+* `amount` - The quantity of tokens to burn.
 
 ##### Events
 
@@ -102,7 +107,7 @@ The burn function may also introduce a security consideration if the total suppl
 ```rust
 abi MySRC3Token {
     fn mint(recipient: Identity, sub_id: SubId, amount: u64);
-    fn burn(sub_id: SubId);
+    fn burn(sub_id: SubId, amount: u64);
 }
 ```
 

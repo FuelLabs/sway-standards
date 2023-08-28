@@ -27,7 +27,7 @@ abi SRC3 {
     ///
     /// * `recipient`: [Identity] - The user to which the newly minted tokens are transferred to.
     /// * `sub_id`: [SubId] - The sub-identifier of the newly minted token.
-    /// * `amount`: [u64] - The amount of tokens to mint.
+    /// * `amount`: [u64] - The quantity of tokens to mint.
     ///
     /// # Examples
     ///
@@ -51,6 +51,7 @@ abi SRC3 {
     /// # Arguments
     ///
     /// * `sub_id`: [SubId] - The sub-identifier of the token to burn.
+    /// * `amount`: [u64] - The quantity of tokens to burn.
     ///
     /// # Examples
     ///
@@ -63,8 +64,8 @@ abi SRC3 {
     ///         gas: 10000,
     ///         coins: 100,
     ///         asset_id: AssetId,
-    ///     }.burn(ZERO_B256);
+    ///     }.burn(ZERO_B256, 100);
     /// }
     /// ```
-    fn burn(sub_id: SubId);
+    fn burn(sub_id: SubId, amount: u64);
 }
