@@ -18,7 +18,7 @@ Minting and burning were initially added to the [SRC-20](https://github.com/Fuel
 
 The following functions MUST be implemented to follow the SRC-3 standard:
 
-### `fn mint(recipient: Identity,  sub_id: SubId, amount: u64)`
+### `fn mint(recipient: Identity, sub_id: SubId, amount: u64)`
 
 This function MUST mint `amount` tokens with sub-identifier `sub_id` and transfer them to the `recipient`. 
 This function MAY contain arbitrary conditions for minting, and revert if those conditions are not met.
@@ -28,10 +28,6 @@ This function MAY contain arbitrary conditions for minting, and revert if those 
 * `recipient` - The `Identity` to which the newly minted tokens are transferred to.
 * `sub_id` - The sub-identifier of the asset to mint.
 * `amount` - The quantity of tokens to mint.
-
-##### Events
-
-This function MUST emit the `Mint` event.
 
 ### `fn burn(sub_id: SubId, amount: u64)`
 
@@ -44,50 +40,6 @@ This function MAY contain arbitrary conditions for burning, and revert if those 
 
 * `sub_id` - The sub-identifier of the asset to burn.
 * `amount` - The quantity of tokens to burn.
-
-##### Events
-
-This function MUST emit the `Burn` event.
-
-## Events
-
-The following events MUST be emitted to follow the SRC-3 standard:
-
-### `Mint`
-
-This event MUST be emitted when the `std::token::mint` function is called either directly or indirectly. 
-
-##### Arguments
-
-* `recipient` - The `Identity` to which the newly minted tokens are transferred to.
-* `sub_id` - The sub-identifier of the asset that was minted.
-* `amount` - The quantity of tokens minted.
-  
-```rust
-struct Mint {
-    recipient: Identity,
-    sub_id: SubId,
-    amount: u64,
-}
-```
-
-### `Burn` 
-
-This event MUST be emitted then the `std::token::burn` function is called either directly or indirectly.
-
-##### Arguments
-
-* `sender` - The `Identity` which sent the tokens to the contract to burn.
-* `sub_id` - The sub-identifier of the asset that was burned.
-* `amount` - The quantity of tokens burned.
-
-```rust
-struct Burn {
-    sender: Identity,
-    sub_id: SubId,
-    amount: u64,
-}
-```
 
 # Rationale
 

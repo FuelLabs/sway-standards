@@ -1,25 +1,5 @@
 library;
 
-/// Event that is emmited when a token is minted.
-pub struct Mint {
-    /// The recipient of the newly minted tokens.
-    recipient: Identity,
-    /// The sub-identifier of the newly minted token.
-    sub_id: SubId,
-    /// The number of tokens minted.
-    amount: u64,
-}
-
-/// Event that is emmitted when a token is burned.
-pub struct Burn {
-    /// The identity that has burned some of the tokens.
-    sender: Identity,
-    /// The sub-identifier of the burned token.
-    sub_id: SubId,
-    /// The number of tokens burned.
-    amount: u64,
-}
-
 abi SRC3 {
     /// Mints new tokens using the `sub_id` sub-identifier.
     ///
