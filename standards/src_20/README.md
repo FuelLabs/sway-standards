@@ -15,7 +15,7 @@ A standard interface for [Native Assets](https://fuellabs.github.io/sway/v0.44.0
 
 # Prior Art
 
-The SRC-20 Fungible Token Standard naming pays homage to the [ERC-20 Token Standard](https://eips.ethereum.org/EIPS/eip-20) seen on Ethereum. While there is functionality we may use as a reference, it is noted that Fuel's [Native Assets](https://fuellabs.github.io/sway/v0.44.0/book/blockchain-development/native_assets.html) are fundamentally different than Ethereum's tokens.
+The SRC-20 Token Standard naming pays homage to the [ERC-20 Token Standard](https://eips.ethereum.org/EIPS/eip-20) seen on Ethereum. While there is functionality we may use as a reference, it is noted that Fuel's [Native Assets](https://fuellabs.github.io/sway/v0.44.0/book/blockchain-development/native_assets.html) are fundamentally different than Ethereum's tokens.
 
 There has been a discussion of the Fungile Token Standard on the [Fuel Forum](https://forum.fuel.network/). This discussion can be found [here](https://forum.fuel.network/t/src-20-fungible-token-standard/186). 
 
@@ -29,23 +29,23 @@ The following functions MUST be implemented to follow the SRC-20 standard:
 
 ### `fn name(asset: AssetId) -> Option<String>` 
 
-Returns the name of the asset, such as “Ether”.
+This function MUST return the name of the asset, such as “Ether”. This function MUST return `Some` for any assets minted by the contract.
 
 ### `fn total_supply(asset: AssetId) -> Option<u64>`
 
-Returns the total supply of tokens for an asset.
+This function MUST return the total supply of tokens for an asset. This function MUST return `Some` for any assets minted by the contract.
 
 ### `fn total_assets() -> u64`
 
-Returns the total number of individual assets for a contract.
+This function MUST return the total number of individual assets for a contract.
 
 ### `fn decimals(asset: AssetId) -> Option<u8>`
 
-Returns the number of decimals the asset uses - e.g. 8, means to divide the token amount by 100000000 to get its user representation.
+This function must return the number of decimals the asset uses - e.g. 8, means to divide the token amount by 100000000 to get its user representation. This function MUST return `Some` for any assets minted by the contract.
 
 ### `fn symbol(asset: AssetId) -> Option<String>`
 
-Returns the symbol of the asset, such as “ETH”.
+This function must return the symbol of the asset, such as “ETH”. This function MUST return `Some` for any assets minted by the contract.
 
 ## Non-Fungible Token Restrictions 
 
