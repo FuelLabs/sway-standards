@@ -19,6 +19,7 @@ abi SRC3 {
     ///     contract_abi.mint(Identity::ContractId(this_contract()), ZERO_B256, 100);
     /// }
     /// ```
+    #[storage(read, write)]
     fn mint(recipient: Identity, sub_id: SubId, amount: u64);
 
     /// Burns tokens sent with the given `sub_id`.
@@ -47,5 +48,6 @@ abi SRC3 {
     ///     }.burn(ZERO_B256, 100);
     /// }
     /// ```
+    #[storage(read, write)]
     fn burn(sub_id: SubId, amount: u64);
 }
