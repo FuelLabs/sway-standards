@@ -33,7 +33,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 ## Standards
 
-- [SRC-20; Token Standard](https://github.com/FuelLabs/sway-standards/issues/1) is currently in draft
+- [SRC-20; Token Standard](./standards/src_20/) defines the implementation of a standard API for [Native Assets](https://fuellabs.github.io/sway/v0.44.0/book/blockchain-development/native_assets.html) using the Sway Language.
 - [SRC-2; Inline Documentation](./standards/src_2/) defines how to document your Sway files.
 - [SRC-5; Ownership Standard](./standards/src_5/) is used to restrict function calls to admin users in contracts.
 
@@ -54,10 +54,8 @@ use standard::<standard_abi>;
 For example, to import the SRC-20 Token Standard use the following statement:
 
 ```rust
-use standard::src_20;
+use src20::SRC20;
 ```
-
-> **NOTE** The SRC-20 standard is currently in draft. This cannot be imported until the standard is finalized. You may implement your own abi using the standard in order to prepare for the standard's release.
 
 > **Note**
 > All standards currently use `forc v0.44.0`.
