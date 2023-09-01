@@ -27,25 +27,25 @@ There has also been a Fungible Token Standard and Non-Fungible Token Standard im
 
 The following functions MUST be implemented to follow the SRC-20 standard:
 
-### `fn name(asset: AssetId) -> Option<String>` 
+### `fn total_assets() -> u64`
 
-This function MUST return the name of the asset, such as “Ether”. This function MUST return `Some` for any assets minted by the contract.
+This function MUST return the total number of individual assets for a contract.
 
 ### `fn total_supply(asset: AssetId) -> Option<u64>`
 
 This function MUST return the total supply of tokens for an asset. This function MUST return `Some` for any assets minted by the contract.
 
-### `fn total_assets() -> u64`
+### `fn name(asset: AssetId) -> Option<String>` 
 
-This function MUST return the total number of individual assets for a contract.
-
-### `fn decimals(asset: AssetId) -> Option<u8>`
-
-This function must return the number of decimals the asset uses - e.g. 8, means to divide the token amount by 100000000 to get its user representation. This function MUST return `Some` for any assets minted by the contract.
+This function MUST return the name of the asset, such as “Ether”. This function MUST return `Some` for any assets minted by the contract.
 
 ### `fn symbol(asset: AssetId) -> Option<String>`
 
 This function must return the symbol of the asset, such as “ETH”. This function MUST return `Some` for any assets minted by the contract.
+
+### `fn decimals(asset: AssetId) -> Option<u8>`
+
+This function must return the number of decimals the asset uses - e.g. 8, means to divide the token amount by 100000000 to get its user representation. This function MUST return `Some` for any assets minted by the contract.
 
 ## Non-Fungible Token Restrictions 
 
@@ -73,15 +73,15 @@ This standard does not introduce any security concerns, as it does not call exte
 ```rust 
 abi MyToken {
     #[storage(read)]
-    fn total_supply(asset: AssetId) -> u64;
-    #[storage(read)]
     fn total_assets() -> u64;
     #[storage(read)]
-    fn decimals(asset: AssetId) -> u8;
+    fn total_supply(asset: AssetId) -> Option<u64>;
     #[storage(read)]
-    fn name(asset: AssetId) -> String;
+    fn name(asset: AssetId) -> Option<String>;
     #[storage(read)]
-    fn symbol(asset: AssetId) -> String;
+    fn symbol(asset: AssetId) -> Option<String>;
+    #[storage(read)]
+    fn decimals(asset: AssetId) -> Option<u8>;
 }
 ```
 
