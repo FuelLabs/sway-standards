@@ -9,7 +9,7 @@ abi SRC7 {
     ///
     /// * `asset`: [AssetId] - The asset of which to query the metadata.
     /// * `key`: [String] - The key to the specific metadata.
-    /// 
+    ///
     /// # Returns
     ///
     /// * [Option<MetadataType>] - `Some` metadata that corresponds to the `key` or `None`.
@@ -38,5 +38,5 @@ pub enum MetadataType {
     /// Used when the stored metadata is a `u64`.
     Int: u64,
     /// Used when the stored metadata is a `u64`.
-    Bytes: Bytes
+    Bytes: Bytes,
 }
