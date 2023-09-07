@@ -29,23 +29,23 @@ We also take a look at existing common metadata practices such as [OpenSea's Met
 
 The following describes an enum that wraps various metadata types into a single return type. There SHALL be the following variants in the `MetadataType` enum:
 
-### - `String: String`
+### - `StringData: String`
 
-The **String** variant SHALL be used when the stored metadata for the corresponding asset and key is of the `String` type. The **String** variant MUST be used when a URI is required but MAY contain any arbitrary `String`. 
+The `StringData` variant SHALL be used when the stored metadata for the corresponding asset and key is of the `String` type. The `StringData` variant MUST be used when a URI is required but MAY contain any arbitrary `String`. 
 
-### - `Int: u64`
+### - `IntData: u64`
 
-The **Int** variant SHALL be used when the stored metadata for the corresponding asset and key is of the `u64` type.
+The `IntData` variant SHALL be used when the stored metadata for the corresponding asset and key is of the `u64` type.
 
-### - `Bytes: Bytes`
+### - `BytesData: Bytes`
 
-The **Bytes** variant SHALL be used when the stored metadata for the corresponding asset and key is of the `Bytes` type. The **Bytes** variant should be used when storing custom data such as but not limited to structs and enums.
+The `BytesData` variant SHALL be used when the stored metadata for the corresponding asset and key is of the `Bytes` type. The `BytesData` variant should be used when storing custom data such as but not limited to structs and enums.
 
 ## Require Functions
 
 ### `fn metadata(asset: AssetId, key: String) -> Option<MetadataType>`
 
-This function MUST return valid metadata for the corresponding `asset` and `key`, where the data is either a `String`, `Int`, or `Bytes` variant. If no metadata exists, the function MUST return `None`.
+This function MUST return valid metadata for the corresponding `asset` and `key`, where the data is either a `StringData`, `IntData`, or `BytesData` variant. If no metadata exists, the function MUST return `None`.
 
 # Rationale
 

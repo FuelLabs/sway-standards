@@ -20,8 +20,8 @@ abi SRC7 {
     /// use src_7::{SRC7, MetadataType};
     /// use std::string::String;
     ///
-    /// fn foo(contract: ContractId, asset: AssetId) {
-    ///     let contract_abi = abi(SRC7, contract);
+    /// fn foo(contract_id: ContractId, asset: AssetId) {
+    ///     let contract_abi = abi(SRC7, contract_id);
     ///     let key = String::from_ascii_str("image");
     ///     let data = contract_abi.metadata(asset, key);
     ///     assert(data.is_some());
@@ -34,9 +34,9 @@ abi SRC7 {
 /// Universal return type for metadata.
 pub enum MetadataType {
     /// Used when the stored metadata is a `String`.
-    String: String,
+    StringData: String,
     /// Used when the stored metadata is a `u64`.
-    Int: u64,
+    IntData: u64,
     /// Used when the stored metadata is a `u64`.
-    Bytes: Bytes,
+    BytesData: Bytes,
 }
