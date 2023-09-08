@@ -37,7 +37,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 - [SRC-2; Inline Documentation](./standards/src_2/) defines how to document your Sway files.
 - [SRC-3; Mint and Burn](./standards/src_3/) is used to enabling mint and burn functionality for Native Assets.
 - [SRC-5; Ownership Standard](./standards/src_5/) is used to restrict function calls to admin users in contracts.
-- [SRC-7; Arbitrart Asset Metadata Standard] is used to store metadata for [Native Assets](https://fuellabs.github.io/sway/v0.44.0/book/blockchain-development/native_assets.html).
+- [SRC-7; Arbitrary Asset Metadata Standard] is used to store metadata for [Native Assets](https://fuellabs.github.io/sway/v0.44.0/book/blockchain-development/native_assets.html).
 
 ## Using a standard
 
