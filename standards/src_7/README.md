@@ -31,15 +31,15 @@ The following describes an enum that wraps various metadata types into a single 
 
 ### - `StringData: String`
 
-The `StringData` variant SHALL be used when the stored metadata for the corresponding asset and key is of the `String` type. The `StringData` variant MUST be used when a URI is required but MAY contain any arbitrary `String`. 
+The `StringData` variant SHALL be used when the stored metadata for the corresponding asset and `String` key pair is of the `String` type. The `StringData` variant MUST be used when a URI is required but MAY contain any arbitrary `String`. 
 
 ### - `IntData: u64`
 
-The `IntData` variant SHALL be used when the stored metadata for the corresponding asset and key is of the `u64` type.
+The `IntData` variant SHALL be used when the stored metadata for the corresponding asset and `Sting` key pair is of the `u64` type.
 
 ### - `BytesData: Bytes`
 
-The `BytesData` variant SHALL be used when the stored metadata for the corresponding asset and key is of the `Bytes` type. The `BytesData` variant should be used when storing custom data such as but not limited to structs and enums.
+The `BytesData` variant SHALL be used when the stored metadata for the corresponding asset and `String` key pair is of the `Bytes` type. The `BytesData` variant should be used when storing custom data such as but not limited to structs and enums.
 
 ## Require Functions
 
