@@ -45,7 +45,7 @@ The `BytesData` variant SHALL be used when the stored metadata for the correspon
 
 ### `fn metadata(asset: AssetId, key: String) -> Option<MetadataType>`
 
-This function MUST return valid metadata for the corresponding `asset` and `key`, where the data is either a `StringData`, `IntData`, or `BytesData` variant. If no metadata exists, the function MUST return `None`.
+This function MUST return valid metadata for the corresponding `asset` and `key`, where the data is either a `StringData`, `IntData`, or `BytesData` variant. If the asset does not exist or no metadata exists, the function MUST return `None`.
 
 # Rationale
 
