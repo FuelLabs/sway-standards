@@ -12,12 +12,12 @@ abi SRC7 {
     ///
     /// # Returns
     ///
-    /// * [Option<MetadataType>] - `Some` metadata that corresponds to the `key` or `None`.
+    /// * [Option<Metadata>] - `Some` metadata that corresponds to the `key` or `None`.
     ///
     /// # Examples
     ///
     /// ```sway
-    /// use src_7::{SRC7, MetadataType};
+    /// use src_7::{SRC7, Metadata};
     /// use std::string::String;
     ///
     /// fn foo(contract_id: ContractId, asset: AssetId) {
@@ -28,15 +28,15 @@ abi SRC7 {
     /// }
     /// ```
     #[storage(read)]
-    fn metadata(asset: AssetId, key: String) -> Option<MetadataType>;
+    fn metadata(asset: AssetId, key: String) -> Option<Metadata>;
 }
 
 /// Universal return type for metadata.
-pub enum MetadataType {
+pub enum Metadata {
     /// Used when the stored metadata is a `String`.
     StringData: String,
     /// Used when the stored metadata is a `u64`.
     IntData: u64,
-    /// Used when the stored metadata is a `u64`.
+    /// Used when the stored metadata is `Bytes`.
     BytesData: Bytes,
 }

@@ -27,7 +27,7 @@ We also take a look at existing common metadata practices such as [OpenSea's Met
 
 ## Metadata Type
 
-The following describes an enum that wraps various metadata types into a single return type. There SHALL be the following variants in the `MetadataType` enum:
+The following describes an enum that wraps various metadata types into a single return type. There SHALL be the following variants in the `Metadata` enum:
 
 ### - `StringData: String`
 
@@ -43,7 +43,7 @@ The `BytesData` variant SHALL be used when the stored metadata for the correspon
 
 ## Require Functions
 
-### `fn metadata(asset: AssetId, key: String) -> Option<MetadataType>`
+### `fn metadata(asset: AssetId, key: String) -> Option<Metadata>`
 
 This function MUST return valid metadata for the corresponding `asset` and `key`, where the data is either a `StringData`, `IntData`, or `BytesData` variant. If the asset does not exist or no metadata exists, the function MUST return `None`.
 
@@ -64,6 +64,6 @@ This standard does not introduce any security concerns, as it does not call exte
 ```rust
 abi SRC7Metadata {
      #[storage(read)]
-     fn metadata(asset: AssetId, key: String) -> Option<MetadataType>;
+     fn metadata(asset: AssetId, key: String) -> Option<Metadata>;
 }
 ```
