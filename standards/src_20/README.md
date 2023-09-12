@@ -45,7 +45,7 @@ This function must return the symbol of the asset, such as “ETH”. This funct
 
 ### `fn decimals(asset: AssetId) -> Option<u8>`
 
-This function must return the number of decimals the asset uses - e.g. 8, means to divide the token amount by 100000000 to get its user representation. This function MUST return `Some` for any assets minted by the contract.
+This function must return the number of decimals the asset uses - e.g. 8, which means to divide the token amount by 100000000 to get its user representation. This function MUST return `Some` for any assets minted by the contract.
 
 ## Non-Fungible Token Restrictions 
 

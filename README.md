@@ -9,8 +9,8 @@
     <a href="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yml" alt="CI">
         <img src="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yml/badge.svg" />
     </a>
-    <a href="https://crates.io/crates/forc/0.38.0" alt="forc">
-        <img src="https://img.shields.io/badge/forc-v0.38.0-orange" />
+    <a href="https://crates.io/crates/forc/0.44.0" alt="forc">
+        <img src="https://img.shields.io/badge/forc-v0.44.0-orange" />
     </a>
     <a href="./LICENSE" alt="forc">
         <img src="https://img.shields.io/github/license/FuelLabs/sway-standards" />
@@ -24,7 +24,7 @@
 
 The purpose of this repository is to contain standards for the Sway Language which users can import and use. 
 
-Standards in this repository may be in various stages of development. Use of draft standards and feedback on the proposed standards is encouraged. To use a draft, search for a standard using the appropriate github label and implement the standard abi into your contract. 
+Standards in this repository may be in various stages of development. Use of draft standards and feedback on the proposed standards is encouraged. To use a draft, search for a standard using the appropriate GitHub label and implement the standard abi into your contract. 
 
 If you don't find what you're looking for, feel free to create an issue and propose a new standard!
 
@@ -35,7 +35,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 - [SRC-20; Token Standard](./standards/src_20/) defines the implementation of a standard API for [Native Assets](https://fuellabs.github.io/sway/v0.44.0/book/blockchain-development/native_assets.html) using the Sway Language.
 - [SRC-2; Inline Documentation](./standards/src_2/) defines how to document your Sway files.
-- [SRC-3; Mint and Burn](./standards/src_3/) is used to enabling mint and burn functionality for Native Assets.
+- [SRC-3; Mint and Burn](./standards/src_3/) is used to enable mint and burn functionality for Native Assets.
 - [SRC-5; Ownership Standard](./standards/src_5/) is used to restrict function calls to admin users in contracts.
 
 ## Using a standard
@@ -52,10 +52,14 @@ You may then import your desired standard in your Sway Smart Contract as so:
 use standard::<standard_abi>;
 ```
 
-For example, to import the SRC-20 Token Standard use the following statement:
+For example, to import the SRC-20 Token Standard use the following statements in your `Forc.toml` and Sway Smart Contract file respectively:
 
 ```rust
-use src20::SRC20;
+src_20 = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.1.1" }
+```
+
+```rust
+use src_20::SRC20;
 ```
 
 > **Note**
