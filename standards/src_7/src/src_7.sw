@@ -40,3 +40,20 @@ pub enum Metadata {
     /// Used when the stored metadata is `Bytes`.
     BytesData: Bytes,
 }
+
+impl core::ops::Eq for Metadata {
+    fn eq(self, other: Self) -> bool {
+        match (self, other) {
+            (Metadata::StringData(string1), Metadata::StringData(string2)) => {
+                string1 == string2
+            },
+            (Metadata::IntData(int1), Metadata::IntData(int2)) => {
+                int1 == int2
+            },
+            (Metadata::BytesData(bytes1), Metadata::BytesData(bytes2)) => {
+                bytes1 == bytes2
+            },
+            _ => false,
+        }
+    }
+}
