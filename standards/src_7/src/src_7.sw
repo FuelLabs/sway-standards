@@ -33,25 +33,30 @@ abi SRC7 {
 
 /// Universal return type for metadata.
 pub enum Metadata {
-    /// Used when the stored metadata is a `String`.
-    StringData: String,
-    /// Used when the stored metadata is a `u64`.
-    IntData: u64,
+    // Used when the stored metadata is a `b256`.
+    B256: b256,
     /// Used when the stored metadata is `Bytes`.
-    BytesData: Bytes,
+    Bytes: Bytes,
+    /// Used when the stored metadata is a `u64`.
+    Int: u64,
+    /// Used when the stored metadata is a `String`.
+    String: String,
 }
 
 impl core::ops::Eq for Metadata {
     fn eq(self, other: Self) -> bool {
         match (self, other) {
-            (Metadata::StringData(string1), Metadata::StringData(string2)) => {
-                string1 == string2
+            (Metadata::B256(bytes1), Metadata::B256(bytes2)) => {
+                bytes1 == bytes2
             },
-            (Metadata::IntData(int1), Metadata::IntData(int2)) => {
+            (Metadata::Bytes(bytes1), Metadata::Bytes(bytes2)) => {
+                bytes1 == bytes2
+            },
+            (Metadata::Int(int1), Metadata::Int(int2)) => {
                 int1 == int2
             },
-            (Metadata::BytesData(bytes1), Metadata::BytesData(bytes2)) => {
-                bytes1 == bytes2
+            (Metadata::String(string1), Metadata::String(string2)) => {
+                string1 == string2
             },
             _ => false,
         }

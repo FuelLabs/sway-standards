@@ -29,23 +29,27 @@ We also take a look at existing common metadata practices such as [OpenSea's Met
 
 The following describes an enum that wraps various metadata types into a single return type. There SHALL be the following variants in the `Metadata` enum:
 
-### - `StringData: String`
+### - `B256`
 
-The `StringData` variant SHALL be used when the stored metadata for the corresponding asset and `String` key pair is of the `String` type. The `StringData` variant MUST be used when a URI is required but MAY contain any arbitrary `String`. 
+The `B256` variant SHALL be used when the stored metadata for the corresponding `AssetId` and `Sting` key pair is of the `b256` type.
 
-### - `IntData: u64`
+### - `Bytes`
 
-The `IntData` variant SHALL be used when the stored metadata for the corresponding asset and `Sting` key pair is of the `u64` type.
+The `Bytes` variant SHALL be used when the stored metadata for the corresponding `AssetId` and `String` key pair is of the `Bytes` type. The `Bytes` variant should be used when storing custom data such as but not limited to structs and enums.
 
-### - `BytesData: Bytes`
+### - `Int`
 
-The `BytesData` variant SHALL be used when the stored metadata for the corresponding asset and `String` key pair is of the `Bytes` type. The `BytesData` variant should be used when storing custom data such as but not limited to structs and enums.
+The `Int` variant SHALL be used when the stored metadata for the corresponding `AssetId` and `Sting` key pair is of the `u64` type.
+
+### - `String`
+
+The `String` variant SHALL be used when the stored metadata for the corresponding `AssetId` and `String` key pair is of the `String` type. The `String` variant MUST be used when a URI is required but MAY contain any arbitrary `String` data. 
 
 ## Require Functions
 
 ### `fn metadata(asset: AssetId, key: String) -> Option<Metadata>`
 
-This function MUST return valid metadata for the corresponding `asset` and `key`, where the data is either a `StringData`, `IntData`, or `BytesData` variant. If the asset does not exist or no metadata exists, the function MUST return `None`.
+This function MUST return valid metadata for the corresponding `asset` and `key`, where the data is either a `B256`, `Bytes`, `Int`, or `String` variant. If the asset does not exist or no metadata exists, the function MUST return `None`.
 
 # Rationale
 
