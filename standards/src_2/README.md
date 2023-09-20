@@ -279,7 +279,7 @@ Example:
 
 # Rationale
 
-The SRC-2 standard should help provide developers with an easy way to both quickly write inline documentation and get up to speed on other developers' code. This standard in combination with Fuel's VS Code extension provides for readily accessible information on functions, structs, and enums
+The SRC-2 standard should help provide developers with an easy way to both quickly write inline documentation and get up to speed on other developers' code. This standard in combination with Fuel's VS Code extension provides readily accessible information on functions, structs, and enums
 
 ![Screenshot 2023-05-10 125656](https://github.com/FuelLabs/sway-standards/assets/54727135/f03073b9-2a28-44d1-b12a-5603a0738fee)
 
@@ -361,7 +361,7 @@ pub struct Bid {
 pub enum State {
     /// The ownership has not been set.
     Uninitialized: (),
-    /// The user which has been given ownership.
+    /// The user who has been given ownership.
     Initialized: Identity,
     /// The ownership has been given up and can never be set again.
     Revoked: (),
@@ -382,7 +382,7 @@ pub enum AccessError {
 storage {
     /// The contract of the tokens which is to be distributed.
     asset: Option<ContractId> = Option::None,
-    /// Stores the ClaimState of users that have interacted with the Airdrop Distrubutor contract.
+    /// Stores the ClaimState of users that have interacted with the Airdrop Distributor contract.
     ///
     /// # Additional Information
     ///
