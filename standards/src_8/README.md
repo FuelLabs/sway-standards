@@ -74,66 +74,66 @@ This standard does not call external contracts, nor does it define any mutations
 
 ```rust
 impl SRC20 for Contract {
-     fn total_assets() -> u64 {
-          1
-      }         
+    fn total_assets() -> u64 {
+        1
+    }         
 
-     fn total_supply(asset: AssetId) -> Option<u64> {
-          match asset { 
-               AssetId::from(ZERO_B256)) => Option::Some(1),
-               _ => Option::None(),
-          }
-     }
+    fn total_supply(asset: AssetId) -> Option<u64> {
+        match asset { 
+            AssetId::from(ZERO_B256)) => Option::Some(1),
+            _ => Option::None(),
+        }
+    }
 
-     fn name(asset: AssetId) -> Option<String> {
-          match asset { 
-               AssetId::from(ZERO_B256)) => Option::Some(String::from_ascii_str("Name")),
-               _ => Option::None(),
-          }
-     }
+    fn name(asset: AssetId) -> Option<String> {
+        match asset { 
+            AssetId::from(ZERO_B256)) => Option::Some(String::from_ascii_str("Name")),
+            _ => Option::None(),
+        }
+    }
 
-     fn symbol(asset: AssetId) -> Option<String> {
-          match asset { 
-               AssetId::from(ZERO_B256)) => Option::Some(String::from_ascii_str("Symbol")),
-               _ => Option::None(),
-          }
-     }
+    fn symbol(asset: AssetId) -> Option<String> {
+        match asset { 
+            AssetId::from(ZERO_B256)) => Option::Some(String::from_ascii_str("Symbol")),
+            _ => Option::None(),
+        }
+    }
 
-     fn decimals(asset: AssetId) -> Option<u8> {
-          match asset { 
-               AssetId::from(ZERO_B256)) => Option::Some(0u8),
-               _ => Option::None(),
-          }
-     }
+    fn decimals(asset: AssetId) -> Option<u8> {
+        match asset { 
+            AssetId::from(ZERO_B256)) => Option::Some(0u8),
+            _ => Option::None(),
+        }
+    }
 }
 
 impl SRC7 for Contract {
-     fn metadata(asset: AssetId, key: String) -> Option<Metadata> {
-          if (asset != AssetId::from(ZERO_B256)) {
-               return Option::None();
-          }
+    fn metadata(asset: AssetId, key: String) -> Option<Metadata> {
+        if (asset != AssetId::from(ZERO_B256)) {
+            return Option::None();
+        }
 
-          match key {
-                String::from_ascii_str("origin_chain") => {
-                     Option::Some(Metadata::Int(1))
-                },
-                String::from_ascii_str("origin_asset_address") => {
-                     let origin_asset_address = ZERO_B256;
-                     Option::Some(Metadata::B256(origin_asset_address))
-                },
-                String::from_ascii_str("origin_asset_id") => {
-                     let origin_asset_id = ZERO_B256;
-                     Option::Some(Metadata::B256(origin_asset_id))
-                },
-                String::from_ascii_str("origin_asset_decimals") => {
-                     Option::Some(Metadata::Int(1))
-                },
-                String::from_ascii_str("origin_asset_data") => {
-                     let origin_asset_data = String::from_ascii_str("My Data");
-                     Option::Some(Metadata::StringData(origin_asset_data))
-                },
-                _ => Option::None(),
-           }
-     }
+        match key {
+            String::from_ascii_str("origin_chain") => {
+                Option::Some(Metadata::Int(1))
+            },
+            String::from_ascii_str("origin_asset_address") => {
+                let origin_asset_address = ZERO_B256;
+                Option::Some(Metadata::B256(origin_asset_address))
+            },
+            String::from_ascii_str("origin_asset_id") => {
+                let origin_asset_id = ZERO_B256;
+                Option::Some(Metadata::B256(origin_asset_id))
+            },
+            String::from_ascii_str("origin_asset_decimals") => {
+                Option::Some(Metadata::Int(1))
+            },
+            String::from_ascii_str("origin_asset_data") => {
+                let origin_asset_data = String::from_ascii_str("My Data");
+                Option::Some(Metadata::StringData(origin_asset_data))
+            },
+            _ => Option::None(),
+        }
+    }
 }
 ```
