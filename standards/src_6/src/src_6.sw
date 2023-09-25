@@ -33,7 +33,6 @@ pub struct Withdraw {
 abi SRC6 {
     // SRC-6
     // Deposit/Withdrawal
-
     /// Deposits assets into the contract and mints shares to the receiver.
     ///
     /// # Additional Information
@@ -78,9 +77,8 @@ abi SRC6 {
     /// * The user crosses any global or user specific withdrawal limits.
     #[storage(read, write)]
     fn withdraw(asset: AssetId, receiver: Identity) -> u64;
-    
-    // Accounting
 
+    // Accounting
     /// Returns the amount of managed assets of the given asset.
     ///
     /// # Arguments
@@ -152,7 +150,6 @@ abi SRC6 {
     fn preview_withdraw(asset: AssetId, shares: u64) -> u64;
 
     // Deposit/Withdrawal Limits
-
     /// Returns the maximum amount of assets that can be deposited into the contract, for the given asset.
     ///
     /// # Additional Information
