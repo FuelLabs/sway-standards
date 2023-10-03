@@ -20,7 +20,7 @@ The following functions MUST be implemented (on top of the SRC-20 functions) to 
 
 ### `fn deposit(receiver: Identity) -> u64`
 Method that allows depositing of the underlying asset in exchange for shares of the vault.
-This function takes the receiver's identity as an argument and returns the amount of shares minted.
+This function takes the receiver's identity as an argument and returns the amount of shares minted to the receiver.
 
 MUST revert if any AssetId other than the underlying is forwarded.
 MUST mint `preview_deposit(deposited_assets)` amount of shares to `receiver`.
@@ -31,7 +31,7 @@ MUST emit a `Deposit` log.
 
 ### `fn withdraw(asset: AssetId, receiver: Identity) -> u64`
 Method that allows the redeeming of the vault shares in exchange for a pro-rata amount of the underlying asset
-This function takes the asset's AssetId and the receiver's identity as arguments and returns the amount of assets transferred.
+This function takes the asset's AssetId and the receiver's identity as arguments and returns the amount of assets transferred to the receiver.
 The AssetId of the asset, and the AssetId of the shares MUST be one-to-one, meaning every deposited AssetId shall have a unique corresponding shares AssetId.
 
 MUST revert if any AssetId other than the AssetId corresponding to the deposited asset is forwarded.
