@@ -50,6 +50,7 @@ abi SRC6 {
     /// * The user crosses any global or user specific deposit limits.
     #[storage(read, write)]
     fn deposit(receiver: Identity) -> u64;
+    
     /// Burns shares from the sender and transfers assets to the receiver.
     ///
     /// # Additional Information
@@ -85,6 +86,7 @@ abi SRC6 {
     /// * [u64] - The amount of managed assets of the given asset.
     #[storage(read)]
     fn managed_assets(asset: AssetId) -> u64;
+
     /// Returns how many shares would be minted for the given amount of assets, in an ideal scenario (No accounting for slippage, or any limits).
     ///
     /// # Arguments
@@ -98,6 +100,7 @@ abi SRC6 {
     /// * [None] - If the asset is not supported by the contract.
     #[storage(read)]
     fn convert_to_shares(asset: AssetId, assets: u64) -> Option<u64>;
+
     /// Returns how many assets would be transferred for the given amount of shares, in an ideal scenario (No accounting for slippage, or any limits).
     ///
     /// # Arguments
@@ -111,6 +114,7 @@ abi SRC6 {
     /// * [None] - If the asset is not supported by the contract.
     #[storage(read)]
     fn convert_to_assets(asset: AssetId, shares: u64) -> Option<u64>;
+
     /// Returns how many shares would have been minted for the given amount of assets, if this was a deposit call.
     ///
     /// # Arguments
@@ -127,6 +131,7 @@ abi SRC6 {
     /// * For any reason the `deposit` function would revert given the same conditions.
     #[storage(read)]
     fn preview_deposit(asset: AssetId, assets: u64) -> u64;
+
     /// Returns how many assets would have been transferred for the given amount of shares, if this was a withdrawal call.
     ///
     /// # Arguments
@@ -160,6 +165,7 @@ abi SRC6 {
     /// * [None] - If the asset is not supported by the contract.
     #[storage(read)]
     fn max_depositable(asset: AssetId) -> Option<u64>;
+
     /// Returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
     ///
     /// # Additional Information
