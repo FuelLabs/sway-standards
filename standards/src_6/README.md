@@ -6,15 +6,19 @@
 </p>
 
 # Abstract
+
 The following standard allows for the implementation of a standard API for token vaults such as yield bearing token vaults. This standard is an optional add-on to the SRC-20 standard.
 
 # Motivation
+
 Token vaults allow users to own shares of variable amount of assets, such as lending protocols which may have growing assets due to profits from interest. This pattern is highly useful and would greatly benefit from standardisation
 
 # Prior Art
+
 Token vaults have been thoroughly explored on Ethereum and with [EIP 4626](https://eips.ethereum.org/EIPS/eip-4626) they have their own standard for it. However as Fuel's native assets are fundamentally different to Ethereum's ERC-20 tokens, the implementation will differ, but the interface may be used as reference.
 
 # Specification
+
 ## Required public functions
 The following functions MUST be implemented (on top of the SRC-20 functions) to follow the SRC-6 standard
 
@@ -94,7 +98,7 @@ MUST return the maximum amount of assets that can be withdrawn from the contract
 ## Required logs
 The following logs MUST be emitted at the specified occasions
 
-```
+```sway
 /// Event logged when a deposit is made.
 pub struct Deposit {
     /// The caller of the deposit function.
@@ -113,7 +117,7 @@ pub struct Deposit {
 
 The `Deposit` struct MUST be logged whenever new shares are minted via the `deposit` method
 
-```
+```sway
 /// Event logged when a withdrawal is made.
 pub struct Withdraw {
     /// The caller of the withdrawal function.
@@ -133,14 +137,18 @@ pub struct Withdraw {
 The `Withdraw` struct MUST be logged whenever shares are redeemed for assets via the `withdraw` method
 
 # Rationale
+
 The ABI discussed is simple and covers the known use cases of token vaults while allowing safe implementations
 
 # Backwards compatibility
+
 This standard is fully compatible with the SRC-20 standard
 
 # Security Considerations
+
 Incorrect implementation of token vaults could allow attackers to steal underlying assets. It is recommended to properly audit any code using this standard to ensure exploits are not possible.
 
 # Reference implementation
+
 Full reference implementation can be seen [here](https://github.com/SwayStar123/vault-standard-reference-implementation/blob/master/src/main.sw)
 

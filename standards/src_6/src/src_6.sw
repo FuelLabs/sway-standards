@@ -1,7 +1,5 @@
 library;
 
-// Required logs:
-
 /// Event logged when a deposit is made.
 pub struct Deposit {
     /// The caller of the deposit function.
