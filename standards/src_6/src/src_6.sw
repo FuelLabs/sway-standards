@@ -50,7 +50,7 @@ abi SRC6 {
     /// * The user crosses any global or user specific deposit limits.
     #[storage(read, write)]
     fn deposit(receiver: Identity) -> u64;
-    
+
     /// Burns shares from the sender and transfers assets to the receiver.
     ///
     /// # Additional Information
