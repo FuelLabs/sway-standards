@@ -8,7 +8,7 @@
 
 # Abstract
 
-The following standard attempts to define the retrieval of relevant on-chain metadata for any bridged [Native Assets](https://fuellabs.github.io/sway/v0.45.0/book/blockchain-development/native_assets.html). Any contract that implements the SRC-8 standard MUST implement the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard. 
+The following standard attempts to define the retrieval of relevant on-chain metadata for any bridged [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-8 standard MUST implement the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard. 
 
 # Motivation
 
@@ -16,7 +16,7 @@ The SRC-8 standard seeks to enable relevant data for bridged assets on the Fuel 
 
 # Prior Art
 
-The use of generic metadata for [Native Assets](https://fuellabs.github.io/sway/v0.45.0/book/blockchain-development/native_assets.html) is defined in the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard. This standard integrates into the existing [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard.
+The use of generic metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) is defined in the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard. This standard integrates into the existing [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard.
 
 # Specification
 
@@ -56,7 +56,7 @@ The SRC-8 standard should allow for data on any bridged assets on the Fuel Netwo
 
 # Backwards Compatibility
 
-This standard is compatible with Fuel's [Native Assets](https://fuellabs.github.io/sway/v0.45.0/book/blockchain-development/native_assets.html), the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard, and the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard. 
+This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets), the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard, and the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard. 
 
 The standard is also compatible with both tokens and NFTs native to other ecosystems by introducing a token ID element of the original chain.
 
