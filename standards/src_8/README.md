@@ -26,7 +26,7 @@ The `SubId` of the token MUST be the digest of the `sha256(origin_chain_id, orig
 
 - `origin_chain_id` is a `u64` of the chain ID where the asset was originally minted.
 - `origin_asset_address` is a `b256` of the asset's address on the chain where the asset was originally minted.
-- `origin_asset_id` is a `b256` of the asset's ID on the chain where the asset was originally minted. IF there is no ID, `ZERO_B256` SHALL be used.
+- `origin_asset_id` is a `b256` of the asset's ID such as an NFT's ID on the chain where the asset was originally minted. IF there is no ID, `ZERO_B256` SHALL be used.
 
 ## SRC-20 Metadata
 
@@ -44,15 +44,11 @@ The key `origin_asset_address` SHALL return a `B256` variant of the asset's addr
 
 ### - `origin_asset_id`
 
-The key `origin_asset_id` MAY return a `B256` variant of the asset's ID on the chain where the asset was originally minted. IF there is no ID, `None` SHALL be returned.
+The key `origin_asset_id` MAY return a `B256` variant of the asset's ID such as an NFT's ID on the chain where the asset was originally minted. IF there is no ID, `None` SHALL be returned.
 
 ### - `origin_asset_decimals`
 
 The key `origin_decimals` MAY return an `Int` variant of the asset's decimals on the chain where the asset was originally minted. IF there are no decimals, `None` SHALL be returned.
-
-### - `origin_asset_data`
-
-The key `origin_asset_data` MAY return any arbitrary `Metadata` of the asset's data that exists on the chain where the asset was originally minted. IF there is no data, `None` SHALL be returned.
 
 # Rationale
 
@@ -66,8 +62,6 @@ The standard is also compatible with both tokens and NFTs native to other ecosys
 
 # Security Considerations
 
-There is no guarantee that any data returned from the `origin_asset_data` key is up to date with the data on the origin chain. 
-
 This standard does not call external contracts, nor does it define any mutations of the contract state.
 
 # Example
@@ -80,29 +74,29 @@ impl SRC20 for Contract {
 
     fn total_supply(asset: AssetId) -> Option<u64> {
         match asset { 
-            AssetId::from(ZERO_B256)) => Option::Some(1),
-            _ => Option::None(),
+            AssetId::from(ZERO_B256) => Option::Some(1),
+            _ => Option::None,
         }
     }
 
     fn name(asset: AssetId) -> Option<String> {
         match asset { 
-            AssetId::from(ZERO_B256)) => Option::Some(String::from_ascii_str("Name")),
-            _ => Option::None(),
+            AssetId::from(ZERO_B256) => Option::Some(String::from_ascii_str("Name")),
+            _ => Option::None,
         }
     }
 
     fn symbol(asset: AssetId) -> Option<String> {
         match asset { 
-            AssetId::from(ZERO_B256)) => Option::Some(String::from_ascii_str("Symbol")),
-            _ => Option::None(),
+            AssetId::from(ZERO_B256) => Option::Some(String::from_ascii_str("Symbol")),
+            _ => Option::None,
         }
     }
 
     fn decimals(asset: AssetId) -> Option<u8> {
         match asset { 
-            AssetId::from(ZERO_B256)) => Option::Some(0u8),
-            _ => Option::None(),
+            AssetId::from(ZERO_B256) => Option::Some(0u8),
+            _ => Option::None,
         }
     }
 }
@@ -110,7 +104,7 @@ impl SRC20 for Contract {
 impl SRC7 for Contract {
     fn metadata(asset: AssetId, key: String) -> Option<Metadata> {
         if (asset != AssetId::from(ZERO_B256)) {
-            return Option::None();
+            return Option::None;
         }
 
         match key {
@@ -132,7 +126,7 @@ impl SRC7 for Contract {
                 let origin_asset_data = String::from_ascii_str("My Data");
                 Option::Some(Metadata::StringData(origin_asset_data))
             },
-            _ => Option::None(),
+            _ => Option::None,
         }
     }
 }
