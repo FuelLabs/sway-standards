@@ -8,7 +8,7 @@
 
 # Abstract
 
-The following standard attempts to define the retrieval of relevant on-chain metadata for any bridged [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-8 standard MUST implement the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard. 
+The following standard attempts to define the retrieval of relevant on-chain metadata for any bridged [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-8 standard MUST implement the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) and [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standards. 
 
 # Motivation
 
