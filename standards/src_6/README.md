@@ -69,20 +69,6 @@ MUST return an Option::Some of the amount of assets that would be transferred fo
 MUST return an Option::None if the asset is not supported.
 MUST NOT revert under any circumstances.
 
-### `fn preview_deposit(asset: AssetId, assets: u64) -> u64`
-Helper method for previewing deposit.
-This function takes the asset's AssetId and the amount of assets as arguments and returns the amount of shares that would have been minted for the given amount of assets.
-
-MUST return the amount of shares that would have been minted for the given amount of assets.
-MUST revert for any reason the `deposit` function would revert given the same conditions.
-
-### `fn preview_withdraw(asset: AssetId, shares: u64) -> u64`
-Helper method for previewing withdraw
-This function takes the asset's AssetId and the amount of shares as arguments and returns the amount of assets that would have been transferred for the given amount of shares.
-
-MUST return the amount of assets that would have been transferred for the given amount of shares.
-MUST revert for any reason the `withdraw` function would revert given the same conditions.
-
 ### `fn max_depositable(asset: AssetId) -> Option<u64>`
 Helper method for getting maximum depositable
 This function takes the asset's AssetId as an argument and returns the maximum amount of assets that can be deposited into the contract, for the given asset.

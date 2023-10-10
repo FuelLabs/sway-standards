@@ -115,40 +115,6 @@ abi SRC6 {
     #[storage(read)]
     fn convert_to_assets(asset: AssetId, shares: u64) -> Option<u64>;
 
-    /// Returns how many shares would have been minted for the given amount of assets, if this was a deposit call.
-    ///
-    /// # Arguments
-    ///
-    /// * `asset`: [AssetId] - The asset for which the amount of shares should be returned.
-    /// * `assets`: [u64] - The amount of assets for which the amount of shares should be returned.
-    ///
-    /// # Returns
-    ///
-    /// * [u64] - The amount of shares that would have been minted for the given amount of assets.
-    ///
-    /// # Reverts
-    ///
-    /// * For any reason the `deposit` function would revert given the same conditions.
-    #[storage(read)]
-    fn preview_deposit(asset: AssetId, assets: u64) -> u64;
-
-    /// Returns how many assets would have been transferred for the given amount of shares, if this was a withdrawal call.
-    ///
-    /// # Arguments
-    ///
-    /// * `asset`: [AssetId] - The asset for which the amount of assets should be returned.
-    /// * `shares`: [u64] - The amount of shares for which the amount of assets should be returned.
-    ///
-    /// # Returns
-    ///
-    /// * [u64] - The amount of assets that would have been transferred for the given amount of shares.
-    ///
-    /// # Reverts
-    ///
-    /// * For any reason the `withdraw` function would revert given the same conditions.
-    #[storage(read)]
-    fn preview_withdraw(asset: AssetId, shares: u64) -> u64;
-
     /// Returns the maximum amount of assets that can be deposited into the contract, for the given asset.
     ///
     /// # Additional Information
