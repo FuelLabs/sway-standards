@@ -24,7 +24,7 @@ The following functions MUST be implemented (on top of the SRC-20 functions) to 
 
 ### `fn deposit(receiver: Identity, sub_id: SubId) -> u64`
 Method that allows depositing of the underlying asset in exchange for shares of the vault.
-This function takes the receiver's identity as an argument and returns the amount of shares minted to the receiver.
+This function takes the receiver's identity and the sub_id of the sub vault as an argument and returns the amount of shares minted to the receiver.
 
 MUST revert if any AssetId other than the underlying is forwarded.
 MUST mint `preview_deposit(deposited_assets)` amount of shares to `receiver`.
@@ -35,7 +35,7 @@ MUST emit a `Deposit` log.
 
 ### `fn withdraw(asset: AssetId, sub_id: SubId, receiver: Identity) -> u64`
 Method that allows the redeeming of the vault shares in exchange for a pro-rata amount of the underlying asset
-This function takes the asset's AssetId and the receiver's identity as arguments and returns the amount of assets transferred to the receiver.
+This function takes the asset's AssetId, the sub_id of the sub vault, and the receiver's identity as arguments and returns the amount of assets transferred to the receiver.
 The AssetId of the asset, and the AssetId of the shares MUST be one-to-one, meaning every deposited AssetId shall have a unique corresponding shares AssetId.
 
 MUST revert if any AssetId other than the AssetId corresponding to the deposited asset is forwarded.
@@ -47,7 +47,7 @@ MUST emit a `Withdraw` log.
 
 ### `fn managed_assets(asset: AssetId, sub_id: SubId) -> u64`
 Method that returns the total assets under management by vault. Includes assets controlled by the vault but not directly possessed by vault.
-This function takes the asset's AssetId as an argument and returns the total amount of assets of AssetId under management by vault.
+This function takes the asset's AssetId and the sub_id of the sub vault as an argument and returns the total amount of assets of AssetId under management by vault.
 
 MUST return total amount of assets of underlying AssetId under management by vault.
 MUST return 0 if there are no assets of underlying AssetId under management by vault.
@@ -55,7 +55,7 @@ MUST NOT revert under any circumstances.
 
 ### `fn convert_to_shares(asset: AssetId, sub_id: SubId, assets: u64) -> Option<u64>`
 Helper method for converting assets to shares.
-This function takes the asset's AssetId and the amount of assets as arguments and returns the amount of shares that would be minted for the given amount of assets, in an ideal condition without slippage.
+This function takes the asset's AssetId, the sub_id of the sub vault, and the amount of assets as arguments and returns the amount of shares that would be minted for the given amount of assets, in an ideal condition without slippage.
 
 MUST return an Option::Some of the amount of shares that would be minted for the given amount of assets, without accounting for any slippage, if the given asset is supported.
 MUST return an Option::None if the given asset is not supported.
@@ -63,7 +63,7 @@ MUST NOT revert under any circumstances.
 
 ### `fn convert_to_assets(asset: AssetId, sub_id: SubId, shares: u64) -> Option<u64>`
 Helper method for converting shares to assets.
-This function takes the asset's AssetId and the amount of shares as arguments and returns the amount of assets that would be transferred for the given amount of shares, in an ideal condition without slippage.
+This function takes the asset's AssetId, the sub_id of the sub vault, and the amount of shares as arguments and returns the amount of assets that would be transferred for the given amount of shares, in an ideal condition without slippage.
 
 MUST return an Option::Some of the amount of assets that would be transferred for the given amount of shares, if the given asset is supported.
 MUST return an Option::None if the asset is not supported.
@@ -71,13 +71,13 @@ MUST NOT revert under any circumstances.
 
 ### `fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64>`
 Helper method for getting maximum depositable
-This function takes the asset's AssetId as an argument and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
+This function takes the asset's AssetId and the sub_id of the sub vault as an argument and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
 
 MUST return the maximum amount of assets that can be deposited into the contract, for the given asset.
 
 ### `fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64>`
 Helper method for getting maximum withdrawable
-This function takes the asset's AssetId as an argument and returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
+This function takes the asset's AssetId and the sub_id of the sub vault as an argument and returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
 
 MUST return the maximum amount of assets that can be withdrawn from the contract, for the given asset.
 
