@@ -81,6 +81,22 @@ This function takes the asset's AssetId as an argument and returns the maximum a
 
 MUST return the maximum amount of assets that can be withdrawn from the contract, for the given asset.
 
+### `fn vault_asset_id(asset: AssetId, sub_id: SubId) -> Option<AssetId>`
+Method that returns the AssetId of the vault shares for the given asset and sub vault.
+This function takes the asset's AssetId and the SubId of the vault as arguments and returns the AssetId of the vault shares for the given asset and sub vault.
+
+MUST return an Option::Some of the AssetId of the vault shares for the given asset and sub vault, if the given asset is supported.
+MUST return an Option::None if the given asset is not supported.
+MUST NOT revert under any circumstances.
+
+### `fn asset_of_vault(vault_asset_id: AssetId) -> Option<AssetId>`
+Method that returns the AssetId of the asset of the vault for the given AssetId of the vault shares.
+This function takes the AssetId of the vault shares as an argument and returns the AssetId of the asset of the vault for the given AssetId of the vault shares.
+
+MUST return an Option::Some of the AssetId of the asset of the vault for the given AssetId of the vault shares, if the given asset is supported and the vault has been initialised.
+MUST return an Option::None if the given asset is not supported or the vault has not been initialised.
+MUST NOT revert under any circumstances.
+
 ## Required logs
 The following logs MUST be emitted at the specified occasions
 
