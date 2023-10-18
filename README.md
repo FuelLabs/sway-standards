@@ -38,6 +38,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 - [SRC-3; Mint and Burn](./standards/src_3/) is used to enable mint and burn functionality for Native Assets.
 - [SRC-5; Ownership Standard](./standards/src_5/) is used to restrict function calls to admin users in contracts.
 - [SRC-7; Arbitrary Asset Metadata Standard](./standards/src_7/) is used to store metadata for [Native Assets](https://fuellabs.github.io/sway/v0.44.0/book/blockchain-development/native_assets.html).
+- [SRC-9; Metadata Keys Standard](./standards/src_9/) is used to store standardize metdata keys for [Native Assets](https://fuellabs.github.io/sway/v0.44.0/book/blockchain-development/native_assets.html) in combination with the SRC-7 standard.
 
 ## Using a standard
 
