@@ -7,15 +7,15 @@
 
 # Abstract
 
-The following standard allows for the implementation of a standard API for [Native Assets](https://fuellabs.github.io/sway/v0.44.0/book/blockchain-development/native_assets.html) using the Sway Language. This standard provides basic functionality as well as on-chain metadata for other applications to use.
+The following standard allows for the implementation of a standard API for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) using the Sway Language. This standard provides basic functionality as well as on-chain metadata for other applications to use.
 
 # Motivation
 
-A standard interface for [Native Assets](https://fuellabs.github.io/sway/v0.44.0/book/blockchain-development/native_assets.html) on Fuel allows external applications to interact with the token, whether that be decentralized exchanges, wallets, or Fuel's [Scripts](https://fuellabs.github.io/sway/v0.44.0/book/sway-program-types/scripts.html) and [Predicates](https://fuellabs.github.io/sway/v0.44.0/book/sway-program-types/predicates.html). 
+A standard interface for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) on Fuel allows external applications to interact with the token, whether that be decentralized exchanges, wallets, or Fuel's [Scripts](https://docs.fuel.network/docs/sway/sway-program-types/scripts/) and [Predicates](https://docs.fuel.network/docs/sway/sway-program-types/predicates/). 
 
 # Prior Art
 
-The SRC-20 Token Standard naming pays homage to the [ERC-20 Token Standard](https://eips.ethereum.org/EIPS/eip-20) seen on Ethereum. While there is functionality we may use as a reference, it is noted that Fuel's [Native Assets](https://fuellabs.github.io/sway/v0.44.0/book/blockchain-development/native_assets.html) are fundamentally different than Ethereum's tokens.
+The SRC-20 Token Standard naming pays homage to the [ERC-20 Token Standard](https://eips.ethereum.org/EIPS/eip-20) seen on Ethereum. While there is functionality we may use as a reference, it is noted that Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) are fundamentally different than Ethereum's tokens.
 
 There has been a discussion of the Fungile Token Standard on the [Fuel Forum](https://forum.fuel.network/). This discussion can be found [here](https://forum.fuel.network/t/src-20-fungible-token-standard/186). 
 
@@ -62,7 +62,7 @@ Following this, we have omitted the inclusion of any transfer functions or event
 
 # Backwards Compatibility
 
-This standard is compatible with Fuel's [Native Assets](https://fuellabs.github.io/sway/v0.44.0/book/blockchain-development/native_assets.html). There are no other standards that require compatibility.
+This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). There are no other standards that require compatibility.
 
 # Security Considerations
 
