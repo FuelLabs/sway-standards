@@ -41,11 +41,11 @@ This function MAY contain arbitrary conditions for burning, and revert if those 
 
 # Rationale
 
-This standard has been added to enable compatibility between applications and allow minting and burning tokens per use case. This standard has been separated from the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard to allow for the minting and burning for all fungible tokens, irrelevant of whether they are [Native Assets](https://fuellabs.github.io/sway/v0.44.1/book/blockchain-development/native_assets.html) or not.
+This standard has been added to enable compatibility between applications and allow minting and burning tokens per use case. This standard has been separated from the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard to allow for the minting and burning for all fungible tokens, irrelevant of whether they are [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) or not.
 
 # Backwards Compatibility
 
-This standard is compatible with Fuel's [Native Assets](https://fuellabs.github.io/sway/v0.38.0/book/blockchain-development/native_assets.html) ensuring its compatibility with the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard.
+This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) ensuring its compatibility with the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard.
 
 # Security Considerations
 
