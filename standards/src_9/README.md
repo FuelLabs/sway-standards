@@ -7,7 +7,7 @@
 
 # Abstract
 
-The following standard attempts to define the keys of relevant on-chain metadata for any [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-8 standard MUST implement the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) and [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standards. This is a living standard where revisions may be made as the ecosystem evolves.
+The following standard attempts to define the keys of relevant on-chain metadata for any [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-9 standard MUST implement the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) and [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standards. This is a living standard where revisions may be made as the ecosystem evolves.
 
 # Motivation
 
@@ -19,7 +19,7 @@ The use of generic metadata for [Native Assets](https://docs.fuel.network/docs/s
 
 # Specification
 
-The following keys are reserved for the SRC-9 standard. Use of the key should follow the SRC-9 specification.
+The following keys are reserved for the SRC-9 standard. Use of the keys should follow the SRC-9 specification.
 
 All keys SHALL use snake case. 
 
@@ -28,12 +28,12 @@ All keys SHALL use snake case.
 The social prefix SHALL be used for any social media platform and SHALL return usernames.
 
 Any social media metadata keys SHALL follow the following syntax `social:site` where:
--  The `social` keyword must be prepended to denote this is a social platform
+- The `social` keyword must be prepended to denote this is a social platform
 - The `site` keyword must be the website or platform of the social
 
 #### - `social:discord`
 
-The key `social:discord` SHALL return a `String` variant of a username for the discord platform.
+The key `social:discord` SHALL return a `String` variant of a username for the Discord platform.
 
 #### - `social:facebook`
 
@@ -100,7 +100,7 @@ The key `social:youtube` SHALL return a `String` variant of a username for the Y
 The `contact` prefix SHALL be used for any contact information on a particular project's team for an asset.
 
 Any contact information metadata keys SHALL follow the following syntax `contract:type` where:
--  The `contact` keyword must be prepended to denote this is contact information
+- The `contact` keyword must be prepended to denote this is contact information
 - The `type` keyword must be the method of contact
 
 The key SHALL use snake case. 
@@ -126,7 +126,7 @@ The key `contact:company` SHALL return a `String` variant of a company name.
 The `link` prefix SHALL be used for any external webpage hyperlink associated with an asset.
 
 Any external webpage metadata keys SHALL follow the following syntax `link:site` where:
--  The `link` keyword must be prepended to denote this is an external webpage
+- The `link` keyword must be prepended to denote this is an external webpage
 - The `site` keyword must be an external website
 
 #### - `link:home`
@@ -158,7 +158,7 @@ The key `link:linktree` SHALL return a `String` variant of the asset's project l
 The `res` prefix SHALL be used for any resources or general information on an asset.
 
 Any resource metadata keys SHALL follow the following syntax `rec:type` where:
--  The `res` keyword must be prepended to denote this is a resource
+- The `res` keyword must be prepended to denote this is a resource
 - The `type` keyword must be the type of resource
 
 #### - `res:license`
@@ -194,7 +194,7 @@ The key `res:block` SHALL return a `Int` variant of a block number.
 The `image` prefix SHALL be used for any image files associated with a singular token.
 
 Any image metadata keys SHALL follow the following syntax `image:type` where:
--  The `image` keyword must be prepended to denote this is an image
+- The `image` keyword must be prepended to denote this is an image
 - The `type` keyword must be the file type of the image
 
 #### - `image:svg`
@@ -226,7 +226,7 @@ The key `image:heif` SHALL return a `String` variant of a URI for a HEIF image.
 The `video` prefix SHALL be used for any video files associated with a singular token.
 
 Any video metadata keys SHALL follow the following syntax `video:type` where:
--  The `video` keyword must be prepended to denote this is a video
+- The `video` keyword must be prepended to denote this is a video
 - The `type` keyword must be the file type of the video
 
 #### - `video:mp4`
@@ -254,7 +254,7 @@ The key `video:ogg` SHALL return a `String` variant of a URI for an OGG video.
 The `audio` prefix SHALL be used for any audio files associated with a singular token.
 
 Any audio metadata keys SHALL follow the following syntax `audio:type` where:
--  The `audio` keyword must be prepended to denote this is audio metadata
+- The `audio` keyword must be prepended to denote this is audio metadata
 - The `type` keyword must be the file type of the audio
 
 #### - `audio:mp3`
@@ -274,7 +274,7 @@ The key `audio:oga` SHALL return a `String` variant of a URI for an OGA file.
 The `media` prefix SHALL be used for any media associated with a particular singular token.
 
 Any media metadata keys SHALL follow the following syntax `media:type` where:
--  The `media` keyword must be prepended to denote this is a video
+- The `media` keyword must be prepended to denote this is a video
 - The `type` keyword must be the file type of the media
 
 #### - `media:gltf`
@@ -290,7 +290,7 @@ The key `media:glb` SHALL return a `String` variant of a URI for a GLB file.
 The `logo` prefix SHALL be used for any images associated with a particular asset or project.
 
 Any logo metadata keys SHALL follow the following syntax `logo:type` where:
--  The `logo` keyword must be prepended to denote this is a logo
+- The `logo` keyword must be prepended to denote this is a logo
 - The `type` keyword must be the type of logo
 
 #### - `logo:svg_light`
@@ -299,7 +299,7 @@ The key `logo:svg_light` SHALL return a `String` variant of an SVG image of a lo
 
 #### - `logo:svg_dark`
 
-The key `logo:svg_light` SHALL return a `String` variant of an SVG image of a logo for dark themes.
+The key `logo:svg_dark` SHALL return a `String` variant of an SVG image of a logo for dark themes.
 
 #### - `logo:small_light`
 
@@ -330,7 +330,7 @@ The key `logo:large_dark` SHALL return a `String` variant of a URI for a 1024x10
 The `attr` prefix SHALL be used for any attributes associated with a singular token.
 
 Any attribute metadata keys SHALL follow the following syntax `attr:type` where:
--  The `attr` keyword must be prepended to denote this is an attribute
+- The `attr` keyword must be prepended to denote this is an attribute
 - The `type` keyword must be the type of attribute
 
 There are no standardized types of attributes.
