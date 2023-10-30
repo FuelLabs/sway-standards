@@ -24,7 +24,7 @@ The use of generic metadata for [Native Assets](https://docs.fuel.network/docs/s
 
 The `SubId` of the token MUST be the digest of the `sha256(origin_chain_id, origin_asset_address, origin_asset_id)` hash where:
 
-- `origin_chain_id` is a `u64` of the chain ID where the asset was originally minted.
+- `origin_chain_id` is a `String` of the chain ID where the asset was originally minted.
 - `origin_asset_address` is a `b256` of the asset's address on the chain where the asset was originally minted.
 - `origin_asset_id` is a `b256` of the asset's ID such as an NFT's ID on the chain where the asset was originally minted. IF there is no ID, `ZERO_B256` SHALL be used.
 
@@ -36,11 +36,11 @@ Any bridged assets MUST use the name and symbol of the asset on the chain where 
 
 ### - `bridged:chain`
 
-The key `bridged:chain` SHALL return an `Int` variant the chain ID where the asset was originally minted.
+The key `bridged:chain` SHALL return an `String` variant of the chain ID where the asset was originally minted.
 
 ### - `bridged:address`
 
-The key `bridged:address` SHALL return a `B256` variant of the asset's address on the chain where the asset was originally minted.
+The key `bridged:address` SHALL return a `B256` variant of the asset's address on the chain where the asset was originally minted. Native assets of a chain that do not have an address such as Ether on Ethereum SHALL use `ZERO_B256`.
 
 ### - `bridged:id`
 
