@@ -75,7 +75,7 @@ impl SRC7 for Contract {
 
         match key {
             String::from_ascii_str("bridged:chain") => {
-                Option::Some(Metadata::Int(1))
+                Option::Some(String::from_ascii_str("1"))
             },
             String::from_ascii_str("bridged:address") => {
                 let origin_asset_address = ZERO_B256;
