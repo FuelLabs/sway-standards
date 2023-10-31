@@ -9,9 +9,9 @@ use std::{
     token::{transfer, mint, burn},
 };
 
-use src_6::{SRC6, Deposit, Withdraw}
-use src_20string::SRC20;
-use std::::String;
+use src_6::{SRC6, Deposit, Withdraw};
+use src_20::SRC20;
+use std::string::String;
 
 storage {
     total_assets: u64 = 0,
