@@ -28,33 +28,6 @@ storage {
     decimals: StorageMap<AssetId, u8> = StorageMap {},
 }
 
-impl SRC20 for Contract {
-    #[storage(read)]
-    fn total_assets() -> u64 {
-        storage.total_assets.try_read().unwrap_or(0)
-    }
-
-    #[storage(read)]
-    fn total_supply(asset: AssetId) -> Option<u64> {
-        storage.total_supply.get(asset).try_read()
-    }
-
-    #[storage(read)]
-    fn name(asset: AssetId) -> Option<String> {
-        storage.name.get(asset).read_slice()
-    }
-
-    #[storage(read)]
-    fn symbol(asset: AssetId) -> Option<String> {
-        storage.symbol.get(asset).read_slice()
-    }
-
-    #[storage(read)]
-    fn decimals(asset: AssetId) -> Option<u8> {
-        storage.decimals.get(asset).try_read()
-    }
-}
-
 impl SRC6 for Contract {
     #[storage(read)]
     fn managed_assets(asset: AssetId) -> u64 {
@@ -125,6 +98,33 @@ impl SRC6 for Contract {
     #[storage(read)]
     fn max_withdrawable(asset: AssetId) -> Option<u64> {
         Option::Some(managed_assets(asset)) // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
+    }
+}
+
+impl SRC20 for Contract {
+    #[storage(read)]
+    fn total_assets() -> u64 {
+        storage.total_assets.try_read().unwrap_or(0)
+    }
+
+    #[storage(read)]
+    fn total_supply(asset: AssetId) -> Option<u64> {
+        storage.total_supply.get(asset).try_read()
+    }
+
+    #[storage(read)]
+    fn name(asset: AssetId) -> Option<String> {
+        storage.name.get(asset).read_slice()
+    }
+
+    #[storage(read)]
+    fn symbol(asset: AssetId) -> Option<String> {
+        storage.symbol.get(asset).read_slice()
+    }
+
+    #[storage(read)]
+    fn decimals(asset: AssetId) -> Option<u8> {
+        storage.decimals.get(asset).try_read()
     }
 }
 
