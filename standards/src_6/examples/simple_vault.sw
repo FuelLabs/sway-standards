@@ -5,11 +5,18 @@ use std::{
     call_frames::msg_asset_id,
     context::msg_amount,
     hash::Hash,
-    storage::{storage_map::*, storage_string::StorageString},
-    token::{transfer, mint, burn},
+    storage::{
+        storage_map::*,
+        storage_string::StorageString,
+    },
+    token::{
+        burn,
+        mint,
+        transfer,
+    },
 };
 
-use src_6::{SRC6, Deposit, Withdraw};
+use src_6::{Deposit, SRC6, Withdraw};
 use src_20::SRC20;
 use std::string::String;
 
@@ -53,14 +60,14 @@ impl SRC6 for Contract {
     fn managed_assets(asset: AssetId) -> u64 {
         managed_assets(asset) // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
     }
-    
+
     #[storage(read, write)]
     fn deposit(receiver: Identity) -> u64 {
         let assets = msg_amount();
         let asset = msg_asset_id();
         let shares = preview_deposit(asset, assets);
         require(assets != 0, "ZERO_ASSETS");
-        
+
         let _ = _mint(receiver, asset.into(), shares); // Using the asset_id as the sub_id for shares.
         storage.total_supply.insert(asset, storage.total_supply.get(asset).read() + shares);
         after_deposit();
@@ -82,7 +89,7 @@ impl SRC6 for Contract {
         require(shares != 0, "ZERO_SHARES");
         require(msg_asset_id() == AssetId::new(ContractId::this(), asset.into()), "INVALID_ASSET_ID");
         let assets = preview_withdraw(asset, shares);
-        
+
         _burn(asset.into(), shares);
         storage.total_supply.insert(asset, storage.total_supply.get(asset).read() - shares);
         after_withdraw();
@@ -105,7 +112,6 @@ impl SRC6 for Contract {
         Option::Some(preview_deposit(asset, assets))
     }
 
-    
     #[storage(read)]
     fn convert_to_assets(asset: AssetId, shares: u64) -> Option<u64> {
         Option::Some(preview_withdraw(asset, shares))
@@ -155,11 +161,7 @@ fn after_withdraw() {
 }
 
 #[storage(read, write)]
-pub fn _mint(
-    recipient: Identity,
-    sub_id: SubId,
-    amount: u64,
-) -> AssetId {
+pub fn _mint(recipient: Identity, sub_id: SubId, amount: u64) -> AssetId {
     let asset_id = AssetId::new(contract_id(), sub_id);
     let supply = storage.total_supply.get(asset).try_read();
     // Only increment the number of assets minted by this contract if it hasn't been minted before.
@@ -173,10 +175,7 @@ pub fn _mint(
 }
 
 #[storage(read, write)]
-pub fn _burn(
-    sub_id: SubId,
-    amount: u64,
-) {
+pub fn _burn(sub_id: SubId, amount: u64) {
     let asset_id = AssetId::new(contract_id(), sub_id);
     require(this_balance(asset_id) >= amount, BurnError::NotEnoughTokens);
     // If we pass the check above, we can assume it is safe to unwrap.
