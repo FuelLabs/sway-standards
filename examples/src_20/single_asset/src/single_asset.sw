@@ -1,7 +1,7 @@
 contract;
 
 use src_20::SRC20;
-use std::{call_frames::contract_id, option::*, string::String};
+use std::{call_frames::contract_id, string::String};
 
 configurable {
     TOTAL_SUPPLY: u64 = 100_000_000,

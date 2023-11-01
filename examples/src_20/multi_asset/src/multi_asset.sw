@@ -1,7 +1,7 @@
 contract;
 
 use src_20::SRC20;
-use std::{hash::Hash, option::*, storage::storage_string::*, string::String};
+use std::{hash::Hash, storage::storage_string::*, string::String};
 
 storage {
     total_assets: u64 = 0,
