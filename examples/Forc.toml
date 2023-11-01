@@ -1,0 +1,2 @@
+[workspace]
+members = ["src_20/single_asset", "src_20/multi_asset"]
