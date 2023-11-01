@@ -57,8 +57,14 @@ jobs:
             name: my-toolchain
             components: forc@${{ env.FORC_VERSION }}, fuel-core@${{ env.CORE_VERSION }}
 
-        - name: Check Sway formatting
+        - name: Check Sway Formatting Standards
           run: forc fmt --path standards --check
 
         - name: Build All Standards
           run: forc build --path standards
+
+        - name: Check Sway Formatting Examples
+          run: forc fmt --path examples --check
+
+        - name: Build All Examples
+          run: forc build --path examples
