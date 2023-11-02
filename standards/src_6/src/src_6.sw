@@ -160,7 +160,7 @@ abi SRC6 {
     #[storage(read)]
     fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64>;
 
-    /// Returns the AssetId of the vault shares for the given asset and sub vault.
+    /// Returns the AssetId and SubId of the vault shares for the given asset and sub vault.
     ///
     /// # Arguments
     ///
@@ -169,12 +169,12 @@ abi SRC6 {
     ///
     /// # Returns
     ///
-    /// * [Some(AssetId)] - The AssetId of the vault shares for the given asset and sub vault.
+    /// * [Some((AssetId, SubId))] - The AssetId and SubId of the vault shares for the given asset and sub vault.
     /// * [None] - If the asset is not supported by the contract.
     #[storage(read)]
-    fn vault_asset_id(asset: AssetId, sub_id: SubId) -> Option<AssetId>;
+    fn vault_asset_id(asset: AssetId, sub_id: SubId) -> Option<(AssetId, SubId)>;
 
-    /// Returns the AssetId of the asset of the vault for the given AssetId of the vault shares.
+    /// Returns the AssetId of the asset of the vault for the given AssetId of the vault shares, and the sub_id of the vault.
     ///
     /// # Arguments
     ///
@@ -182,8 +182,8 @@ abi SRC6 {
     ///
     /// # Returns
     ///
-    /// * [Some(AssetId)] - The AssetId of the asset of the vault for the given AssetId of the vault shares.
+    /// * [Some((AssetId, SubId))] - The AssetId of the asset of the vault for the given AssetId of the vault shares, and the sub_id of the vault.
     /// * [None] - If the asset is not supported by the contract or the vault has not been initialised.
     #[storage(read)]
-    fn asset_of_vault(vault_asset_id: AssetId) -> Option<AssetId>;
+    fn asset_of_vault(vault_asset_id: AssetId) -> Option<(AssetId, SubId)>;
 }
