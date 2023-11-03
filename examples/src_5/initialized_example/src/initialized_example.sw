@@ -1,16 +1,18 @@
 contract;
 
-use src_5::{SRC_5, Ownership, State};
+use src_5::{Ownership, SRC_5, State};
 use std::constants::ZERO_B256;
 
-configurable { 
+configurable {
     /// The owner of this contract at deployment.
     INITIAL_OWNER: Identity = Identity::Address(Address::from(ZERO_B256)),
 }
 
 storage {
     /// The owner in storage.
-    owner: Ownership = Ownership { state: State::Initialized(INITIAL_OWNER) },
+    owner: Ownership = Ownership {
+        state: State::Initialized(INITIAL_OWNER),
+    },
 }
 
 impl SRC_5 for Contract {
@@ -31,7 +33,7 @@ impl SRC_5 for Contract {
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let ownership_abi = abi(contract_id, SRC_5);
-    /// 
+    ///
     ///     match ownership_abi.owner() {
     ///         State::Initialized(owner) => log("The ownership is initalized"),
     ///         _ => log("This example will never reach this statement"),
