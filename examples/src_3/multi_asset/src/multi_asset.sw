@@ -52,10 +52,11 @@ impl SRC3 for Contract {
     ///
     /// ```sway
     /// use src3::SRC3;
+    /// use std::constants::ZERO_B256;
     ///
-    /// fn foo(contract: ContractId) {
-    ///     let contract_abi = abi(SR3, contract);
-    ///     contract_abi.mint(Identity::ContractId(this_contract()), ZERO_B256, 100);
+    /// fn foo(contract_id: ContractId) {
+    ///     let contract_abi = abi(SR3, contract_id);
+    ///     contract_abi.mint(Identity::ContractId(contract_id), ZERO_B256, 100);
     /// }
     /// ```
     #[storage(read, write)]
@@ -97,13 +98,14 @@ impl SRC3 for Contract {
     ///
     /// ```sway
     /// use src3::SRC3;
+    /// use std::constants::ZERO_B256;
     ///
-    /// fn foo(contract: ContractId, asset_id: AssetId) {
-    ///     let contract_abi = abi(SR3, contract);
+    /// fn foo(contract_id: ContractId, asset_id: AssetId) {
+    ///     let contract_abi = abi(SR3, contract_id);
     ///     contract_abi {
     ///         gas: 10000,
     ///         coins: 100,
-    ///         asset_id: AssetId,
+    ///         asset_id: asset_id,
     ///     }.burn(ZERO_B256, 100);
     /// }
     /// ```
