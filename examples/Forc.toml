@@ -1,2 +1,7 @@
 [workspace]
-members = ["src_5/initialized_example", "src_5/uninitialized_example", "src_20/single_asset", "src_20/multi_asset"]
+members = [
+  "src_5/initialized_example",
+  "src_5/uninitialized_example",
+  "src_20/single_asset",
+  "src_20/multi_asset",
+]
