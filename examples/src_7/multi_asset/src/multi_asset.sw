@@ -47,10 +47,6 @@ impl SRC7 for Contract {
     ///
     /// * [Option<Metadata>] - `Some` metadata that corresponds to the `key` or `None`.
     ///
-    /// # Reverts
-    ///
-    /// * When the AssetId provided does not match the default SubId.
-    ///
     /// # Examples
     ///
     /// ```sway
@@ -66,8 +62,6 @@ impl SRC7 for Contract {
     /// ```
     #[storage(read)]
     fn metadata(asset: AssetId, key: String) -> Option<Metadata> {
-        require(asset == AssetId::default(contract_id()), "Invalid AssetId provided");
-
         if key == String::from_ascii_str("social:x") {
             Some(Metadata::String(String::from_ascii_str(from_str_array(SOCIAL_X))))
         } else if key == String::from_ascii_str("site:forum") {
