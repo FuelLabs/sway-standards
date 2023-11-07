@@ -293,6 +293,10 @@ Any logo metadata keys SHALL follow the following syntax `logo:type` where:
 - The `logo` keyword must be prepended to denote this is a logo
 - The `type` keyword must be the type of logo
 
+#### - `logo:svg`
+
+The key `logo:svg` SHALL return a `String` variant of an SVG image of a logo.
+
 #### - `logo:svg_light`
 
 The key `logo:svg_light` SHALL return a `String` variant of an SVG image of a logo for light themes.
