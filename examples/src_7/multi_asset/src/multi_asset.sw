@@ -3,12 +3,7 @@ contract;
 use src_7::{Metadata, SRC7};
 use src_20::SRC20;
 
-use std::{
-    call_frames::contract_id, 
-    hash::Hash,
-    string::String,
-    storage::storage_string::*,
-};
+use std::{call_frames::contract_id, hash::Hash, storage::storage_string::*, string::String};
 
 // In this example, all assets minted from this contract have the same decimals, name, and symbol
 configurable {
