@@ -1,5 +1,7 @@
 [workspace]
 members = [
+  "src_3/single_asset",
+  "src_3/multi_asset",
   "src_5/initialized_example",
   "src_5/uninitialized_example",
   "src_20/single_asset",
