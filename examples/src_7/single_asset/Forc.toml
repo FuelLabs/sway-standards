@@ -1,0 +1,9 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "single_asset.sw"
+license = "Apache-2.0"
+name = "single_src7_asset"
+
+[dependencies]
+src_20 = { path = "../../../standards/src_20" }
+src_7 = { path = "../../../standards/src_7" }

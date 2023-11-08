@@ -4,6 +4,8 @@ members = [
   "src_3/multi_asset",
   "src_5/initialized_example",
   "src_5/uninitialized_example",
+  "src_7/single_asset",
+  "src_7/multi_asset",
   "src_20/single_asset",
   "src_20/multi_asset",
 ]
