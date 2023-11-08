@@ -81,7 +81,7 @@ use std::constants::ZERO_B256;
 use standards::src_5::*;
 
 storage {
-    owner: Ownership = Ownership::initialized(Identity::Address(Address::from(ZERO_B256))),
+    owner: State = Identity::Address(Address::from(ZERO_B256)),
 }
 
 impl SRC_5 for MyContract {
