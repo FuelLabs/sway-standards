@@ -29,13 +29,7 @@ pub enum AccessError {
     NotOwner: (),
 }
 
-/// Contains the ownership state.
-pub struct Ownership {
-    /// Represents the state of ownership.
-    state: State,
-}
-
-abi SRC_5 {
+abi SRC5 {
     /// Returns the owner.
     ///
     /// # Return Values

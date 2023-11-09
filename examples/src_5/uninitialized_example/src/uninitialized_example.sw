@@ -1,15 +1,13 @@
 contract;
 
-use src_5::{Ownership, SRC_5, State};
+use src_5::{SRC5, State};
 
 storage {
     /// The owner in storage.
-    owner: Ownership = Ownership {
-        state: State::Uninitialized,
-    },
+    owner: State = State::Uninitialized,
 }
 
-impl SRC_5 for Contract {
+impl SRC5 for Contract {
     /// Returns the owner.
     ///
     /// # Return Values
@@ -36,6 +34,6 @@ impl SRC_5 for Contract {
     /// ```
     #[storage(read)]
     fn owner() -> State {
-        storage.owner.read().state
+        storage.owner.read()
     }
 }
