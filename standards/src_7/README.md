@@ -74,10 +74,10 @@ abi SRC7Metadata {
 
 # Example Implementation
 
-## [Single Native Asset](../../examples/src_7/single_asset/)
+## [Single Native Asset](../../examples/src_7/single_asset/src/single_asset.sw)
 
 Example of the SRC-7 implementation where metadata exists for only a single asset with one `SubId`.
 
-## [Mutli Native Asset](../../examples/src_7/multi_asset/)
+## [Mutli Native Asset](../../examples/src_7/multi_asset/src/multi_asset.sw)
 
 Example of the SRC-7 implementation where metadata exists for multiple assets with differing `SubId`s.

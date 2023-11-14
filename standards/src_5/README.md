@@ -83,10 +83,10 @@ abi SRC5 {
 
 # Example Implementation
 
-## [Uninitalized](../../examples/src_5/uninitialized_example/)
+## [Uninitalized](../../examples/src_5/uninitialized_example/src/uninitialized_example.sw)
 
 Example of the SRC-5 implementation where a contract does not have an owner set at compile time with the intent to set it during runtime.
 
-## [Initialized](../../examples/src_5/initialized_example/)
+## [Initialized](../../examples/src_5/initialized_example/src/initialized_example.sw)
 
 Example of the SRC-5 implementation where a contract has an owner set at compile time.

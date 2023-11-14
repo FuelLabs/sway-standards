@@ -63,10 +63,10 @@ abi MySRC3Token {
 
 # Example Implementation
 
-## [Single Native Asset](../../examples/src_3/single_asset/)
+## [Single Native Asset](../../examples/src_3/single_asset/src/single_asset.sw)
 
 Example of the SRC-3 implementation where a contract only mints a single asset with one `SubId`.
 
-## [Multi Native Asset](../../examples/src_3/multi_asset/)
+## [Multi Native Asset](../../examples/src_3/multi_asset/src/multi_asset.sw)
 
 Example of the SRC-3 implementation where a contract mints multiple assets with differing `SubId`s.
