@@ -72,22 +72,21 @@ There are no standards that SRC-5 requires to be compatible with.
 
 The SRC-5 standard should help improve the security of Sway contracts and their interoperability.
 
-# Examples
+# Examples ABI
 
 ```rust
-contract;
-
-use std::constants::ZERO_B256;
-use standards::src_5::*;
-
-storage {
-    owner: State = Identity::Address(Address::from(ZERO_B256)),
-}
-
-impl SRC_5 for MyContract {
+abi SRC5 {
     #[storage(read)]
-    fn owner() -> State {
-        storage.owner.state
-    }
+    fn owner() -> State;
 }
 ```
+
+# Example Implementation
+
+## [Uninitalized](../../examples/src_5/uninitialized_example/)
+
+Example of the SRC-5 implementation where a contract does not have an owner set at compile time with the intent to set it during runtime.
+
+## [Initialized](../../examples/src_5/initialized_example/)
+
+Example of the SRC-5 implementation where a contract has an owner set at compile time.

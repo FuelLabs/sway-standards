@@ -61,4 +61,12 @@ abi MySRC3Token {
 }
 ```
 
-This draft standard is to be released as `v0.1`. 
+# Example Implementation
+
+## [Single Native Asset](../../examples/src_3/single_asset/)
+
+Example of the SRC-3 implementation where a contract only mints a single asset with one `SubId`.
+
+## [Multi Native Asset](../../examples/src_3/multi_asset/)
+
+Example of the SRC-3 implementation where a contract mints multiple assets with differing `SubId`s.
