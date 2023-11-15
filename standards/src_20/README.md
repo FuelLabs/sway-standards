@@ -1,7 +1,7 @@
 <p align="center">
     <picture>
         <source media="(prefers-color-scheme: dark)" srcset=".docs/src-20-logo-dark-theme.png">
-        <img alt="SRC-5 logo" width="400px" src=".docs/src-20-logo-light-theme.png">
+        <img alt="SRC-20 logo" width="400px" src=".docs/src-20-logo-light-theme.png">
     </picture>
 </p>
 
@@ -85,4 +85,12 @@ abi MyToken {
 }
 ```
 
-This draft standard is to be released as `v0.1`. 
+# Example Implementation
+
+## [Single Native Assset](../../examples/src_20/single_asset/src/single_asset.sw)
+
+Example of the SRC-20 implementation where a contract contains a single asset with one `SubId`. This implementation is recommended for users that intend to deploy a single asset with their contract.
+
+## [Multi Native Asset](../../examples/src_20/multi_asset/src/multi_asset.sw)
+
+Example of the SRC-20 implementation where a contract contains multiple assets with differing `SubId`s. This implementation is recommended for users that intend to deploy multiple assets with their contract.

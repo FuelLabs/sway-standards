@@ -63,6 +63,50 @@ src_20 = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.1.1" }
 use src_20::SRC20;
 ```
 
+### Examples of Standards
+
+Minimal example implementations for every standard can be found in the [`examples/`](./examples/) folder.
+
+#### SRC-20; Token Standard Examples
+
+##### - [Single Native Assset](./examples/src_20/single_asset/src/single_asset.sw)
+
+Example of the SRC-20 implementation where a contract contains a single asset with one `SubId`. This implementation is recommended for users that intend to deploy a single asset with their contract.
+
+##### - [Multi Native Asset](./examples/src_20/multi_asset/src/multi_asset.sw)
+
+Example of the SRC-20 implementation where a contract contains multiple assets with differing `SubId`s. This implementation is recommended for users that intend to deploy multiple assets with their contract.
+
+#### SRC-3; Mint and Burn Standard Examples
+
+##### - [Single Native Asset](./examples/src_3/single_asset/src/single_asset.sw)
+
+Example of the SRC-3 implementation where a contract only mints a single asset with one `SubId`.
+
+##### - [Multi Native Asset](./examples/src_3/multi_asset/src/multi_asset.sw)
+
+Example of the SRC-3 implementation where a contract mints multiple assets with differing `SubId`s.
+
+#### SRC-5; Ownership Examples
+
+##### - [Uninitalized](./examples/src_5/uninitialized_example/src/uninitialized_example.sw)
+
+Example of the SRC-5 implementation where a contract does not have an owner set at compile time with the intent to set it during runtime.
+
+##### - [Initialized](./examples/src_5/initialized_example/src/initialized_example.sw)
+
+Example of the SRC-5 implementation where a contract has an owner set at compile time.
+
+#### SRC-7; Arbitrary Asset Metadata Standard Examples
+
+##### - [Single Native Asset](./examples/src_7/single_asset/src/single_asset.sw)
+
+Example of the SRC-7 implementation where metadata exists for only a single asset with one `SubId`.
+
+##### - [Mutli Native Asset](./examples/src_7/multi_asset/src/multi_asset.sw)
+
+Example of the SRC-7 implementation where metadata exists for multiple assets with differing `SubId`s.
+
 > **Note**
 > All standards currently use `forc v0.46.0`.
 
