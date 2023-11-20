@@ -41,7 +41,7 @@ abi SRC20 {
     /// fn foo(contract: ContractId, asset: AssetId) {
     ///     let contract_abi = abi(SRC20, contract);
     ///     let total_supply = contract_abi.total_supply(asset);
-    ///     assert(total_supply != 0);
+    ///     assert(total_supply.unwrap() != 0);
     /// }
     /// ```
     #[storage(read)]
@@ -66,7 +66,7 @@ abi SRC20 {
     /// fn foo(contract: ContractId, asset: AssetId) {
     ///     let contract_abi = abi(SRC20, contract);
     ///     let name = contract_abi.name(asset);
-    ///     assert(name.len() != 0);
+    ///     assert(name.is_some());
     /// }
     /// ```
     #[storage(read)]
@@ -90,7 +90,7 @@ abi SRC20 {
     /// fn foo(contract: ContractId, asset: AssetId) {
     ///     let contract_abi = abi(SRC20, contract);
     ///     let symbol = contract_abi.symbol(asset);
-    ///     assert(symbol.len() != 0);
+    ///     assert(symbol.is_some());
     /// }
     /// ```
     #[storage(read)]
@@ -117,7 +117,7 @@ abi SRC20 {
     /// fn foo(contract: ContractId, asset: AssedId) {
     ///     let contract_abi = abi(SRC20, contract);
     ///     let decimals = contract_abi.decimals(asset);
-    ///     assert(decimals == 8);
+    ///     assert(decimals.unwrap() == 8u8);
     /// }
     /// ```
     #[storage(read)]
