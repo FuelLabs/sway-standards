@@ -1,2 +1,5 @@
 [workspace]
 members = ["src_3", "src_5", "src_7", "src_20"]
+
+[patch.'https://github.com/fuellabs/sway']
+std = { git = "https://github.com/fuellabs/sway", branch = "feat/transaction-policies" }
