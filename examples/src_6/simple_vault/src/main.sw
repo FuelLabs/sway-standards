@@ -44,12 +44,13 @@ impl SRC6 for Contract {
     #[storage(read)]
     fn managed_assets(asset: AssetId, sub_id: SubId) -> u64 {
         let vault_share_asset = vault_asset_id(asset, sub_id).0;
-        managed_assets(vault_share_asset) // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
+        // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
+        managed_assets(vault_share_asset)
     }
 
     #[storage(read, write)]
     fn deposit(receiver: Identity, sub_id: SubId) -> u64 {
-        let assets = msg_amount();
+        let asset_amount = msg_amount();
         let asset = msg_asset_id();
         let (shares, share_asset, share_asset_sub_id) = preview_deposit(asset, sub_id, assets);
         require(assets != 0, "ZERO_ASSETS");
@@ -60,8 +61,6 @@ impl SRC6 for Contract {
         let mut vault_info = storage.vault_info.get(share_asset).read();
         vault_info.managed_assets = vault_info.managed_assets + assets;
         storage.vault_info.insert(share_asset, vault_info);
-
-        after_deposit();
 
         log(Deposit {
             caller: msg_sender().unwrap(),
@@ -87,7 +86,6 @@ impl SRC6 for Contract {
 
         _burn(share_asset_id, share_asset_sub_id, shares);
         storage.total_supply.insert(asset, storage.total_supply.get(asset).read() - shares);
-        after_withdraw();
 
         transfer(receiver, asset, assets);
 
@@ -198,14 +196,6 @@ fn preview_withdraw(share_asset_id: AssetId, shares: u64) -> u64 {
     } else {
         shares * (managed_assets(share_asset_id) / supply)
     }
-}
-
-fn after_deposit() {
-    // Does nothing, only for demonstration purposes.
-}
-
-fn after_withdraw() {
-    // Does nothing, only for demonstration purposes.
 }
 
 #[storage(read, write)]

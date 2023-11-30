@@ -1,7 +1,7 @@
 <p align="center">
     <picture>
-        <source media="(prefers-color-scheme: dark)" srcset=".docs/src-5-logo-dark-theme.png">
-        <img alt="SRC-5 logo" width="400px" src=".docs/src-5-logo-light-theme.png">
+        <source media="(prefers-color-scheme: dark)" srcset=".docs/src-6-logo-dark-theme.png">
+        <img alt="SRC-6 logo" width="400px" src=".docs/src-6-logo-light-theme.png">
     </picture>
 </p>
 
@@ -27,7 +27,6 @@ Method that allows depositing of the underlying asset in exchange for shares of 
 This function takes the receiver's identity and the sub_id of the sub vault as an argument and returns the amount of shares minted to the receiver.
 
 MUST revert if any AssetId other than the underlying is forwarded.
-MUST mint `preview_deposit(deposited_assets)` amount of shares to `receiver`.
 MUST increase `managed_assets` by `deposited_assets` (through any means including `std::context::this_balance(ASSET_ID)` if applicable).
 MUST increase `total_supply` of the share's AssetId by newly minted shares.
 MUST increase `total_assets` by one if the the AssetId is minted for the first time.
@@ -39,9 +38,7 @@ This function takes the asset's AssetId, the sub_id of the sub vault, and the re
 The AssetId of the asset, and the AssetId of the shares MUST be one-to-one, meaning every deposited AssetId shall have a unique corresponding shares AssetId.
 
 MUST revert if any AssetId other than the AssetId corresponding to the deposited asset is forwarded.
-MUST send `preview_withdraw(redeemed_shares)` amount of assets to `receiver`.
 MUST burn the received shares.
-MUST reduce `managed_assets` by `preview_withdraw(redeemed_shares)`.
 MUST reduce `total_supply` of the shares's AssetId by amount of burnt shares.
 MUST emit a `Withdraw` log.
 
