@@ -45,7 +45,7 @@ The `Int` variant SHALL be used when the stored metadata for the corresponding `
 
 The `String` variant SHALL be used when the stored metadata for the corresponding `AssetId` and `String` key pair is of the `String` type. The `String` variant MUST be used when a URI is required but MAY contain any arbitrary `String` data. 
 
-## Require Functions
+## Required Functions
 
 ### `fn metadata(asset: AssetId, key: String) -> Option<Metadata>`
 
