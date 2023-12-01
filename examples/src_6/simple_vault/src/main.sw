@@ -31,13 +31,14 @@ pub struct VaultInfo {
 }
 
 storage {
+    /// Vault share AssetId -> VaultInfo
+    vault_info: StorageMap<AssetId, VaultInfo> = StorageMap {},
+    
     total_assets: u64 = 0,
     total_supply: StorageMap<AssetId, u64> = StorageMap {},
     name: StorageMap<AssetId, StorageString> = StorageMap {},
     symbol: StorageMap<AssetId, StorageString> = StorageMap {},
     decimals: StorageMap<AssetId, u8> = StorageMap {},
-    /// Vault share AssetId -> VaultInfo
-    vault_info: StorageMap<AssetId, VaultInfo> = StorageMap {},
 }
 
 impl SRC6 for Contract {
@@ -113,12 +114,14 @@ impl SRC6 for Contract {
 
     #[storage(read)]
     fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64> {
-        Option::Some(18_446_744_073_709_551_615 - managed_assets(asset)) // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
+        // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
+        Option::Some(u64::MAX - managed_assets(asset))
     }
 
     #[storage(read)]
     fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64> {
-        Option::Some(managed_assets(asset)) // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
+        // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
+        Option::Some(managed_assets(asset))
     }
 
     #[storage(read)]

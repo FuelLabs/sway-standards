@@ -20,9 +20,11 @@ Token vaults have been thoroughly explored on Ethereum and with [EIP 4626](https
 # Specification
 
 ## Required public functions
-The following functions MUST be implemented (on top of the SRC-20 functions) to follow the SRC-6 standard
+
+The following functions MUST be implemented to follow the SRC-6 standard. Any contract that implements the SRC-7 standard MUST implement the SRC-20 standard.
 
 ### `fn deposit(receiver: Identity, sub_id: SubId) -> u64`
+
 Method that allows depositing of the underlying asset in exchange for shares of the vault.
 This function takes the receiver's identity and the sub_id of the sub vault as an argument and returns the amount of shares minted to the receiver.
 
@@ -33,6 +35,7 @@ MUST increase `total_assets` by one if the the AssetId is minted for the first t
 MUST emit a `Deposit` log.
 
 ### `fn withdraw(asset: AssetId, sub_id: SubId, receiver: Identity) -> u64`
+
 Method that allows the redeeming of the vault shares in exchange for a pro-rata amount of the underlying asset
 This function takes the asset's AssetId, the sub_id of the sub vault, and the receiver's identity as arguments and returns the amount of assets transferred to the receiver.
 The AssetId of the asset, and the AssetId of the shares MUST be one-to-one, meaning every deposited AssetId shall have a unique corresponding shares AssetId.
@@ -43,6 +46,7 @@ MUST reduce `total_supply` of the shares's AssetId by amount of burnt shares.
 MUST emit a `Withdraw` log.
 
 ### `fn managed_assets(asset: AssetId, sub_id: SubId) -> u64`
+
 Method that returns the total assets under management by vault. Includes assets controlled by the vault but not directly possessed by vault.
 This function takes the asset's AssetId and the sub_id of the sub vault as an argument and returns the total amount of assets of AssetId under management by vault.
 
@@ -51,50 +55,57 @@ MUST return 0 if there are no assets of underlying AssetId under management by v
 MUST NOT revert under any circumstances.
 
 ### `fn convert_to_shares(asset: AssetId, sub_id: SubId, assets: u64) -> Option<u64>`
+
 Helper method for converting assets to shares.
 This function takes the asset's AssetId, the sub_id of the sub vault, and the amount of assets as arguments and returns the amount of shares that would be minted for the given amount of assets, in an ideal condition without slippage.
 
-MUST return an Option::Some of the amount of shares that would be minted for the given amount of assets, without accounting for any slippage, if the given asset is supported.
-MUST return an Option::None if the given asset is not supported.
+MUST return an `Option::Some(amount)` of shares that would be minted for the given amount of assets, without accounting for any slippage, if the given asset is supported.
+MUST return an `Option::None` if the given asset is not supported.
 MUST NOT revert under any circumstances.
 
 ### `fn convert_to_assets(asset: AssetId, sub_id: SubId, shares: u64) -> Option<u64>`
+
 Helper method for converting shares to assets.
 This function takes the asset's AssetId, the sub_id of the sub vault, and the amount of shares as arguments and returns the amount of assets that would be transferred for the given amount of shares, in an ideal condition without slippage.
 
-MUST return an Option::Some of the amount of assets that would be transferred for the given amount of shares, if the given asset is supported.
-MUST return an Option::None if the asset is not supported.
+MUST return an `Option::Some(amount)` of assets that would be transferred for the given amount of shares, if the given asset is supported.
+MUST return an `Option::None` if the asset is not supported.
 MUST NOT revert under any circumstances.
 
 ### `fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64>`
+
 Helper method for getting maximum depositable
 This function takes the asset's AssetId and the sub_id of the sub vault as an argument and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
 
 MUST return the maximum amount of assets that can be deposited into the contract, for the given asset.
 
 ### `fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64>`
+
 Helper method for getting maximum withdrawable
 This function takes the asset's AssetId and the sub_id of the sub vault as an argument and returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
 
 MUST return the maximum amount of assets that can be withdrawn from the contract, for the given asset.
 
 ### `fn vault_asset_id(asset: AssetId, sub_id: SubId) -> Option<AssetId>`
+
 Method that returns the AssetId of the vault shares for the given asset and sub vault.
 This function takes the asset's AssetId and the SubId of the vault as arguments and returns the AssetId of the vault shares for the given asset and sub vault.
 
-MUST return an Option::Some of the AssetId of the vault shares for the given asset and sub vault, if the given asset is supported.
-MUST return an Option::None if the given asset is not supported.
+MUST return an `Option::Some(AssetId)` of the vault shares for the given asset and sub vault, if the given asset is supported.
+MUST return an `Option::None` if the given asset is not supported.
 MUST NOT revert under any circumstances.
 
 ### `fn asset_of_vault(vault_asset_id: AssetId) -> Option<AssetId>`
+
 Method that returns the AssetId of the asset of the vault for the given AssetId of the vault shares.
 This function takes the AssetId of the vault shares as an argument and returns the AssetId of the asset of the vault for the given AssetId of the vault shares.
 
-MUST return an Option::Some of the AssetId of the asset of the vault for the given AssetId of the vault shares, if the given asset is supported and the vault has been initialised.
-MUST return an Option::None if the given asset is not supported or the vault has not been initialised.
+MUST return an `Option::Some(AssetId)` of the asset of the vault for the given AssetId of the vault shares, if the given asset is supported and the vault has been initialised.
+MUST return an `Option::None` if the given asset is not supported or the vault has not been initialised.
 MUST NOT revert under any circumstances.
 
 ## Required logs
+
 The following logs MUST be emitted at the specified occasions
 
 ```sway
@@ -141,9 +152,9 @@ The `Withdraw` struct MUST be logged whenever shares are redeemed for assets via
 
 # Rationale
 
-The ABI discussed is simple and covers the known use cases of token vaults while allowing safe implementations
+The ABI discussed and covers the known use cases of token vaults while allowing safe implementations
 
-# Backwards compatibility
+# Backwards Compatibility
 
 This standard is fully compatible with the SRC-20 standard
 
