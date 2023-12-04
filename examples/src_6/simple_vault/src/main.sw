@@ -53,14 +53,14 @@ impl SRC6 for Contract {
     fn deposit(receiver: Identity, sub_id: SubId) -> u64 {
         let asset_amount = msg_amount();
         let asset = msg_asset_id();
-        let (shares, share_asset, share_asset_sub_id) = preview_deposit(asset, sub_id, assets);
-        require(assets != 0, "ZERO_ASSETS");
+        let (shares, share_asset, share_asset_sub_id) = preview_deposit(asset, sub_id, asset_amount);
+        require(asset_amount != 0, "ZERO_ASSETS");
 
         _mint(receiver, share_asset, share_asset_sub_id, shares);
         storage.total_supply.insert(asset, storage.total_supply.get(asset).read() + shares);
 
         let mut vault_info = storage.vault_info.get(share_asset).read();
-        vault_info.managed_assets = vault_info.managed_assets + assets;
+        vault_info.managed_assets = vault_info.managed_assets + asset_amount;
         storage.vault_info.insert(share_asset, vault_info);
 
         log(Deposit {
@@ -68,7 +68,7 @@ impl SRC6 for Contract {
             receiver: receiver,
             asset: asset,
             sub_id: sub_id,
-            assets: assets,
+            assets: asset_amount,
             shares: shares,
         });
 
@@ -103,19 +103,9 @@ impl SRC6 for Contract {
     }
 
     #[storage(read)]
-    fn convert_to_shares(asset: AssetId, sub_id: SubId, assets: u64) -> Option<u64> {
-        Option::Some(preview_deposit(asset, sub_id, assets).0)
-    }
-
-    #[storage(read)]
-    fn convert_to_assets(asset: AssetId, sub_id: SubId, shares: u64) -> Option<u64> {
-        Option::Some(preview_withdraw(AssetId::new(ContractId::this(), sha256((asset.into(), sub_id))), shares))
-    }
-
-    #[storage(read)]
     fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64> {
         // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
-        Option::Some(u64::MAX - managed_assets(asset))
+        Option::Some(u64::max() - managed_assets(asset))
     }
 
     #[storage(read)]

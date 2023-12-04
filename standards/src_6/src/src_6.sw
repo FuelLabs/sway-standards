@@ -94,36 +94,6 @@ abi SRC6 {
     #[storage(read)]
     fn managed_assets(asset: AssetId, sub_id: SubId) -> u64;
 
-    /// Returns how many shares would be minted for the given amount of assets, in an ideal scenario (No accounting for slippage, or any limits).
-    ///
-    /// # Arguments
-    ///
-    /// * `asset`: [AssetId] - The asset for which the amount of shares should be returned.
-    /// * `sub_id`: [SubId] - The SubId of the vault.
-    /// * `assets`: [u64] - The amount of assets for which the amount of shares should be returned.
-    ///
-    /// # Returns
-    ///
-    /// * [Some(u64)] - The amount of shares that would be minted for the given amount of assets.
-    /// * [None] - If the asset is not supported by the contract.
-    #[storage(read)]
-    fn convert_to_shares(asset: AssetId, sub_id: SubId, assets: u64) -> Option<u64>;
-
-    /// Returns how many assets would be transferred for the given amount of shares, in an ideal scenario (No accounting for slippage, or any limits).
-    ///
-    /// # Arguments
-    ///
-    /// * `asset`: [AssetId] - The asset for which the amount of assets should be returned.
-    /// * `sub_id`: [SubId] - The SubId of the vault.
-    /// * `shares`: [u64] - The amount of shares for which the amount of assets should be returned.
-    ///
-    /// # Returns
-    ///
-    /// * [Some(u64)] - The amount of assets that would be transferred for the given amount of shares.
-    /// * [None] - If the asset is not supported by the contract.
-    #[storage(read)]
-    fn convert_to_assets(asset: AssetId, sub_id: SubId, shares: u64) -> Option<u64>;
-
     /// Returns the maximum amount of assets that can be deposited into the contract, for the given asset.
     ///
     /// # Additional Information

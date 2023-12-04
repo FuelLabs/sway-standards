@@ -54,24 +54,6 @@ MUST return total amount of assets of underlying AssetId under management by vau
 MUST return 0 if there are no assets of underlying AssetId under management by vault.
 MUST NOT revert under any circumstances.
 
-### `fn convert_to_shares(asset: AssetId, sub_id: SubId, assets: u64) -> Option<u64>`
-
-Helper method for converting assets to shares.
-This function takes the asset's AssetId, the sub_id of the sub vault, and the amount of assets as arguments and returns the amount of shares that would be minted for the given amount of assets, in an ideal condition without slippage.
-
-MUST return an `Option::Some(amount)` of shares that would be minted for the given amount of assets, without accounting for any slippage, if the given asset is supported.
-MUST return an `Option::None` if the given asset is not supported.
-MUST NOT revert under any circumstances.
-
-### `fn convert_to_assets(asset: AssetId, sub_id: SubId, shares: u64) -> Option<u64>`
-
-Helper method for converting shares to assets.
-This function takes the asset's AssetId, the sub_id of the sub vault, and the amount of shares as arguments and returns the amount of assets that would be transferred for the given amount of shares, in an ideal condition without slippage.
-
-MUST return an `Option::Some(amount)` of assets that would be transferred for the given amount of shares, if the given asset is supported.
-MUST return an `Option::None` if the asset is not supported.
-MUST NOT revert under any circumstances.
-
 ### `fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64>`
 
 Helper method for getting maximum depositable
