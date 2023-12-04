@@ -8,11 +8,11 @@ use std::{
         Hash,
         sha256,
     },
-    string::String,
     storage::{
         storage_map::*,
         storage_string::*,
     },
+    string::String,
     token::{
         transfer,
     },
@@ -150,7 +150,6 @@ impl SRC6 for Contract {
                 None
             }
         }
-        
     }
 
     #[storage(read)]
