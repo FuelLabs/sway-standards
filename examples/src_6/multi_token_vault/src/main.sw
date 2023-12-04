@@ -104,13 +104,13 @@ impl SRC6 for Contract {
     #[storage(read)]
     fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64> {
         // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
-        Option::Some(u64::max() - managed_assets(asset))
+        Some(u64::max() - managed_assets(asset))
     }
 
     #[storage(read)]
     fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64> {
         // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
-        Option::Some(managed_assets(asset))
+        Some(managed_assets(asset))
     }
 
     #[storage(read)]
