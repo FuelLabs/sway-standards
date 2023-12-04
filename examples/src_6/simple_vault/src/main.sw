@@ -33,7 +33,6 @@ pub struct VaultInfo {
 storage {
     /// Vault share AssetId -> VaultInfo
     vault_info: StorageMap<AssetId, VaultInfo> = StorageMap {},
-    
     total_assets: u64 = 0,
     total_supply: StorageMap<AssetId, u64> = StorageMap {},
     name: StorageMap<AssetId, StorageString> = StorageMap {},
