@@ -47,15 +47,12 @@ configurable {
 impl SRC6 for Contract {
     #[storage(read)]
     fn managed_assets(asset: AssetId, sub_id: SubId) -> u64 {
-        match asset {
-            ACCEPTED_TOKEN => {
-                let vault_share_asset = vault_asset_id(asset, sub_id).0;
-                // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
-                managed_assets(vault_share_asset)
-            },
-            _ => {
-                0
-            }
+        if asset == ACCEPTED_TOKEN {
+            let vault_share_asset = vault_asset_id(asset, sub_id).0;
+            // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
+            managed_assets(vault_share_asset)
+        } else {
+            0
         }
     }
 
@@ -116,54 +113,43 @@ impl SRC6 for Contract {
 
     #[storage(read)]
     fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64> {
-        match asset {
-            ACCEPTED_TOKEN => {
-                // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
-                Option::Some(u64::max() - managed_assets(asset))
-            },
-            _ => {
-                None
-            }
+        if asset == ACCEPTED_TOKEN {
+            // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
+            Option::Some(u64::max() - managed_assets(asset))
+        } else {
+            None
         }
     }
 
     #[storage(read)]
     fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64> {
-        match asset {
-            ACCEPTED_TOKEN => {
-                // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
-                Option::Some(managed_assets(asset))
-            },
-            _ => {
-                None
-            }
+        if asset == ACCEPTED_TOKEN {
+            // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
+            Option::Some(managed_assets(asset))
+        } else {
+            None
         }
     }
 
     #[storage(read)]
     fn vault_asset_id(asset: AssetId, sub_id: SubId) -> Option<(AssetId, SubId)> {
-        match asset {
-            ACCEPTED_TOKEN => {
-                Some(vault_asset_id(asset, sub_id))
-            },
-            _ => {
-                None
-            }
+        if asset == ACCEPTED_TOKEN {
+            Some(vault_asset_id(asset, sub_id))
+        } else {
+            None
         }
     }
 
     #[storage(read)]
     fn asset_of_vault(vault_asset_id: AssetId) -> Option<(AssetId, SubId)> {
         let asset = storage.vault_info.get(vault_asset_id).read().asset;
-        match asset {
-            ACCEPTED_TOKEN => {
-                let vault_info = storage.vault_info.get(vault_asset_id).read();
-                Some((vault_info.asset, vault_info.sub_id))
-            }
-            _ => {
-                None
-            }
-        }
+
+        if asset == ACCEPTED_TOKEN {
+            let vault_info = storage.vault_info.get(vault_asset_id).read();
+            Some((vault_info.asset, vault_info.sub_id))
+        } else {
+            None
+        }        
     }
 }
 
