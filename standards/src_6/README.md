@@ -144,7 +144,39 @@ This standard is fully compatible with the SRC-20 standard
 
 Incorrect implementation of token vaults could allow attackers to steal underlying assets. It is recommended to properly audit any code using this standard to ensure exploits are not possible.
 
-# Reference implementation
+# Example ABI
 
-Full reference implementation can be seen [here](https://github.com/SwayStar123/vault-standard-reference-implementation/blob/master/src/main.sw)
+```sway
+abi SRC6 {
+    #[storage(read, write)]
+    fn deposit(receiver: Identity, sub_id: SubId) -> u64;
 
+    #[storage(read, write)]
+    fn withdraw(asset: AssetId, sub_id: SubId, receiver: Identity) -> u64;
+
+    #[storage(read)]
+    fn managed_assets(asset: AssetId, sub_id: SubId) -> u64;
+    
+    #[storage(read)]
+    fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64>;
+
+    #[storage(read)]
+    fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64>;
+
+    #[storage(read)]
+    fn vault_asset_id(asset: AssetId, sub_id: SubId) -> Option<(AssetId, SubId)>;
+
+    #[storage(read)]
+    fn asset_of_vault(vault_asset_id: AssetId) -> Option<(AssetId, SubId)>;
+}
+```
+
+# Example Implementation
+
+## [Multi Token Vault](../../examples/src_6/multi_token_vault/)
+
+A barebones implementation of the vault standard that supports any number of sub vaults being created for every AssetId.
+
+## [Single Token Vault](../../examples/src_6/single_token_vault/)
+
+A barebones implemenation of the vault standard demonstrating how to constrict deposits and withdrawals to a single AssetId.

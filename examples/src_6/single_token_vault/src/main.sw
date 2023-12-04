@@ -8,6 +8,7 @@ use std::{
         Hash,
         sha256,
     },
+    string::String,
     storage::{
         storage_map::*,
         storage_string::*,
@@ -19,7 +20,6 @@ use std::{
 
 use src_6::{Deposit, SRC6, Withdraw};
 use src_20::SRC20;
-use std::string::String;
 
 pub struct VaultInfo {
     /// Amount of assets currently managed by this vault
@@ -40,18 +40,31 @@ storage {
     decimals: StorageMap<AssetId, u8> = StorageMap {},
 }
 
+configurable {
+    ACCEPTED_TOKEN: AssetId = std::constants::BASE_ASSET_ID,
+}
+
 impl SRC6 for Contract {
     #[storage(read)]
     fn managed_assets(asset: AssetId, sub_id: SubId) -> u64 {
-        let vault_share_asset = vault_asset_id(asset, sub_id).0;
-        // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
-        managed_assets(vault_share_asset)
+        match asset {
+            ACCEPTED_TOKEN => {
+                let vault_share_asset = vault_asset_id(asset, sub_id).0;
+                // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
+                managed_assets(vault_share_asset)
+            },
+            _ => {
+                0
+            }
+        }
     }
 
     #[storage(read, write)]
     fn deposit(receiver: Identity, sub_id: SubId) -> u64 {
         let asset_amount = msg_amount();
         let asset = msg_asset_id();
+
+        require(asset == ACCEPTED_TOKEN, "INVALID_ASSET_ID");
         let (shares, share_asset, share_asset_sub_id) = preview_deposit(asset, sub_id, asset_amount);
         require(asset_amount != 0, "ZERO_ASSETS");
 
@@ -103,25 +116,55 @@ impl SRC6 for Contract {
 
     #[storage(read)]
     fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64> {
-        // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
-        Option::Some(u64::max() - managed_assets(asset))
+        match asset {
+            ACCEPTED_TOKEN => {
+                // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
+                Option::Some(u64::max() - managed_assets(asset))
+            },
+            _ => {
+                None
+            }
+        }
     }
 
     #[storage(read)]
     fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64> {
-        // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
-        Option::Some(managed_assets(asset))
+        match asset {
+            ACCEPTED_TOKEN => {
+                // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
+                Option::Some(managed_assets(asset))
+            },
+            _ => {
+                None
+            }
+        }
     }
 
     #[storage(read)]
     fn vault_asset_id(asset: AssetId, sub_id: SubId) -> Option<(AssetId, SubId)> {
-        Some(vault_asset_id(asset, sub_id))
+        match asset {
+            ACCEPTED_TOKEN => {
+                Some(vault_asset_id(asset, sub_id))
+            },
+            _ => {
+                None
+            }
+        }
+        
     }
 
     #[storage(read)]
     fn asset_of_vault(vault_asset_id: AssetId) -> Option<(AssetId, SubId)> {
-        let vault_info = storage.vault_info.get(vault_asset_id).read();
-        Some((vault_info.asset, vault_info.sub_id))
+        let asset = storage.vault_info.get(vault_asset_id).read().asset;
+        match asset {
+            ACCEPTED_TOKEN => {
+                let vault_info = storage.vault_info.get(vault_asset_id).read();
+                Some((vault_info.asset, vault_info.sub_id))
+            }
+            _ => {
+                None
+            }
+        }
     }
 }
 
