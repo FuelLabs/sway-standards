@@ -64,9 +64,9 @@ abi SRC6 {
     ///
     /// # Arguments
     ///
+    /// * `receiver`: [Identity] - The receiver of the assets.
     /// * `asset`: [AssetId] - The asset for which the shares should be burned.
     /// * `sub_id`: [SubId] - The SubId of the vault.
-    /// * `receiver`: [Identity] - The receiver of the assets.
     ///
     /// # Returns
     ///
@@ -79,7 +79,7 @@ abi SRC6 {
     /// * If the transferred shares do not corresspond to the given asset.
     /// * The user crosses any global or user specific withdrawal limits.
     #[storage(read, write)]
-    fn withdraw(asset: AssetId, sub_id: SubId, receiver: Identity) -> u64;
+    fn withdraw(receiver: Identity, asset: AssetId, sub_id: SubId) -> u64;
 
     /// Returns the amount of managed assets of the given asset.
     ///
@@ -98,10 +98,11 @@ abi SRC6 {
     ///
     /// # Additional Information
     ///
-    /// Does not account for any user or global limits.
+    /// Must account for any user or global limits.
     ///
     /// # Arguments
     ///
+    /// * `receiver`: [Identity] - The hypothetical receiver of the shares.
     /// * `asset`: [AssetId] - The asset for which the maximum amount of depositable assets should be returned.
     /// * `sub_id`: [SubId] - The SubId of the vault.
     ///
@@ -110,13 +111,13 @@ abi SRC6 {
     /// * [Some(u64)] - The maximum amount of assets that can be deposited into the contract, for the given asset.
     /// * [None] - If the asset is not supported by the contract.
     #[storage(read)]
-    fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64>;
+    fn max_depositable(receiver: Identity, asset: AssetId, sub_id: SubId) -> Option<u64>;
 
     /// Returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
     ///
     /// # Additional Information
     ///
-    /// Does not account for any user or global limits.
+    /// Must account for any global limits.
     ///
     /// # Arguments
     ///
@@ -129,31 +130,4 @@ abi SRC6 {
     /// * [None] - If the asset is not supported by the contract.
     #[storage(read)]
     fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64>;
-
-    /// Returns the AssetId and SubId of the vault shares for the given asset and sub vault.
-    ///
-    /// # Arguments
-    ///
-    /// * `asset`: [AssetId] - The asset for which the vault shares should be returned.
-    /// * `sub_id`: [SubId] - The SubId of the vault.
-    ///
-    /// # Returns
-    ///
-    /// * [Some((AssetId, SubId))] - The AssetId and SubId of the vault shares for the given asset and sub vault.
-    /// * [None] - If the asset is not supported by the contract.
-    #[storage(read)]
-    fn vault_asset_id(asset: AssetId, sub_id: SubId) -> Option<(AssetId, SubId)>;
-
-    /// Returns the AssetId of the asset of the vault for the given AssetId of the vault shares, and the sub_id of the vault.
-    ///
-    /// # Arguments
-    ///
-    /// * `vault_asset_id`: [AssetId] - The AssetId of the vault shares for which the asset of the vault should be returned.
-    ///
-    /// # Returns
-    ///
-    /// * [Some((AssetId, SubId))] - The AssetId of the asset of the vault for the given AssetId of the vault shares, and the sub_id of the vault.
-    /// * [None] - If the asset is not supported by the contract or the vault has not been initialised.
-    #[storage(read)]
-    fn asset_of_vault(vault_asset_id: AssetId) -> Option<(AssetId, SubId)>;
 }

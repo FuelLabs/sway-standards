@@ -85,7 +85,7 @@ impl SRC6 for Contract {
     }
 
     #[storage(read, write)]
-    fn withdraw(asset: AssetId, sub_id: SubId, receiver: Identity) -> u64 {
+    fn withdraw(receiver: Identity, asset: AssetId, sub_id: SubId) -> u64 {
         let shares = msg_amount();
         require(shares != 0, "ZERO_SHARES");
 
@@ -112,7 +112,7 @@ impl SRC6 for Contract {
     }
 
     #[storage(read)]
-    fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64> {
+    fn max_depositable(receiver: Identity, asset: AssetId, sub_id: SubId) -> Option<u64> {
         if asset == ACCEPTED_TOKEN {
             // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
             Some(u64::max() - managed_assets(asset))
@@ -129,27 +129,6 @@ impl SRC6 for Contract {
         } else {
             None
         }
-    }
-
-    #[storage(read)]
-    fn vault_asset_id(asset: AssetId, sub_id: SubId) -> Option<(AssetId, SubId)> {
-        if asset == ACCEPTED_TOKEN {
-            Some(vault_asset_id(asset, sub_id))
-        } else {
-            None
-        }
-    }
-
-    #[storage(read)]
-    fn asset_of_vault(vault_asset_id: AssetId) -> Option<(AssetId, SubId)> {
-        let asset = storage.vault_info.get(vault_asset_id).read().asset;
-
-        if asset == ACCEPTED_TOKEN {
-            let vault_info = storage.vault_info.get(vault_asset_id).read();
-            Some((vault_info.asset, vault_info.sub_id))
-        } else {
-            None
-        }        
     }
 }
 

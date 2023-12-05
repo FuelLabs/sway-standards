@@ -8,11 +8,11 @@ use std::{
         Hash,
         sha256,
     },
-    string::String,
     storage::{
         storage_map::*,
         storage_string::*,
     },
+    string::String,
     token::{
         transfer,
     },
@@ -75,7 +75,7 @@ impl SRC6 for Contract {
     }
 
     #[storage(read, write)]
-    fn withdraw(asset: AssetId, sub_id: SubId, receiver: Identity) -> u64 {
+    fn withdraw(receiver: Identity, asset: AssetId, sub_id: SubId) -> u64 {
         let shares = msg_amount();
         require(shares != 0, "ZERO_SHARES");
 
@@ -102,7 +102,7 @@ impl SRC6 for Contract {
     }
 
     #[storage(read)]
-    fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64> {
+    fn max_depositable(receiver: Identity, asset: AssetId, sub_id: SubId) -> Option<u64> {
         // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
         Some(u64::max() - managed_assets(asset))
     }
@@ -111,17 +111,6 @@ impl SRC6 for Contract {
     fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64> {
         // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
         Some(managed_assets(asset))
-    }
-
-    #[storage(read)]
-    fn vault_asset_id(asset: AssetId, sub_id: SubId) -> Option<(AssetId, SubId)> {
-        Some(vault_asset_id(asset, sub_id))
-    }
-
-    #[storage(read)]
-    fn asset_of_vault(vault_asset_id: AssetId) -> Option<(AssetId, SubId)> {
-        let vault_info = storage.vault_info.get(vault_asset_id).read();
-        Some((vault_info.asset, vault_info.sub_id))
     }
 }
 

@@ -24,7 +24,6 @@ use src_20::SRC20;
 configurable {
     ACCEPTED_TOKEN: AssetId = std::constants::BASE_ASSET_ID,
     ACCEPTED_SUB_VAULT: SubId = std::constants::ZERO_B256,
-    // Calculated as sha256((ACCEPTED_TOKEN, ACCEPTED_SUB_VAULT))
     PRE_CALCULATED_SHARE_SUB_ID: SubId = 0xf5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b,
 }
 
@@ -75,7 +74,7 @@ impl SRC6 for Contract {
     }
 
     #[storage(read, write)]
-    fn withdraw(asset: AssetId, sub_id: SubId, receiver: Identity) -> u64 {
+    fn withdraw(receiver: Identity, asset: AssetId, sub_id: SubId) -> u64 {
         require(asset == ACCEPTED_TOKEN, "INVALID_ASSET_ID");
         require(sub_id == ACCEPTED_SUB_VAULT, "INVALID_SUB_ID");
 
@@ -105,7 +104,7 @@ impl SRC6 for Contract {
     }
 
     #[storage(read)]
-    fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64> {
+    fn max_depositable(receiver: Identity, asset: AssetId, sub_id: SubId) -> Option<u64> {
         if asset == ACCEPTED_TOKEN {
             // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
             Some(u64::max() - storage.managed_assets.read())
@@ -119,24 +118,6 @@ impl SRC6 for Contract {
         if asset == ACCEPTED_TOKEN {
             // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
             Some(storage.managed_assets.read())
-        } else {
-            None
-        }
-    }
-
-    #[storage(read)]
-    fn vault_asset_id(asset: AssetId, sub_id: SubId) -> Option<(AssetId, SubId)> {
-        if asset == ACCEPTED_TOKEN && sub_id == ACCEPTED_SUB_VAULT {
-            Some((vault_assetid(), PRE_CALCULATED_SHARE_SUB_ID))
-        } else {
-            None
-        }
-    }
-
-    #[storage(read)]
-    fn asset_of_vault(vault_asset_id: AssetId) -> Option<(AssetId, SubId)> {
-        if vault_assetid() == vault_asset_id {
-            Some((ACCEPTED_TOKEN, ACCEPTED_SUB_VAULT))
         } else {
             None
         }
@@ -202,11 +183,7 @@ fn preview_withdraw(shares: u64) -> u64 {
 }
 
 #[storage(read, write)]
-pub fn _mint(
-    recipient: Identity,
-    asset_id: AssetId,
-    amount: u64,
-) {
+pub fn _mint(recipient: Identity, asset_id: AssetId, amount: u64) {
     use std::token::mint_to;
 
     let supply = storage.total_supply.read();

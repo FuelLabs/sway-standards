@@ -28,22 +28,25 @@ The following functions MUST be implemented to follow the SRC-6 standard. Any co
 Method that allows depositing of the underlying asset in exchange for shares of the vault.
 This function takes the receiver's identity and the sub_id of the sub vault as an argument and returns the amount of shares minted to the receiver.
 
-MUST revert if any AssetId other than the underlying is forwarded.
-MUST increase `managed_assets` by `deposited_assets` (through any means including `std::context::this_balance(ASSET_ID)` if applicable).
+MUST revert if any unaccepted AssetId is forwarded.
+MUST increase `managed_assets` by amount of deposited assets (through any means including `std::context::this_balance(ASSET_ID)` if applicable).
+MUST mint a token representing the pro-rata share of the vault, with the AssetId of `sha256((asset, sub_id))`, a hash of the AssetId of the deposited asset, and the `sub_id` of the vault.
 MUST increase `total_supply` of the share's AssetId by newly minted shares.
 MUST increase `total_assets` by one if the the AssetId is minted for the first time.
 MUST emit a `Deposit` log.
+MUST return amount of minted shares.
 
-### `fn withdraw(asset: AssetId, sub_id: SubId, receiver: Identity) -> u64`
+### `fn withdraw(receiver: Identity, asset: AssetId, sub_id: SubId) -> u64`
 
 Method that allows the redeeming of the vault shares in exchange for a pro-rata amount of the underlying asset
 This function takes the asset's AssetId, the sub_id of the sub vault, and the receiver's identity as arguments and returns the amount of assets transferred to the receiver.
 The AssetId of the asset, and the AssetId of the shares MUST be one-to-one, meaning every deposited AssetId shall have a unique corresponding shares AssetId.
 
-MUST revert if any AssetId other than the AssetId corresponding to the deposited asset is forwarded.
+MUST revert if any AssetId other than the AssetId representing the deposited asset's shares for the given sub vault at `sub_id` is forwarded.
 MUST burn the received shares.
 MUST reduce `total_supply` of the shares's AssetId by amount of burnt shares.
 MUST emit a `Withdraw` log.
+MUST return amount of assets transferred to the receiver.
 
 ### `fn managed_assets(asset: AssetId, sub_id: SubId) -> u64`
 
@@ -54,37 +57,26 @@ MUST return total amount of assets of underlying AssetId under management by vau
 MUST return 0 if there are no assets of underlying AssetId under management by vault.
 MUST NOT revert under any circumstances.
 
-### `fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64>`
+### `fn max_depositable(receiver: Identity, asset: AssetId, sub_id: SubId) -> Option<u64>`
 
 Helper method for getting maximum depositable
-This function takes the asset's AssetId and the sub_id of the sub vault as an argument and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
+This function takes the hypothetical receivers `Identity`, the asset's `AssetId`, and the `sub_id` of the sub vault as an argument and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
 
-MUST return the maximum amount of assets that can be deposited into the contract, for the given asset.
+MUST return the maximum amount of assets that can be deposited into the contract, for the given asset, if the given vault exists.
+MUST return an `Option::Some(amount)` if the given vault exists.
+MUST return an `Option::None` if the given vault does not exist.
+MUST account for both global and user specific limits. For example: if deposits are disabled, even temporarily, MUST return 0.
 
-### `fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64>`
+
+### `fn max_withdrawable(receiver: Identity, asset: AssetId, sub_id: SubId) -> Option<u64>`
 
 Helper method for getting maximum withdrawable
-This function takes the asset's AssetId and the sub_id of the sub vault as an argument and returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
+This function takes the hypothetical receive's `Identity`, the asset's `AssetId`, and the `sub_id`` of the sub vault as an argument and returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
 
-MUST return the maximum amount of assets that can be withdrawn from the contract, for the given asset.
-
-### `fn vault_asset_id(asset: AssetId, sub_id: SubId) -> Option<AssetId>`
-
-Method that returns the AssetId of the vault shares for the given asset and sub vault.
-This function takes the asset's AssetId and the SubId of the vault as arguments and returns the AssetId of the vault shares for the given asset and sub vault.
-
-MUST return an `Option::Some(AssetId)` of the vault shares for the given asset and sub vault, if the given asset is supported.
-MUST return an `Option::None` if the given asset is not supported.
-MUST NOT revert under any circumstances.
-
-### `fn asset_of_vault(vault_asset_id: AssetId) -> Option<AssetId>`
-
-Method that returns the AssetId of the asset of the vault for the given AssetId of the vault shares.
-This function takes the AssetId of the vault shares as an argument and returns the AssetId of the asset of the vault for the given AssetId of the vault shares.
-
-MUST return an `Option::Some(AssetId)` of the asset of the vault for the given AssetId of the vault shares, if the given asset is supported and the vault has been initialised.
-MUST return an `Option::None` if the given asset is not supported or the vault has not been initialised.
-MUST NOT revert under any circumstances.
+MUST return the maximum amount of assets that can be withdrawn from the contract, for the given asset, if the given vault exists.
+MUST return an `Option::Some(amount)` if the given vault exists.
+MUST return an `Option::None` if the given vault does not exist.
+MUST account for global limits. For example: if withdrawals are disabled, even temporarily, MUST return 0.
 
 ## Required logs
 
@@ -152,22 +144,16 @@ abi SRC6 {
     fn deposit(receiver: Identity, sub_id: SubId) -> u64;
 
     #[storage(read, write)]
-    fn withdraw(asset: AssetId, sub_id: SubId, receiver: Identity) -> u64;
+    fn withdraw(receiver: Identity, asset: AssetId, sub_id: SubId) -> u64;
 
     #[storage(read)]
     fn managed_assets(asset: AssetId, sub_id: SubId) -> u64;
     
     #[storage(read)]
-    fn max_depositable(asset: AssetId, sub_id: SubId) -> Option<u64>;
+    fn max_depositable(receiver: Identity, asset: AssetId, sub_id: SubId) -> Option<u64>;
 
     #[storage(read)]
     fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64>;
-
-    #[storage(read)]
-    fn vault_asset_id(asset: AssetId, sub_id: SubId) -> Option<(AssetId, SubId)>;
-
-    #[storage(read)]
-    fn asset_of_vault(vault_asset_id: AssetId) -> Option<(AssetId, SubId)>;
 }
 ```
 
@@ -180,3 +166,7 @@ A barebones implementation of the vault standard that supports any number of sub
 ## [Single Token Vault](../../examples/src_6/single_token_vault/)
 
 A barebones implemenation of the vault standard demonstrating how to constrict deposits and withdrawals to a single AssetId.
+
+## [Single Token Single Sub Vault](../../examples/src_6/single_token_single_sub_vault/)
+
+A barebones implementation of the vault standard demonstrating how to constrict deposits and withdrawals to a single AssetId, and to a single Sub vault.
