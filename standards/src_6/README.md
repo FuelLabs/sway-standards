@@ -120,6 +120,7 @@ pub struct Withdraw {
     shares: u64,
 }
 ```
+
 `caller` has called the `withdraw` method sending `shares` shares in exchange for `assets` assets of the `asset` AssetId from the subvault of `sub_id` to the receiver `receiver`
 
 The `Withdraw` struct MUST be logged whenever shares are redeemed for assets via the `withdraw` method
