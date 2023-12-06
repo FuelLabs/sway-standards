@@ -21,7 +21,7 @@ Token vaults have been thoroughly explored on Ethereum and with [EIP 4626](https
 
 ## Required public functions
 
-The following functions MUST be implemented to follow the SRC-6 standard. Any contract that implements the SRC-7 standard MUST implement the SRC-20 standard.
+The following functions MUST be implemented to follow the SRC-6 standard. Any contract that implements the SRC-6 standard MUST implement the SRC-20 standard.
 
 ### `fn deposit(receiver: Identity, sub_id: SubId) -> u64`
 
