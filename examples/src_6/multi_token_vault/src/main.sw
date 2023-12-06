@@ -47,9 +47,10 @@ impl SRC6 for Contract {
     #[storage(read, write)]
     fn deposit(receiver: Identity, sub_id: SubId) -> u64 {
         let asset_amount = msg_amount();
+        require(asset_amount != 0, "ZERO_ASSETS");
+
         let asset = msg_asset_id();
         let (shares, share_asset, share_asset_sub_id) = preview_deposit(asset, sub_id, asset_amount);
-        require(asset_amount != 0, "ZERO_ASSETS");
 
         _mint(receiver, share_asset, share_asset_sub_id, shares);
         storage.total_supply.insert(asset, storage.total_supply.get(asset).read() + shares);
