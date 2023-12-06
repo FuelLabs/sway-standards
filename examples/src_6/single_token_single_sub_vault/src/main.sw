@@ -7,10 +7,7 @@ use std::{
         Hash,
         sha256,
     },
-    storage::{
-        storage_map::*,
-        storage_string::*,
-    },
+    storage::storage_string::*,
     string::String,
     token::{
         transfer,
