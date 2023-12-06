@@ -49,8 +49,8 @@ impl SRC6 for Contract {
         require(asset == ACCEPTED_TOKEN, "INVALID_ASSET_ID");
 
         let asset_amount = msg_amount();
-        let (shares, share_asset) = preview_deposit(asset_amount);
         require(asset_amount != 0, "ZERO_ASSETS");
+        let (shares, share_asset) = preview_deposit(asset_amount);
 
         _mint(receiver, share_asset, shares);
         storage.total_supply.write(storage.total_supply.read() + shares);
