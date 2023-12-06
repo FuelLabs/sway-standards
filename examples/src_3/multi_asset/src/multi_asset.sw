@@ -142,7 +142,7 @@ impl SRC20 for Contract {
     #[storage(read)]
     fn name(asset: AssetId) -> Option<String> {
         match storage.total_supply.get(asset).try_read() {
-            Some(val) => Some(String::from_ascii_str(from_str_array(NAME))),
+            Some(_) => Some(String::from_ascii_str(from_str_array(NAME))),
             None => None,
         }
     }
@@ -150,7 +150,7 @@ impl SRC20 for Contract {
     #[storage(read)]
     fn symbol(asset: AssetId) -> Option<String> {
         match storage.total_supply.get(asset).try_read() {
-            Some(val) => Some(String::from_ascii_str(from_str_array(SYMBOL))),
+            Some(_) => Some(String::from_ascii_str(from_str_array(SYMBOL))),
             None => None,
         }
     }
@@ -158,7 +158,7 @@ impl SRC20 for Contract {
     #[storage(read)]
     fn decimals(asset: AssetId) -> Option<u8> {
         match storage.total_supply.get(asset).try_read() {
-            Some(val) => Some(DECIMALS),
+            Some(_) => Some(DECIMALS),
             None => None,
         }
     }
