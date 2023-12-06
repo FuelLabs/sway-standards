@@ -1,7 +1,6 @@
 contract;
 
 use std::{
-    auth::msg_sender,
     call_frames::msg_asset_id,
     context::msg_amount,
     hash::{
