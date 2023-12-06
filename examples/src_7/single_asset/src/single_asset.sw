@@ -53,7 +53,7 @@ impl SRC7 for Contract {
     /// ```
     #[storage(read)]
     fn metadata(asset: AssetId, key: String) -> Option<Metadata> {
-        require(asset == AssetId::default(contract_id()), "Invalid AssetId provided");
+        require(asset == AssetId::default(), "Invalid AssetId provided");
 
         if key == String::from_ascii_str("social:x") {
             Some(Metadata::String(String::from_ascii_str(from_str_array(SOCIAL_X))))
@@ -75,7 +75,7 @@ impl SRC20 for Contract {
 
     #[storage(read)]
     fn total_supply(asset: AssetId) -> Option<u64> {
-        if asset == AssetId::default(contract_id()) {
+        if asset == AssetId::default() {
             Some(TOTAL_SUPPLY)
         } else {
             None
@@ -84,7 +84,7 @@ impl SRC20 for Contract {
 
     #[storage(read)]
     fn name(asset: AssetId) -> Option<String> {
-        if asset == AssetId::default(contract_id()) {
+        if asset == AssetId::default() {
             Some(String::from_ascii_str(from_str_array(NAME)))
         } else {
             None
@@ -93,7 +93,7 @@ impl SRC20 for Contract {
 
     #[storage(read)]
     fn symbol(asset: AssetId) -> Option<String> {
-        if asset == AssetId::default(contract_id()) {
+        if asset == AssetId::default() {
             Some(String::from_ascii_str(from_str_array(SYMBOL)))
         } else {
             None
@@ -102,7 +102,7 @@ impl SRC20 for Contract {
 
     #[storage(read)]
     fn decimals(asset: AssetId) -> Option<u8> {
-        if asset == AssetId::default(contract_id()) {
+        if asset == AssetId::default() {
             Some(DECIMALS)
         } else {
             None
