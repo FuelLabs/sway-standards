@@ -61,11 +61,11 @@ impl SRC6 for Contract {
 
         log(Deposit {
             caller: msg_sender().unwrap(),
-            receiver: receiver,
-            asset: asset,
-            sub_id: sub_id,
+            receiver,
+            asset,
+            sub_id,
             assets: asset_amount,
-            shares: shares,
+            shares,
         });
 
         shares
