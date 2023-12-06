@@ -189,8 +189,7 @@ pub fn _mint(
     if supply.is_none() {
         storage.total_assets.write(storage.total_assets.read() + 1);
     }
-    let current_supply = supply.unwrap_or(0);
-    storage.total_supply.insert(asset_id, current_supply + amount);
+    storage.total_supply.insert(asset_id, supply.unwrap_or(0) + amount);
     mint_to(recipient, sub_id, amount);
 }
 
