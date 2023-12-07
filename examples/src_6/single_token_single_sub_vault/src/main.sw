@@ -165,12 +165,12 @@ fn vault_assetid() -> AssetId {
 fn preview_deposit(assets: u64) -> (u64, AssetId) {
     let share_asset_id = vault_assetid();
 
-    let shares_supply = storage.total_supply.read();
+    let shares_supply = storage.total_supply.try_read().unwrap_or(0);
     if shares_supply == 0 {
         (assets, share_asset_id)
     } else {
         (
-            assets * shares_supply / storage.managed_assets.read(),
+            assets * shares_supply / storage.managed_assets.try_read().unwrap_or(0),
             share_asset_id,
         )
     }

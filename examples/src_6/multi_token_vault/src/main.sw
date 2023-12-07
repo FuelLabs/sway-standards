@@ -151,14 +151,17 @@ fn vault_asset_id(asset: AssetId, sub_id: SubId) -> (AssetId, SubId) {
 
 #[storage(read)]
 fn managed_assets(share_asset: AssetId) -> u64 {
-    storage.vault_info.get(share_asset).read().managed_assets
+    match storage.vault_info.get(share_asset).try_read() {
+        Some(vault_info) => vault_info.managed_assets,
+        None => 0,
+    }
 }
 
 #[storage(read)]
 fn preview_deposit(asset: AssetId, sub_id: SubId, assets: u64) -> (u64, AssetId, SubId) {
     let (share_asset_id, share_asset_sub_id) = vault_asset_id(asset, sub_id);
 
-    let shares_supply = storage.total_supply.get(share_asset_id).read();
+    let shares_supply = storage.total_supply.get(share_asset_id).try_read().unwrap_or(0);
     if shares_supply == 0 {
         (assets, share_asset_id, share_asset_sub_id)
     } else {
