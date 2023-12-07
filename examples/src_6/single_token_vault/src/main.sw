@@ -164,7 +164,7 @@ impl SRC20 for Contract {
 
 /// Returns the vault shares assetid and subid for the given assets assetid and the vaults sub id
 fn vault_asset_id(asset: AssetId, sub_id: SubId) -> (AssetId, SubId) {
-    let share_asset_sub_id = sha256((asset.into(), sub_id));
+    let share_asset_sub_id = sha256((asset, sub_id));
     let share_asset_id = AssetId::new(ContractId::this(), share_asset_sub_id);
     (share_asset_id, share_asset_sub_id)
 }
