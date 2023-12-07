@@ -27,23 +27,21 @@ pub struct VaultInfo {
 }
 
 storage {
-    /// Vault share AssetId -> VaultInfo
+    /// Vault share AssetId -> VaultInfo.
     vault_info: StorageMap<AssetId, VaultInfo> = StorageMap {},
+    /// Number of different assets managed by this contract.
     total_assets: u64 = 0,
+    /// Total supply of shares for each asset.
     total_supply: StorageMap<AssetId, u64> = StorageMap {},
+    /// Asset name.
     name: StorageMap<AssetId, StorageString> = StorageMap {},
+    /// Asset symbol.
     symbol: StorageMap<AssetId, StorageString> = StorageMap {},
+    /// Asset decimals.
     decimals: StorageMap<AssetId, u8> = StorageMap {},
 }
 
 impl SRC6 for Contract {
-    #[storage(read)]
-    fn managed_assets(asset: AssetId, sub_id: SubId) -> u64 {
-        let vault_share_asset = vault_asset_id(asset, sub_id).0;
-        // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
-        managed_assets(vault_share_asset)
-    }
-
     #[storage(read, write)]
     fn deposit(receiver: Identity, sub_id: SubId) -> u64 {
         let asset_amount = msg_amount();
@@ -53,7 +51,7 @@ impl SRC6 for Contract {
         let (shares, share_asset, share_asset_sub_id) = preview_deposit(asset, sub_id, asset_amount);
 
         _mint(receiver, share_asset, share_asset_sub_id, shares);
-        storage.total_supply.insert(asset, storage.total_supply.get(asset).read() + shares);
+        storage.total_supply.insert(share_asset, storage.total_supply.get(share_asset).read() + shares);
 
         let mut vault_info = storage.vault_info.get(share_asset).read();
         vault_info.managed_assets = vault_info.managed_assets + asset_amount;
@@ -82,7 +80,7 @@ impl SRC6 for Contract {
         let assets = preview_withdraw(share_asset_id, shares);
 
         _burn(share_asset_id, share_asset_sub_id, shares);
-        storage.total_supply.insert(asset, storage.total_supply.get(asset).read() - shares);
+        storage.total_supply.insert(share_asset_id, storage.total_supply.get(share_asset_id).read() - shares);
 
         transfer(receiver, asset, assets);
 
@@ -96,6 +94,12 @@ impl SRC6 for Contract {
         });
 
         assets
+    }
+    #[storage(read)]
+    fn managed_assets(asset: AssetId, sub_id: SubId) -> u64 {
+        let vault_share_asset = vault_asset_id(asset, sub_id).0;
+        // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
+        managed_assets(vault_share_asset)
     }
 
     #[storage(read)]

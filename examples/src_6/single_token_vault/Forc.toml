@@ -5,5 +5,5 @@ license = "Apache-2.0"
 name = "single_token_vault"
 
 [dependencies]
-src_6 = { path = "../../../standards/src_6" }
 src_20 = { path = "../../../standards/src_20" }
+src_6 = { path = "../../../standards/src_6" }

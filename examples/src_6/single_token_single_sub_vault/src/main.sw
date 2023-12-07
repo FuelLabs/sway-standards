@@ -2,6 +2,10 @@ contract;
 
 use std::{
     call_frames::msg_asset_id,
+    constants::{
+        BASE_ASSET_ID,
+        ZERO_B256,
+    },
     context::msg_amount,
     hash::{
         Hash,
@@ -18,29 +22,23 @@ use src_6::{Deposit, SRC6, Withdraw};
 use src_20::SRC20;
 
 configurable {
-    ACCEPTED_TOKEN: AssetId = std::constants::BASE_ASSET_ID,
-    ACCEPTED_SUB_VAULT: SubId = std::constants::ZERO_B256,
+    /// The only asset that can be deposited and withdrawn from this vault.
+    ACCEPTED_TOKEN: AssetId = BASE_ASSET_ID,
+    /// The only sub vault that can be deposited and withdrawn from this vault.
+    ACCEPTED_SUB_VAULT: SubId = ZERO_B256,
     PRE_CALCULATED_SHARE_SUB_ID: SubId = 0xf5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b,
 }
 
 storage {
+    /// The total amount of assets managed by this vault.
     managed_assets: u64 = 0,
-    total_assets: u64 = 0,
+    /// The total amount of shares minted by this vault.
     total_supply: u64 = 0,
+    /// Whether the vault shares have been minted.
     minted: bool = false,
 }
 
 impl SRC6 for Contract {
-    #[storage(read)]
-    fn managed_assets(asset: AssetId, sub_id: SubId) -> u64 {
-        if asset == ACCEPTED_TOKEN && sub_id == ACCEPTED_SUB_VAULT {
-            // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
-            storage.managed_assets.read()
-        } else {
-            0
-        }
-    }
-
     #[storage(read, write)]
     fn deposit(receiver: Identity, sub_id: SubId) -> u64 {
         require(sub_id == ACCEPTED_SUB_VAULT, "INVALID_SUB_ID");
@@ -100,6 +98,16 @@ impl SRC6 for Contract {
     }
 
     #[storage(read)]
+    fn managed_assets(asset: AssetId, sub_id: SubId) -> u64 {
+        if asset == ACCEPTED_TOKEN && sub_id == ACCEPTED_SUB_VAULT {
+            // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
+            storage.managed_assets.read()
+        } else {
+            0
+        }
+    }
+
+    #[storage(read)]
     fn max_depositable(receiver: Identity, asset: AssetId, sub_id: SubId) -> Option<u64> {
         if asset == ACCEPTED_TOKEN {
             // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
@@ -112,7 +120,7 @@ impl SRC6 for Contract {
     #[storage(read)]
     fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64> {
         if asset == ACCEPTED_TOKEN {
-            // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
+            // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
             Some(storage.managed_assets.read())
         } else {
             None
