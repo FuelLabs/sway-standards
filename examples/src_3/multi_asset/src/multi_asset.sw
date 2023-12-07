@@ -52,11 +52,11 @@ impl SRC3 for Contract {
     ///
     /// ```sway
     /// use src3::SRC3;
-    /// use std::constants::ZERO_B256;
+    /// use std::constants::DEFAULT_SUB_ID;
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SR3, contract_id);
-    ///     contract_abi.mint(Identity::ContractId(contract_id), ZERO_B256, 100);
+    ///     contract_abi.mint(Identity::ContractId(contract_id), DEFAULT_SUB_ID, 100);
     /// }
     /// ```
     #[storage(read, write)]
@@ -67,13 +67,17 @@ impl SRC3 for Contract {
         let asset_supply = storage.total_supply.get(asset_id).try_read();
         match asset_supply {
             None => {
-                storage.total_assets.write(storage.total_assets.read() + 1)
+                storage
+                    .total_assets
+                    .write(storage.total_assets.read() + 1)
             },
             _ => {},
         }
 
         // Increment total supply of the asset and mint to the recipient.
-        storage.total_supply.insert(asset_id, amount + asset_supply.unwrap_or(0));
+        storage
+            .total_supply
+            .insert(asset_id, amount + asset_supply.unwrap_or(0));
         mint_to(recipient, sub_id, amount);
     }
 
@@ -98,7 +102,7 @@ impl SRC3 for Contract {
     ///
     /// ```sway
     /// use src3::SRC3;
-    /// use std::constants::ZERO_B256;
+    /// use std::constants::DEFAULT_SUB_ID;
     ///
     /// fn foo(contract_id: ContractId, asset_id: AssetId) {
     ///     let contract_abi = abi(SR3, contract_id);
@@ -106,7 +110,7 @@ impl SRC3 for Contract {
     ///         gas: 10000,
     ///         coins: 100,
     ///         asset_id: asset_id,
-    ///     }.burn(ZERO_B256, 100);
+    ///     }.burn(DEFAULT_SUB_ID, 100);
     /// }
     /// ```
     #[storage(read, write)]
@@ -116,7 +120,9 @@ impl SRC3 for Contract {
         require(msg_asset_id() == asset_id, "Incorrect asset provided");
 
         // Decrement total supply of the asset and burn.
-        storage.total_supply.insert(asset_id, storage.total_supply.get(asset_id).read() - amount);
+        storage
+            .total_supply
+            .insert(asset_id, storage.total_supply.get(asset_id).read() - amount);
         burn(sub_id, amount);
     }
 }
@@ -135,28 +141,25 @@ impl SRC20 for Contract {
 
     #[storage(read)]
     fn name(asset: AssetId) -> Option<String> {
-        if asset == AssetId::default(contract_id()) {
-            Some(String::from_ascii_str(from_str_array(NAME)))
-        } else {
-            None
+        match storage.total_supply.get(asset).try_read() {
+            Some(_) => Some(String::from_ascii_str(from_str_array(NAME))),
+            None => None,
         }
     }
 
     #[storage(read)]
     fn symbol(asset: AssetId) -> Option<String> {
-        if asset == AssetId::default(contract_id()) {
-            Some(String::from_ascii_str(from_str_array(SYMBOL)))
-        } else {
-            None
+        match storage.total_supply.get(asset).try_read() {
+            Some(_) => Some(String::from_ascii_str(from_str_array(SYMBOL))),
+            None => None,
         }
     }
 
     #[storage(read)]
     fn decimals(asset: AssetId) -> Option<u8> {
-        if asset == AssetId::default(contract_id()) {
-            Some(DECIMALS)
-        } else {
-            None
+        match storage.total_supply.get(asset).try_read() {
+            Some(_) => Some(DECIMALS),
+            None => None,
         }
     }
 }

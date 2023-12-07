@@ -7,7 +7,7 @@ use std::{
         contract_id,
         msg_asset_id,
     },
-    constants::ZERO_B256,
+    constants::DEFAULT_SUB_ID,
     context::msg_amount,
     string::String,
     token::{
@@ -52,20 +52,22 @@ impl SRC3 for Contract {
     ///
     /// ```sway
     /// use src3::SRC3;
-    /// use std::constants::ZERO_B256;
+    /// use std::constants::DEFAULT_SUB_ID;
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SR3, contract);
-    ///     contract_abi.mint(Identity::ContractId(contract_id), ZERO_B256, 100);
+    ///     contract_abi.mint(Identity::ContractId(contract_id), DEFAULT_SUB_ID, 100);
     /// }
     /// ```
     #[storage(read, write)]
     fn mint(recipient: Identity, sub_id: SubId, amount: u64) {
-        require(sub_id == ZERO_B256, "Incorrect Sub Id");
+        require(sub_id == DEFAULT_SUB_ID, "Incorrect Sub Id");
 
         // Increment total supply of the asset and mint to the recipient.
-        storage.total_supply.write(amount + storage.total_supply.read());
-        mint_to(recipient, ZERO_B256, amount);
+        storage
+            .total_supply
+            .write(amount + storage.total_supply.read());
+        mint_to(recipient, DEFAULT_SUB_ID, amount);
     }
 
     /// Unconditionally burns tokens sent with the default SubId.
@@ -90,7 +92,7 @@ impl SRC3 for Contract {
     ///
     /// ```sway
     /// use src3::SRC3;
-    /// use std::constants::ZERO_B256;
+    /// use std::constants::DEFAULT_SUB_ID;
     ///
     /// fn foo(contract_id: ContractId, asset_id: AssetId) {
     ///     let contract_abi = abi(SR3, contract_id);
@@ -98,18 +100,23 @@ impl SRC3 for Contract {
     ///         gas: 10000,
     ///         coins: 100,
     ///         asset_id: asset_id,
-    ///     }.burn(ZERO_B256, 100);
+    ///     }.burn(DEFAULT_SUB_ID, 100);
     /// }
     /// ```
     #[storage(read, write)]
     fn burn(sub_id: SubId, amount: u64) {
-        require(sub_id == ZERO_B256, "Incorrect Sub Id");
+        require(sub_id == DEFAULT_SUB_ID, "Incorrect Sub Id");
         require(msg_amount() >= amount, "Incorrect amount provided");
-        require(msg_asset_id() == AssetId::default(contract_id()), "Incorrect asset provided");
+        require(
+            msg_asset_id() == AssetId::default(),
+            "Incorrect asset provided",
+        );
 
         // Decrement total supply of the asset and burn.
-        storage.total_supply.write(storage.total_supply.read() - amount);
-        burn(ZERO_B256, amount);
+        storage
+            .total_supply
+            .write(storage.total_supply.read() - amount);
+        burn(DEFAULT_SUB_ID, amount);
     }
 }
 
@@ -122,7 +129,7 @@ impl SRC20 for Contract {
 
     #[storage(read)]
     fn total_supply(asset: AssetId) -> Option<u64> {
-        if asset == AssetId::default(contract_id()) {
+        if asset == AssetId::default() {
             Some(storage.total_supply.read())
         } else {
             None
@@ -131,7 +138,7 @@ impl SRC20 for Contract {
 
     #[storage(read)]
     fn name(asset: AssetId) -> Option<String> {
-        if asset == AssetId::default(contract_id()) {
+        if asset == AssetId::default() {
             Some(String::from_ascii_str(from_str_array(NAME)))
         } else {
             None
@@ -140,7 +147,7 @@ impl SRC20 for Contract {
 
     #[storage(read)]
     fn symbol(asset: AssetId) -> Option<String> {
-        if asset == AssetId::default(contract_id()) {
+        if asset == AssetId::default() {
             Some(String::from_ascii_str(from_str_array(SYMBOL)))
         } else {
             None
@@ -149,7 +156,7 @@ impl SRC20 for Contract {
 
     #[storage(read)]
     fn decimals(asset: AssetId) -> Option<u8> {
-        if asset == AssetId::default(contract_id()) {
+        if asset == AssetId::default() {
             Some(DECIMALS)
         } else {
             None

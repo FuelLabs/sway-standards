@@ -9,8 +9,8 @@
     <a href="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yml" alt="CI">
         <img src="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yml/badge.svg" />
     </a>
-    <a href="https://crates.io/crates/forc/0.46.0" alt="forc">
-        <img src="https://img.shields.io/badge/forc-v0.46.0-orange" />
+    <a href="https://crates.io/crates/forc/0.48.1" alt="forc">
+        <img src="https://img.shields.io/badge/forc-v0.48.1-orange" />
     </a>
     <a href="./LICENSE" alt="forc">
         <img src="https://img.shields.io/github/license/FuelLabs/sway-standards" />
@@ -109,7 +109,7 @@ Example of the SRC-7 implementation where metadata exists for only a single asse
 Example of the SRC-7 implementation where metadata exists for multiple assets with differing `SubId`s.
 
 > **Note**
-> All standards currently use `forc v0.46.0`.
+> All standards currently use `forc v0.48.1`.
 
 <!-- TODO:
 ## Contributing

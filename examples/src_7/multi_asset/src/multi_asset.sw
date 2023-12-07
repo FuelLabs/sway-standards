@@ -95,28 +95,25 @@ impl SRC20 for Contract {
 
     #[storage(read)]
     fn name(asset: AssetId) -> Option<String> {
-        if asset == AssetId::default(contract_id()) {
-            Some(String::from_ascii_str(from_str_array(NAME)))
-        } else {
-            None
+        match storage.total_supply.get(asset).try_read() {
+            Some(_) => Some(String::from_ascii_str(from_str_array(NAME))),
+            None => None,
         }
     }
 
     #[storage(read)]
     fn symbol(asset: AssetId) -> Option<String> {
-        if asset == AssetId::default(contract_id()) {
-            Some(String::from_ascii_str(from_str_array(SYMBOL)))
-        } else {
-            None
+        match storage.total_supply.get(asset).try_read() {
+            Some(_) => Some(String::from_ascii_str(from_str_array(SYMBOL))),
+            None => None,
         }
     }
 
     #[storage(read)]
     fn decimals(asset: AssetId) -> Option<u8> {
-        if asset == AssetId::default(contract_id()) {
-            Some(DECIMALS)
-        } else {
-            None
+        match storage.total_supply.get(asset).try_read() {
+            Some(_) => Some(DECIMALS),
+            None => None,
         }
     }
 }
