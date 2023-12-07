@@ -58,10 +58,19 @@ impl SRC6 for Contract {
         require(asset_amount != 0, "ZERO_ASSETS");
 
         _mint(receiver, share_asset, share_asset_sub_id, shares);
-        storage.total_supply.insert(share_asset, storage.total_supply.get(share_asset).read() + shares);
+        storage
+            .total_supply
+            .insert(
+                share_asset,
+                storage
+                    .total_supply
+                    .get(share_asset)
+                    .read() + shares,
+            );
 
         let mut vault_info = storage.vault_info.get(share_asset).read();
-        vault_info.managed_assets = vault_info.managed_assets + asset_amount;
+        vault_info.managed_assets = vault_info
+            .managed_assets + asset_amount;
         storage.vault_info.insert(share_asset, vault_info);
 
         log(Deposit {
@@ -87,7 +96,15 @@ impl SRC6 for Contract {
         let assets = preview_withdraw(share_asset_id, shares);
 
         _burn(share_asset_id, share_asset_sub_id, shares);
-        storage.total_supply.insert(share_asset_id, storage.total_supply.get(share_asset_id).read() - shares);
+        storage
+            .total_supply
+            .insert(
+                share_asset_id,
+                storage
+                    .total_supply
+                    .get(share_asset_id)
+                    .read() - shares,
+            );
 
         transfer(receiver, asset, assets);
 
@@ -218,7 +235,9 @@ pub fn _mint(
         storage.total_assets.write(storage.total_assets.read() + 1);
     }
     let current_supply = supply.unwrap_or(0);
-    storage.total_supply.insert(asset_id, current_supply + amount);
+    storage
+        .total_supply
+        .insert(asset_id, current_supply + amount);
     mint_to(recipient, sub_id, amount);
 }
 
@@ -226,7 +245,10 @@ pub fn _mint(
 pub fn _burn(asset_id: AssetId, sub_id: SubId, amount: u64) {
     use std::{context::this_balance, token::burn};
 
-    require(this_balance(asset_id) >= amount, "BurnError::NotEnoughTokens");
+    require(
+        this_balance(asset_id) >= amount,
+        "BurnError::NotEnoughTokens",
+    );
     // If we pass the check above, we can assume it is safe to unwrap.
     let supply = storage.total_supply.get(asset_id).try_read().unwrap();
     storage.total_supply.insert(asset_id, supply - amount);

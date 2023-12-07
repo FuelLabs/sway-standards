@@ -51,9 +51,13 @@ impl SRC6 for Contract {
         let (shares, share_asset) = preview_deposit(asset_amount);
 
         _mint(receiver, share_asset, shares);
-        storage.total_supply.write(storage.total_supply.read() + shares);
+        storage
+            .total_supply
+            .write(storage.total_supply.read() + shares);
 
-        storage.managed_assets.write(storage.managed_assets.read() + asset_amount);
+        storage
+            .managed_assets
+            .write(storage.managed_assets.read() + asset_amount);
 
         log(Deposit {
             caller: msg_sender().unwrap(),
@@ -81,7 +85,9 @@ impl SRC6 for Contract {
         let assets = preview_withdraw(shares);
 
         _burn(share_asset_id, shares);
-        storage.total_supply.write(storage.total_supply.read() - shares);
+        storage
+            .total_supply
+            .write(storage.total_supply.read() - shares);
 
         transfer(receiver, asset, assets);
 
@@ -199,7 +205,10 @@ pub fn _mint(recipient: Identity, asset_id: AssetId, amount: u64) {
 pub fn _burn(asset_id: AssetId, amount: u64) {
     use std::{context::this_balance, token::burn};
 
-    require(this_balance(asset_id) >= amount, "BurnError::NotEnoughTokens");
+    require(
+        this_balance(asset_id) >= amount,
+        "BurnError::NotEnoughTokens",
+    );
     // If we pass the check above, we can assume it is safe to unwrap.
     let supply = storage.total_supply.read();
     storage.total_supply.write(supply - amount);
