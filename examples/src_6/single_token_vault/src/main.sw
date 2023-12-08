@@ -10,9 +10,7 @@ use std::{
     },
     storage::storage_string::*,
     string::String,
-    token::{
-        transfer,
-    },
+    token::transfer
 };
 
 use src_6::{Deposit, SRC6, Withdraw};
