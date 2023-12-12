@@ -30,7 +30,6 @@ This function takes the `receiver` Identity and the SubId `sub_id` of the sub-va
 
 This function MAY reject arbitrary assets based on implementation and MUST revert if unaccepted assets are forwarded.
 This function MUST mint an asset representing the pro-rata share of the vault, with the SubId of the `sha256((asset, sub_id))` digest, where `asset` is the AssetId of the deposited asset and the `sub_id` is the id of the vault.
-This function MUST increase the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) total supply of the sub-vault's asset.
 MUST increase `total_assets` by one if the the AssetId is minted for the first time.
 This function MUST emit a `Deposit` log.
 This function MUST return the amount of minted shares.
@@ -43,7 +42,6 @@ The AssetId of the asset, and the AssetId of the shares MUST be one-to-one, mean
 
 MUST revert if any AssetId other than the AssetId representing the deposited asset's shares for the given sub vault at `sub_id` is forwarded.
 MUST burn the received shares.
-MUST reduce `total_supply` of the shares's AssetId by amount of burnt shares.
 MUST emit a `Withdraw` log.
 MUST return amount of assets transferred to the receiver.
 
