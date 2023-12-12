@@ -34,7 +34,7 @@ MUST mint a token representing the pro-rata share of the vault, with the AssetId
 MUST increase `total_supply` of the share's AssetId by newly minted shares.
 MUST increase `total_assets` by one if the the AssetId is minted for the first time.
 MUST emit a `Deposit` log.
-MUST return amount of minted shares.
+This function MUST return the amount of minted shares.
 
 ### `fn withdraw(receiver: Identity, asset: AssetId, sub_id: SubId) -> u64`
 
