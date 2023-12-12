@@ -31,7 +31,7 @@ This function takes the receiver's identity and the sub_id of the sub vault as a
 This function MAY reject arbitrary assets based on implementation and MUST revert if unaccepted assets are forwarded.
 MUST increase `managed_assets` by amount of deposited assets (through any means including `std::context::this_balance(ASSET_ID)` if applicable).
 MUST mint a token representing the pro-rata share of the vault, with the AssetId of `sha256((asset, sub_id))`, a hash of the AssetId of the deposited asset, and the `sub_id` of the vault.
-MUST increase `total_supply` of the share's AssetId by newly minted shares.
+This function MUST increase the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) total supply of the sub-vault's asset.
 MUST increase `total_assets` by one if the the AssetId is minted for the first time.
 This function MUST emit a `Deposit` log.
 This function MUST return the amount of minted shares.
