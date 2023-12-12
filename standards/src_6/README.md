@@ -28,7 +28,7 @@ The following functions MUST be implemented to follow the SRC-6 standard. Any co
 Method that allows depositing of the underlying asset in exchange for shares of the vault.
 This function takes the receiver's identity and the sub_id of the sub vault as an argument and returns the amount of shares minted to the receiver.
 
-MUST revert if any unaccepted AssetId is forwarded.
+This function MAY reject arbitrary assets based on implementation and MUST revert if unaccepted assets are forwarded.
 MUST increase `managed_assets` by amount of deposited assets (through any means including `std::context::this_balance(ASSET_ID)` if applicable).
 MUST mint a token representing the pro-rata share of the vault, with the AssetId of `sha256((asset, sub_id))`, a hash of the AssetId of the deposited asset, and the `sub_id` of the vault.
 MUST increase `total_supply` of the share's AssetId by newly minted shares.
