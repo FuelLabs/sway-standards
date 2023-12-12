@@ -11,7 +11,7 @@ The following standard allows for the implementation of a standard API for token
 
 # Motivation
 
-Token vaults allow users to own shares of variable amount of assets, such as lending protocols which may have growing assets due to profits from interest. This pattern is highly useful and would greatly benefit from standardisation
+Token vaults allow users to own shares of variable amount of assets, such as lending protocols which may have growing assets due to profits from interest. This pattern is highly useful and would greatly benefit from standardization
 
 # Prior Art
 
