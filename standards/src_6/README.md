@@ -25,7 +25,7 @@ The following functions MUST be implemented to follow the SRC-6 standard. Any co
 
 ### `fn deposit(receiver: Identity, sub_id: SubId) -> u64`
 
-Method that allows depositing of the underlying asset in exchange for shares of the vault.
+This function MUST allow for depositing of the underlying asset in exchange for shares of the vault.
 This function takes the receiver's identity and the sub_id of the sub vault as an argument and returns the amount of shares minted to the receiver.
 
 This function MAY reject arbitrary assets based on implementation and MUST revert if unaccepted assets are forwarded.
