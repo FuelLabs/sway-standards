@@ -30,7 +30,6 @@ This function takes the `receiver` Identity and the SubId `sub_id` of the sub-va
 
 This function MAY reject arbitrary assets based on implementation and MUST revert if unaccepted assets are forwarded.
 This function MUST mint an asset representing the pro-rata share of the vault, with the SubId of the `sha256((asset, sub_id))` digest, where `asset` is the AssetId of the deposited asset and the `sub_id` is the id of the vault.
-MUST increase `total_assets` by one if the the AssetId is minted for the first time.
 This function MUST emit a `Deposit` log.
 This function MUST return the amount of minted shares.
 
@@ -40,29 +39,29 @@ Method that allows the redeeming of the vault shares in exchange for a pro-rata 
 This function takes the asset's AssetId, the sub_id of the sub vault, and the receiver's identity as arguments and returns the amount of assets transferred to the receiver.
 The AssetId of the asset, and the AssetId of the shares MUST be one-to-one, meaning every deposited AssetId shall have a unique corresponding shares AssetId.
 
-MUST revert if any AssetId other than the AssetId representing the deposited asset's shares for the given sub vault at `sub_id` is forwarded.
-MUST burn the received shares.
-MUST emit a `Withdraw` log.
-MUST return amount of assets transferred to the receiver.
+This function MUST revert if any AssetId other than the AssetId representing the deposited asset's shares for the given sub vault at `sub_id` is forwarded.
+This function MUST burn the received shares.
+This function MUST emit a `Withdraw` log.
+This function MUST return amount of assets transferred to the receiver.
 
 ### `fn managed_assets(asset: AssetId, sub_id: SubId) -> u64`
 
 Method that returns the total assets under management by vault. Includes assets controlled by the vault but not directly possessed by vault.
 This function takes the asset's AssetId and the sub_id of the sub vault as an argument and returns the total amount of assets of AssetId under management by vault.
 
-MUST return total amount of assets of underlying AssetId under management by vault.
-MUST return 0 if there are no assets of underlying AssetId under management by vault.
-MUST NOT revert under any circumstances.
+This function MUST return total amount of assets of underlying AssetId under management by vault.
+This function MUST return 0 if there are no assets of underlying AssetId under management by vault.
+This function MUST NOT revert under any circumstances.
 
 ### `fn max_depositable(receiver: Identity, asset: AssetId, sub_id: SubId) -> Option<u64>`
 
 Helper method for getting maximum depositable
 This function takes the hypothetical receivers `Identity`, the asset's `AssetId`, and the `sub_id` of the sub vault as an argument and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
 
-MUST return the maximum amount of assets that can be deposited into the contract, for the given asset, if the given vault exists.
-MUST return an `Option::Some(amount)` if the given vault exists.
-MUST return an `Option::None` if the given vault does not exist.
-MUST account for both global and user specific limits. For example: if deposits are disabled, even temporarily, MUST return 0.
+This function MUST return the maximum amount of assets that can be deposited into the contract, for the given asset, if the given vault exists.
+This function MUST return an `Option::Some(amount)` if the given vault exists.
+This function MUST return an `Option::None` if the given vault does not exist.
+This function MUST account for both global and user specific limits. For example: if deposits are disabled, even temporarily, MUST return 0.
 
 
 ### `fn max_withdrawable(receiver: Identity, asset: AssetId, sub_id: SubId) -> Option<u64>`
@@ -70,10 +69,10 @@ MUST account for both global and user specific limits. For example: if deposits 
 Helper method for getting maximum withdrawable
 This function takes the hypothetical receive's `Identity`, the asset's `AssetId`, and the `sub_id`` of the sub vault as an argument and returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
 
-MUST return the maximum amount of assets that can be withdrawn from the contract, for the given asset, if the given vault exists.
-MUST return an `Option::Some(amount)` if the given vault exists.
-MUST return an `Option::None` if the given vault does not exist.
-MUST account for global limits. For example: if withdrawals are disabled, even temporarily, MUST return 0.
+This function MUST return the maximum amount of assets that can be withdrawn from the contract, for the given asset, if the given vault exists.
+This function MUST return an `Option::Some(amount)` if the given vault exists.
+This function MUST return an `Option::None` if the given vault does not exist.
+This function MUST account for global limits. For example: if withdrawals are disabled, even temporarily, MUST return 0.
 
 ## Required logs
 
