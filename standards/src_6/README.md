@@ -15,7 +15,7 @@ Token vaults allow users to own shares of variable amount of assets, such as len
 
 # Prior Art
 
-Token vaults have been thoroughly explored on Ethereum and with [EIP 4626](https://eips.ethereum.org/EIPS/eip-4626) they have their own standard for it. However as Fuel's native assets are fundamentally different to Ethereum's ERC-20 tokens, the implementation will differ, but the interface may be used as reference.
+Token vaults have been thoroughly explored on Ethereum and with [EIP 4626](https://eips.ethereum.org/EIPS/eip-4626) they have their own standard for it. However as Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) are fundamentally different from Ethereum's ERC-20 tokens, the implementation will differ, but the interface may be used as a reference.
 
 # Specification
 
