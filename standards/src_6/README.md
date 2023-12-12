@@ -7,7 +7,7 @@
 
 # Abstract
 
-The following standard allows for the implementation of a standard API for token vaults such as yield bearing token vaults. This standard is an optional add-on to the SRC-20 standard.
+The following standard allows for the implementation of a standard API for token vaults such as yield-bearing token vaults or asset wrappers. This standard is an optional add-on to the SRC-20 standard.
 
 # Motivation
 
