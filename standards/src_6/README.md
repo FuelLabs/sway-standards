@@ -33,7 +33,7 @@ MUST increase `managed_assets` by amount of deposited assets (through any means 
 MUST mint a token representing the pro-rata share of the vault, with the AssetId of `sha256((asset, sub_id))`, a hash of the AssetId of the deposited asset, and the `sub_id` of the vault.
 MUST increase `total_supply` of the share's AssetId by newly minted shares.
 MUST increase `total_assets` by one if the the AssetId is minted for the first time.
-MUST emit a `Deposit` log.
+This function MUST emit a `Deposit` log.
 This function MUST return the amount of minted shares.
 
 ### `fn withdraw(receiver: Identity, asset: AssetId, sub_id: SubId) -> u64`
