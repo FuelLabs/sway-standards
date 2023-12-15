@@ -38,15 +38,14 @@ This function takes the `receiver` Identity and the SubId `vault_sub_id` of the 
 This function takes the `receiver` Identity, the `underlying_asset` AssetId, and the `vault_sub_id` of the sub vault, as arguments and returns the amount of assets transferred to the `receiver`.
 
 - This function MUST allow for redeeming of the vault shares in exchange for a pro-rata amount of the underlying assets.
-- This function MUST revert if any AssetId other than the AssetId representing the deposited asset's shares for the given sub vault at `vault_sub_id` is forwarded. (i.e. transferred share's AssetId must be equal to `AssetId::new(ContractId::this(), sha256((underlying_asset, vault_sub_id))`)
+- This function MUST revert if any AssetId other than the AssetId representing the underlying asset's shares for the given sub vault at `vault_sub_id` is forwarded. (i.e. transferred share's AssetId must be equal to `AssetId::new(ContractId::this(), sha256((underlying_asset, vault_sub_id))`)
 - This function MUST burn the received shares.
 - This function MUST emit a `Withdraw` log.
 - This function MUST return amount of assets transferred to the receiver.
 
 ### `fn managed_assets(underlying_asset: AssetId, vault_sub_id: SubId) -> u64`
 
-Method that returns the total assets under management by vault. Includes assets controlled by the vault but not directly possessed by vault.
-This function takes the `underlying_asset` AssetId and the `vault_sub_id` of the sub vault as an argument and returns the total amount of assets of AssetId under management by vault.
+This function returns the total assets under management by vault. Includes assets controlled by the vault but not directly possessed by vault. It takes the `underlying_asset` AssetId and the `vault_sub_id` of the sub vault as arguments and returns the total amount of assets of AssetId under management by vault.
 
 - This function MUST return total amount of assets of `underlying_asset` AssetId under management by vault.
 - This function MUST return 0 if there are no assets of `underlying_asset` AssetId under management by vault.
@@ -54,26 +53,25 @@ This function takes the `underlying_asset` AssetId and the `vault_sub_id` of the
 
 ### `fn max_depositable(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64>`
 
-This is a helper function for getting the maximum amount of assets that can be deposited. It takes the hypothetical `receiver` Identity, the `underlying_asset` AssetId, and the `vault_sub_id` of the sub vault as an arguments and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
+This is a helper function for getting the maximum amount of assets that can be deposited. It takes the hypothetical `receiver` Identity, the `underlying_asset` AssetId, and the `vault_sub_id` SubId of the sub vault as an arguments and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
 
-- This function MUST return the maximum amount of assets that can be deposited into the contract, for the given asset, if the given vault exists.
-- This function MUST return an `Some(amount)` if the given vault exists.
-- This function MUST return an `None` if the given vault does not exist.
+- This function MUST return the maximum amount of assets that can be deposited into the contract, for the given `underlying_asset`, if the given `vault_sub_id` vault exists.
+- This function MUST return an `Some(amount)` if the given `vault_sub_id` vault exists.
+- This function MUST return an `None` if the given `vault_sub_id` vault does not exist.
 - This function MUST account for both global and user specific limits. For example: if deposits are disabled, even temporarily, MUST return 0.
 
 ### `fn max_withdrawable(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64>`
 
-This is a helper function for getting maximum withdrawable. It takes the hypothetical `receiver` Identity, the `underlying_asset` AssetId, and the `vault_sub_id` of the sub vault as an argument and returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
+This is a helper function for getting maximum withdrawable. It takes the hypothetical `receiver` Identity, the `underlying_asset` AssetId, and the `vault_sub_id` SubId of the sub vault as an argument and returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
 
-- This function MUST return the maximum amount of assets that can be withdrawn from the contract, for the given asset, if the given vault exists.
-- This function MUST return an `Some(amount)` if the given vault exists.
-- This function MUST return an `None` if the given vault does not exist.
+- This function MUST return the maximum amount of assets that can be withdrawn from the contract, for the given `underlying_asset`, if the given `vault_sub_id` vault exists.
+- This function MUST return an `Some(amount)` if the given `vault_sub_id` vault exists.
+- This function MUST return an `None` if the given `vault_sub_id` vault does not exist.
 - This function MUST account for global limits. For example: if withdrawals are disabled, even temporarily, MUST return 0.
 
 ## Required logs
 
-The following logs MUST be emitted at the specified occasions
-
+The following logs MUST be emitted at the specified occasions.
 
 ### `Deposit`
 
@@ -141,11 +139,11 @@ The `burned_shares` field MUST represent the u64 amount of shares burned.
 
 # Rationale
 
-The ABI discussed and covers the known use cases of token vaults while allowing safe implementations
+The ABI discussed covers the known use cases of token vaults while allowing safe implementations
 
 # Backwards Compatibility
 
-This standard is fully compatible with the SRC-20 standard
+This standard is fully compatible with the [SRC-20 standard](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20).
 
 # Security Considerations
 
