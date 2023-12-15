@@ -46,16 +46,16 @@ This function MUST return amount of assets transferred to the receiver.
 ### `fn managed_assets(underlying_asset: AssetId, vault_sub_id: SubId) -> u64`
 
 Method that returns the total assets under management by vault. Includes assets controlled by the vault but not directly possessed by vault.
-This function takes the asset's AssetId and the vault_sub_id of the sub vault as an argument and returns the total amount of assets of AssetId under management by vault.
+This function takes the `underlying_asset` AssetId and the `vault_sub_id` of the sub vault as an argument and returns the total amount of assets of AssetId under management by vault.
 
-This function MUST return total amount of assets of underlying AssetId under management by vault.
-This function MUST return 0 if there are no assets of underlying AssetId under management by vault.
+This function MUST return total amount of assets of `underlying_asset` AssetId under management by vault.
+This function MUST return 0 if there are no assets of `underlying_asset` AssetId under management by vault.
 This function MUST NOT revert under any circumstances.
 
 ### `fn max_depositable(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64>`
 
 Helper method for getting maximum depositable
-This function takes the hypothetical receivers `Identity`, the asset's `AssetId`, and the `vault_sub_id` of the sub vault as an argument and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
+This function takes the hypothetical `receiver` `Identity`, the `underlying_asset` `AssetId`, and the `vault_sub_id` of the sub vault as an argument and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
 
 This function MUST return the maximum amount of assets that can be deposited into the contract, for the given asset, if the given vault exists.
 This function MUST return an `Option::Some(amount)` if the given vault exists.
@@ -66,7 +66,7 @@ This function MUST account for both global and user specific limits. For example
 ### `fn max_withdrawable(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64>`
 
 Helper method for getting maximum withdrawable
-This function takes the hypothetical receive's `Identity`, the asset's `AssetId`, and the `vault_sub_id`` of the sub vault as an argument and returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
+This function takes the hypothetical `receiver` `Identity`, the `underlying_asset` `AssetId`, and the `vault_sub_id` of the sub vault as an argument and returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
 
 This function MUST return the maximum amount of assets that can be withdrawn from the contract, for the given asset, if the given vault exists.
 This function MUST return an `Option::Some(amount)` if the given vault exists.
