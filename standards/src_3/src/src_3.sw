@@ -1,12 +1,12 @@
 library;
 
 abi SRC3 {
-    /// Mints new tokens using the `sub_id` sub-identifier.
+    /// Mints new tokens using the `vault_sub_id` sub-identifier.
     ///
     /// # Arguments
     ///
     /// * `recipient`: [Identity] - The user to which the newly minted tokens are transferred to.
-    /// * `sub_id`: [SubId] - The sub-identifier of the newly minted token.
+    /// * `vault_sub_id`: [SubId] - The sub-identifier of the newly minted token.
     /// * `amount`: [u64] - The quantity of tokens to mint.
     ///
     /// # Examples
@@ -20,18 +20,18 @@ abi SRC3 {
     /// }
     /// ```
     #[storage(read, write)]
-    fn mint(recipient: Identity, sub_id: SubId, amount: u64);
+    fn mint(recipient: Identity, vault_sub_id: SubId, amount: u64);
 
-    /// Burns tokens sent with the given `sub_id`.
+    /// Burns tokens sent with the given `vault_sub_id`.
     ///
     /// # Additional Information
     ///
     /// NOTE: The sha-256 hash of `(ContractId, SubId)` must match the `AssetId` where `ContractId` is the id of
-    /// the implementing contract and `SubId` is the given `sub_id` argument.
+    /// the implementing contract and `SubId` is the given `vault_sub_id` argument.
     ///
     /// # Arguments
     ///
-    /// * `sub_id`: [SubId] - The sub-identifier of the token to burn.
+    /// * `vault_sub_id`: [SubId] - The sub-identifier of the token to burn.
     /// * `amount`: [u64] - The quantity of tokens to burn.
     ///
     /// # Examples
@@ -49,5 +49,5 @@ abi SRC3 {
     /// }
     /// ```
     #[storage(read, write)]
-    fn burn(sub_id: SubId, amount: u64);
+    fn burn(vault_sub_id: SubId, amount: u64);
 }

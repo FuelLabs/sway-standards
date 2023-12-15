@@ -18,8 +18,8 @@ use src_20::SRC20;
 pub struct VaultInfo {
     /// Amount of assets currently managed by this vault
     managed_assets: u64,
-    /// The sub_id of this vault.
-    sub_id: SubId,
+    /// The vault_sub_id of this vault.
+    vault_sub_id: SubId,
     /// The asset being managed by this vault
     asset: AssetId,
 }
@@ -41,14 +41,14 @@ storage {
 
 impl SRC6 for Contract {
     #[storage(read, write)]
-    fn deposit(receiver: Identity, sub_id: SubId) -> u64 {
+    fn deposit(receiver: Identity, vault_sub_id: SubId) -> u64 {
         let asset_amount = msg_amount();
         require(asset_amount != 0, "ZERO_ASSETS");
 
-        let asset = msg_asset_id();
-        let (shares, share_asset, share_asset_sub_id) = preview_deposit(asset, sub_id, asset_amount);
+        let underlying_asset = msg_asset_id();
+        let (shares, share_asset, share_asset_vault_sub_id) = preview_deposit(underlying_asset, vault_sub_id, asset_amount);
 
-        _mint(receiver, share_asset, share_asset_sub_id, shares);
+        _mint(receiver, share_asset, share_asset_vault_sub_id, shares);
         storage
             .total_supply
             .insert(
@@ -67,8 +67,8 @@ impl SRC6 for Contract {
         log(Deposit {
             caller: msg_sender().unwrap(),
             receiver,
-            asset,
-            sub_id,
+            underlying_asset,
+            vault_sub_id,
             assets: asset_amount,
             shares,
         });
@@ -77,16 +77,20 @@ impl SRC6 for Contract {
     }
 
     #[storage(read, write)]
-    fn withdraw(receiver: Identity, asset: AssetId, sub_id: SubId) -> u64 {
+    fn withdraw(
+        receiver: Identity,
+        underlying_asset: AssetId,
+        vault_sub_id: SubId,
+    ) -> u64 {
         let shares = msg_amount();
         require(shares != 0, "ZERO_SHARES");
 
-        let (share_asset_id, share_asset_sub_id) = vault_asset_id(asset, sub_id);
+        let (share_asset_id, share_asset_vault_sub_id) = vault_asset_id(underlying_asset, vault_sub_id);
 
         require(msg_asset_id() == share_asset_id, "INVALID_ASSET_ID");
         let assets = preview_withdraw(share_asset_id, shares);
 
-        _burn(share_asset_id, share_asset_sub_id, shares);
+        _burn(share_asset_id, share_asset_vault_sub_id, shares);
         storage
             .total_supply
             .insert(
@@ -97,13 +101,13 @@ impl SRC6 for Contract {
                     .read() - shares,
             );
 
-        transfer(receiver, asset, assets);
+        transfer(receiver, underlying_asset, assets);
 
         log(Withdraw {
             caller: msg_sender().unwrap(),
             receiver,
-            asset,
-            sub_id,
+            underlying_asset,
+            vault_sub_id,
             assets,
             shares,
         });
@@ -111,22 +115,26 @@ impl SRC6 for Contract {
         assets
     }
     #[storage(read)]
-    fn managed_assets(asset: AssetId, sub_id: SubId) -> u64 {
-        let vault_share_asset = vault_asset_id(asset, sub_id).0;
+    fn managed_assets(underlying_asset: AssetId, vault_sub_id: SubId) -> u64 {
+        let vault_share_asset = vault_asset_id(underlying_asset, vault_sub_id).0;
         // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
         managed_assets(vault_share_asset)
     }
 
     #[storage(read)]
-    fn max_depositable(receiver: Identity, asset: AssetId, sub_id: SubId) -> Option<u64> {
+    fn max_depositable(
+        receiver: Identity,
+        underlying_asset: AssetId,
+        vault_sub_id: SubId,
+    ) -> Option<u64> {
         // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
-        Some(u64::max() - managed_assets(asset))
+        Some(u64::max() - managed_assets(underlying_asset))
     }
 
     #[storage(read)]
-    fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64> {
+    fn max_withdrawable(underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64> {
         // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
-        Some(managed_assets(asset))
+        Some(managed_assets(underlying_asset))
     }
 }
 
@@ -158,10 +166,10 @@ impl SRC20 for Contract {
 }
 
 /// Returns the vault shares assetid and subid for the given assets assetid and the vaults sub id
-fn vault_asset_id(asset: AssetId, sub_id: SubId) -> (AssetId, SubId) {
-    let share_asset_sub_id = sha256((asset, sub_id));
-    let share_asset_id = AssetId::new(ContractId::this(), share_asset_sub_id);
-    (share_asset_id, share_asset_sub_id)
+fn vault_asset_id(asset: AssetId, vault_sub_id: SubId) -> (AssetId, SubId) {
+    let share_asset_vault_sub_id = sha256((asset, vault_sub_id));
+    let share_asset_id = AssetId::new(ContractId::this(), share_asset_vault_sub_id);
+    (share_asset_id, share_asset_vault_sub_id)
 }
 
 #[storage(read)]
@@ -173,17 +181,21 @@ fn managed_assets(share_asset: AssetId) -> u64 {
 }
 
 #[storage(read)]
-fn preview_deposit(asset: AssetId, sub_id: SubId, assets: u64) -> (u64, AssetId, SubId) {
-    let (share_asset_id, share_asset_sub_id) = vault_asset_id(asset, sub_id);
+fn preview_deposit(
+    underlying_asset: AssetId,
+    vault_sub_id: SubId,
+    assets: u64,
+) -> (u64, AssetId, SubId) {
+    let (share_asset_id, share_asset_vault_sub_id) = vault_asset_id(underlying_asset, vault_sub_id);
 
     let shares_supply = storage.total_supply.get(share_asset_id).try_read().unwrap_or(0);
     if shares_supply == 0 {
-        (assets, share_asset_id, share_asset_sub_id)
+        (assets, share_asset_id, share_asset_vault_sub_id)
     } else {
         (
             assets * shares_supply / managed_assets(share_asset_id),
             share_asset_id,
-            share_asset_sub_id,
+            share_asset_vault_sub_id,
         )
     }
 }
@@ -202,7 +214,7 @@ fn preview_withdraw(share_asset_id: AssetId, shares: u64) -> u64 {
 pub fn _mint(
     recipient: Identity,
     asset_id: AssetId,
-    sub_id: SubId,
+    vault_sub_id: SubId,
     amount: u64,
 ) {
     use std::token::mint_to;
@@ -215,11 +227,11 @@ pub fn _mint(
     storage
         .total_supply
         .insert(asset_id, supply.unwrap_or(0) + amount);
-    mint_to(recipient, sub_id, amount);
+    mint_to(recipient, vault_sub_id, amount);
 }
 
 #[storage(read, write)]
-pub fn _burn(asset_id: AssetId, sub_id: SubId, amount: u64) {
+pub fn _burn(asset_id: AssetId, vault_sub_id: SubId, amount: u64) {
     use std::{context::this_balance, token::burn};
 
     require(
@@ -229,5 +241,5 @@ pub fn _burn(asset_id: AssetId, sub_id: SubId, amount: u64) {
     // If we pass the check above, we can assume it is safe to unwrap.
     let supply = storage.total_supply.get(asset_id).try_read().unwrap();
     storage.total_supply.insert(asset_id, supply - amount);
-    burn(sub_id, amount);
+    burn(vault_sub_id, amount);
 }

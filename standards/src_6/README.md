@@ -23,40 +23,39 @@ Token vaults have been thoroughly explored on Ethereum and with [EIP 4626](https
 
 The following functions MUST be implemented to follow the SRC-6 standard. Any contract that implements the SRC-6 standard MUST implement the SRC-20 standard.
 
-### `fn deposit(receiver: Identity, sub_id: SubId) -> u64`
+### `fn deposit(receiver: Identity, vault_sub_id: SubId) -> u64`
 
-This function MUST allow for depositing of the underlying asset in exchange for shares of the vault.
-This function takes the `receiver` Identity and the SubId `sub_id` of the sub-vault as an argument and returns the amount of shares minted to the receiver.
+This function MUST allow for depositing of the underlying asset in exchange for pro-rata shares of the vault.
+This function takes the `receiver` Identity and the SubId `vault_sub_id` of the sub-vault as an argument and returns the amount of shares minted to the `receiver`.
 
 This function MAY reject arbitrary assets based on implementation and MUST revert if unaccepted assets are forwarded.
-This function MUST mint an asset representing the pro-rata share of the vault, with the SubId of the `sha256((asset, sub_id))` digest, where `asset` is the AssetId of the deposited asset and the `sub_id` is the id of the vault.
+This function MUST mint an asset representing the pro-rata share of the vault, with the SubId of the `sha256((underlying_asset, vault_sub_id))` digest, where `underlying_asset` is the AssetId of the deposited asset and the `vault_sub_id` is the id of the vault.
 This function MUST emit a `Deposit` log.
 This function MUST return the amount of minted shares.
 
-### `fn withdraw(receiver: Identity, asset: AssetId, sub_id: SubId) -> u64`
+### `fn withdraw(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> u64`
 
-Method that allows the redeeming of the vault shares in exchange for a pro-rata amount of the underlying asset
-This function takes the asset's AssetId, the sub_id of the sub vault, and the receiver's identity as arguments and returns the amount of assets transferred to the receiver.
-The AssetId of the asset, and the AssetId of the shares MUST be one-to-one, meaning every deposited AssetId shall have a unique corresponding shares AssetId.
+This function MUST allow for redeeming of the vault shares in exchange for a pro-rata amount of the underlying assets.
+This function takes the `underlying_asset` AssetId, the `vault_sub_id` of the sub vault, and the `receiver` Identity as arguments and returns the amount of assets transferred to the `receiver`.
 
-This function MUST revert if any AssetId other than the AssetId representing the deposited asset's shares for the given sub vault at `sub_id` is forwarded.
+This function MUST revert if any AssetId other than the AssetId representing the deposited asset's shares for the given sub vault at `vault_sub_id` is forwarded. (i.e. transferred share's AssetId must be equal to `AssetId::new(ContractId::this(), sha256((underlying_asset, vault_sub_id))`)
 This function MUST burn the received shares.
 This function MUST emit a `Withdraw` log.
 This function MUST return amount of assets transferred to the receiver.
 
-### `fn managed_assets(asset: AssetId, sub_id: SubId) -> u64`
+### `fn managed_assets(underlying_asset: AssetId, vault_sub_id: SubId) -> u64`
 
 Method that returns the total assets under management by vault. Includes assets controlled by the vault but not directly possessed by vault.
-This function takes the asset's AssetId and the sub_id of the sub vault as an argument and returns the total amount of assets of AssetId under management by vault.
+This function takes the asset's AssetId and the vault_sub_id of the sub vault as an argument and returns the total amount of assets of AssetId under management by vault.
 
 This function MUST return total amount of assets of underlying AssetId under management by vault.
 This function MUST return 0 if there are no assets of underlying AssetId under management by vault.
 This function MUST NOT revert under any circumstances.
 
-### `fn max_depositable(receiver: Identity, asset: AssetId, sub_id: SubId) -> Option<u64>`
+### `fn max_depositable(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64>`
 
 Helper method for getting maximum depositable
-This function takes the hypothetical receivers `Identity`, the asset's `AssetId`, and the `sub_id` of the sub vault as an argument and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
+This function takes the hypothetical receivers `Identity`, the asset's `AssetId`, and the `vault_sub_id` of the sub vault as an argument and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
 
 This function MUST return the maximum amount of assets that can be deposited into the contract, for the given asset, if the given vault exists.
 This function MUST return an `Option::Some(amount)` if the given vault exists.
@@ -64,10 +63,10 @@ This function MUST return an `Option::None` if the given vault does not exist.
 This function MUST account for both global and user specific limits. For example: if deposits are disabled, even temporarily, MUST return 0.
 
 
-### `fn max_withdrawable(receiver: Identity, asset: AssetId, sub_id: SubId) -> Option<u64>`
+### `fn max_withdrawable(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64>`
 
 Helper method for getting maximum withdrawable
-This function takes the hypothetical receive's `Identity`, the asset's `AssetId`, and the `sub_id`` of the sub vault as an argument and returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
+This function takes the hypothetical receive's `Identity`, the asset's `AssetId`, and the `vault_sub_id`` of the sub vault as an argument and returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
 
 This function MUST return the maximum amount of assets that can be withdrawn from the contract, for the given asset, if the given vault exists.
 This function MUST return an `Option::Some(amount)` if the given vault exists.
@@ -86,16 +85,16 @@ pub struct Deposit {
     /// The receiver of the deposit.
     receiver: Identity,
     /// The asset being deposited.
-    asset: AssetId,
+    underlying_asset: AssetId,
     /// The SubId of the vault.
-    sub_id: SubId,
+    vault_sub_id: SubId,
     /// The amount of assets being deposited.
     assets: u64,
     /// The amount of shares being minted.
     shares: u64,
 }
 ```
-`caller` has called the `deposit` method sending `assets` assets of the `asset` AssetId to the subvault of `sub_id`, in exchange for `shares` shares sent to the receiver `receiver`
+`caller` has called the `deposit` method sending `assets` assets of the `underlying_asset` AssetId to the subvault of `vault_sub_id`, in exchange for `shares` shares sent to the receiver `receiver`
 
 The `Deposit` struct MUST be logged whenever new shares are minted via the `deposit` method
 
@@ -107,9 +106,9 @@ pub struct Withdraw {
     /// The receiver of the withdrawal.
     receiver: Identity,
     /// The asset being withdrawn.
-    asset: AssetId,
+    underlying_asset: AssetId,
     /// The SubId of the vault.
-    sub_id: SubId,
+    vault_sub_id: SubId,
     /// The amount of assets being withdrawn.
     assets: u64,
     /// The amount of shares being burned.
@@ -117,7 +116,7 @@ pub struct Withdraw {
 }
 ```
 
-`caller` has called the `withdraw` method sending `shares` shares in exchange for `assets` assets of the `asset` AssetId from the subvault of `sub_id` to the receiver `receiver`
+`caller` has called the `withdraw` method sending `shares` shares in exchange for `assets` assets of the `underlying_asset` AssetId from the subvault of `vault_sub_id` to the receiver `receiver`
 
 The `Withdraw` struct MUST be logged whenever shares are redeemed for assets via the `withdraw` method
 
@@ -138,19 +137,19 @@ Incorrect implementation of token vaults could allow attackers to steal underlyi
 ```sway
 abi SRC6 {
     #[storage(read, write)]
-    fn deposit(receiver: Identity, sub_id: SubId) -> u64;
+    fn deposit(receiver: Identity, vault_sub_id: SubId) -> u64;
 
     #[storage(read, write)]
-    fn withdraw(receiver: Identity, asset: AssetId, sub_id: SubId) -> u64;
+    fn withdraw(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> u64;
 
     #[storage(read)]
-    fn managed_assets(asset: AssetId, sub_id: SubId) -> u64;
+    fn managed_assets(underlying_asset: AssetId, vault_sub_id: SubId) -> u64;
     
     #[storage(read)]
-    fn max_depositable(receiver: Identity, asset: AssetId, sub_id: SubId) -> Option<u64>;
+    fn max_depositable(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64>;
 
     #[storage(read)]
-    fn max_withdrawable(asset: AssetId, sub_id: SubId) -> Option<u64>;
+    fn max_withdrawable(underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64>;
 }
 ```
 
