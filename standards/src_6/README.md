@@ -7,11 +7,11 @@
 
 # Abstract
 
-The following standard allows for the implementation of a standard API for token vaults such as yield-bearing token vaults or asset wrappers. This standard is an optional add-on to the SRC-20 standard.
+The following standard allows for the implementation of a standard API for token vaults such as yield-bearing token vaults or asset wrappers. This standard is an optional add-on to the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard.
 
 # Motivation
 
-Token vaults allow users to own shares of variable amount of assets, such as lending protocols which may have growing assets due to profits from interest. This pattern is highly useful and would greatly benefit from standardization
+Token vaults allow users to own shares of variable amounts of assets, such as lending protocols which may have growing assets due to profits from interest. This pattern is highly useful and would greatly benefit from standardization.
 
 # Prior Art
 
