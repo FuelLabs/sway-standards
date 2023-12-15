@@ -79,7 +79,11 @@ abi SRC6 {
     /// * If the transferred shares do not corresspond to the given asset.
     /// * The user crosses any global or user specific withdrawal limits.
     #[storage(read, write)]
-    fn withdraw(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> u64;
+    fn withdraw(
+        receiver: Identity,
+        underlying_asset: AssetId,
+        vault_sub_id: SubId,
+    ) -> u64;
 
     /// Returns the amount of managed assets of the given asset.
     ///
@@ -111,7 +115,11 @@ abi SRC6 {
     /// * [Some(u64)] - The maximum amount of assets that can be deposited into the contract, for the given asset.
     /// * [None] - If the asset is not supported by the contract.
     #[storage(read)]
-    fn max_depositable(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64>;
+    fn max_depositable(
+        receiver: Identity,
+        underlying_asset: AssetId,
+        vault_sub_id: SubId,
+    ) -> Option<u64>;
 
     /// Returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
     ///
