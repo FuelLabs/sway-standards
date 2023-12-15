@@ -36,7 +36,7 @@ This function MUST return the amount of minted shares.
 ### `fn withdraw(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> u64`
 
 This function MUST allow for redeeming of the vault shares in exchange for a pro-rata amount of the underlying assets.
-This function takes the `underlying_asset` AssetId, the `vault_sub_id` of the sub vault, and the `receiver` Identity as arguments and returns the amount of assets transferred to the `receiver`.
+This function takes the `receiver` Identity, the `underlying_asset` AssetId, and the `vault_sub_id` of the sub vault, as arguments and returns the amount of assets transferred to the `receiver`.
 
 This function MUST revert if any AssetId other than the AssetId representing the deposited asset's shares for the given sub vault at `vault_sub_id` is forwarded. (i.e. transferred share's AssetId must be equal to `AssetId::new(ContractId::this(), sha256((underlying_asset, vault_sub_id))`)
 This function MUST burn the received shares.
