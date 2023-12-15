@@ -11,9 +11,9 @@ pub struct Deposit {
     /// The SubId of the vault.
     vault_sub_id: SubId,
     /// The amount of assets being deposited.
-    assets: u64,
+    deposited_amount: u64,
     /// The amount of shares being minted.
-    shares: u64,
+    minted_shares: u64,
 }
 
 /// Event logged when a withdrawal is made.
@@ -27,9 +27,9 @@ pub struct Withdraw {
     /// The SubId of the vault.
     vault_sub_id: SubId,
     /// The amount of assets being withdrawn.
-    assets: u64,
+    withdrawn_amount: u64,
     /// The amount of shares being burned.
-    shares: u64,
+    burned_shares: u64,
 }
 
 abi SRC6 {

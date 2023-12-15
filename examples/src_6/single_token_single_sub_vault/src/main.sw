@@ -62,8 +62,8 @@ impl SRC6 for Contract {
             receiver,
             underlying_asset,
             vault_sub_id,
-            assets: asset_amount,
-            shares,
+            deposited_assets: asset_amount,
+            minted_shares: shares,
         });
 
         shares
@@ -98,8 +98,8 @@ impl SRC6 for Contract {
             receiver,
             underlying_asset,
             vault_sub_id,
-            assets,
-            shares,
+            withdrawn_assets: assets,
+            burned_shares: shares,
         });
 
         assets
