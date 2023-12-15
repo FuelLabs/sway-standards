@@ -1,0 +1,9 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "main.sw"
+license = "Apache-2.0"
+name = "single_token_single_sub_vault"
+
+[dependencies]
+src_20 = { path = "../../../standards/src_20" }
+src_6 = { path = "../../../standards/src_6" }
