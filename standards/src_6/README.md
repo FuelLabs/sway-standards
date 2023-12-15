@@ -109,7 +109,7 @@ The `minted_shares` field MUST represent the u64 amount of shares minted.
 
 `caller` has called the `withdraw()` method sending `burned_shares` shares in exchange for `withdrawn_amount` assets of the `underlying_asset` Asset from the subvault of `vault_sub_id` to the receiver `receiver`.
 
-The `Withdraw` struct MUST be logged whenever shares are redeemed for assets via the `withdraw()` method
+The `Withdraw` struct MUST be logged whenever shares are redeemed for assets via the `withdraw()` method.
 
 The `Withdraw` log SHALL have the following fields.
 
