@@ -75,9 +75,9 @@ The following logs MUST be emitted at the specified occasions.
 
 ### `Deposit`
 
-`caller` has called the `deposit()` method sending `deposited_amount` assets of the `underlying_asset` Asset to the subvault of `vault_sub_id`, in exchange for `minted_shares` shares sent to the receiver `receiver`
+`caller` has called the `deposit()` method sending `deposited_amount` assets of the `underlying_asset` Asset to the subvault of `vault_sub_id`, in exchange for `minted_shares` shares sent to the receiver `receiver`.
 
-The `Deposit` struct MUST be logged whenever new shares are minted via the `deposit` method
+The `Deposit` struct MUST be logged whenever new shares are minted via the `deposit()` method.
 
 The `Deposit` log SHALL have the following fields.
 
@@ -107,9 +107,9 @@ The `minted_shares` field MUST represent the u64 amount of shares minted.
 
 ### `Withdraw`
 
-`caller` has called the `withdraw()` method sending `burned_shares` shares in exchange for `withdrawn_amount` assets of the `underlying_asset` Asset from the subvault of `vault_sub_id` to the receiver `receiver`
+`caller` has called the `withdraw()` method sending `burned_shares` shares in exchange for `withdrawn_amount` assets of the `underlying_asset` Asset from the subvault of `vault_sub_id` to the receiver `receiver`.
 
-The `Withdraw` struct MUST be logged whenever shares are redeemed for assets via the `withdraw` method
+The `Withdraw` struct MUST be logged whenever shares are redeemed for assets via the `withdraw()` method
 
 The `Withdraw` log SHALL have the following fields.
 
@@ -139,7 +139,7 @@ The `burned_shares` field MUST represent the u64 amount of shares burned.
 
 # Rationale
 
-The ABI discussed covers the known use cases of token vaults while allowing safe implementations
+The ABI discussed covers the known use cases of token vaults while allowing safe implementations.
 
 # Backwards Compatibility
 
