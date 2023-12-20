@@ -1,3 +1,10 @@
+<p align="center">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset=".docs/src-10-logo-dark-theme.png">
+        <img alt="SRC-10 logo" width="400px" src=".docs/src-10-logo-light-theme.png">
+    </picture>
+</p>
+
 # Abstract
 
 The following standard allows for the implementation of a standard API for Native Bridges using the Sway Language. The standardized design has the bridge contract send a message to the origin chain to register which token it accepts to prevent a loss of funds.
@@ -33,7 +40,7 @@ The `process_message()` function accepts incoming deposit messages from the cano
 - This function SHALL mint a token that follows the [SRC-8; Bridged Asset Standard](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_8). 
 - This function SHALL issue a refund if there is an error in the bridging process.
 
-### - `fn withdraw(to: b256, sub_id: b256, gateway: b256)`
+### - `fn withdraw(to: b256, sub_id: SubId, gateway: b256)`
 
 The `withdraw()` function accepts and burns a bridged asset and sends a message to the `gateway` contract on the canonical chain to release the original deposited token to the `to` address.
 
@@ -41,7 +48,7 @@ The `withdraw()` function accepts and burns a bridged asset and sends a message 
 - This function MUST ensure the `sha256(contract_id(), sub_id)` matches the asset's `AssetId` sent in the transaction.
 - This function SHALL burn all tokens sent in the transaction.
 
-### - `fn claim_refund(to: b256, token: b256, token_id: b256, gateway: b256)`
+### - `fn claim_refund(to: b256, token: b256, token_id: Option<b256>, gateway: b256)`
 
 The `claim_refund()` function is called if something goes wrong in the bridging process and an error occurs. It sends a message to the `gateway` contract on the canonical chain to release the `token` token with token id `token_id` to the `to` address. 
 
@@ -76,7 +83,7 @@ The `token_address` field MUST represent the bridged token's address on the cano
 
 #### - token_id: `Option<b256>`
 
-The `token_id` field MUST represent the token's ID on the canonical chain. MUST be `None` if this is a fungible token and no token ID exists
+The `token_id` field MUST represent the token's ID on the canonical chain. MUST be `None` if this is a fungible token and no token ID exists.
 
 ### Example
 
@@ -109,7 +116,7 @@ This standard is compatible with the SRC-20 and SRC-8 standards.
 abi SRC10 {
      fn register_bridge(token: b256, gateway: b256);
      fn process_message(msg_idx: u64);
-     fn withdraw(to: b256, sub_id: b256, gateway: b256);
-     fn claim_refund(to: b256, token_address: b256, token_id: b256, gateway: b256);
+     fn withdraw(to: b256, sub_id: SubId, gateway: b256);
+     fn claim_refund(to: b256, token_address: b256, token_id: Option<b256>, gateway: b256);
 }
 ```
