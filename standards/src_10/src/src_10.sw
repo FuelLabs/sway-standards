@@ -21,7 +21,7 @@ abi SRC10 {
     ///
     /// # Additional Information
     ///
-    /// * The `gateway` contract on the canonical chain receives the `token` ID in the message such that when assets are deposited they are reported to prevent loss of funds. 
+    /// * The `gateway` contract on the canonical chain receives the `token` ID in the message such that when assets are deposited they are reported to prevent loss of funds.
     ///
     /// # Arguments
     ///
@@ -68,7 +68,7 @@ abi SRC10 {
     /// * `sub_id`: [SubId] - The SubId of the asset sent in the transaction.
     /// * `gateway`: [b256] - The contract that holds the deposited tokens on the canonical chain.
     ///
-    /// # Examples 
+    /// # Examples
     ///
     /// ```sway
     /// use src10::SRC10;
