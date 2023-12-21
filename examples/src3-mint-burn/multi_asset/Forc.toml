@@ -1,0 +1,9 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "multi_asset.sw"
+license = "Apache-2.0"
+name = "multi_src3_asset"
+
+[dependencies]
+src20 = { path = "../../../standards/src20-token" }
+src3 = { path = "../../../standards/src3-mint-burn" }
