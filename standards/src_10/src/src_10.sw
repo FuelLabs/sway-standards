@@ -105,5 +105,10 @@ abi SRC10 {
     /// }
     /// ```
     #[storage(read, write)]
-    fn claim_refund(to_address: b256, token_address: b256, token_id: Option<b256>, gateway_contract: b256);
+    fn claim_refund(
+        to_address: b256,
+        token_address: b256,
+        token_id: Option<b256>,
+        gateway_contract: b256,
+    );
 }
