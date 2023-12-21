@@ -1,2 +1,8 @@
 [workspace]
-members = ["src3-mint-burn", "src5-ownership", "src6-vault", "src7-metadata", "src20-token"]
+members = [
+  "src3-mint-burn",
+  "src5-ownership",
+  "src6-vault",
+  "src7-metadata",
+  "src20-token",
+]
