@@ -17,7 +17,7 @@ abi SRC7 {
     /// # Examples
     ///
     /// ```sway
-    /// use src_7::{SRC7, Metadata};
+    /// use src7::{SRC7, Metadata};
     /// use std::string::String;
     ///
     /// fn foo(contract_id: ContractId, asset: AssetId) {
