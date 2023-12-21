@@ -1,11 +1,11 @@
 [workspace]
 members = [
-  "src_3/single_asset",
-  "src_3/multi_asset",
-  "src_5/initialized_example",
-  "src_5/uninitialized_example",
-  "src_7/single_asset",
-  "src_7/multi_asset",
-  "src_20/single_asset",
-  "src_20/multi_asset",
+  "src3-mint-burn/single_asset",
+  "src3-mint-burn/multi_asset",
+  "src5-ownership/initialized_example",
+  "src5-ownership/uninitialized_example",
+  "src7-metadata/single_asset",
+  "src7-metadata/multi_asset",
+  "src20-token/single_asset",
+  "src20-token/multi_asset",
 ]
