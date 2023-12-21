@@ -70,41 +70,41 @@ Minimal example implementations for every standard can be found in the [`example
 
 #### SRC-20; Token Standard Examples
 
-##### - [Single Native Assset](./examples/src_20/single_asset/src/single_asset.sw)
+##### - [Single Native Assset](./examples/src20-token/single_asset/src/single_asset.sw)
 
 Example of the SRC-20 implementation where a contract contains a single asset with one `SubId`. This implementation is recommended for users that intend to deploy a single asset with their contract.
 
-##### - [Multi Native Asset](./examples/src_20/multi_asset/src/multi_asset.sw)
+##### - [Multi Native Asset](./examples/src20-token/multi_asset/src/multi_asset.sw)
 
 Example of the SRC-20 implementation where a contract contains multiple assets with differing `SubId`s. This implementation is recommended for users that intend to deploy multiple assets with their contract.
 
 #### SRC-3; Mint and Burn Standard Examples
 
-##### - [Single Native Asset](./examples/src_3/single_asset/src/single_asset.sw)
+##### - [Single Native Asset](./examples/src3-mint-burn/single_asset/src/single_asset.sw)
 
 Example of the SRC-3 implementation where a contract only mints a single asset with one `SubId`.
 
-##### - [Multi Native Asset](./examples/src_3/multi_asset/src/multi_asset.sw)
+##### - [Multi Native Asset](./examples/src3-mint-burn/multi_asset/src/multi_asset.sw)
 
 Example of the SRC-3 implementation where a contract mints multiple assets with differing `SubId`s.
 
 #### SRC-5; Ownership Examples
 
-##### - [Uninitalized](./examples/src_5/uninitialized_example/src/uninitialized_example.sw)
+##### - [Uninitalized](./examples/src5-ownership/uninitialized_example/src/uninitialized_example.sw)
 
 Example of the SRC-5 implementation where a contract does not have an owner set at compile time with the intent to set it during runtime.
 
-##### - [Initialized](./examples/src_5/initialized_example/src/initialized_example.sw)
+##### - [Initialized](./examples/src5-ownership/initialized_example/src/initialized_example.sw)
 
 Example of the SRC-5 implementation where a contract has an owner set at compile time.
 
 #### SRC-7; Arbitrary Asset Metadata Standard Examples
 
-##### - [Single Native Asset](./examples/src_7/single_asset/src/single_asset.sw)
+##### - [Single Native Asset](./examples/src7-metadata/single_asset/src/single_asset.sw)
 
 Example of the SRC-7 implementation where metadata exists for only a single asset with one `SubId`.
 
-##### - [Mutli Native Asset](./examples/src_7/multi_asset/src/multi_asset.sw)
+##### - [Mutli Native Asset](./examples/src7-metadata/multi_asset/src/multi_asset.sw)
 
 Example of the SRC-7 implementation where metadata exists for multiple assets with differing `SubId`s.
 

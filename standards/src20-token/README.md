@@ -87,10 +87,10 @@ abi MyToken {
 
 # Example Implementation
 
-## [Single Native Assset](../../examples/src_20/single_asset/src/single_asset.sw)
+## [Single Native Assset](../../examples/src20-token/single_asset/src/single_asset.sw)
 
 Example of the SRC-20 implementation where a contract contains a single asset with one `SubId`. This implementation is recommended for users that intend to deploy a single asset with their contract.
 
-## [Multi Native Asset](../../examples/src_20/multi_asset/src/multi_asset.sw)
+## [Multi Native Asset](../../examples/src20-token/multi_asset/src/multi_asset.sw)
 
 Example of the SRC-20 implementation where a contract contains multiple assets with differing `SubId`s. This implementation is recommended for users that intend to deploy multiple assets with their contract.

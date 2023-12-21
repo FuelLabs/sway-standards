@@ -172,14 +172,14 @@ abi SRC6 {
 
 # Example Implementation
 
-## [Multi Token Vault](../../examples/src_6/multi_token_vault/)
+## [Multi Token Vault](../../examples/src6-vault/multi_token_vault/)
 
 A barebones implementation of the vault standard that supports any number of sub vaults being created for every AssetId.
 
-## [Single Token Vault](../../examples/src_6/single_token_vault/)
+## [Single Token Vault](../../examples/src6-vault/single_token_vault/)
 
 A barebones implemenation of the vault standard demonstrating how to constrict deposits and withdrawals to a single AssetId.
 
-## [Single Token Single Sub Vault](../../examples/src_6/single_token_single_sub_vault/)
+## [Single Token Single Sub Vault](../../examples/src6-vault/single_token_single_sub_vault/)
 
 A barebones implementation of the vault standard demonstrating how to constrict deposits and withdrawals to a single AssetId, and to a single Sub vault.
