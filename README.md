@@ -57,11 +57,11 @@ use standard::<standard_abi>;
 For example, to import the SRC-20 Token Standard use the following statements in your `Forc.toml` and Sway Smart Contract file respectively:
 
 ```rust
-src_20 = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.1.1" }
+src20 = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.1.1" }
 ```
 
 ```rust
-use src_20::SRC20;
+use src20::SRC20;
 ```
 
 ### Examples of Standards
