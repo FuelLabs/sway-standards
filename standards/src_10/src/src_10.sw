@@ -10,7 +10,7 @@ struct MessageData {
     len: u16,
     /// The bridging target destination on the Fuel chain.
     to: Identity,
-    /// The birdged token's addrss on the canonical chain.
+    /// The bridged token's address on the canonical chain.
     token_address: b256,
     /// The token's ID on the canonical chain.
     token_id: Option<b256>,
@@ -25,8 +25,8 @@ abi SRC10 {
     ///
     /// # Arguments
     ///
-    /// * `token`: [b256] - The token's address on the canonical chain.
-    /// * `gateway`: [b256] - The contract that accepts deposits on the canonical chain.
+    /// * `token_address`: [b256] - The token's address on the canonical chain.
+    /// * `gateway_contract`: [b256] - The contract that accepts deposits on the canonical chain.
     ///
     /// # Examples
     ///
@@ -39,13 +39,13 @@ abi SRC10 {
     /// }
     /// ```
     #[storage(read, write)]
-    fn register_bridge(token: b256, gateway: b256);
+    fn register_bridge(token_address: b256, gateway_contract: b256);
 
-    /// Accepts incomming deposit messages from the canonical chain and issues the corresponding bridged asset.
+    /// Accepts incoming deposit messages from the canonical chain and issues the corresponding bridged asset.
     ///
     /// # Arguments
     ///
-    /// * `msg_idx`: [u64] - The index of the message to parse.
+    /// * `message_index`: [u64] - The index of the message to parse.
     ///
     /// # Examples
     ///
@@ -58,15 +58,15 @@ abi SRC10 {
     /// }
     /// ```
     #[storage(read, write)]
-    fn process_message(msg_idx: u64);
+    fn process_message(message_index: u64);
 
     /// Accepts and burns a bridged asset and sends a messages to the canonical chain to release the original deposited token.
     ///
     /// # Arguments
     ///
-    /// * `to`: [b256] - The address on the canoncial chain to send the released tokens to.
+    /// * `to_address`: [b256] - The address on the canonical chain to send the released tokens to.
     /// * `sub_id`: [SubId] - The SubId of the asset sent in the transaction.
-    /// * `gateway`: [b256] - The contract that holds the deposited tokens on the canonical chain.
+    /// * `gateway_contract`: [b256] - The contract that holds the deposited tokens on the canonical chain.
     ///
     /// # Examples
     ///
@@ -83,16 +83,16 @@ abi SRC10 {
     /// }
     /// ```
     #[storage(read, write)]
-    fn withdraw(to: b256, sub_id: SubId, gateway: b256);
+    fn withdraw(to_address: b256, sub_id: SubId, gateway_contract: b256);
 
-    /// Returns a refund on the canonical chain if an error occurs swhile bridging.
+    /// Returns a refund on the canonical chain if an error occurs while bridging.
     ///
     /// # Arguments
     ///
-    /// * `to`: [b256] - The address on the canoncial chain to send the refunded tokens to.
-    /// * `token`: [b256] - The token on the canonical chain to be refunded.
-    /// * `token_id`: [Option<b256>] - The token id of the token on the canoncial chain to be refunded.
-    /// * `gateway`: [b256] - The contract that holds the deposited tokens on the canonical chain.
+    /// * `to_address`: [b256] - The address on the canonical chain to send the refunded tokens to.
+    /// * `token_address`: [b256] - The token on the canonical chain to be refunded.
+    /// * `token_id`: [Option<b256>] - The token id of the token on the canonical chain to be refunded.
+    /// * `gateway_contract`: [b256] - The contract that holds the deposited tokens on the canonical chain.
     ///
     /// # Examples
     ///
@@ -105,5 +105,5 @@ abi SRC10 {
     /// }
     /// ```
     #[storage(read, write)]
-    fn claim_refund(to: b256, token: b256, token_id: Option<b256>, gateway: b256);
+    fn claim_refund(to_address: b256, token_address: b256, token_id: Option<b256>, gateway_contract: b256);
 }
