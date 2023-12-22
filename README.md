@@ -116,15 +116,15 @@ Example of the SRC-5 implementation where a contract has an owner set at compile
 
 ##### [Multi Token Vault](./examples/src6-vault/multi_token_vault/)
 
-A barebones implementation of the vault standard that supports any number of sub vaults being created for every AssetId.
+A basic implementation of the vault standard that supports any number of sub vaults being created for every AssetId.
 
 ##### [Single Token Vault](./examples/src6-vault/single_token_vault/)
 
-A barebones implemenation of the vault standard demonstrating how to constrict deposits and withdrawals to a single AssetId.
+A basic implemenation of the vault standard demonstrating how to constrict deposits and withdrawals to a single AssetId.
 
 ##### [Single Token Single Sub Vault](./examples/src6-vault/single_token_single_sub_vault/)
 
-A barebones implementation of the vault standard demonstrating how to constrict deposits and withdrawals to a single AssetId, and to a single Sub vault.
+A basic implementation of the vault standard demonstrating how to constrict deposits and withdrawals to a single AssetId, and to a single Sub vault.
 
 #### SRC-7; Arbitrary Asset Metadata Standard Examples
 
