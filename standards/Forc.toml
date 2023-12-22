@@ -4,6 +4,6 @@ members = [
   "src5-ownership",
   "src6-vault",
   "src7-metadata",
-  "src_10",
+  "src-10-native-bridge",
   "src20-token",
 ]
