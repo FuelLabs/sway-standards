@@ -33,12 +33,26 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 ## Standards
 
-- [SRC-20; Token Standard](./standards/src_20/) defines the implementation of a standard API for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) using the Sway Language.
-- [SRC-2; Inline Documentation](./standards/src_2/) defines how to document your Sway files.
-- [SRC-3; Mint and Burn](./standards/src_3/) is used to enable mint and burn functionality for Native Assets.
-- [SRC-5; Ownership Standard](./standards/src_5/) is used to restrict function calls to admin users in contracts.
-- [SRC-7; Arbitrary Asset Metadata Standard](./standards/src_7/) is used to store metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
-- [SRC-9; Metadata Keys Standard](./standards/src_9/) is used to store standardized metadata keys for [Native Assets](https://fuellabs.github.io/sway/v0.44.0/book/blockchain-development/native_assets.html) in combination with the SRC-7 standard.
+### Native Assets
+
+- [SRC-20; Token Standard](./standards/src20-token/) defines the implementation of a standard API for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) using the Sway Language.
+- [SRC-3; Mint and Burn](./standards/src3-mint-burn/) is used to enable mint and burn functionality for Native Assets.
+- [SRC-7; Arbitrary Asset Metadata Standard](./standards/src7-metadata/) is used to store metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
+- [SRC-9; Metadata Keys Standard](./standards/src9-metadata-keys/) is used to store standardized metadata keys for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) in combination with the SRC-7 standard.
+- [SRC-6; Vault Standard](./standards/src6-vault/) defines the implementation of a standard API for token vaults developed in Sway.
+
+### Access Control
+
+- [SRC-5; Ownership Standard](./standards/src5-ownership/) is used to restrict function calls to admin users in contracts.
+
+### Bridge
+
+- [SRC-8; Bridged Asset](./standards/src8-bridged-asset/) defines the metadata required for an asset bridged to the Fuel Network.
+
+### Documentation
+
+- [SRC-2; Inline Documentation](./standards/src2-inline-docs/) defines how to document your Sway files.
+
 
 ## Using a standard
 
@@ -57,7 +71,7 @@ use standard::<standard_abi>;
 For example, to import the SRC-20 Token Standard use the following statements in your `Forc.toml` and Sway Smart Contract file respectively:
 
 ```rust
-src20 = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.1.1" }
+src20 = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.1.0" }
 ```
 
 ```rust
@@ -97,6 +111,20 @@ Example of the SRC-5 implementation where a contract does not have an owner set 
 ##### - [Initialized](./examples/src5-ownership/initialized_example/src/initialized_example.sw)
 
 Example of the SRC-5 implementation where a contract has an owner set at compile time.
+
+#### SRC-6; Vault Standard Examples
+
+##### [Multi Token Vault](./examples/src6-vault/multi_token_vault/)
+
+A barebones implementation of the vault standard that supports any number of sub vaults being created for every AssetId.
+
+##### [Single Token Vault](./examples/src6-vault/single_token_vault/)
+
+A barebones implemenation of the vault standard demonstrating how to constrict deposits and withdrawals to a single AssetId.
+
+##### [Single Token Single Sub Vault](./examples/src6-vault/single_token_single_sub_vault/)
+
+A barebones implementation of the vault standard demonstrating how to constrict deposits and withdrawals to a single AssetId, and to a single Sub vault.
 
 #### SRC-7; Arbitrary Asset Metadata Standard Examples
 
