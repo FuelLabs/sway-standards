@@ -45,7 +45,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 To import a standard the following should be added to the project's `Forc.toml` file under `[dependencies]` with the most recent release:
 
 ```rust
-standard = { git = "https://github.com/FuelLabs/sway-standards" }
+standard = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.1.0" }
 ```
 
 You may then import your desired standard in your Sway Smart Contract as so:
@@ -57,7 +57,7 @@ use standard::<standard_abi>;
 For example, to import the SRC-20 Token Standard use the following statements in your `Forc.toml` and Sway Smart Contract file respectively:
 
 ```rust
-src20 = { git = "https://github.com/FuelLabs/sway-standards" }
+src20 = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.3.0"}
 ```
 
 ```rust
