@@ -53,6 +53,7 @@ abi SRC6 {
     /// * If the asset is not supported by the contract.
     /// * If the amount of assets forwarded to the contract is zero.
     /// * The user crosses any global or user specific deposit limits.
+    #[payable]
     #[storage(read, write)]
     fn deposit(receiver: Identity, vault_sub_id: SubId) -> u64;
 
@@ -78,6 +79,7 @@ abi SRC6 {
     /// * If the amount of shares is zero.
     /// * If the transferred shares do not corresspond to the given asset.
     /// * The user crosses any global or user specific withdrawal limits.
+    #[payable]
     #[storage(read, write)]
     fn withdraw(
         receiver: Identity,
