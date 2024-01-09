@@ -153,9 +153,11 @@ Incorrect implementation of token vaults could allow attackers to steal underlyi
 
 ```sway
 abi SRC6 {
+    #[payable]
     #[storage(read, write)]
     fn deposit(receiver: Identity, vault_sub_id: SubId) -> u64;
 
+    #[payable]
     #[storage(read, write)]
     fn withdraw(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> u64;
 
