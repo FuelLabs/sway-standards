@@ -13,7 +13,7 @@ struct MessageData {
     /// The bridged token's address on the canonical chain.
     token_address: b256,
     /// The token's ID on the canonical chain.
-    token_id: Option<b256>,
+    token_id: b256,
 }
 
 abi SRC10 {
@@ -91,7 +91,7 @@ abi SRC10 {
     ///
     /// * `to_address`: [b256] - The address on the canonical chain to send the refunded tokens to.
     /// * `token_address`: [b256] - The token on the canonical chain to be refunded.
-    /// * `token_id`: [Option<b256>] - The token id of the token on the canonical chain to be refunded.
+    /// * `token_id`: [b256] - The token id of the token on the canonical chain to be refunded.
     /// * `gateway_contract`: [b256] - The contract that holds the deposited tokens on the canonical chain.
     ///
     /// # Examples
@@ -99,7 +99,7 @@ abi SRC10 {
     /// ```sway
     /// use src10::SRC10;
     ///
-    /// fn foo(to_address: b256, token_address: b256, token_id: Option<b256>, gateway_contract: b256, bridge: ContractId) {
+    /// fn foo(to_address: b256, token_address: b256, token_id: b256, gateway_contract: b256, bridge: ContractId) {
     ///     let bridge_abi = abi(SRC10, bridge.value);
     ///     bridge_abi.claim_refund(to_address, token_address, token_id, gateway_contract);
     /// }
@@ -108,7 +108,7 @@ abi SRC10 {
     fn claim_refund(
         to_address: b256,
         token_address: b256,
-        token_id: Option<b256>,
+        token_id: b256,
         gateway_contract: b256,
     );
 }

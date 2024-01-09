@@ -46,10 +46,10 @@ The `process_message()` function accepts incoming deposit messages from the cano
 The `withdraw()` function accepts and burns a bridged asset and sends a message to the `gateway_contract` contract on the canonical chain to release the originally deposited token to the `to_address` address.
 
 - This function SHALL send a message to the `gateway_contract` contract to release the bridged tokens to the `to_address` address on the canonical chain.
-- This function MUST ensure the `sha256(contract_id(), sub_id)` matches the asset's `AssetId` sent in the transaction.
+- This function MUST ensure the `sha256(contract_id(), sub_id)` digest matches the asset's `AssetId` sent in the transaction.
 - This function SHALL burn all tokens sent in the transaction.
 
-### - `fn claim_refund(to_address: b256, token_address: b256, token_id: Option<b256>, gateway_contract: b256)`
+### - `fn claim_refund(to_address: b256, token_address: b256, token_id: b256, gateway_contract: b256)`
 
 The `claim_refund()` function is called if something goes wrong in the bridging process and an error occurs. It sends a message to the `gateway_contract` contract on the canonical chain to release the `token_address` token with token id `token_id` to the `to_address` address. 
 
@@ -82,9 +82,9 @@ The `to` field MUST represent the bridging target destination `Address` or `Cont
 
 The `token_address` field MUST represent the bridged token's address on the canonical chain.
 
-#### - token_id: `Option<b256>`
+#### - token_id: `b256`
 
-The `token_id` field MUST represent the token's ID on the canonical chain. MUST be `None` if this is a fungible token and no token ID exists.
+The `token_id` field MUST represent the token's ID on the canonical chain. The `ZERO_B256` MUST be used if this is a fungible token and no token ID exists.
 
 ### Example
 
@@ -95,7 +95,7 @@ struct MessageData {
      len: u16,
      to: Identity,
      token_address: b256,
-     token_id: Option<b256>,
+     token_id: b256,
 }
 ```
 
@@ -118,6 +118,6 @@ abi SRC10 {
      fn register_bridge(token_address: b256, gateway_contract: b256);
      fn process_message(message_index: u64);
      fn withdraw(to_address: b256, sub_id: SubId, gateway_contract: b256);
-     fn claim_refund(to_address: b256, token_address: b256, token_id: Option<b256>, gateway_contract: b256);
+     fn claim_refund(to_address: b256, token_address: b256, token_id: b256, gateway_contract: b256);
 }
 ```
