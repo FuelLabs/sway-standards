@@ -27,11 +27,11 @@ The following functions MUST be implemented to follow the SRC-10; Native Bridge 
 
 ### - `fn register_token(token_address: b256, gateway_contract: b256)`
 
-The `register_token()` function compiles a message to be sent back to the canonical chain. The `gateway_contract` contract on the canonical chain receives the `token_address` token on the canonical chain in the message such that when assets are deposited they are reported to prevent loss of funds. 
+The `register_token()` function compiles a message to be sent back to the canonical chain to register a token to be bridged. The `gateway_contract` contract on the canonical chain receives the `token_address` token address in the message such that when `token_addess` tokens are deposited on the canonical chain they are reported to prevent loss of funds. 
 
 > **NOTE:*** Trying to deposit tokens to a contract ID that does not exist or does not implement the Fuel Messaging Portal would mean permanent loss of funds.
 
-- This function MUST send a message on the canonical chain to the `gateway_contract` contract on the canonical chain, registering the specified `token_address` token that exists on the canonical chain. 
+- This function MUST send a message on the canonical chain to the `gateway_contract` contract, registering the specified `token_address` token that exists on the canonical chain. 
 
 ### - `fn process_message(message_index: u64)`
 
@@ -43,7 +43,7 @@ The `process_message()` function accepts incoming deposit messages from the cano
 
 ### - `fn withdraw(to_address: b256, sub_id: SubId, gateway_contract: b256)`
 
-The `withdraw()` function accepts and burns a bridged asset and sends a message to the `gateway_contract` contract on the canonical chain to release the originally deposited token to the `to_address` address.
+The `withdraw()` function accepts and burns a bridged Native Asset on Fuel and sends a message to the `gateway_contract` contract on the canonical chain to release the originally deposited tokens to the `to_address` address.
 
 - This function SHALL send a message to the `gateway_contract` contract to release the bridged tokens to the `to_address` address on the canonical chain.
 - This function MUST ensure the `sha256(contract_id(), sub_id)` digest matches the asset's `AssetId` sent in the transaction.
