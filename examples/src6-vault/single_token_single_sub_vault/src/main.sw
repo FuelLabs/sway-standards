@@ -37,6 +37,7 @@ storage {
 }
 
 impl SRC6 for Contract {
+    #[payable]
     #[storage(read, write)]
     fn deposit(receiver: Identity, vault_sub_id: SubId) -> u64 {
         require(vault_sub_id == ACCEPTED_SUB_VAULT, "INVALID_vault_sub_id");
@@ -69,6 +70,7 @@ impl SRC6 for Contract {
         shares
     }
 
+    #[payable]
     #[storage(read, write)]
     fn withdraw(
         receiver: Identity,
