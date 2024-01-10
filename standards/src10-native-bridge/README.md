@@ -25,13 +25,13 @@ The following functions MUST be implemented to follow the SRC-10; Native Bridge 
 
 ## Required Functions
 
-### - `fn register_bridge(token_address: b256, gateway_contract: b256)`
+### - `fn register_token(token_address: b256, gateway_contract: b256)`
 
-The `register_bridge()` function compiles a message to be sent back to the canonical chain. The `gateway_contract` contract on the canonical chain receives the `token_address` token in the message such that when assets are deposited they are reported to prevent loss of funds. 
+The `register_token()` function compiles a message to be sent back to the canonical chain. The `gateway_contract` contract on the canonical chain receives the `token_address` token on the canonical chain in the message such that when assets are deposited they are reported to prevent loss of funds. 
 
 > **NOTE:*** Trying to deposit tokens to a contract ID that does not exist or does not implement the Fuel Messaging Portal would mean permanent loss of funds.
 
-- This function MUST send a message on the canonical chain to the `gateway_contract` contract, registering the specified `token_address`. 
+- This function MUST send a message on the canonical chain to the `gateway_contract` contract on the canonical chain, registering the specified `token_address` token that exists on the canonical chain. 
 
 ### - `fn process_message(message_index: u64)`
 
@@ -115,7 +115,7 @@ This standard is compatible with the SRC-20 and SRC-8 standards.
 
 ```sway
 abi SRC10 {
-     fn register_bridge(token_address: b256, gateway_contract: b256);
+     fn register_token(token_address: b256, gateway_contract: b256);
      fn process_message(message_index: u64);
      fn withdraw(to_address: b256, sub_id: SubId, gateway_contract: b256);
      fn claim_refund(to_address: b256, token_address: b256, token_id: b256, gateway_contract: b256);

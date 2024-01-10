@@ -35,11 +35,11 @@ abi SRC10 {
     ///
     /// fn foo(gateway_contract: b256, token_address: b256, bridge: ContractId) {
     ///     let bridge_abi = abi(SRC10, bridge.value);
-    ///     bridge_abi.register_bridge(token_address, gateway_contract);
+    ///     bridge_abi.register_token(token_address, gateway_contract);
     /// }
     /// ```
     #[storage(read, write)]
-    fn register_bridge(token_address: b256, gateway_contract: b256);
+    fn register_token(token_address: b256, gateway_contract: b256);
 
     /// Accepts incoming deposit messages from the canonical chain and issues the corresponding bridged asset.
     ///
