@@ -48,11 +48,11 @@ If you don't find what you're looking for, feel free to create an issue and prop
 ### Bridge
 
 - [SRC-8; Bridged Asset](./standards/src8-bridged-asset/) defines the metadata required for an asset bridged to the Fuel Network.
+- [SRC-10; Native Bridge Standard](./standards/src10-native-bridge/) defines the standard API for the Native Bridge between the Fuel Chain and the canonical base chain.
 
 ### Documentation
 
 - [SRC-2; Inline Documentation](./standards/src2-inline-docs/) defines how to document your Sway files.
-
 
 ## Using a standard
 
