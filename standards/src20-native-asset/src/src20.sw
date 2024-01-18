@@ -23,7 +23,7 @@ abi SRC20 {
     #[storage(read)]
     fn total_assets() -> u64;
 
-    /// Returns the total supply of tokens for an asset.
+    /// Returns the total supply of coins for an asset.
     ///
     /// # Arguments
     ///
@@ -31,7 +31,7 @@ abi SRC20 {
     ///
     /// # Returns
     ///
-    /// * [Option<u64>] - The total supply of tokens for `asset`.
+    /// * [Option<u64>] - The total supply of coins for `asset`.
     ///
     /// # Examples
     ///
@@ -99,7 +99,7 @@ abi SRC20 {
     ///
     /// # Additional Information
     ///
-    /// e.g. 8, means to divide the token amount by 100000000 to get its user representation.
+    /// e.g. 8, means to divide the coin amount by 100000000 to get its user representation.
     ///
     /// # Arguments
     ///
