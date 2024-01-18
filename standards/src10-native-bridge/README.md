@@ -38,7 +38,7 @@ The `register_token()` function compiles a message to be sent back to the canoni
 The `process_message()` function accepts incoming deposit messages from the canonical chain and issues the corresponding bridged asset.
 
 - This function MUST parse a message at the given `message_index` index. 
-- This function SHALL mint a token that follows the [SRC-8; Bridged Asset Standard](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_8). 
+- This function SHALL mint an asset that follows the [SRC-8; Bridged Asset Standard](https://github.com/FuelLabs/sway-standards/tree/master/standards/src8-bridged-asset). 
 - This function SHALL issue a refund if there is an error in the bridging process.
 
 ### - `fn withdraw(to_address: b256, sub_id: SubId, gateway_contract: b256)`
@@ -47,7 +47,7 @@ The `withdraw()` function accepts and burns a bridged Native Asset on Fuel and s
 
 - This function SHALL send a message to the `gateway_contract` contract to release the bridged tokens to the `to_address` address on the canonical chain.
 - This function MUST ensure the `sha256(contract_id(), sub_id)` digest matches the asset's `AssetId` sent in the transaction.
-- This function SHALL burn all tokens sent in the transaction.
+- This function SHALL burn all coins sent in the transaction.
 
 ### - `fn claim_refund(to_address: b256, token_address: b256, token_id: b256, gateway_contract: b256)`
 
@@ -101,7 +101,7 @@ struct MessageData {
 
 ## Required Standards
 
-Any contract that implements the SRC-10; Native Bridge Standard MUST implement the [SRC-8; Bridged Asset Standard](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_8) for all bridged assets. 
+Any contract that implements the SRC-10; Native Bridge Standard MUST implement the [SRC-8; Bridged Asset Standard](https://github.com/FuelLabs/sway-standards/tree/master/standards/src8-bridged-asset) for all bridged assets. 
 
 # Rationale 
 

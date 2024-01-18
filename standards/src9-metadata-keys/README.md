@@ -7,7 +7,7 @@
 
 # Abstract
 
-The following standard attempts to define the keys of relevant on-chain metadata for any [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-9 standard MUST implement the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) and [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standards. This is a living standard where revisions may be made as the ecosystem evolves.
+The following standard attempts to define the keys of relevant on-chain metadata for any [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-9 standard MUST implement the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src7-metadata) and [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src20-native-asset) standards. This is a living standard where revisions may be made as the ecosystem evolves.
 
 # Motivation
 
@@ -15,7 +15,7 @@ The SRC-9 standard seeks to enable relevant data for assets on the Fuel Network.
 
 # Prior Art
 
-The use of generic metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) is defined in the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard. This standard integrates into the existing [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard.
+The use of generic metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) is defined in the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src7-metadata) standard. This standard integrates into the existing [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src7-metadata) standard.
 
 # Specification
 
@@ -191,7 +191,7 @@ The key `res:block` SHALL return a `Int` variant of a block number.
 
 ## Images
 
-The `image` prefix SHALL be used for any image files associated with a singular token.
+The `image` prefix SHALL be used for any image files associated with a singular asset.
 
 Any image metadata keys SHALL follow the following syntax `image:type` where:
 - The `image` keyword must be prepended to denote this is an image
@@ -223,7 +223,7 @@ The key `image:heif` SHALL return a `String` variant of a URI for a HEIF image.
 
 ## Video
 
-The `video` prefix SHALL be used for any video files associated with a singular token.
+The `video` prefix SHALL be used for any video files associated with a singular asset.
 
 Any video metadata keys SHALL follow the following syntax `video:type` where:
 - The `video` keyword must be prepended to denote this is a video
@@ -251,7 +251,7 @@ The key `video:ogg` SHALL return a `String` variant of a URI for an OGG video.
 
 ## Audio
 
-The `audio` prefix SHALL be used for any audio files associated with a singular token.
+The `audio` prefix SHALL be used for any audio files associated with a singular asset.
 
 Any audio metadata keys SHALL follow the following syntax `audio:type` where:
 - The `audio` keyword must be prepended to denote this is audio metadata
@@ -271,7 +271,7 @@ The key `audio:oga` SHALL return a `String` variant of a URI for an OGA file.
 
 ## Media
 
-The `media` prefix SHALL be used for any media associated with a particular singular token.
+The `media` prefix SHALL be used for any media associated with a particular singular asset.
 
 Any media metadata keys SHALL follow the following syntax `media:type` where:
 - The `media` keyword must be prepended to denote this is a video
@@ -331,7 +331,7 @@ The key `logo:large_dark` SHALL return a `String` variant of a URI for a 1024x10
 
 ## Attributes
 
-The `attr` prefix SHALL be used for any attributes associated with a singular token.
+The `attr` prefix SHALL be used for any attributes associated with a singular asset.
 
 Any attribute metadata keys SHALL follow the following syntax `attr:type` where:
 - The `attr` keyword must be prepended to denote this is an attribute
@@ -346,7 +346,7 @@ The SRC-9 standard should allow for standardized keys for metadata on the Fuel N
 
 # Backwards Compatibility
 
-This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets), the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard, and the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard. 
+This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets), the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src20-native-asset) standard, and the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src7-metadata) standard. 
 
 # Security Considerations
 

@@ -337,9 +337,9 @@ pub fn only_owner(self, number: u64) -> bool {
 ## Struct Examples
 
 ```rust
-/// Metadata that is tied to a token.
+/// Metadata that is tied to an asset.
 pub struct NFTMetadata {
-    /// Represents the token ID of this NFT.
+    /// Represents the ID of this NFT.
     value: u64,
 }
 ```
@@ -347,7 +347,7 @@ pub struct NFTMetadata {
 ```rust
 /// Log of a bid.
 pub struct Bid {
-    /// The number of tokens that were bid.
+    /// The number of coins that were bid.
     amount: u64,
     /// The user which placed this bid.
     bidder: Identity,
@@ -380,8 +380,8 @@ pub enum AccessError {
 
 ```rust
 storage {
-    /// The contract of the tokens which is to be distributed.
-    asset: Option<ContractId> = Option::None,
+    /// An asset which is to be distributed.
+    asset: Option<AssetId> = Option::None,
     /// Stores the ClaimState of users that have interacted with the Airdrop Distributor contract.
     ///
     /// # Additional Information
