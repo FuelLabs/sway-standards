@@ -8,7 +8,7 @@
 
 # Abstract
 
-The following standard attempts to define the retrieval of relevant on-chain metadata for any bridged [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-8 standard MUST implement the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) and [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standards. 
+The following standard attempts to define the retrieval of relevant on-chain metadata for any bridged [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-8 standard MUST implement the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src7-metadata) and [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src20-native-asset) standards. 
 
 # Motivation
 
@@ -16,13 +16,13 @@ The SRC-8 standard seeks to enable relevant data for bridged assets on the Fuel 
 
 # Prior Art
 
-The use of generic metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) is defined in the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard. This standard integrates into the existing [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard.
+The use of generic metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) is defined in the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src7-metadata) standard. This standard integrates into the existing [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src7-metadata) standard.
 
 # Specification
 
-## Token Creation
+## Asset Creation
 
-The `SubId` of the token MUST be the digest of the `sha256(origin_chain_id, origin_asset_address, origin_asset_id)` hash where:
+The `SubId` of the asset MUST be the digest of the `sha256(origin_chain_id, origin_asset_address, origin_asset_id)` hash where:
 
 - `origin_chain_id` is a `String` of the chain ID where the asset was originally minted.
 - `origin_asset_address` is a `b256` of the asset's address on the chain where the asset was originally minted.
@@ -56,7 +56,7 @@ The SRC-8 standard should allow for data on any bridged assets on the Fuel Netwo
 
 # Backwards Compatibility
 
-This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets), the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard, and the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_7) standard. 
+This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets), the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src20-native-asset) standard, and the [SRC-7](https://github.com/FuelLabs/sway-standards/tree/master/standards/src7-metadata) standard. 
 
 The standard is also compatible with both tokens and NFTs native to other ecosystems by introducing a token ID element of the original chain.
 

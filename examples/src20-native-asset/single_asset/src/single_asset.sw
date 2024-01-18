@@ -4,12 +4,12 @@ use src20::SRC20;
 use std::{call_frames::contract_id, string::String};
 
 configurable {
-    /// The total supply of tokens for the asset minted by this contract.
+    /// The total supply of coins for the asset minted by this contract.
     TOTAL_SUPPLY: u64 = 100_000_000,
     /// The decimals of the asset minted by this contract.
     DECIMALS: u8 = 9u8,
     /// The name of the asset minted by this contract.
-    NAME: str[7] = __to_str_array("MyToken"),
+    NAME: str[7] = __to_str_array("MyAsset"),
     /// The symbol of the asset minted by this contract.
     SYMBOL: str[5] = __to_str_array("MYTKN"),
 }
@@ -41,7 +41,7 @@ impl SRC20 for Contract {
         1
     }
 
-    /// Returns the total supply of tokens for the asset.
+    /// Returns the total supply of coins for the asset.
     ///
     /// # Arguments
     ///

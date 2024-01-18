@@ -35,13 +35,13 @@ storage {
 }
 
 impl SRC3 for Contract {
-    /// Unconditionally mints new tokens using the `sub_id` sub-identifier.
+    /// Unconditionally mints new assets using the `sub_id` sub-identifier.
     ///
     /// # Arguments
     ///
-    /// * `recipient`: [Identity] - The user to which the newly minted tokens are transferred to.
-    /// * `sub_id`: [SubId] - The sub-identifier of the newly minted token.
-    /// * `amount`: [u64] - The quantity of tokens to mint.
+    /// * `recipient`: [Identity] - The user to which the newly minted asset is transferred to.
+    /// * `sub_id`: [SubId] - The sub-identifier of the newly minted asset.
+    /// * `amount`: [u64] - The quantity of coins to mint.
     ///
     /// # Number of Storage Accesses
     ///
@@ -81,12 +81,12 @@ impl SRC3 for Contract {
         mint_to(recipient, sub_id, amount);
     }
 
-    /// Unconditionally burns tokens sent with the `sub_id` sub-identifier.
+    /// Unconditionally burns assets sent with the `sub_id` sub-identifier.
     ///
     /// # Arguments
     ///
-    /// * `sub_id`: [SubId] - The sub-identifier of the token to burn.
-    /// * `amount`: [u64] - The quantity of tokens to burn.
+    /// * `sub_id`: [SubId] - The sub-identifier of the asset to burn.
+    /// * `amount`: [u64] - The quantity of coins to burn.
     ///
     /// # Number of Storage Accesses
     ///
@@ -95,7 +95,7 @@ impl SRC3 for Contract {
     ///
     /// # Reverts
     ///
-    /// * When the transaction did not include at least `amount` tokens.
+    /// * When the transaction did not include at least `amount` coins.
     /// * When the asset included in the transaction does not have the SubId `sub_id`.
     ///
     /// # Examples
