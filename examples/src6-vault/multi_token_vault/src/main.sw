@@ -238,7 +238,7 @@ pub fn _burn(asset_id: AssetId, vault_sub_id: SubId, amount: u64) {
 
     require(
         this_balance(asset_id) >= amount,
-        "BurnError::NotEnoughTokens",
+        "BurnError::NotEnoughCoins",
     );
     // If we pass the check above, we can assume it is safe to unwrap.
     let supply = storage.total_supply.get(asset_id).try_read().unwrap();

@@ -4,9 +4,9 @@ use src20::SRC20;
 use std::{hash::Hash, storage::storage_string::*, string::String};
 
 storage {
-    /// The total number of distinguishable tokens minted by this contract.
+    /// The total number of distinguishable assets minted by this contract.
     total_assets: u64 = 0,
-    /// The total supply of tokens for a specific asset minted by this contract.
+    /// The total supply of coins for a specific asset minted by this contract.
     total_supply: StorageMap<AssetId, u64> = StorageMap {},
     /// The name of a specific asset minted by this contract.
     name: StorageMap<AssetId, StorageString> = StorageMap {},
@@ -47,7 +47,7 @@ impl SRC20 for Contract {
         storage.total_assets.read()
     }
 
-    /// Returns the total supply of tokens for an asset.
+    /// Returns the total supply of coins for an asset.
     ///
     /// # Arguments
     ///
