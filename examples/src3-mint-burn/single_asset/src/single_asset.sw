@@ -3,6 +3,10 @@ contract;
 use src3::SRC3;
 use src20::SRC20;
 use std::{
+    asset::{
+        burn,
+        mint_to,
+    },
     call_frames::{
         contract_id,
         msg_asset_id,
@@ -10,10 +14,6 @@ use std::{
     constants::DEFAULT_SUB_ID,
     context::msg_amount,
     string::String,
-    token::{
-        burn,
-        mint_to,
-    },
 };
 
 configurable {

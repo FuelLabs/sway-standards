@@ -3,6 +3,10 @@ contract;
 use src3::SRC3;
 use src20::SRC20;
 use std::{
+    asset::{
+        burn,
+        mint_to,
+    },
     call_frames::{
         contract_id,
         msg_asset_id,
@@ -11,10 +15,6 @@ use std::{
     hash::Hash,
     storage::storage_string::*,
     string::String,
-    token::{
-        burn,
-        mint_to,
-    },
 };
 
 // In this example, all assets minted from this contract have the same decimals, name, and symbol
@@ -67,9 +67,7 @@ impl SRC3 for Contract {
         let asset_supply = storage.total_supply.get(asset_id).try_read();
         match asset_supply {
             None => {
-                storage
-                    .total_assets
-                    .write(storage.total_assets.read() + 1)
+                storage.total_assets.write(storage.total_assets.read() + 1)
             },
             _ => {},
         }

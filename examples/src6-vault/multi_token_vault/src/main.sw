@@ -61,8 +61,7 @@ impl SRC6 for Contract {
             );
 
         let mut vault_info = storage.vault_info.get(share_asset).read();
-        vault_info.managed_assets = vault_info
-            .managed_assets + asset_amount;
+        vault_info.managed_assets = vault_info.managed_assets + asset_amount;
         storage.vault_info.insert(share_asset, vault_info);
 
         log(Deposit {
