@@ -71,7 +71,7 @@ use standard::<standard_abi>;
 For example, to import the SRC-20 Native Asset Standard use the following statements in your `Forc.toml` and Sway Smart Contract file respectively:
 
 ```rust
-src20 = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.4.0" }
+src20 = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.3.3" }
 ```
 
 ```rust
