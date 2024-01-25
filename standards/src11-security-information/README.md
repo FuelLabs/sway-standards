@@ -61,14 +61,10 @@ abi SRC11 {
 
 # Example Implementation
 
-## [Multi Token Vault](../../examples/src6-vault/multi_token_vault/)
+## [Hard coded information](../../examples/src11-security-information/hardcoded-information/)
 
-A basic implementation of the vault standard that supports any number of sub vaults being created for every AssetId.
+A basic implementation of the security information standard demonstrating how to hardcode information to be returned.
 
-## [Single Token Vault](../../examples/src6-vault/single_token_vault/)
+## [Variable information](../../examples/src11-security-information/variable-information/)
 
-A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single AssetId.
-
-## [Single Token Single Sub Vault](../../examples/src6-vault/single_token_single_sub_vault/)
-
-A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single AssetId, and to a single Sub vault.
+A basic implementation of the security information standard demonstrating how to return variable information that can be edited to keep it up to date. In this example only the contact_information field is variable, but the same method can be applied to any field which you wish to update.
