@@ -11,7 +11,7 @@ The following standard allows for contract creators to make communication inform
 
 # Motivation
 
-White hat hackers may find bugs or exploits in contracts which they want to report to the project for safeguarding of funds. It is not immedietely obvious from a ContractId, who the right person to contact is. This standarad aims to make the process of bug reporting as smooth as possible
+White hat hackers may find bugs or exploits in contracts which they want to report to the project for safeguarding of funds. It is not immedietely obvious from a ContractId, who the right person to contact is. This standard aims to make the process of bug reporting as smooth as possible
 
 # Prior Art
 
@@ -21,7 +21,7 @@ The [security.txt](https://github.com/neodyme-labs/solana-security-txt) library 
 
 ## Required public functions
 
-The following functions MUST be implemented to follow the SRC-6 standard. Any contract that implements the SRC-6 standard MUST implement the SRC-20 standard.
+The following function MUST be implemented to follow the SRC-11 standard.
 
 ### `fn security_information() -> SecurityInformation;`
 
