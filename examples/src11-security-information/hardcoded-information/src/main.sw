@@ -1,11 +1,8 @@
 contract;
 
-use src11::{SRC11, SecurityInformation};
+use src11::{SecurityInformation, SRC11};
 
-use std::{
-    string::String,
-    vec::Vec,
-};
+use std::{string::String, vec::Vec,};
 
 impl SRC11 for Contract {
     #[storage(read)]
@@ -20,7 +17,6 @@ impl SRC11 for Contract {
         preferred_languages.push(String::from_ascii_str("ja")); // Japanese
         preferred_languages.push(String::from_ascii_str("zh")); // Chinese
         preferred_languages.push(String::from_ascii_str("hi")); // Hindi
-
         let mut auditors = Vec::new();
         auditors.push(String::from_ascii_str("https://example.com/auditors"));
 
@@ -45,8 +41,8 @@ E9+eviIDAQgHiHgEGBYIACAWIQTrhbtfozp14V6UTmPyMVUMT0fjjgUCXEcE6QIb
 DAAKCRDyMVUMT0fjjlnQAQDFHUs6TIcxrNTtEZFjUFm1M0PJ1Dng/cDW4xN80fsn
 0QEA22Kr7VkCjeAEC08VSTeV+QFsmz55/lntWkwYWhmvOgE=
 =iIGO
------END PGP PUBLIC KEY BLOCK-----"
-                )),
+-----END PGP PUBLIC KEY BLOCK-----",
+            )),
             source_code: Some(String::from_ascii_str("https://github.com/example/test")),
             source_release: Some(String::from_ascii_str("v1.0.0")),
             source_revision: Some(String::from_ascii_str("a1b2c3d4e5f6")),

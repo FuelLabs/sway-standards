@@ -27,7 +27,7 @@ pub struct SecurityInformation {
     /// The revision identifier of this build, usually a git sha that can be rebuilt to reproduce the same binary.
     /// 3rd party build verification tools will use this tag to identify a matching github releases.
     source_revision: Option<String>,
-    /// A list of people or entities that audited this smart contract, or links to pages where audit reports are hosted. 
+    /// A list of people or entities that audited this smart contract, or links to pages where audit reports are hosted.
     /// Note that this field is self-reported by the author of the program and might not be accurate.
     auditors: Option<Vec<String>>,
     /// Either a link or a text document containing acknowledgements to security researchers who have previously found vulnerabilities in the project.

@@ -6,4 +6,3 @@ name = "variable-information"
 
 [dependencies]
 src11 = { path = "../../../standards/src11-security-information" }
-
