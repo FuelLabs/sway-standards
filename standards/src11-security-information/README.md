@@ -32,7 +32,7 @@ This function takes no input parameters and returns a struct containing contact 
 - This function MUST return at least one item in the `contact_information` field's `Vec`. Furthermore, the string should follow the following format `<contact_type>:<contact_information>`.
 - This function MUST NOT return any empty strings. Optional parameters MUST return `None` if it is unnecessary.
 - This function MUST return atleast one item in the `preferred_languages`, if it is not `None`. Furthurmore, the string should only contain the `ISO 639-1` language code and nothing else.
-- This function MAY return a link or the information directly for the following fields: `project_url`, `policy`, `encryption`, `source_code`, `auditors`, `acknowledgements`, `additional_information`.
+- This function MAY return a link or the information directly for the following fields: `project_url`, `policy`, `encryption`, `source_code`, `auditors`, `acknowledgments`, `additional_information`.
 - This function MUST return the information directly for the following fields: `name`, `contact_information`, `preferred_languages`, `source_release`, and `source_revision`.
 
 
