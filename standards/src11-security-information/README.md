@@ -25,7 +25,7 @@ The following function MUST be implemented to follow the SRC-11 standard.
 
 ### `fn security_information() -> SecurityInformation;`
 
-This function takes no input parameters and returns a struct containing contact information for the project owners, information regarding the bug bounty program, other information related to security, and any other information which the developers find relevant.
+This function takes no input parameters and returns a struct containing contact information for the project owners, information regarding the bug bounty program, other information related to security, and any other information that the developers find relevant.
 
 - This function MUST return accurate and up to date information.
 - This function MAY not return the optional parameters.
