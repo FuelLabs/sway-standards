@@ -15,7 +15,7 @@ White hat hackers may find bugs or exploits in contracts that they want to repor
 
 # Prior Art
 
-The [security.txt](https://github.com/neodyme-labs/solana-security-txt) library for solana has explored this idea. This standard takes inspiration from the library, with some changes.
+The [security.txt](https://github.com/neodyme-labs/solana-security-txt) library for Solana has explored this idea. This standard takes inspiration from the library, with some changes.
 
 # Specification
 
