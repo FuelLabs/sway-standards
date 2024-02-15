@@ -3,17 +3,17 @@ library;
 /// Enscapsultes metadata sent between the canonical chain and Fuel.
 struct MessageData {
     /// The number of tokens.
-    amount: b256,
+    pub amount: b256,
     /// The user's address on the canonical chain.
-    from: b256,
+    pub from: b256,
     /// The number of deposit messages.
-    len: u16,
+    pub len: u16,
     /// The bridging target destination on the Fuel chain.
-    to: Identity,
+    pub to: Identity,
     /// The bridged token's address on the canonical chain.
-    token_address: b256,
+    pub token_address: b256,
     /// The token's ID on the canonical chain.
-    token_id: b256,
+    pub token_id: b256,
 }
 
 abi SRC10 {
