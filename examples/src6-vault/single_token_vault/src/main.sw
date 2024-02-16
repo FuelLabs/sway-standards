@@ -57,15 +57,6 @@ impl SRC6 for Contract {
         require(asset_amount != 0, "ZERO_ASSETS");
 
         _mint(receiver, share_asset, share_asset_vault_sub_id, shares);
-        storage
-            .total_supply
-            .insert(
-                share_asset,
-                storage
-                    .total_supply
-                    .get(share_asset)
-                    .read() + shares,
-            );
 
         let mut vault_info = storage.vault_info.get(share_asset).read();
         vault_info.managed_assets = vault_info.managed_assets + asset_amount;
@@ -99,16 +90,7 @@ impl SRC6 for Contract {
         let assets = preview_withdraw(share_asset_id, shares);
 
         _burn(share_asset_id, share_asset_vault_sub_id, shares);
-        storage
-            .total_supply
-            .insert(
-                share_asset_id,
-                storage
-                    .total_supply
-                    .get(share_asset_id)
-                    .read() - shares,
-            );
-
+        
         transfer(receiver, underlying_asset, assets);
 
         log(Withdraw {
