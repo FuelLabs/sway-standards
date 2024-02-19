@@ -90,7 +90,7 @@ impl SRC6 for Contract {
         let assets = preview_withdraw(share_asset_id, shares);
 
         _burn(share_asset_id, share_asset_vault_sub_id, shares);
-        
+
         transfer(receiver, underlying_asset, assets);
 
         log(Withdraw {
