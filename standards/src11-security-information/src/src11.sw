@@ -12,7 +12,7 @@ pub struct SecurityInformation {
     /// Should be in the format <contact_type>:<contact_information>.
     /// You should include contact types that will not change over time.
     contact_information: Vec<String>,
-    /// Either a link or a text document describing the project's security policy.
+    /// Text describing the project's security policy, or a link to it.
     /// This should describe what kind of bounties your project offers and the terms under which you offer them.
     policy: String,
     /// A list of preferred languages (ISO 639-1).
@@ -30,9 +30,9 @@ pub struct SecurityInformation {
     /// A list of people or entities that audited this smart contract, or links to pages where audit reports are hosted.
     /// Note that this field is self-reported by the author of the program and might not be accurate.
     auditors: Option<Vec<String>>,
-    /// Either a link or a text document containing acknowledgements to security researchers who have previously found vulnerabilities in the project.
-    acknowledgements: Option<String>,
-    /// Link or text containing any additional information you want to provide.
+    /// Text containing acknowledgments to security researchers who have previously found vulnerabilities in the project, or a link to it.
+    acknowledgments: Option<String>,
+    /// Text containing any additional information you want to provide, or a link to it.
     additional_information: Option<String>,
 }
 
