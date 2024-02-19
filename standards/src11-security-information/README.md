@@ -28,7 +28,7 @@ The following function MUST be implemented to follow the SRC-11 standard.
 This function takes no input parameters and returns a struct containing contact information for the project owners, information regarding the bug bounty program, other information related to security, and any other information that the developers find relevant.
 
 - This function MUST return accurate and up to date information.
-- This function MAY not return the optional parameters.
+- This function MAY return the optional parameters.
 - This function MUST return at least one item in the `contact_information` field's `Vec`. Furthermore, the string should follow the following format `<contact_type>:<contact_information>`.
 - This function MUST NOT return any empty strings. Optional parameters MUST return `None` if it is unnecessary.
 - This function MUST return at least one item in the `preferred_languages`, if it is not `None`. Furthermore, the string should only contain the [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) language code and nothing else.
