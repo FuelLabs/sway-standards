@@ -29,6 +29,7 @@ This function takes the `receiver` Identity and the SubId `vault_sub_id` of the 
 
 - This function MUST allow for depositing of the underlying asset in exchange for pro-rata shares of the vault.
 - This function MAY reject arbitrary assets based on implementation and MUST revert if unaccepted assets are forwarded.
+- This function MAY reject any arbitrary `receiver` based on implementation and MUST revert in the case of a blacklisted or non-whitelisted `receiver`.
 - This function MUST mint an asset representing the pro-rata share of the vault, with the SubId of the `sha256((underlying_asset, vault_sub_id))` digest, where `underlying_asset` is the AssetId of the deposited asset and the `vault_sub_id` is the id of the vault.
 - This function MUST emit a `Deposit` log.
 - This function MUST return the amount of minted shares.
