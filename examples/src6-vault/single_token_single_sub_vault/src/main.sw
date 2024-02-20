@@ -50,9 +50,6 @@ impl SRC6 for Contract {
         let shares = preview_deposit(asset_amount);
 
         _mint(receiver, shares);
-        storage
-            .total_supply
-            .write(storage.total_supply.read() + shares);
 
         storage
             .managed_assets
@@ -89,9 +86,6 @@ impl SRC6 for Contract {
         let assets = preview_withdraw(shares);
 
         _burn(share_asset_id, shares);
-        storage
-            .total_supply
-            .write(storage.total_supply.read() - shares);
 
         transfer(receiver, underlying_asset, assets);
 
@@ -150,7 +144,11 @@ impl SRC20 for Contract {
 
     #[storage(read)]
     fn total_supply(asset: AssetId) -> Option<u64> {
-        Some(storage.total_supply.read())
+        if asset == vault_assetid() {
+            Some(storage.total_supply.read())
+        } else {
+            None
+        }
     }
 
     #[storage(read)]
