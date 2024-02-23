@@ -1,5 +1,5 @@
 [project]
 authors = ["Fuel Labs <contact@fuel.sh>"]
-entry = "src11.sw"
+entry = "src12.sw"
 license = "Apache-2.0"
-name = "src11"
+name = "src12"

@@ -1,6 +1,6 @@
 contract;
 
-use src11::*;
+use src12::*;
 use std::{constants::ZERO_B256, external::bytecode_root, hash::Hash,};
 
 configurable {
@@ -12,7 +12,7 @@ storage {
     registered_contracts: StorageMap<ContractId, bool> = StorageMap {},
 }
 
-impl SRC11 for Contract {
+impl SRC12 for Contract {
     /// Verifies that a newly deployed contract is the child of a contract factory and registers it.
     ///
     /// # Additional Information
@@ -31,12 +31,12 @@ impl SRC11 for Contract {
     /// # Examples
     ///
     /// ```sway
-    /// use src11::SRC11;
+    /// use src12::SRC12;
     ///
-    /// fn foo(my_src_11_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
-    ///     let src_11_contract_abi = abi(SRC11, my_src_11_contract.bits());
-    ///     src_11_contract_abi.register_contract(my_deployed_contract, my_configurables);
-    ///     assert(src_11_contract_abi.is_valid(my_deployed_contract));
+    /// fn foo(my_src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
+    ///     let src_12_contract_abi = abi(SRC12, my_src_12_contract.bits());
+    ///     src_12_contract_abi.register_contract(my_deployed_contract, my_configurables);
+    ///     assert(src_12_contract_abi.is_valid(my_deployed_contract));
     /// }
     /// ```
     #[storage(read, write)]
@@ -47,7 +47,7 @@ impl SRC11 for Contract {
         require(
             configurables
                 .is_none(),
-            "This SRC-11 implementation only registers contracts without configurable values",
+            "This SRC-12 implementation only registers contracts without configurable values",
         );
 
         let returned_root = bytecode_root(child_contract);
@@ -76,12 +76,12 @@ impl SRC11 for Contract {
     /// # Examples
     ///
     /// ```sway
-    /// use src11::SRC11;
+    /// use src12::SRC12;
     ///
-    /// fn foo(my_src_11_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
-    ///     let src_11_contract_abi = abi(SRC11, my_src_11_contract.bits());
-    ///     src_11_contract_abi.register_contract(my_deployed_contract, my_configurables);
-    ///     assert(src_11_contract_abi.is_valid(my_deployed_contract));
+    /// fn foo(my_src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
+    ///     let src_12_contract_abi = abi(SRC12, my_src_12_contract.bits());
+    ///     src_12_contract_abi.register_contract(my_deployed_contract, my_configurables);
+    ///     assert(src_12_contract_abi.is_valid(my_deployed_contract));
     /// }
     /// ```
     #[storage(read)]
@@ -98,12 +98,12 @@ impl SRC11 for Contract {
     /// # Examples
     ///
     /// ```sway
-    /// use src11::SRC11;
+    /// use src12::SRC12;
     /// use std::constants::ZERO_B256;
     ///
-    /// fn foo(my_src_11_contract: ContractId) {
-    ///     let src_11_contract_abi = abi(SRC11, my_src_11_contract.bits());
-    ///     let root = src_11_contract_abi.factory_bytecode_root();
+    /// fn foo(my_src_12_contract: ContractId) {
+    ///     let src_12_contract_abi = abi(SRC12, my_src_12_contract.bits());
+    ///     let root = src_12_contract_abi.factory_bytecode_root();
     ///     assert(root.unwrap() != ZERO_B256);
     /// }
     /// ```

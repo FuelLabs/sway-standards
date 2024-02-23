@@ -1,7 +1,7 @@
 <p align="center">
     <picture>
-        <source media="(prefers-color-scheme: dark)" srcset=".docs/src-11-logo-dark-theme.png">
-        <img alt="SRC-11 logo" width="400px" src=".docs/src-11-logo-light-theme.png">
+        <source media="(prefers-color-scheme: dark)" srcset=".docs/src-12-logo-dark-theme.png">
+        <img alt="SRC-12 logo" width="400px" src=".docs/src-12-logo-light-theme.png">
     </picture>
 </p>
 
@@ -23,7 +23,7 @@ When changing something such as a configurable in Sway, the bytecode root is rec
 
 # Specification
 
-The following functions MUST be implemented to follow the SRC-11; Contract Factory Standard:
+The following functions MUST be implemented to follow the SRC-12; Contract Factory Standard:
 
 ## Required Functions
 
@@ -51,33 +51,45 @@ The `factory_bytecode_root()` function returns the bytecode root of the default 
 
 The `get_contract_id()` function returns a registered contract factory child contract with specific implementation details specified by `configurables`.
 
-- This function MUST return `Some(ContractId)` IF a contract that follows the specified `configurables` has been registered with the SRC-11 Contract Factory contract, otherwise `None`.
+- This function MUST return `Some(ContractId)` IF a contract that follows the specified `configurables` has been registered with the SRC-12 Contract Factory contract, otherwise `None`.
 
 # Rationale
 
-The SRC-11; Contract Factory Standard is designed to standardize the contract factory design implementation interface between all Fuel instances. 
+The SRC-12; Contract Factory Standard is designed to standardize the contract factory design implementation interface between all Fuel instances. 
 
 # Backwards Compatibility
 
-There are no other standards that the SRC-11 requires compatibility.
+There are no other standards that the SRC-12 requires compatibility.
 
 # Security Considerations
 
-This standard takes into consideration child contracts that are deployed with differentiating configurable values, however individual contract behaviors may be dependent on storage variables. As storage variables may change after the contract has been registered with the SRC-11 compliant contract, the standard suggests to check these values upon registration however it is not enforced.
+This standard takes into consideration child contracts that are deployed with differentiating configurable values, however individual contract behaviors may be dependent on storage variables. As storage variables may change after the contract has been registered with the SRC-12 compliant contract, the standard suggests to check these values upon registration however it is not enforced.
 
 # Example ABI
 
 ```sway
-abi SRC11 {
-     #[storage(read, write)]
-     fn register_contract(child_contract: ContractId, configurables: Option<Vec<(u64, Vec<u8>)>>);
-     #[storage(read)]
-     fn is_valid(child_contract: ContractId) -> bool;
-     #[storage(read)]
-     fn factory_bytecode_root() -> Option<b256>;
-     #[storage(read)]
-     fn get_contract_id(configurables: Option<Vec<(u64, Vec<u8>)>>) -> Option<ContractId>;
+abi SRC12 {
+    #[storage(read, write)]
+    fn register_contract(child_contract: ContractId, configurables: Option<Vec<(u64, Vec<u8>)>>);
+    #[storage(read)]
+    fn is_valid(child_contract: ContractId) -> bool;
+    #[storage(read)]
+    fn factory_bytecode_root() -> Option<b256>;
+}
+
+abi SRC12_Extension {
+    #[storage(read)]
+    fn get_contract_id(configurables: Option<Vec<(u64, Vec<u8>)>>) -> Option<ContractId>;
 }
 ```
 
 # Example Implementation
+
+## [With Configurables](../../examples/src12-contract-factory/with_configurables/src/with_configurables.sw)
+
+Example of the SRC-12 implementation where contract deployments contain configurable values that differentiate the bytecode root from other contracts with the same bytecode.
+
+## [Without Configurables](../../examples/src12-contract-factory/without_configurables/src/without_configurables.sw)
+
+Example of the SRC-12 implementation where all contract deployments are identitcal and thus have the same bytecode and root.
+

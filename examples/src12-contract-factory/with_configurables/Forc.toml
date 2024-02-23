@@ -2,7 +2,7 @@
 authors = ["Fuel Labs <contact@fuel.sh>"]
 entry = "with_configurables.sw"
 license = "Apache-2.0"
-name = "with_configurables_src11_registry"
+name = "with_configurables_src12_registry"
 
 [dependencies]
-src11 = { path = "../../../standards/src11-contract-factory" }
+src12 = { path = "../../../standards/src12-contract-factory" }

@@ -3,7 +3,7 @@ contract;
 mod bytecode;
 
 use bytecode::{_compute_bytecode_root, _swap_configurables};
-use src11::*;
+use src12::*;
 use std::{
     constants::ZERO_B256,
     external::bytecode_root,
@@ -45,7 +45,7 @@ impl MyRegistryContract for Contract {
     }
 }
 
-impl SRC11 for Contract {
+impl SRC12 for Contract {
     /// Verifies that a newly deployed contract is the child of a contract factory and registers it.
     ///
     /// # Additional Information
@@ -64,12 +64,12 @@ impl SRC11 for Contract {
     /// # Examples
     ///
     /// ```sway
-    /// use src11::SRC11;
+    /// use src12::SRC12;
     ///
-    /// fn foo(my_src_11_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
-    ///     let src_11_contract_abi = abi(SRC11, my_src_11_contract.bits());
-    ///     src_11_contract_abi.register_contract(my_deployed_contract, my_configurables);
-    ///     assert(src_11_contract_abi.is_valid(my_deployed_contract));
+    /// fn foo(my_src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
+    ///     let src_12_contract_abi = abi(SRC12, my_src_12_contract.bits());
+    ///     src_12_contract_abi.register_contract(my_deployed_contract, my_configurables);
+    ///     assert(src_12_contract_abi.is_valid(my_deployed_contract));
     /// }
     /// ```
     #[storage(read, write)]
@@ -119,12 +119,12 @@ impl SRC11 for Contract {
     /// # Examples
     ///
     /// ```sway
-    /// use src11::SRC11;
+    /// use src12::SRC12;
     ///
-    /// fn foo(my_src_11_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
-    ///     let src_11_contract_abi = abi(SRC11, my_src_11_contract.bits());
-    ///     src_11_contract_abi.register_contract(my_deployed_contract, my_configurables);
-    ///     assert(src_11_contract_abi.is_valid(my_deployed_contract));
+    /// fn foo(my_src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
+    ///     let src_12_contract_abi = abi(SRC12, my_src_12_contract.bits());
+    ///     src_12_contract_abi.register_contract(my_deployed_contract, my_configurables);
+    ///     assert(src_12_contract_abi.is_valid(my_deployed_contract));
     /// }
     /// ```
     #[storage(read)]
@@ -141,12 +141,12 @@ impl SRC11 for Contract {
     /// # Examples
     ///
     /// ```sway
-    /// use src11::SRC11;
+    /// use src12::SRC12;
     /// use std::constants::ZERO_B256;
     ///
-    /// fn foo(my_src_11_contract: ContractId) {
-    ///     let src_11_contract_abi = abi(SRC11, my_src_11_contract.bits());
-    ///     let root = src_11_contract_abi.factory_bytecode_root();
+    /// fn foo(my_src_12_contract: ContractId) {
+    ///     let src_12_contract_abi = abi(SRC12, my_src_12_contract.bits());
+    ///     let root = src_12_contract_abi.factory_bytecode_root();
     ///     assert(root.unwrap() != ZERO_B256);
     /// }
     /// ```
@@ -156,7 +156,7 @@ impl SRC11 for Contract {
     }
 }
 
-impl SRC11_Extension for Contract {
+impl SRC12_Extension for Contract {
     /// Return a registered contract factory child contract with specific implementation details specified by it's configurables.
     ///
     /// # Arguments
@@ -175,12 +175,12 @@ impl SRC11_Extension for Contract {
     /// # Examples
     ///
     /// ```sway
-    /// use src11::SRC11;
+    /// use src12::SRC12_Extension;
     ///
-    /// fn foo(my_src_11_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
-    ///     let src_11_contract_abi = abi(SRC11, my_src_11_contract.bits());
-    ///     src_11_contract_abi.register_contract(my_deployed_contract, my_configurables);
-    ///     let result_contract_id = src_11_contract_abi.get_contract_id(my_configurables);
+    /// fn foo(my_src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
+    ///     let src_12_contract_abi = abi(SRC12_Extension, my_src_12_contract.bits());
+    ///     src_12_contract_abi.register_contract(my_deployed_contract, my_configurables);
+    ///     let result_contract_id = src_12_contract_abi.get_contract_id(my_configurables);
     ///     assert(result_contract_id.unwrap() == my_deployed_contract);
     /// }
     /// ```
