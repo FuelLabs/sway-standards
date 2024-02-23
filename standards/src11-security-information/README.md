@@ -11,7 +11,7 @@ The following standard allows for contract creators to make communication inform
 
 # Motivation
 
-White hat hackers may find bugs or exploits in contracts that they want to report to the project for safeguarding of funds. It is not immediately obvious from a ContractId, who the right person to contact is. This standard aims to make the process of bug reporting as smooth as possible
+White hat hackers may find bugs or exploits in contracts that they want to report to the project for safeguarding of funds. It is not immediately obvious from a `ContractId`, who the right person to contact is. This standard aims to make the process of bug reporting as smooth as possible.
 
 # Prior Art
 
