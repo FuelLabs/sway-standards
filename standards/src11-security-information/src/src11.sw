@@ -38,7 +38,7 @@ pub struct SecurityInformation {
 
 abi SRC11 {
     /// Returns security, contact, and audit information about the contract.
-    /// White hat hackers can use this information to report bugs to the project.
+    /// White hat hackers may use this information to report bugs to the project.
     ///
     /// # Returns
     ///
