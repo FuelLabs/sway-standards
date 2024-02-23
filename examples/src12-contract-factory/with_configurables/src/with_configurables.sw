@@ -1,8 +1,8 @@
 contract;
 
-mod bytecode;
+mod utils;
 
-use bytecode::{_compute_bytecode_root, _swap_configurables};
+use utils::{_compute_bytecode_root, _swap_configurables};
 use src12::*;
 use std::{
     constants::ZERO_B256,
