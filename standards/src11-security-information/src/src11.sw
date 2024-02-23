@@ -22,7 +22,7 @@ pub struct SecurityInformation {
     /// A URL to the project's source code.
     source_code: Option<String>,
     /// The release identifier of this build, ideally corresponding to a tag on git that can be rebuilt to reproduce the same binary.
-    /// 3rd party build verification tools will use this tag to identify a matching github releases.
+    /// 3rd party build verification tools will use this tag to identify a matching github release.
     source_release: Option<String>,
     /// The revision identifier of this build, usually a git sha that can be rebuilt to reproduce the same binary.
     /// 3rd party build verification tools will use this tag to identify a matching github releases.
