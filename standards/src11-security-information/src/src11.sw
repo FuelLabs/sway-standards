@@ -25,7 +25,7 @@ pub struct SecurityInformation {
     /// 3rd party build verification tools will use this tag to identify a matching github release.
     source_release: Option<String>,
     /// The revision identifier of this build, usually a git sha that can be rebuilt to reproduce the same binary.
-    /// 3rd party build verification tools will use this tag to identify a matching github releases.
+    /// 3rd party build verification tools will use this tag to identify a matching github release.
     source_revision: Option<String>,
     /// A list of people or entities that audited this smart contract, or links to pages where audit reports are hosted.
     /// Note that this field is self-reported by the author of the program and might not be accurate.
