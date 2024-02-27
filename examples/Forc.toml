@@ -6,6 +6,8 @@ members = [
   "src5-ownership/uninitialized_example",
   "src7-metadata/single_asset",
   "src7-metadata/multi_asset",
+  "src11-security-information/hardcoded-information",
+  "src11-security-information/variable-information",
   "src20-token/single_asset",
   "src20-token/multi_asset",
 ]
