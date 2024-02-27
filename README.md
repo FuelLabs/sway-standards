@@ -137,7 +137,7 @@ Example of the SRC-7 implementation where metadata exists for only a single asse
 Example of the SRC-7 implementation where metadata exists for multiple assets with differing `SubId`s.
 
 > **Note**
-> All standards currently use `forc v0.49.1`.
+> All standards currently use `forc v0.50.0`.
 
 <!-- TODO:
 ## Contributing
