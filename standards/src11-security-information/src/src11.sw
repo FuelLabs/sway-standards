@@ -5,35 +5,35 @@ use std::string::String;
 /// Contact Information to report bugs to.
 pub struct SecurityInformation {
     /// Name of the project.
-    name: String,
+    pub name: String,
     /// Website URL of the project.
-    project_url: Option<String>,
+    pubproject_url: Option<String>,
     /// List of contact information to contact developers of the project.
     /// Should be in the format <contact_type>:<contact_information>.
     /// You should include contact types that will not change over time.
-    contact_information: Vec<String>,
+    pub contact_information: Vec<String>,
     /// Text describing the project's security policy, or a link to it.
     /// This should describe what kind of bounties your project offers and the terms under which you offer them.
-    policy: String,
+    pub policy: String,
     /// A list of preferred languages (ISO 639-1).
-    preferred_languages: Option<Vec<String>>,
+    pub preferred_languages: Option<Vec<String>>,
     /// A PGP public key block (or similar) or a link to one.
-    encryption: Option<String>,
+    pub encryption: Option<String>,
     /// A URL to the project's source code.
-    source_code: Option<String>,
+    pub source_code: Option<String>,
     /// The release identifier of this build, ideally corresponding to a tag on git that can be rebuilt to reproduce the same binary.
     /// 3rd party build verification tools will use this tag to identify a matching github release.
-    source_release: Option<String>,
+    pub source_release: Option<String>,
     /// The revision identifier of this build, usually a git sha that can be rebuilt to reproduce the same binary.
     /// 3rd party build verification tools will use this tag to identify a matching github release.
-    source_revision: Option<String>,
+    pub source_revision: Option<String>,
     /// A list of people or entities that audited this smart contract, or links to pages where audit reports are hosted.
     /// Note that this field is self-reported by the author of the program and might not be accurate.
-    auditors: Option<Vec<String>>,
+    pub auditors: Option<Vec<String>>,
     /// Text containing acknowledgments to security researchers who have previously found vulnerabilities in the project, or a link to it.
-    acknowledgments: Option<String>,
+    pub acknowledgments: Option<String>,
     /// Text containing any additional information you want to provide, or a link to it.
-    additional_information: Option<String>,
+    pub additional_information: Option<String>,
 }
 
 abi SRC11 {
