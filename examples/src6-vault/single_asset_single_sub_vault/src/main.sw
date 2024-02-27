@@ -204,7 +204,7 @@ pub fn _mint(recipient: Identity, amount: u64) {
 
 #[storage(read, write)]
 pub fn _burn(asset_id: AssetId, amount: u64) {
-    use std::{context::this_balance, asset::burn};
+    use std::{asset::burn, context::this_balance};
 
     require(
         this_balance(asset_id) >= amount,

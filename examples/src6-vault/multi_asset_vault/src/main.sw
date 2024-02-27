@@ -215,7 +215,7 @@ pub fn _mint(
 
 #[storage(read, write)]
 pub fn _burn(asset_id: AssetId, vault_sub_id: SubId, amount: u64) {
-    use std::{context::this_balance, asset::burn};
+    use std::{asset::burn, context::this_balance};
 
     require(
         this_balance(asset_id) >= amount,
