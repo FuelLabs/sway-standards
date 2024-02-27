@@ -1,8 +1,8 @@
 contract;
 
 use std::{
+    asset::transfer,
     call_frames::msg_asset_id,
-    constants::BASE_ASSET_ID,
     context::msg_amount,
     hash::{
         Hash,
@@ -10,7 +10,6 @@ use std::{
     },
     storage::storage_string::*,
     string::String,
-    token::transfer,
 };
 
 use src6::{Deposit, SRC6, Withdraw};
@@ -30,7 +29,7 @@ storage {
     vault_info: StorageMap<AssetId, VaultInfo> = StorageMap {},
     /// Number of different assets managed by this contract.
     total_assets: u64 = 0,
-    /// Total supply of shares.
+    /// Total supply of shares for each asset.
     total_supply: StorageMap<AssetId, u64> = StorageMap {},
     /// Asset name.
     name: StorageMap<AssetId, StorageString> = StorageMap {},
@@ -40,21 +39,15 @@ storage {
     decimals: StorageMap<AssetId, u8> = StorageMap {},
 }
 
-configurable {
-    /// The only asset that can be deposited and withdrawn from this vault.
-    ACCEPTED_ASSET: AssetId = BASE_ASSET_ID,
-}
-
 impl SRC6 for Contract {
     #[payable]
     #[storage(read, write)]
     fn deposit(receiver: Identity, vault_sub_id: SubId) -> u64 {
         let asset_amount = msg_amount();
-        let underlying_asset = msg_asset_id();
-
-        require(underlying_asset == ACCEPTED_ASSET, "INVALID_ASSET_ID");
-        let (shares, share_asset, share_asset_vault_sub_id) = preview_deposit(underlying_asset, vault_sub_id, asset_amount);
         require(asset_amount != 0, "ZERO_ASSETS");
+
+        let underlying_asset = msg_asset_id();
+        let (shares, share_asset, share_asset_vault_sub_id) = preview_deposit(underlying_asset, vault_sub_id, asset_amount);
 
         _mint(receiver, share_asset, share_asset_vault_sub_id, shares);
 
@@ -64,10 +57,10 @@ impl SRC6 for Contract {
 
         log(Deposit {
             caller: msg_sender().unwrap(),
-            receiver: receiver,
+            receiver,
             underlying_asset,
-            vault_sub_id: vault_sub_id,
-            deposited_assets: asset_amount,
+            vault_sub_id,
+            deposited_amount: asset_amount,
             minted_shares: shares,
         });
 
@@ -95,25 +88,20 @@ impl SRC6 for Contract {
 
         log(Withdraw {
             caller: msg_sender().unwrap(),
-            receiver: receiver,
+            receiver,
             underlying_asset,
-            vault_sub_id: vault_sub_id,
-            withdrawn_assets: assets,
+            vault_sub_id,
+            withdrawn_amount: assets,
             burned_shares: shares,
         });
 
         assets
     }
-
     #[storage(read)]
     fn managed_assets(underlying_asset: AssetId, vault_sub_id: SubId) -> u64 {
-        if underlying_asset == ACCEPTED_ASSET {
-            let vault_share_asset = vault_asset_id(underlying_asset, vault_sub_id).0;
-            // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
-            managed_assets(vault_share_asset)
-        } else {
-            0
-        }
+        let vault_share_asset = vault_asset_id(underlying_asset, vault_sub_id).0;
+        // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
+        managed_assets(vault_share_asset)
     }
 
     #[storage(read)]
@@ -122,22 +110,14 @@ impl SRC6 for Contract {
         underlying_asset: AssetId,
         vault_sub_id: SubId,
     ) -> Option<u64> {
-        if underlying_asset == ACCEPTED_ASSET {
-            // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
-            Some(u64::max() - managed_assets(underlying_asset))
-        } else {
-            None
-        }
+        // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
+        Some(u64::max() - managed_assets(underlying_asset))
     }
 
     #[storage(read)]
     fn max_withdrawable(underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64> {
-        if underlying_asset == ACCEPTED_ASSET {
-            // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
-            Some(managed_assets(underlying_asset))
-        } else {
-            None
-        }
+        // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
+        Some(managed_assets(underlying_asset))
     }
 }
 
@@ -169,8 +149,8 @@ impl SRC20 for Contract {
 }
 
 /// Returns the vault shares assetid and subid for the given assets assetid and the vaults sub id
-fn vault_asset_id(underlying_asset: AssetId, vault_sub_id: SubId) -> (AssetId, SubId) {
-    let share_asset_vault_sub_id = sha256((underlying_asset, vault_sub_id));
+fn vault_asset_id(asset: AssetId, vault_sub_id: SubId) -> (AssetId, SubId) {
+    let share_asset_vault_sub_id = sha256((asset, vault_sub_id));
     let share_asset_id = AssetId::new(ContractId::this(), share_asset_vault_sub_id);
     (share_asset_id, share_asset_vault_sub_id)
 }
@@ -220,23 +200,22 @@ pub fn _mint(
     vault_sub_id: SubId,
     amount: u64,
 ) {
-    use std::token::mint_to;
+    use std::asset::mint_to;
 
     let supply = storage.total_supply.get(asset_id).try_read();
     // Only increment the number of assets minted by this contract if it hasn't been minted before.
     if supply.is_none() {
         storage.total_assets.write(storage.total_assets.read() + 1);
     }
-    let current_supply = supply.unwrap_or(0);
     storage
         .total_supply
-        .insert(asset_id, current_supply + amount);
+        .insert(asset_id, supply.unwrap_or(0) + amount);
     mint_to(recipient, vault_sub_id, amount);
 }
 
 #[storage(read, write)]
 pub fn _burn(asset_id: AssetId, vault_sub_id: SubId, amount: u64) {
-    use std::{context::this_balance, token::burn};
+    use std::{context::this_balance, asset::burn};
 
     require(
         this_balance(asset_id) >= amount,

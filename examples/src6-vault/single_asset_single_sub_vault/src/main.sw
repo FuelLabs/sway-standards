@@ -1,6 +1,7 @@
 contract;
 
 use std::{
+    asset::transfer,
     call_frames::msg_asset_id,
     constants::{
         BASE_ASSET_ID,
@@ -13,7 +14,6 @@ use std::{
     },
     storage::storage_string::*,
     string::String,
-    token::transfer,
 };
 
 use src6::{Deposit, SRC6, Withdraw};
@@ -60,7 +60,7 @@ impl SRC6 for Contract {
             receiver,
             underlying_asset,
             vault_sub_id,
-            deposited_assets: asset_amount,
+            deposited_amount: asset_amount,
             minted_shares: shares,
         });
 
@@ -94,7 +94,7 @@ impl SRC6 for Contract {
             receiver,
             underlying_asset,
             vault_sub_id,
-            withdrawn_assets: assets,
+            withdrawn_amount: assets,
             burned_shares: shares,
         });
 
@@ -195,7 +195,7 @@ fn preview_withdraw(shares: u64) -> u64 {
 
 #[storage(read, write)]
 pub fn _mint(recipient: Identity, amount: u64) {
-    use std::token::mint_to;
+    use std::asset::mint_to;
 
     let supply = storage.total_supply.read();
     storage.total_supply.write(supply + amount);
@@ -204,7 +204,7 @@ pub fn _mint(recipient: Identity, amount: u64) {
 
 #[storage(read, write)]
 pub fn _burn(asset_id: AssetId, amount: u64) {
-    use std::{context::this_balance, token::burn};
+    use std::{context::this_balance, asset::burn};
 
     require(
         this_balance(asset_id) >= amount,
