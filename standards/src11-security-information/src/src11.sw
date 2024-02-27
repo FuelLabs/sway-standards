@@ -7,7 +7,7 @@ pub struct SecurityInformation {
     /// Name of the project.
     pub name: String,
     /// Website URL of the project.
-    pubproject_url: Option<String>,
+    pub project_url: Option<String>,
     /// List of contact information to contact developers of the project.
     /// Should be in the format <contact_type>:<contact_information>.
     /// You should include contact types that will not change over time.
