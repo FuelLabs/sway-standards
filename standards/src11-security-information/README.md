@@ -25,7 +25,7 @@ The following describes the `SecurityInformation` type.
 
 - The struct MAY contain `None` for `Option<T>` type fields, if they are deemed unnecessary.
 - The struct MUST NOT contain empty `String` or `Vec` fields.
-- The struct MAY contain a link or the information directly for the following fields: `project_url`, `policy`, `encryption`, `source_code`, `auditors`, `acknowledgments`, `additional_information`.
+- The struct MAY contain a URL or the information directly for the following fields: `project_url`, `policy`, `encryption`, `source_code`, `auditors`, `acknowledgments`, `additional_information`.
 - The struct MUST contain the information directly for the following fields: `name`, `contact_information`, `preferred_languages`, `source_release`, and `source_revision`.
 - The struct MUST contain at least one item in the `preferred_languages` field's `Vec`, if it is not `None`. Furthermore, the string should only contain the [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) language code and nothing else.
 - The struct MUST contain at least one item in the `contact_information` field's `Vec`. Furthermore, the string should follow the following format `<contact_type>:<contact_information>`. Where `contact_type` describes the method of contact (eg. `email` or `discord`) and `contact_information` describes the information needed to contact (eg. `example@example.com` or `@EXAMPLE`).
