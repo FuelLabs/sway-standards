@@ -16,13 +16,13 @@ configurable {
     /// The security policy of the project
     POLICY: str[35] = __to_str_array("https://example.com/security_policy"),
     /// The preferred languages of the project
-    PREFERRED_LANGUAGES1: str[2] = __to_str_array("en"), // English
-    PREFERRED_LANGUAGES2: str[2] = __to_str_array("ja"), // Japanese
-    PREFERRED_LANGUAGES3: str[2] = __to_str_array("zh"), // Chinese
-    PREFERRED_LANGUAGES4: str[2] = __to_str_array("hi"), // Hindi
+    PREFERRED_LANGUAGES1: str[2] = __to_str_array("en"),
+    PREFERRED_LANGUAGES2: str[2] = __to_str_array("ja"),
+    PREFERRED_LANGUAGES3: str[2] = __to_str_array("zh"),
+    PREFERRED_LANGUAGES4: str[2] = __to_str_array("hi"),
     /// The encryption key of the project
     ENCRYPTION: str[751] = __to_str_array(
-"-----BEGIN PGP PUBLIC KEY BLOCK-----
+        "-----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: Alice's OpenPGP certificate
 Comment: https://www.ietf.org/id/draft-bre-openpgp-samples-01.html
 
@@ -36,7 +36,7 @@ E9+eviIDAQgHiHgEGBYIACAWIQTrhbtfozp14V6UTmPyMVUMT0fjjgUCXEcE6QIb
 DAAKCRDyMVUMT0fjjlnQAQDFHUs6TIcxrNTtEZFjUFm1M0PJ1Dng/cDW4xN80fsn
 0QEA22Kr7VkCjeAEC08VSTeV+QFsmz55/lntWkwYWhmvOgE=
 =iIGO
------END PGP PUBLIC KEY BLOCK-----"
+-----END PGP PUBLIC KEY BLOCK-----",
     ),
     /// The URL of the project's source code
     SOURCE_CODE: str[31] = __to_str_array("https://github.com/example/test"),
@@ -64,7 +64,6 @@ impl SRC11 for Contract {
         preferred_languages.push(String::from_ascii_str(from_str_array(PREFERRED_LANGUAGES2))); // Japanese
         preferred_languages.push(String::from_ascii_str(from_str_array(PREFERRED_LANGUAGES3))); // Chinese
         preferred_languages.push(String::from_ascii_str(from_str_array(PREFERRED_LANGUAGES4))); // Hindi
-
         let mut auditors = Vec::new();
         auditors.push(String::from_ascii_str(from_str_array(AUDITORS)));
 
