@@ -3,6 +3,10 @@ contract;
 use src3::SRC3;
 use src20::SRC20;
 use std::{
+    asset::{
+        burn,
+        mint_to,
+    },
     call_frames::{
         contract_id,
         msg_asset_id,
@@ -11,10 +15,6 @@ use std::{
     hash::Hash,
     storage::storage_string::*,
     string::String,
-    token::{
-        burn,
-        mint_to,
-    },
 };
 
 // In this example, all assets minted from this contract have the same decimals, name, and symbol
@@ -35,13 +35,13 @@ storage {
 }
 
 impl SRC3 for Contract {
-    /// Unconditionally mints new tokens using the `sub_id` sub-identifier.
+    /// Unconditionally mints new assets using the `sub_id` sub-identifier.
     ///
     /// # Arguments
     ///
-    /// * `recipient`: [Identity] - The user to which the newly minted tokens are transferred to.
-    /// * `sub_id`: [SubId] - The sub-identifier of the newly minted token.
-    /// * `amount`: [u64] - The quantity of tokens to mint.
+    /// * `recipient`: [Identity] - The user to which the newly minted asset is transferred to.
+    /// * `sub_id`: [SubId] - The sub-identifier of the newly minted asset.
+    /// * `amount`: [u64] - The quantity of coins to mint.
     ///
     /// # Number of Storage Accesses
     ///
@@ -67,9 +67,7 @@ impl SRC3 for Contract {
         let asset_supply = storage.total_supply.get(asset_id).try_read();
         match asset_supply {
             None => {
-                storage
-                    .total_assets
-                    .write(storage.total_assets.read() + 1)
+                storage.total_assets.write(storage.total_assets.read() + 1)
             },
             _ => {},
         }
@@ -81,12 +79,12 @@ impl SRC3 for Contract {
         mint_to(recipient, sub_id, amount);
     }
 
-    /// Unconditionally burns tokens sent with the `sub_id` sub-identifier.
+    /// Unconditionally burns assets sent with the `sub_id` sub-identifier.
     ///
     /// # Arguments
     ///
-    /// * `sub_id`: [SubId] - The sub-identifier of the token to burn.
-    /// * `amount`: [u64] - The quantity of tokens to burn.
+    /// * `sub_id`: [SubId] - The sub-identifier of the asset to burn.
+    /// * `amount`: [u64] - The quantity of coins to burn.
     ///
     /// # Number of Storage Accesses
     ///
@@ -95,7 +93,7 @@ impl SRC3 for Contract {
     ///
     /// # Reverts
     ///
-    /// * When the transaction did not include at least `amount` tokens.
+    /// * When the transaction did not include at least `amount` coins.
     /// * When the asset included in the transaction does not have the SubId `sub_id`.
     ///
     /// # Examples

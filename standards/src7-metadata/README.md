@@ -7,7 +7,7 @@
 
 # Abstract
 
-The following standard attempts to define the retrieval of on-chain arbitrary metadata for any [Native Asset](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-7 standard MUST implement the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard. 
+The following standard attempts to define the retrieval of on-chain arbitrary metadata for any [Native Asset](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-7 standard MUST implement the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src20-native-asset) standard. 
 
 # Motivation
 
@@ -17,7 +17,7 @@ The SRC-7 standard seeks to enable data-rich assets on the Fuel Network while ma
 
 The use of generic metadata was originally found in the Sway-Lib's [NFT Library](https://github.com/FuelLabs/sway-libs/tree/v0.12.0/libs/nft) which did not use Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). This library has since been deprecated. 
 
-A previous definition for a metadata standard was written in the original edit of the now defunct [SRC-721](https://github.com/FuelLabs/sway-standards/issues/2). This has since been replaced with the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard as `SubId` was introduced to enable multiple assets to be minted from a single contract. 
+A previous definition for a metadata standard was written in the original edit of the now defunct [SRC-721](https://github.com/FuelLabs/sway-standards/issues/2). This has since been replaced with the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src20-native-asset) standard as `SubId` was introduced to enable multiple assets to be minted from a single contract. 
 
 The standard takes inspiration from [ENS's public resolver](https://docs.ens.domains/contract-api-reference/publicresolver) with the use of a `String` as the key. This should enable human-readable keys to help minimize errors and enable the standardization of certain keys, such as "image" as opposed to an `enum` or `u64` representation of keys.
 
@@ -57,7 +57,7 @@ The SRC-7 standard should allow for data-rich assets to interact with one anothe
 
 # Backwards Compatibility
 
-This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) and the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard. It also maintains compatibility with existing standards in other ecosystems.
+This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) and the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src20-native-asset) standard. It also maintains compatibility with existing standards in other ecosystems.
 
 # Security Considerations
 
