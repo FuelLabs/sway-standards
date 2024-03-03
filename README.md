@@ -9,8 +9,8 @@
     <a href="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yml" alt="CI">
         <img src="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yml/badge.svg" />
     </a>
-    <a href="https://crates.io/crates/forc/0.48.1" alt="forc">
-        <img src="https://img.shields.io/badge/forc-v0.48.1-orange" />
+    <a href="https://crates.io/crates/forc/0.49.1" alt="forc">
+        <img src="https://img.shields.io/badge/forc-v0.49.1-orange" />
     </a>
     <a href="./LICENSE" alt="forc">
         <img src="https://img.shields.io/github/license/FuelLabs/sway-standards" />
@@ -35,11 +35,11 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 ### Native Assets
 
-- [SRC-20; Token Standard](./standards/src20-token/) defines the implementation of a standard API for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) using the Sway Language.
+- [SRC-20; Native Asset Standard](./standards/src20-native-asset/) defines the implementation of a standard API for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) using the Sway Language.
 - [SRC-3; Mint and Burn](./standards/src3-mint-burn/) is used to enable mint and burn functionality for Native Assets.
 - [SRC-7; Arbitrary Asset Metadata Standard](./standards/src7-metadata/) is used to store metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
 - [SRC-9; Metadata Keys Standard](./standards/src9-metadata-keys/) is used to store standardized metadata keys for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) in combination with the SRC-7 standard.
-- [SRC-6; Vault Standard](./standards/src6-vault/) defines the implementation of a standard API for token vaults developed in Sway.
+- [SRC-6; Vault Standard](./standards/src6-vault/) defines the implementation of a standard API for asset vaults developed in Sway.
 
 ### Access Control
 
@@ -68,10 +68,10 @@ You may then import your desired standard in your Sway Smart Contract as so:
 use standard::<standard_abi>;
 ```
 
-For example, to import the SRC-20 Token Standard use the following statements in your `Forc.toml` and Sway Smart Contract file respectively:
+For example, to import the SRC-20 Native Asset Standard use the following statements in your `Forc.toml` and Sway Smart Contract file respectively:
 
 ```rust
-src20 = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.3.0" }
+src20 = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.3.3" }
 ```
 
 ```rust
@@ -82,13 +82,13 @@ use src20::SRC20;
 
 Minimal example implementations for every standard can be found in the [`examples/`](./examples/) folder.
 
-#### SRC-20; Token Standard Examples
+#### SRC-20; Native Asset Standard Examples
 
-##### - [Single Native Assset](./examples/src20-token/single_asset/src/single_asset.sw)
+##### - [Single Native Assset](./examples/src20-native-asset/single_asset/src/single_asset.sw)
 
 Example of the SRC-20 implementation where a contract contains a single asset with one `SubId`. This implementation is recommended for users that intend to deploy a single asset with their contract.
 
-##### - [Multi Native Asset](./examples/src20-token/multi_asset/src/multi_asset.sw)
+##### - [Multi Native Asset](./examples/src20-native-asset/multi_asset/src/multi_asset.sw)
 
 Example of the SRC-20 implementation where a contract contains multiple assets with differing `SubId`s. This implementation is recommended for users that intend to deploy multiple assets with their contract.
 
@@ -114,15 +114,15 @@ Example of the SRC-5 implementation where a contract has an owner set at compile
 
 #### SRC-6; Vault Standard Examples
 
-##### [Multi Token Vault](./examples/src6-vault/multi_token_vault/)
+##### [Multi Asset Vault](./examples/src6-vault/multi_asset_vault/)
 
 A basic implementation of the vault standard that supports any number of sub vaults being created for every AssetId.
 
-##### [Single Token Vault](./examples/src6-vault/single_token_vault/)
+##### [Single Asset Vault](./examples/src6-vault/single_asset_vault/)
 
 A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single AssetId.
 
-##### [Single Token Single Sub Vault](./examples/src6-vault/single_token_single_sub_vault/)
+##### [Single Asset Single Sub Vault](./examples/src6-vault/single_asset_single_sub_vault/)
 
 A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single AssetId, and to a single Sub vault.
 
@@ -137,7 +137,7 @@ Example of the SRC-7 implementation where metadata exists for only a single asse
 Example of the SRC-7 implementation where metadata exists for multiple assets with differing `SubId`s.
 
 > **Note**
-> All standards currently use `forc v0.48.1`.
+> All standards currently use `forc v0.50.0`.
 
 <!-- TODO:
 ## Contributing

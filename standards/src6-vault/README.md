@@ -7,15 +7,15 @@
 
 # Abstract
 
-The following standard allows for the implementation of a standard API for token vaults such as yield-bearing token vaults or asset wrappers. This standard is an optional add-on to the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20) standard.
+The following standard allows for the implementation of a standard API for asset vaults such as yield-bearing asset vaults or asset wrappers. This standard is an optional add-on to the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src20-native-asset) standard.
 
 # Motivation
 
-Token vaults allow users to own shares of variable amounts of assets, such as lending protocols which may have growing assets due to profits from interest. This pattern is highly useful and would greatly benefit from standardization.
+Asset vaults allow users to own shares of variable amounts of assets, such as lending protocols which may have growing assets due to profits from interest. This pattern is highly useful and would greatly benefit from standardization.
 
 # Prior Art
 
-Token vaults have been thoroughly explored on Ethereum and with [EIP 4626](https://eips.ethereum.org/EIPS/eip-4626) they have their own standard for it. However as Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) are fundamentally different from Ethereum's ERC-20 tokens, the implementation will differ, but the interface may be used as a reference.
+Asset vaults have been thoroughly explored on Ethereum and with [EIP 4626](https://eips.ethereum.org/EIPS/eip-4626) they have their own standard for it. However as Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) are fundamentally different from Ethereum's ERC-20 tokens, the implementation will differ, but the interface may be used as a reference.
 
 # Specification
 
@@ -29,6 +29,7 @@ This function takes the `receiver` Identity and the SubId `vault_sub_id` of the 
 
 - This function MUST allow for depositing of the underlying asset in exchange for pro-rata shares of the vault.
 - This function MAY reject arbitrary assets based on implementation and MUST revert if unaccepted assets are forwarded.
+- This function MAY reject any arbitrary `receiver` based on implementation and MUST revert in the case of a blacklisted or non-whitelisted `receiver`.
 - This function MUST mint an asset representing the pro-rata share of the vault, with the SubId of the `sha256((underlying_asset, vault_sub_id))` digest, where `underlying_asset` is the AssetId of the deposited asset and the `vault_sub_id` is the id of the vault.
 - This function MUST emit a `Deposit` log.
 - This function MUST return the amount of minted shares.
@@ -131,7 +132,7 @@ The `vault_sub_id` field MUST represent the SubId of the vault from which was wi
 
 #### - `withdrawn_amount`: u64
 
-The `withdrawn_amount` field MUST represent the u64 amount of tokens withdrawn.
+The `withdrawn_amount` field MUST represent the u64 amount of coins withdrawn.
 
 #### - `burned_shares`: u64
 
@@ -139,15 +140,15 @@ The `burned_shares` field MUST represent the u64 amount of shares burned.
 
 # Rationale
 
-The ABI discussed covers the known use cases of token vaults while allowing safe implementations.
+The ABI discussed covers the known use cases of asset vaults while allowing safe implementations.
 
 # Backwards Compatibility
 
-This standard is fully compatible with the [SRC-20 standard](https://github.com/FuelLabs/sway-standards/tree/master/standards/src_20).
+This standard is fully compatible with the [SRC-20 standard](https://github.com/FuelLabs/sway-standards/tree/master/standards/src20-native-asset).
 
 # Security Considerations
 
-Incorrect implementation of token vaults could allow attackers to steal underlying assets. It is recommended to properly audit any code using this standard to ensure exploits are not possible.
+Incorrect implementation of asset vaults could allow attackers to steal underlying assets. It is recommended to properly audit any code using this standard to ensure exploits are not possible.
 
 # Example ABI
 
@@ -174,14 +175,14 @@ abi SRC6 {
 
 # Example Implementation
 
-## [Multi Token Vault](../../examples/src6-vault/multi_token_vault/)
+## [Multi Asset Vault](../../examples/src6-vault/multi_asset_vault/)
 
 A basic implementation of the vault standard that supports any number of sub vaults being created for every AssetId.
 
-## [Single Token Vault](../../examples/src6-vault/single_token_vault/)
+## [Single Asset Vault](../../examples/src6-vault/single_asset_vault/)
 
 A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single AssetId.
 
-## [Single Token Single Sub Vault](../../examples/src6-vault/single_token_single_sub_vault/)
+## [Single Asset Single Sub Vault](../../examples/src6-vault/single_asset_single_sub_vault/)
 
 A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single AssetId, and to a single Sub vault.

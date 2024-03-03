@@ -3,6 +3,10 @@ contract;
 use src3::SRC3;
 use src20::SRC20;
 use std::{
+    asset::{
+        burn,
+        mint_to,
+    },
     call_frames::{
         contract_id,
         msg_asset_id,
@@ -10,17 +14,13 @@ use std::{
     constants::DEFAULT_SUB_ID,
     context::msg_amount,
     string::String,
-    token::{
-        burn,
-        mint_to,
-    },
 };
 
 configurable {
     /// The decimals of the asset minted by this contract.
     DECIMALS: u8 = 9u8,
     /// The name of the asset minted by this contract.
-    NAME: str[7] = __to_str_array("MyToken"),
+    NAME: str[7] = __to_str_array("MyAsset"),
     /// The symbol of the asset minted by this contract.
     SYMBOL: str[5] = __to_str_array("MYTKN"),
 }
@@ -31,13 +31,13 @@ storage {
 }
 
 impl SRC3 for Contract {
-    /// Unconditionally mints new tokens using the default SubId.
+    /// Unconditionally mints new assets using the default SubId.
     ///
     /// # Arguments
     ///
-    /// * `recipient`: [Identity] - The user to which the newly minted tokens are transferred to.
+    /// * `recipient`: [Identity] - The user to which the newly minted asset is transferred to.
     /// * `sub_id`: [SubId] - The default SubId.
-    /// * `amount`: [u64] - The quantity of tokens to mint.
+    /// * `amount`: [u64] - The quantity of coins to mint.
     ///
     /// # Number of Storage Accesses
     ///
@@ -70,12 +70,12 @@ impl SRC3 for Contract {
         mint_to(recipient, DEFAULT_SUB_ID, amount);
     }
 
-    /// Unconditionally burns tokens sent with the default SubId.
+    /// Unconditionally burns assets sent with the default SubId.
     ///
     /// # Arguments
     ///
     /// * `sub_id`: [SubId] - The default SubId.
-    /// * `amount`: [u64] - The quantity of tokens to burn.
+    /// * `amount`: [u64] - The quantity of coins to burn.
     ///
     /// # Number of Storage Accesses
     ///
@@ -85,7 +85,7 @@ impl SRC3 for Contract {
     /// # Reverts
     ///
     /// * When the `sub_id` is not the default SubId.
-    /// * When the transaction did not include at least `amount` tokens.
+    /// * When the transaction did not include at least `amount` coins.
     /// * When the transaction did not include the asset minted by this contract.
     ///
     /// # Examples

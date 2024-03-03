@@ -1,13 +1,13 @@
 library;
 
 abi SRC3 {
-    /// Mints new tokens using the `vault_sub_id` sub-identifier.
+    /// Mints new assets using the `vault_sub_id` sub-identifier.
     ///
     /// # Arguments
     ///
-    /// * `recipient`: [Identity] - The user to which the newly minted tokens are transferred to.
-    /// * `vault_sub_id`: [SubId] - The sub-identifier of the newly minted token.
-    /// * `amount`: [u64] - The quantity of tokens to mint.
+    /// * `recipient`: [Identity] - The user to which the newly minted asset is transferred to.
+    /// * `vault_sub_id`: [SubId] - The sub-identifier of the newly minted asset.
+    /// * `amount`: [u64] - The quantity of coins to mint.
     ///
     /// # Examples
     ///
@@ -22,7 +22,7 @@ abi SRC3 {
     #[storage(read, write)]
     fn mint(recipient: Identity, vault_sub_id: SubId, amount: u64);
 
-    /// Burns tokens sent with the given `vault_sub_id`.
+    /// Burns assets sent with the given `vault_sub_id`.
     ///
     /// # Additional Information
     ///
@@ -31,8 +31,8 @@ abi SRC3 {
     ///
     /// # Arguments
     ///
-    /// * `vault_sub_id`: [SubId] - The sub-identifier of the token to burn.
-    /// * `amount`: [u64] - The quantity of tokens to burn.
+    /// * `vault_sub_id`: [SubId] - The sub-identifier of the asset to burn.
+    /// * `amount`: [u64] - The quantity of coins to burn.
     ///
     /// # Examples
     ///

@@ -5,5 +5,5 @@ members = [
   "src6-vault",
   "src7-metadata",
   "src10-native-bridge",
-  "src20-token",
+  "src20-native-asset",
 ]
