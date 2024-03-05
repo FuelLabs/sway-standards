@@ -132,7 +132,7 @@ A basic implementation of the vault standard demonstrating how to restrict depos
 
 Example of the SRC-7 implementation where metadata exists for only a single asset with one `SubId`.
 
-##### - [Mutli Native Asset](./examples/src7-metadata/multi_asset/src/multi_asset.sw)
+##### - [Multi Native Asset](./examples/src7-metadata/multi_asset/src/multi_asset.sw)
 
 Example of the SRC-7 implementation where metadata exists for multiple assets with differing `SubId`s.
 
