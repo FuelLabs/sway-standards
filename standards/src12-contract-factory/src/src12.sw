@@ -2,6 +2,7 @@ library;
 
 use std::{alloc::alloc_bytes, bytes::Bytes, hash::{Hash, Hasher}};
 
+pub type BytecodeRoot = b256;
 pub type ContractConfigurables = Vec<(u64, Vec<u8>)>;
 
 abi SRC12 {
@@ -11,6 +12,10 @@ abi SRC12 {
     ///
     /// * `child_contract`: [ContractId] - The deployed factory child contract which to verify the bytecode root.
     /// * `configurables`: [Option<ContractConfigurables>] - The configurables value set for the `child_contract`.
+    ///
+    /// # Returns
+    ///
+    /// * [Result<BytecodeRoot, str>] - Either the bytecode root of the newly registered contract or a `str` error message.
     ///
     /// # Examples
     ///
@@ -27,7 +32,7 @@ abi SRC12 {
     fn register_contract(
         child_contract: ContractId,
         configurables: Option<ContractConfigurables>,
-    ) -> Result<b256, str>;
+    ) -> Result<BytecodeRoot, str>;
 
     /// Returns a boolean representing the state of whether a contract is a valid child of the contract factory.
     ///
@@ -57,7 +62,7 @@ abi SRC12 {
     ///
     /// # Returns
     ///
-    /// * [Option<b256>] - The bytecode root of the default template contract.
+    /// * [Option<BytecodeRoot>] - The bytecode root of the default template contract.
     ///
     /// # Examples
     ///
@@ -72,7 +77,7 @@ abi SRC12 {
     /// }
     /// ```
     #[storage(read)]
-    fn factory_bytecode_root() -> Option<b256>;
+    fn factory_bytecode_root() -> Option<BytecodeRoot>;
 }
 
 abi SRC12_Extension {

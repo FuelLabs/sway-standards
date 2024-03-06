@@ -57,6 +57,10 @@ impl SRC12 for Contract {
     /// * `child_contract`: [ContractId] - The deployed factory child contract which to verify the bytecode root.
     /// * `configurables`: [Option<ContractConfigurables>] - The configurables value set for the `child_contract`.
     ///
+    /// # Returns
+    ///
+    /// * [Result<BytecodeRoot, str>] - Either the bytecode root of the newly registered contract or a `str` error message.
+    ///
     /// # Number of Storage Accesses
     ///
     /// * Writes: `2`
@@ -76,7 +80,7 @@ impl SRC12 for Contract {
     fn register_contract(
         child_contract: ContractId,
         configurables: Option<ContractConfigurables>,
-    ) -> Result<b256, str> {
+    ) -> Result<BytecodeRoot, str> {
         let returned_root = bytecode_root(child_contract);
 
         // If there are no configurables just use the default template
@@ -139,7 +143,7 @@ impl SRC12 for Contract {
     ///
     /// # Returns
     ///
-    /// * [Option<b256>] - The bytecode root of the default template contract.
+    /// * [Option<BytecodeRoot>] - The bytecode root of the default template contract.
     ///
     /// # Examples
     ///
@@ -154,7 +158,7 @@ impl SRC12 for Contract {
     /// }
     /// ```
     #[storage(read)]
-    fn factory_bytecode_root() -> Option<b256> {
+    fn factory_bytecode_root() -> Option<BytecodeRoot> {
         Some(TEMPLATE_BYTECODE_ROOT)
     }
 }
