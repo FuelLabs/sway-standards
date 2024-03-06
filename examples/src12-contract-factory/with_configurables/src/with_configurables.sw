@@ -76,7 +76,7 @@ impl SRC12 for Contract {
     fn register_contract(
         child_contract: ContractId,
         configurables: Option<ContractConfigurables>,
-    ) {
+    ) -> Result<b256, str> {
         let returned_root = bytecode_root(child_contract);
 
         // If there are no configurables just use the default template
@@ -91,15 +91,18 @@ impl SRC12 for Contract {
         };
 
         // Verify the roots match
-        require(
-            returned_root == computed_root,
-            "The deployed contract's bytecode root and expected contract bytecode root do not match",
-        );
+        if returned_root != computed_root {
+            return Result::Err(
+                "The deployed contract's bytecode root and expected contract bytecode root do not match",
+            );
+        }
 
         storage.registered_contracts.insert(child_contract, true);
         storage
             .contract_configurables
             .insert(sha256(configurables.unwrap_or(Vec::new())), child_contract);
+
+        return Result::Ok(computed_root)
     }
 
     /// Returns a boolean representing the state of whether a contract is a valid child of the contract factory.

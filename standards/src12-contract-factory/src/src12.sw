@@ -27,7 +27,7 @@ abi SRC12 {
     fn register_contract(
         child_contract: ContractId,
         configurables: Option<ContractConfigurables>,
-    );
+    ) -> Result<b256, str>;
 
     /// Returns a boolean representing the state of whether a contract is a valid child of the contract factory.
     ///

@@ -43,20 +43,22 @@ impl SRC12 for Contract {
     fn register_contract(
         child_contract: ContractId,
         configurables: Option<ContractConfigurables>,
-    ) {
-        require(
-            configurables
-                .is_none(),
-            "This SRC-12 implementation only registers contracts without configurable values",
-        );
+    ) -> Result<b256, str> {
+        if configurables.is_some() {
+            return Result::Err(
+                "This SRC-12 implementation only registers contracts without configurable values",
+            );
+        }
 
         let returned_root = bytecode_root(child_contract);
-        require(
-            returned_root == TEMPLATE_BYTECODE_ROOT,
-            "The deployed contract's bytecode root and template contract bytecode root do not match",
-        );
+        if returned_root != TEMPLATE_BYTECODE_ROOT {
+            return Result::Err(
+                "The deployed contract's bytecode root and template contract bytecode root do not match",
+            );
+        }
 
         storage.registered_contracts.insert(child_contract, true);
+        return Result::Ok(returned_root)
     }
 
     /// Returns a boolean representing the state of whether a contract is a valid child of the contract factory.

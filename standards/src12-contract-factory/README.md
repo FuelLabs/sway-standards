@@ -27,12 +27,14 @@ The following functions MUST be implemented to follow the SRC-12; Contract Facto
 
 ## Required Functions
 
-### - `fn register_contract(child_contract: ContractId, configurables: Option<Vec<(u64, Vec<u8>)>>)`
+### - `fn register_contract(child_contract: ContractId, configurables: Option<Vec<(u64, Vec<u8>)>>) -> Result<b256, str>`
 
 The `register_contract()` function verifies that a newly deployed contract is the child of a contract factory.
 
 - This function MUST verify that the bytecode root of the `child_contract` contract matches the expected bytecode root.
 - This function MUST calculate the bytecode root IF `configurables` is `Some`.
+- This function MUST not revert.
+- This function MUST return a `Result` containing the `b256` bytecode root of the newly registered contract or an `str` error message.
 - This function MAY add arbitrary conditions checking a contract factory child’s validity, such as verifying storage variables or initialized values.
 
 ### - `fn is_valid(child_contract: ContractId) -> bool`
@@ -70,7 +72,7 @@ This standard takes into consideration child contracts that are deployed with di
 ```sway
 abi SRC12 {
     #[storage(read, write)]
-    fn register_contract(child_contract: ContractId, configurables: Option<Vec<(u64, Vec<u8>)>>);
+    fn register_contract(child_contract: ContractId, configurables: Option<Vec<(u64, Vec<u8>)>>) -> Result<b256, str>;
     #[storage(read)]
     fn is_valid(child_contract: ContractId) -> bool;
     #[storage(read)]
