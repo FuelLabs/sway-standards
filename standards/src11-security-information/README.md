@@ -65,7 +65,7 @@ The release identifier of this build, ideally corresponding to a tag on git that
 
 ### `source_revision: Option<String>`
 
-The revision identifier of this build, usually a git sha that can be rebuilt to reproduce the same binary. 3rd party build verification tools will use this tag to identify a matching github release.
+The revision identifier of this build, usually a git commit hash that can be rebuilt to reproduce the same binary. 3rd party build verification tools will use this tag to identify a matching github release.
 
 ### `auditors: Option<Vec<String>>`
 
