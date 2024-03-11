@@ -49,6 +49,10 @@ The `factory_bytecode_root()` function returns the bytecode root of the default 
 
 - This function MUST return the bytecode root of the template contract.
 
+## Optional Functions
+
+The following are functions that may enhance the use of the SRC-12 standard but ARE NOT required.
+
 ### - `fn get_contract_id(configurables: Option<Vec<(u64, Vec<u8>)>>) -> Option<ContractId>`
 
 The `get_contract_id()` function returns a registered contract factory child contract with specific implementation details specified by `configurables`.
