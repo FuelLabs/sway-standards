@@ -1,6 +1,7 @@
 contract;
 
 use std::{
+    asset::transfer,
     call_frames::msg_asset_id,
     context::msg_amount,
     hash::{
@@ -9,7 +10,6 @@ use std::{
     },
     storage::storage_string::*,
     string::String,
-    token::transfer,
 };
 
 use src6::{Deposit, SRC6, Withdraw};
@@ -50,15 +50,6 @@ impl SRC6 for Contract {
         let (shares, share_asset, share_asset_vault_sub_id) = preview_deposit(underlying_asset, vault_sub_id, asset_amount);
 
         _mint(receiver, share_asset, share_asset_vault_sub_id, shares);
-        storage
-            .total_supply
-            .insert(
-                share_asset,
-                storage
-                    .total_supply
-                    .get(share_asset)
-                    .read() + shares,
-            );
 
         let mut vault_info = storage.vault_info.get(share_asset).read();
         vault_info.managed_assets = vault_info.managed_assets + asset_amount;
@@ -69,8 +60,8 @@ impl SRC6 for Contract {
             receiver,
             underlying_asset,
             vault_sub_id,
-            deposited_assets: asset_amount,
-            minted_shares,
+            deposited_amount: asset_amount,
+            minted_shares: shares,
         });
 
         shares
@@ -92,15 +83,6 @@ impl SRC6 for Contract {
         let assets = preview_withdraw(share_asset_id, shares);
 
         _burn(share_asset_id, share_asset_vault_sub_id, shares);
-        storage
-            .total_supply
-            .insert(
-                share_asset_id,
-                storage
-                    .total_supply
-                    .get(share_asset_id)
-                    .read() - shares,
-            );
 
         transfer(receiver, underlying_asset, assets);
 
@@ -109,7 +91,7 @@ impl SRC6 for Contract {
             receiver,
             underlying_asset,
             vault_sub_id,
-            withdrawn_assets: assets,
+            withdrawn_amount: assets,
             burned_shares: shares,
         });
 
@@ -218,7 +200,7 @@ pub fn _mint(
     vault_sub_id: SubId,
     amount: u64,
 ) {
-    use std::token::mint_to;
+    use std::asset::mint_to;
 
     let supply = storage.total_supply.get(asset_id).try_read();
     // Only increment the number of assets minted by this contract if it hasn't been minted before.
@@ -233,7 +215,7 @@ pub fn _mint(
 
 #[storage(read, write)]
 pub fn _burn(asset_id: AssetId, vault_sub_id: SubId, amount: u64) {
-    use std::{context::this_balance, token::burn};
+    use std::{asset::burn, context::this_balance};
 
     require(
         this_balance(asset_id) >= amount,

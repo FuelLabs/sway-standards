@@ -136,7 +136,7 @@ A basic implementation of the vault standard demonstrating how to restrict depos
 
 Example of the SRC-7 implementation where metadata exists for only a single asset with one `SubId`.
 
-##### - [Mutli Native Asset](./examples/src7-metadata/multi_asset/src/multi_asset.sw)
+##### - [Multi Native Asset](./examples/src7-metadata/multi_asset/src/multi_asset.sw)
 
 Example of the SRC-7 implementation where metadata exists for multiple assets with differing `SubId`s.
 
@@ -151,7 +151,7 @@ Example of the SRC-12 implementation where contract deployments contain configur
 Example of the SRC-12 implementation where all contract deployments are identitcal and thus have the same bytecode and root.
 
 > **Note**
-> All standards currently use `forc v0.49.1`.
+> All standards currently use `forc v0.50.0`.
 
 <!-- TODO:
 ## Contributing
