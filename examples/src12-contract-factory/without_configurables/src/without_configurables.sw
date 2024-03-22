@@ -21,7 +21,7 @@ impl SRC12 for Contract {
     ///
     /// # Arguments
     ///
-    /// * `child_contract`: [ContractId] - The deployed factory child contract which to verify the bytecode root.
+    /// * `child_contract`: [ContractId] - The deployed factory child contract of which to verify the bytecode root.
     /// * `configurables`: [Option<ContractConfigurables>] - The configurables value set for the `child_contract`.
     ///
     /// # Returns
@@ -69,7 +69,7 @@ impl SRC12 for Contract {
     ///
     /// # Arguments
     ///
-    /// * `child_contract`: [ContractId] - The deployed factory child contract which to check the registry status.
+    /// * `child_contract`: [ContractId] - The deployed factory child contract of which to check the registry status.
     ///
     /// # Returns
     ///

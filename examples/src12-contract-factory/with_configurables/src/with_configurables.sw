@@ -38,7 +38,7 @@ impl MyRegistryContract for Contract {
     /// # Additional Information
     ///
     /// Real world implementations should apply restrictions on this function such that it cannot
-    /// be change by anyone or only once.
+    /// be changed by anyone or can only be changed once.
     #[storage(read, write)]
     fn set_bytecode(bytecode: Vec<u8>) {
         storage.bytecode.store_vec(bytecode);
@@ -54,7 +54,7 @@ impl SRC12 for Contract {
     ///
     /// # Arguments
     ///
-    /// * `child_contract`: [ContractId] - The deployed factory child contract which to verify the bytecode root.
+    /// * `child_contract`: [ContractId] - The deployed factory child contract of which to verify the bytecode root.
     /// * `configurables`: [Option<ContractConfigurables>] - The configurables value set for the `child_contract`.
     ///
     /// # Returns
@@ -113,7 +113,7 @@ impl SRC12 for Contract {
     ///
     /// # Arguments
     ///
-    /// * `child_contract`: [ContractId] - The deployed factory child contract which to check the registry status.
+    /// * `child_contract`: [ContractId] - The deployed factory child contract of which to check the registry status.
     ///
     /// # Returns
     ///
