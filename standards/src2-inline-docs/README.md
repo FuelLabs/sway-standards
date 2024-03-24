@@ -277,6 +277,17 @@ Example:
 /// This configurable variable makes security assumptions.
 ```
 
+## Other Sections
+
+If the above described sections are not relevant for the information that needs to documented, a custom section with a arbitrary `h1` header may be utilized.
+
+Example:
+```
+/// # Recommended Message Style
+///
+/// We recommend that `expect` messages are used to describe the reason you *expect* the `Option` should be `Some`.
+```
+
 # Rationale
 
 The SRC-2 standard should help provide developers with an easy way to both quickly write inline documentation and get up to speed on other developers' code. This standard in combination with Fuel's VS Code extension provides readily accessible information on functions, structs, and enums
