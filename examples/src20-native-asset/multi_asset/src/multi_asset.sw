@@ -1,6 +1,6 @@
 contract;
 
-use src20::SRC20;
+use standards::src20::SRC20;
 use std::{hash::Hash, storage::storage_string::*, string::String};
 
 storage {
