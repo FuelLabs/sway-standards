@@ -5,5 +5,4 @@ license = "Apache-2.0"
 name = "single_asset_single_sub_vault"
 
 [dependencies]
-src20 = { path = "../../../standards/src20-native-asset" }
-src6 = { path = "../../../standards/src6-vault" }
+standards = { path = "../../../standards" }

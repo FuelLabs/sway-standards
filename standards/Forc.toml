@@ -1,9 +1,5 @@
-[workspace]
-members = [
-  "src3-mint-burn",
-  "src5-ownership",
-  "src6-vault",
-  "src7-metadata",
-  "src10-native-bridge",
-  "src20-native-asset",
-]
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "standards.sw"
+license = "Apache-2.0"
+name = "standards"

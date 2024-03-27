@@ -1,7 +1,7 @@
 <p align="center">
     <picture>
         <source media="(prefers-color-scheme: dark)" srcset=".docs/src-2-logo-dark-theme.png">
-        <img alt="SRC-5 logo" width="400px" src=".docs/src-2-logo-light-theme.png">
+        <img alt="SRC-2 logo" width="400px" src=".docs/src-2-logo-light-theme.png">
     </picture>
 </p>
 

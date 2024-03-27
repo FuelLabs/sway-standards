@@ -1,7 +1,6 @@
 contract;
 
-use src7::{Metadata, SRC7};
-use src20::SRC20;
+use standards::{src20::SRC20, src7::{Metadata, SRC7}};
 
 use std::{call_frames::contract_id, string::String};
 

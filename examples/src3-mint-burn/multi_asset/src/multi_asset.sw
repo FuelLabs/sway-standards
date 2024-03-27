@@ -1,7 +1,6 @@
 contract;
 
-use src3::SRC3;
-use src20::SRC20;
+use standards::{src20::SRC20, src3::SRC3};
 use std::{
     asset::{
         burn,

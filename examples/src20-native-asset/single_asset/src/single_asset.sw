@@ -1,6 +1,6 @@
 contract;
 
-use src20::SRC20;
+use standards::src20::SRC20;
 use std::{call_frames::contract_id, string::String};
 
 configurable {

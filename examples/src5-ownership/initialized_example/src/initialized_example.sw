@@ -1,6 +1,6 @@
 contract;
 
-use src5::{SRC5, State};
+use standards::src5::{SRC5, State};
 use std::constants::ZERO_B256;
 
 configurable {
