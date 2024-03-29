@@ -5,4 +5,4 @@ license = "Apache-2.0"
 name = "initialized_src5_example"
 
 [dependencies]
-src5 = { path = "../../../standards/src5-ownership" }
+standards = { path = "../../../standards" }
