@@ -35,15 +35,15 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 ### Native Assets
 
-- [SRC-20; Native Asset Standard](./standards/src20-native-asset/) defines the implementation of a standard API for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) using the Sway Language.
-- [SRC-3; Mint and Burn](./standards/src3-mint-burn/) is used to enable mint and burn functionality for Native Assets.
-- [SRC-7; Arbitrary Asset Metadata Standard](./standards/src7-metadata/) is used to store metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
-- [SRC-9; Metadata Keys Standard](./standards/src9-metadata-keys/) is used to store standardized metadata keys for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) in combination with the SRC-7 standard.
-- [SRC-6; Vault Standard](./standards/src6-vault/) defines the implementation of a standard API for asset vaults developed in Sway.
+- [SRC-20; Native Asset Standard](./SRCs/src20/) defines the implementation of a standard API for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) using the Sway Language.
+- [SRC-3; Mint and Burn](./SRCs/src3/) is used to enable mint and burn functionality for Native Assets.
+- [SRC-7; Arbitrary Asset Metadata Standard](./SRCs/src7/) is used to store metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
+- [SRC-9; Metadata Keys Standard](./SRCs/src9/) is used to store standardized metadata keys for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) in combination with the SRC-7 standard.
+- [SRC-6; Vault Standard](./SRCs/src6/) defines the implementation of a standard API for asset vaults developed in Sway.
 
 ### Access Control
 
-- [SRC-5; Ownership Standard](./standards/src5-ownership/) is used to restrict function calls to admin users in contracts.
+- [SRC-5; Ownership Standard](./SRCs/src5/) is used to restrict function calls to admin users in contracts.
 
 ### Contracts
 
@@ -51,35 +51,34 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 ### Bridge
 
-- [SRC-8; Bridged Asset](./standards/src8-bridged-asset/) defines the metadata required for an asset bridged to the Fuel Network.
-- [SRC-10; Native Bridge Standard](./standards/src10-native-bridge/) defines the standard API for the Native Bridge between the Fuel Chain and the canonical base chain.
+- [SRC-8; Bridged Asset](./SRCs/src8/) defines the metadata required for an asset bridged to the Fuel Network.
+- [SRC-10; Native Bridge Standard](./SRCs/src10/) defines the standard API for the Native Bridge between the Fuel Chain and the canonical base chain.
 
 ### Documentation
 
-- [SRC-2; Inline Documentation](./standards/src2-inline-docs/) defines how to document your Sway files.
+- [SRC-2; Inline Documentation](./SRCs/src2/) defines how to document your Sway files.
 
 ## Using a standard
 
 To import a standard the following should be added to the project's `Forc.toml` file under `[dependencies]` with the most recent release:
 
 ```rust
-standard = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.1.0" }
+standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.1.0" }
 ```
+
+> **NOTE:** 
+> Be sure to set the tag to the latest release.
 
 You may then import your desired standard in your Sway Smart Contract as so:
 
 ```rust
-use standard::<standard_abi>;
+use standards::<standard>::<standard_abi>;
 ```
 
-For example, to import the SRC-20 Native Asset Standard use the following statements in your `Forc.toml` and Sway Smart Contract file respectively:
+For example, to import the SRC-20 Native Asset Standard use the following statement in your Sway Smart Contract file:
 
 ```rust
-src20 = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.3.3" }
-```
-
-```rust
-use src20::SRC20;
+use standards::src20::SRC20;
 ```
 
 ### Examples of Standards
