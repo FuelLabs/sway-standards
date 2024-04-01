@@ -5,4 +5,4 @@ license = "Apache-2.0"
 name = "without_configurables_src12_registry"
 
 [dependencies]
-src12 = { path = "../../../standards/src12-contract-factory" }
+standards = { path = "../../../standards" }

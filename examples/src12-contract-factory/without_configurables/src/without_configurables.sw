@@ -1,6 +1,6 @@
 contract;
 
-use src12::*;
+use standards::src12::*;
 use std::{constants::ZERO_B256, external::bytecode_root, hash::Hash,};
 
 configurable {
