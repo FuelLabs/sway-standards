@@ -47,7 +47,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 ### Contracts
 
-- [SRC-12; Contract Factory](./standards/src12-contract-factory/) defines the implementation of a standard API for contract factories.
+- [SRC-12; Contract Factory](./SRCs/src-12.md) defines the implementation of a standard API for contract factories.
 
 ### Bridge
 
