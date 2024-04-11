@@ -110,6 +110,7 @@ impl SRC3 for Contract {
     ///     }.burn(DEFAULT_SUB_ID, 100);
     /// }
     /// ```
+    #[payable]
     #[storage(read, write)]
     fn burn(sub_id: SubId, amount: u64) {
         let asset_id = AssetId::new(contract_id(), sub_id);

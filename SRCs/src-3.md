@@ -56,7 +56,10 @@ The burn function may also introduce a security consideration if the total suppl
 
 ```rust
 abi MySRC3Asset {
+    #[storage(read, write)]
     fn mint(recipient: Identity, vault_sub_id: SubId, amount: u64);
+    #[payable]
+    #[storage(read, write)]
     fn burn(vault_sub_id: SubId, amount: u64);
 }
 ```
