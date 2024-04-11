@@ -48,6 +48,7 @@ abi SRC3 {
     ///     }.burn(ZERO_B256, 100);
     /// }
     /// ```
+    #[payable]
     #[storage(read, write)]
     fn burn(vault_sub_id: SubId, amount: u64);
 }
