@@ -6,10 +6,7 @@ use std::{
         burn,
         mint_to,
     },
-    call_frames::{
-        contract_id,
-        msg_asset_id,
-    },
+    call_frames::msg_asset_id,
     context::msg_amount,
     hash::Hash,
     storage::storage_string::*,
@@ -60,7 +57,7 @@ impl SRC3 for Contract {
     /// ```
     #[storage(read, write)]
     fn mint(recipient: Identity, sub_id: SubId, amount: u64) {
-        let asset_id = AssetId::new(contract_id(), sub_id);
+        let asset_id = AssetId::new(ContractId::this(), sub_id);
 
         // If this SubId is new, increment the total number of distinguishable assets this contract has minted.
         let asset_supply = storage.total_supply.get(asset_id).try_read();
@@ -113,7 +110,7 @@ impl SRC3 for Contract {
     #[payable]
     #[storage(read, write)]
     fn burn(sub_id: SubId, amount: u64) {
-        let asset_id = AssetId::new(contract_id(), sub_id);
+        let asset_id = AssetId::new(ContractId::this(), sub_id);
         require(msg_amount() == amount, "Incorrect amount provided");
         require(msg_asset_id() == asset_id, "Incorrect asset provided");
 
