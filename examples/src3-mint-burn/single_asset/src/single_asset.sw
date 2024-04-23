@@ -102,6 +102,7 @@ impl SRC3 for Contract {
     ///     }.burn(DEFAULT_SUB_ID, 100);
     /// }
     /// ```
+    #[payable]
     #[storage(read, write)]
     fn burn(sub_id: SubId, amount: u64) {
         require(sub_id == DEFAULT_SUB_ID, "Incorrect Sub Id");
