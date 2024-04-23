@@ -1,0 +1,8 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "without_configurables.sw"
+license = "Apache-2.0"
+name = "without_configurables_src12_registry"
+
+[dependencies]
+standards = { path = "../../../standards" }

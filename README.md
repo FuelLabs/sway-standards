@@ -45,6 +45,10 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 - [SRC-5; Ownership Standard](./SRCs/src5/) is used to restrict function calls to admin users in contracts.
 
+### Contracts
+
+- [SRC-12; Contract Factory](./SRCs/src-12.md) defines the implementation of a standard API for contract factories.
+
 ### Bridge
 
 - [SRC-8; Bridged Asset](./SRCs/src8/) defines the metadata required for an asset bridged to the Fuel Network.
@@ -134,6 +138,16 @@ Example of the SRC-7 implementation where metadata exists for only a single asse
 ##### - [Multi Native Asset](./examples/src7-metadata/multi_asset/src/multi_asset.sw)
 
 Example of the SRC-7 implementation where metadata exists for multiple assets with differing `SubId`s.
+
+#### SRC-12; Contract Factory Standard Examples
+
+##### [With Configurables](../../examples/src12-contract-factory/with_configurables/src/with_configurables.sw)
+
+Example of the SRC-12 implementation where contract deployments contain configurable values that differentiate the bytecode root from other contracts with the same bytecode.
+
+##### [Without Configurables](../../examples/src12-contract-factory/without_configurables/src/without_configurables.sw)
+
+Example of the SRC-12 implementation where all contract deployments are identitcal and thus have the same bytecode and root.
 
 > **Note**
 > All standards currently use `forc v0.53.0`.

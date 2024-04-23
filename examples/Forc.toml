@@ -11,6 +11,8 @@ members = [
   "src7-metadata/multi_asset",
   "src11-security-information/hardcoded-information",
   "src11-security-information/variable-information",
+  "src12-contract-factory/with_configurables",
+  "src12-contract-factory/without_configurables",
   "src20-native-asset/single_asset",
   "src20-native-asset/multi_asset",
 ]
