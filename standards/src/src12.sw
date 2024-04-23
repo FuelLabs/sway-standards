@@ -120,7 +120,7 @@ impl Hash for ContractConfigurables {
 
             // Overwrite the configurable data into the buffer
             offset_ptr.copy_bytes_to(buffer, 4);
-            data.buf.ptr.copy_bytes_to(buffer.add::<u8>(4), data.len());
+            data.ptr().copy_bytes_to(buffer.add::<u8>(4), data.len());
 
             state.write(Bytes::from(raw_slice::from_parts::<u8>(buffer, data.len() + 4)));
             configurable_iterator += 1;
