@@ -7,7 +7,7 @@
 
 # Abstract
 
-The following standard allows for the implementation of a standard API for asset vaults such as yield-bearing asset vaults or asset wrappers. This standard is an optional add-on to the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src20-native-asset) standard.
+The following standard allows for the implementation of a standard API for asset vaults such as yield-bearing asset vaults or asset wrappers. This standard is an optional add-on to the [SRC-20](./src-20.md) standard.
 
 # Motivation
 
@@ -144,7 +144,7 @@ The ABI discussed covers the known use cases of asset vaults while allowing safe
 
 # Backwards Compatibility
 
-This standard is fully compatible with the [SRC-20 standard](https://github.com/FuelLabs/sway-standards/tree/master/standards/src20-native-asset).
+This standard is fully compatible with the [SRC-20 standard](./src-20.md).
 
 # Security Considerations
 
@@ -175,14 +175,14 @@ abi SRC6 {
 
 # Example Implementation
 
-## [Multi Asset Vault](../../examples/src6-vault/multi_asset_vault/)
+## [Multi Asset Vault](../examples/src6-vault/multi_asset_vault)
 
 A basic implementation of the vault standard that supports any number of sub vaults being created for every AssetId.
 
-## [Single Asset Vault](../../examples/src6-vault/single_asset_vault/)
+## [Single Asset Vault](../examples/src6-vault/single_asset_vault)
 
 A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single AssetId.
 
-## [Single Asset Single Sub Vault](../../examples/src6-vault/single_asset_single_sub_vault/)
+## [Single Asset Single Sub Vault](../examples/src6-vault/single_asset_single_sub_vault)
 
 A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single AssetId, and to a single Sub vault.
