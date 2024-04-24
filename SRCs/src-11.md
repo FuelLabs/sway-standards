@@ -114,10 +114,10 @@ abi SRC11 {
 
 # Example Implementation
 
-## [Hard coded information](../../examples/src11-security-information/hardcoded-information)
+## [Hard coded information](../examples/src11-security-information/hardcoded-information)
 
 A basic implementation of the security information standard demonstrating how to hardcode information to be returned.
 
-## [Variable information](../../examples/src11-security-information/variable-information)
+## [Variable information](../examples/src11-security-information/variable-information)
 
 A basic implementation of the security information standard demonstrating how to return variable information that can be edited to keep it up to date. In this example only the contact_information field is variable, but the same method can be applied to any field which you wish to update.
