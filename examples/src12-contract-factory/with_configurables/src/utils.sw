@@ -1,6 +1,6 @@
 library;
 
-use std::{alloc::{alloc, realloc_bytes}, bytes::Bytes,};
+use std::{alloc::{alloc, alloc_bytes, realloc_bytes}, bytes::Bytes,};
 
 /// Pre-defined number of bytes of a leaf in a bytecode merkle tree.
 const LEAF_SIZE = 16 * 1024;
@@ -118,8 +118,8 @@ pub fn _swap_configurables(
         let (offset, data) = configurables.get(configurable_iterator).unwrap();
 
         // Overwrite the configurable data into the bytecode
-        data.buf
-            .ptr
+        data
+            .ptr()
             .copy_bytes_to(bytecode.ptr().add::<u8>(offset), data.len());
 
         configurable_iterator += 1;
@@ -130,17 +130,16 @@ pub fn _swap_configurables(
 /// https://github.com/FuelLabs/sway-libs/tree/master/libs/bytecode
 fn _leaf_digest(data: raw_slice, ref mut result_buffer: raw_ptr) {
     let number_of_bytes = data.number_of_bytes();
-    let mut bytes = Bytes::with_capacity(number_of_bytes + 1);
+    let ptr = alloc_bytes(number_of_bytes + 1);
 
     // Prepend LEAF to the leaf bytes
-    bytes.buf.ptr().write_byte(LEAF);
+    ptr.write_byte(LEAF);
     data
         .ptr()
-        .copy_bytes_to(bytes.buf.ptr().add_uint_offset(1), number_of_bytes);
-    bytes.len = number_of_bytes + 1;
+        .copy_bytes_to(ptr.add_uint_offset(1), number_of_bytes);
 
     // Compute the digest
-    asm(hash: result_buffer, ptr: bytes.buf.ptr, bytes: bytes.len) {
+    asm(hash: result_buffer, ptr: ptr, bytes: number_of_bytes + 1) {
         s256 hash ptr bytes;
     };
 }
@@ -148,18 +147,15 @@ fn _leaf_digest(data: raw_slice, ref mut result_buffer: raw_ptr) {
 /// This function is copied from the Sway Libs Bytecode Library.
 /// https://github.com/FuelLabs/sway-libs/tree/master/libs/bytecode
 fn _node_digest(left: raw_ptr, right: raw_ptr, result_buffer: raw_ptr) {
-    let mut bytes = Bytes::with_capacity(65);
-    let new_ptr_left = bytes.buf.ptr().add_uint_offset(1);
-    let new_ptr_right = bytes.buf.ptr().add_uint_offset(33);
+    let ptr = alloc_bytes(65);
 
     // Prepend NODE and concat the 2 node bytes for the current node
-    bytes.buf.ptr().write_byte(NODE);
-    left.copy_bytes_to(new_ptr_left, 32);
-    right.copy_bytes_to(new_ptr_right, 32);
-    bytes.len = 65;
+    ptr.write_byte(NODE);
+    left.copy_bytes_to(ptr.add_uint_offset(1), 32);
+    right.copy_bytes_to(ptr.add_uint_offset(33), 32);
 
     // Compute the digest
-    asm(hash: result_buffer, ptr: bytes.buf.ptr, bytes: bytes.len) {
+    asm(hash: result_buffer, ptr: ptr, bytes: 65) {
         s256 hash ptr bytes;
     };
 }
