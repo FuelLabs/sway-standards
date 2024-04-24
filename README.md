@@ -141,11 +141,11 @@ Example of the SRC-7 implementation where metadata exists for multiple assets wi
 
 #### SRC-12; Contract Factory Standard Examples
 
-##### [With Configurables](../../examples/src12-contract-factory/with_configurables/src/with_configurables.sw)
+##### [With Configurables](./examples/src12-contract-factory/with_configurables/src/with_configurables.sw)
 
 Example of the SRC-12 implementation where contract deployments contain configurable values that differentiate the bytecode root from other contracts with the same bytecode.
 
-##### [Without Configurables](../../examples/src12-contract-factory/with_configurables/src/without_configurables.sw)
+##### [Without Configurables](./examples/src12-contract-factory/with_configurables/src/without_configurables.sw)
 
 Example of the SRC-12 implementation where all contract deployments are identitcal and thus have the same bytecode and root.
 
