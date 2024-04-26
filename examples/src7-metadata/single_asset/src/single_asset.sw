@@ -2,7 +2,7 @@ contract;
 
 use standards::{src20::SRC20, src7::{Metadata, SRC7}};
 
-use std::{call_frames::contract_id, string::String};
+use std::string::String;
 
 configurable {
     /// The total supply of coins for the asset minted by this contract.
