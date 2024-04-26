@@ -35,15 +35,15 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 ### Native Assets
 
-- [SRC-20; Native Asset Standard](./SRCs/src20/) defines the implementation of a standard API for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) using the Sway Language.
-- [SRC-3; Mint and Burn](./SRCs/src3/) is used to enable mint and burn functionality for Native Assets.
-- [SRC-7; Arbitrary Asset Metadata Standard](./SRCs/src7/) is used to store metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
-- [SRC-9; Metadata Keys Standard](./SRCs/src9/) is used to store standardized metadata keys for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) in combination with the SRC-7 standard.
-- [SRC-6; Vault Standard](./SRCs/src6/) defines the implementation of a standard API for asset vaults developed in Sway.
+- [SRC-20; Native Asset Standard](./SRCs/src-20.md) defines the implementation of a standard API for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) using the Sway Language.
+- [SRC-3; Mint and Burn](./SRCs/src-3.md) is used to enable mint and burn functionality for Native Assets.
+- [SRC-7; Arbitrary Asset Metadata Standard](./SRCs/src-7.md) is used to store metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
+- [SRC-9; Metadata Keys Standard](./SRCs/src-9.md) is used to store standardized metadata keys for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) in combination with the SRC-7 standard.
+- [SRC-6; Vault Standard](./SRCs/src-6.md) defines the implementation of a standard API for asset vaults developed in Sway.
 
 ### Access Control
 
-- [SRC-5; Ownership Standard](./SRCs/src5/) is used to restrict function calls to admin users in contracts.
+- [SRC-5; Ownership Standard](./SRCs/src-5.md) is used to restrict function calls to admin users in contracts.
 
 ### Contracts
 
@@ -51,12 +51,12 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 ### Bridge
 
-- [SRC-8; Bridged Asset](./SRCs/src8/) defines the metadata required for an asset bridged to the Fuel Network.
-- [SRC-10; Native Bridge Standard](./SRCs/src10/) defines the standard API for the Native Bridge between the Fuel Chain and the canonical base chain.
+- [SRC-8; Bridged Asset](./SRCs/src-8.md) defines the metadata required for an asset bridged to the Fuel Network.
+- [SRC-10; Native Bridge Standard](./SRCs/src-10.md) defines the standard API for the Native Bridge between the Fuel Chain and the canonical base chain.
 
 ### Documentation
 
-- [SRC-2; Inline Documentation](./SRCs/src2/) defines how to document your Sway files.
+- [SRC-2; Inline Documentation](./SRCs/src-2.md) defines how to document your Sway files.
 
 ## Using a standard
 
@@ -141,11 +141,11 @@ Example of the SRC-7 implementation where metadata exists for multiple assets wi
 
 #### SRC-12; Contract Factory Standard Examples
 
-##### [With Configurables](../../examples/src12-contract-factory/with_configurables/src/with_configurables.sw)
+##### [With Configurables](./examples/src12-contract-factory/with_configurables/src/with_configurables.sw)
 
 Example of the SRC-12 implementation where contract deployments contain configurable values that differentiate the bytecode root from other contracts with the same bytecode.
 
-##### [Without Configurables](../../examples/src12-contract-factory/without_configurables/src/without_configurables.sw)
+##### [Without Configurables](./examples/src12-contract-factory/without_configurables/src/without_configurables.sw)
 
 Example of the SRC-12 implementation where all contract deployments are identitcal and thus have the same bytecode and root.
 

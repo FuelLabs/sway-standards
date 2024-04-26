@@ -38,7 +38,7 @@ The `register_token()` function compiles a message to be sent back to the canoni
 The `process_message()` function accepts incoming deposit messages from the canonical chain and issues the corresponding bridged asset.
 
 - This function MUST parse a message at the given `message_index` index. 
-- This function SHALL mint an asset that follows the [SRC-8; Bridged Asset Standard](https://github.com/FuelLabs/sway-standards/tree/master/standards/src8-bridged-asset). 
+- This function SHALL mint an asset that follows the [SRC-8; Bridged Asset Standard](./src-8.md). 
 - This function SHALL issue a refund if there is an error in the bridging process.
 
 ### - `fn withdraw(to_address: b256, sub_id: SubId, gateway_contract: b256)`
@@ -101,7 +101,7 @@ struct MessageData {
 
 ## Required Standards
 
-Any contract that implements the SRC-10; Native Bridge Standard MUST implement the [SRC-8; Bridged Asset Standard](https://github.com/FuelLabs/sway-standards/tree/master/standards/src8-bridged-asset) for all bridged assets. 
+Any contract that implements the SRC-10; Native Bridge Standard MUST implement the [SRC-8; Bridged Asset Standard](./src-8.md) for all bridged assets. 
 
 # Rationale 
 

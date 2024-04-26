@@ -67,7 +67,7 @@ On the Fuel Network, the process for sending any [Native Assets](https://docs.fu
 
 # Backwards Compatibility
 
-This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) and the [SRC-20](https://github.com/FuelLabs/sway-standards/tree/master/standards/src20-native-asset) standard.
+This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) and the [SRC-20](./src-20.md) standard.
 
 # Security Considerations
 
