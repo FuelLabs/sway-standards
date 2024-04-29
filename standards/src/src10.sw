@@ -1,46 +1,45 @@
 library;
 
-/// Enscapsultes metadata sent between the canonical chain and Fuel.
-struct MessageData {
+/// Specifies the type of deposit made.
+pub enum DepositType {
+    /// The deposit was made to an Address.
+    Address: (),
+    /// The deposit was made to a Contract.
+    Contract: (),
+    /// The deposit was made to a Contract and contains additioanl data for the Fuel chain.
+    ContractWithData: (),
+}
+
+/// Enscapsultes metadata sent between the canonical chain and Fuel when a deposit is made.
+struct DepositMessage {
     /// The number of tokens.
     pub amount: b256,
     /// The user's address on the canonical chain.
     pub from: b256,
-    /// The number of deposit messages.
-    pub len: u16,
     /// The bridging target destination on the Fuel chain.
     pub to: Identity,
     /// The bridged token's address on the canonical chain.
     pub token_address: b256,
     /// The token's ID on the canonical chain.
     pub token_id: b256,
+    /// The decimals of the token.
+    pub decimals: u8,
+    /// The type of deposit made.
+    pub deposit_type: DepositType,
+}
+
+pub struct MetadataMessage {
+    /// The bridged token's address on the canonical chain.
+    pub token_address: b256,
+    /// The token's ID on the canonical chain.
+    pub token_id: b256,
+    /// The bridged token's name on the canonical chain.
+    pub name: String,
+    /// The bridged token's symbol on the canonical chain.
+    pub symbol: String,
 }
 
 abi SRC10 {
-    /// Compiles a message to be sent back to the canonical chain.
-    ///
-    /// # Additional Information
-    ///
-    /// * The `gateway` contract on the canonical chain receives the `token_address` ID in the message such that when assets are deposited they are reported to prevent loss of funds.
-    ///
-    /// # Arguments
-    ///
-    /// * `token_address`: [b256] - The token's address on the canonical chain.
-    /// * `gateway_contract`: [b256] - The contract that accepts deposits on the canonical chain.
-    ///
-    /// # Examples
-    ///
-    /// ```sway
-    /// use src10::SRC10;
-    ///
-    /// fn foo(gateway_contract: b256, token_address: b256, bridge: ContractId) {
-    ///     let bridge_abi = abi(SRC10, bridge.value);
-    ///     bridge_abi.register_token(token_address, gateway_contract);
-    /// }
-    /// ```
-    #[storage(read, write)]
-    fn register_token(token_address: b256, gateway_contract: b256);
-
     /// Accepts incoming deposit messages from the canonical chain and issues the corresponding bridged asset.
     ///
     /// # Arguments
@@ -73,17 +72,17 @@ abi SRC10 {
     /// ```sway
     /// use src10::SRC10;
     ///
-    /// fn foo(to_address: b256, asset_sub_id: SubId, gateway_contract: b256, bridge: ContractId, bridged_asset: AssetId) {
+    /// fn foo(to_address: b256, bridge: ContractId, bridged_asset: AssetId) {
     ///     let bridge_abi = abi(SRC10, bridge.value);
     ///     bridge_abi {
     ///         gas: 10000,
     ///         coins: 100,
     ///         asset_id: bridged_asset,
-    ///     }.withdraw(to_address, asset_sub_id, gateway_contract);
+    ///     }.withdraw(to_address);
     /// }
     /// ```
     #[storage(read, write)]
-    fn withdraw(to_address: b256, sub_id: SubId, gateway_contract: b256);
+    fn withdraw(to_address: b256);
 
     /// Returns a refund on the canonical chain if an error occurs while bridging.
     ///
