@@ -1,5 +1,7 @@
 library;
 
+use std::string::String;
+
 /// Specifies the type of deposit made.
 pub enum DepositType {
     /// The deposit was made to an Address.
