@@ -63,7 +63,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 To import a standard the following should be added to the project's `Forc.toml` file under `[dependencies]` with the most recent release:
 
 ```rust
-standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.1.0" }
+standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.5.0" }
 ```
 
 > **NOTE:** 
@@ -150,7 +150,7 @@ Example of the SRC-12 implementation where contract deployments contain configur
 Example of the SRC-12 implementation where all contract deployments are identitcal and thus have the same bytecode and root.
 
 > **Note**
-> All standards currently use `forc v0.53.0`.
+> All standards currently use `forc v0.56.0`.
 
 <!-- TODO:
 ## Contributing

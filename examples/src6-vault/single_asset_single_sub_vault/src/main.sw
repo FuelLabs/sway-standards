@@ -3,10 +3,7 @@ contract;
 use std::{
     asset::transfer,
     call_frames::msg_asset_id,
-    constants::{
-        BASE_ASSET_ID,
-        ZERO_B256,
-    },
+    constants::ZERO_B256,
     context::msg_amount,
     hash::{
         Hash,
@@ -19,8 +16,6 @@ use std::{
 use standards::{src20::SRC20, src6::{Deposit, SRC6, Withdraw}};
 
 configurable {
-    /// The only asset that can be deposited and withdrawn from this vault.
-    ACCEPTED_ASSET: AssetId = BASE_ASSET_ID,
     /// The only sub vault that can be deposited and withdrawn from this vault.
     ACCEPTED_SUB_VAULT: SubId = ZERO_B256,
     PRE_CALCULATED_SHARE_VAULT_SUB_ID: SubId = 0xf5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b,
@@ -42,7 +37,7 @@ impl SRC6 for Contract {
         require(vault_sub_id == ACCEPTED_SUB_VAULT, "INVALID_vault_sub_id");
 
         let underlying_asset = msg_asset_id();
-        require(underlying_asset == ACCEPTED_ASSET, "INVALID_ASSET_ID");
+        require(underlying_asset == AssetId::base(), "INVALID_ASSET_ID");
 
         let asset_amount = msg_amount();
         require(asset_amount != 0, "ZERO_ASSETS");
@@ -73,7 +68,7 @@ impl SRC6 for Contract {
         underlying_asset: AssetId,
         vault_sub_id: SubId,
     ) -> u64 {
-        require(underlying_asset == ACCEPTED_ASSET, "INVALID_ASSET_ID");
+        require(underlying_asset == AssetId::base(), "INVALID_ASSET_ID");
         require(vault_sub_id == ACCEPTED_SUB_VAULT, "INVALID_vault_sub_id");
 
         let shares = msg_amount();
@@ -102,7 +97,7 @@ impl SRC6 for Contract {
 
     #[storage(read)]
     fn managed_assets(underlying_asset: AssetId, vault_sub_id: SubId) -> u64 {
-        if underlying_asset == ACCEPTED_ASSET && vault_sub_id == ACCEPTED_SUB_VAULT {
+        if underlying_asset == AssetId::base() && vault_sub_id == ACCEPTED_SUB_VAULT {
             // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
             storage.managed_assets.read()
         } else {
@@ -116,7 +111,7 @@ impl SRC6 for Contract {
         underlying_asset: AssetId,
         vault_sub_id: SubId,
     ) -> Option<u64> {
-        if underlying_asset == ACCEPTED_ASSET {
+        if underlying_asset == AssetId::base() {
             // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
             Some(u64::max() - storage.managed_assets.read())
         } else {
@@ -126,7 +121,7 @@ impl SRC6 for Contract {
 
     #[storage(read)]
     fn max_withdrawable(underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64> {
-        if underlying_asset == ACCEPTED_ASSET {
+        if underlying_asset == AssetId::base() {
             // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
             Some(storage.managed_assets.read())
         } else {
