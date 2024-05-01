@@ -25,14 +25,6 @@ The following functions MUST be implemented to follow the SRC-10; Native Bridge 
 
 ## Required Functions
 
-### - `fn register_token(token_address: b256, gateway_contract: b256)`
-
-The `register_token()` function compiles a message to be sent back to the canonical chain to register a token to be bridged. The `gateway_contract` contract on the canonical chain receives the `token_address` token address in the message such that when `token_addess` tokens are deposited on the canonical chain they are reported to prevent loss of funds. 
-
-> **NOTE:*** Trying to deposit tokens to a contract ID that does not exist or does not implement the Fuel Messaging Portal would mean permanent loss of funds.
-
-- This function MUST send a message on the canonical chain to the `gateway_contract` contract, registering the specified `token_address` token that exists on the canonical chain. 
-
 ### - `fn process_message(message_index: u64)`
 
 The `process_message()` function accepts incoming deposit messages from the canonical chain and issues the corresponding bridged asset.
@@ -41,12 +33,12 @@ The `process_message()` function accepts incoming deposit messages from the cano
 - This function SHALL mint an asset that follows the [SRC-8; Bridged Asset Standard](./src-8.md). 
 - This function SHALL issue a refund if there is an error in the bridging process.
 
-### - `fn withdraw(to_address: b256, sub_id: SubId, gateway_contract: b256)`
+### - `fn withdraw(to_address: b256)`
 
-The `withdraw()` function accepts and burns a bridged Native Asset on Fuel and sends a message to the `gateway_contract` contract on the canonical chain to release the originally deposited tokens to the `to_address` address.
+The `withdraw()` function accepts and burns a bridged Native Asset on Fuel and sends a message to the bridge contract on the canonical chain to release the originally deposited tokens to the `to_address` address.
 
-- This function SHALL send a message to the `gateway_contract` contract to release the bridged tokens to the `to_address` address on the canonical chain.
-- This function MUST ensure the `sha256(contract_id(), sub_id)` digest matches the asset's `AssetId` sent in the transaction.
+- This function SHALL send a message to the bridge contract to release the bridged tokens to the `to_address` address on the canonical chain.
+- This function MUST ensure the asset's `AssetId` sent in the transaction matches a bridged asset.
 - This function SHALL burn all coins sent in the transaction.
 
 ### - `fn claim_refund(to_address: b256, token_address: b256, token_id: b256, gateway_contract: b256)`
@@ -58,9 +50,35 @@ The `claim_refund()` function is called if something goes wrong in the bridging 
 
 ## Required Data Types
 
-### `MessageData`
+### `DepositType`
 
-The following describes a struct that encapsulates various message metadata to a single type. There MUST be the following fields in the `MessageData` struct:
+The `DepositType` enum decribes whether the bridged deposit is made to a address, contract, or contract and contains additional metatdata. There MUST be the following varients in the `DepositType` enum:
+
+#### Address: `()`
+
+The `Address` varient MUST represent when the deposit is made to an address on the Fuel chain.
+
+#### Contract: `()`
+
+The `Contract` varient MUST represent when the deposit is made to an contract on the Fuel chain.
+
+#### ContractWithData: `()`
+
+The `ContractWithData` varient MUST represent when the deposit is made to an contract and contains additional metadata for the Fuel chain.
+
+#### Example
+
+```sway
+pub enum DepositType {
+    Address: (),
+    Contract: (),
+    ContractWithData: (),
+}
+```
+
+### `DepositMessage`
+
+The following describes a struct that encapsulates various deposit message metadata to a single type. There MUST be the following fields in the `DepositMessage` struct:
 
 #### - amount: `u256`
 
@@ -69,10 +87,6 @@ The `amount` field MUST represent the number of tokens.
 #### - from: `b256`
 
 The `from` field MUST represent the bridging user’s address on the canonical chain.
-
-#### - len: `u16`
-
-The `len` field MUST represent the number of the deposit messages to discern between deposits that must be forwarded to an EOA vs deposits that must be forwarded to a contract.
 
 #### - to: `Identity`
 
@@ -86,16 +100,56 @@ The `token_address` field MUST represent the bridged token's address on the cano
 
 The `token_id` field MUST represent the token's ID on the canonical chain. The `ZERO_B256` MUST be used if this is a fungible token and no token ID exists.
 
+#### - decimals: `u8`
+
+The `decimals` field MUST represent the bridged token's decimals on the canonical chain.
+
+#### - deposit_type: `DepositType`
+
+The `deposit_type` field MUST represent the type of bridge deposit made on the canonical chain.
+
+#### Example
+
+```sway 
+pub struct DepositMessage {
+    pub amount: b256,
+    pub from: b256,
+    pub to: Identity,
+    pub token_address: b256,
+    pub token_id: b256,
+    pub decimals: u8,
+    pub deposit_type: DepositType,
+}
+```
+
+### `MetadataMessage`
+
+The following describes a struct that encapsulates the metadata of token on the canonical chain to a single type. There MUST be the following fields in the `MetadataMessage` struct:
+
+#### token_address: `b256`
+
+The `token_address` field MUST represent the bridged token's address on the canonical chain.
+
+#### token_id: `b256`
+
+The `token_id` field MUST represent the token's ID on the canonical chain. The `ZERO_B256` MUST be used if this is a fungible token and no token ID exists.
+
+#### name: `String`
+
+The `name` field MUST represent the bridged token's name field on the canonical chain.
+
+#### symbol: `String`
+
+The `symbol` field MUST represent the bridged token's symbol field on the canonical chain.
+
 ### Example
 
 ```sway 
-struct MessageData {
-     amount: b256,
-     from: b256,
-     len: u16,
-     to: Identity,
-     token_address: b256,
-     token_id: b256,
+pub struct MetadataMessage {
+    pub token_address: b256,
+    pub token_id: b256,
+    pub name: String,
+    pub symbol: String,
 }
 ```
 
@@ -115,9 +169,8 @@ This standard is compatible with the SRC-20 and SRC-8 standards.
 
 ```sway
 abi SRC10 {
-     fn register_token(token_address: b256, gateway_contract: b256);
      fn process_message(message_index: u64);
-     fn withdraw(to_address: b256, sub_id: SubId, gateway_contract: b256);
+     fn withdraw(to_address: b256);
      fn claim_refund(to_address: b256, token_address: b256, token_id: b256, gateway_contract: b256);
 }
 ```
