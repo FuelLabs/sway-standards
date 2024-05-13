@@ -22,9 +22,9 @@
 
 ## Overview
 
-The purpose of this repository is to contain standards for the Sway Language which users can import and use. 
+The purpose of this repository is to contain standards for the Sway Language which users can import and use.
 
-Standards in this repository may be in various stages of development. Use of draft standards and feedback on the proposed standards is encouraged. To use a draft, search for a standard using the appropriate GitHub label and implement the standard abi into your contract. 
+Standards in this repository may be in various stages of development. Use of draft standards and feedback on the proposed standards is encouraged. To use a draft, search for a standard using the appropriate GitHub label and implement the standard abi into your contract.
 
 If you don't find what you're looking for, feel free to create an issue and propose a new standard!
 
@@ -66,7 +66,7 @@ To import a standard the following should be added to the project's `Forc.toml` 
 standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.5.0" }
 ```
 
-> **NOTE:** 
+> **NOTE:**
 > Be sure to set the tag to the latest release.
 
 You may then import your desired standard in your Sway Smart Contract as so:
@@ -87,7 +87,7 @@ Minimal example implementations for every standard can be found in the [`example
 
 #### SRC-20; Native Asset Standard Examples
 
-##### - [Single Native Assset](./examples/src20-native-asset/single_asset/src/single_asset.sw)
+##### - [Single Native Asset](./examples/src20-native-asset/single_asset/src/single_asset.sw)
 
 Example of the SRC-20 implementation where a contract contains a single asset with one `SubId`. This implementation is recommended for users that intend to deploy a single asset with their contract.
 
@@ -119,15 +119,15 @@ Example of the SRC-5 implementation where a contract has an owner set at compile
 
 ##### [Multi Asset Vault](./examples/src6-vault/multi_asset_vault/)
 
-A basic implementation of the vault standard that supports any number of sub vaults being created for every AssetId.
+A basic implementation of the vault standard that supports any number of sub vaults being created for every `AssetId`.
 
 ##### [Single Asset Vault](./examples/src6-vault/single_asset_vault/)
 
-A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single AssetId.
+A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single `AssetId`.
 
 ##### [Single Asset Single Sub Vault](./examples/src6-vault/single_asset_single_sub_vault/)
 
-A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single AssetId, and to a single Sub vault.
+A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single `AssetId`, and to a single Sub vault.
 
 #### SRC-7; Arbitrary Asset Metadata Standard Examples
 
@@ -147,7 +147,7 @@ Example of the SRC-12 implementation where contract deployments contain configur
 
 ##### [Without Configurables](./examples/src12-contract-factory/without_configurables/src/without_configurables.sw)
 
-Example of the SRC-12 implementation where all contract deployments are identitcal and thus have the same bytecode and root.
+Example of the SRC-12 implementation where all contract deployments are identical and thus have the same bytecode and root.
 
 > **Note**
 > All standards currently use `forc v0.56.0`.
