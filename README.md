@@ -36,7 +36,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 ### Native Assets
 
 - [SRC-20; Native Asset Standard](./SRCs/src-20.md) defines the implementation of a standard API for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) using the Sway Language.
-- [SRC-3; Mint and Burn](./SRCs/src-3.md) is used to enable mint and burn functionality for Native Assets.
+- [SRC-3; Mint and Burn](./SRCs/src-3.md) is used to enable mint and burn functionality for fungible assets.
 - [SRC-7; Arbitrary Asset Metadata Standard](./SRCs/src-7.md) is used to store metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
 - [SRC-9; Metadata Keys Standard](./SRCs/src-9.md) is used to store standardized metadata keys for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) in combination with the SRC-7 standard.
 - [SRC-6; Vault Standard](./SRCs/src-6.md) defines the implementation of a standard API for asset vaults developed in Sway.
