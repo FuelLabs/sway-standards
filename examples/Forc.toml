@@ -13,6 +13,8 @@ members = [
   "src11-security-information/variable-information",
   "src12-contract-factory/with_configurables",
   "src12-contract-factory/without_configurables",
+  "src14-simple-proxy/owned",
+  "src14-simple-proxy/minimal",
   "src20-native-asset/single_asset",
   "src20-native-asset/multi_asset",
 ]
