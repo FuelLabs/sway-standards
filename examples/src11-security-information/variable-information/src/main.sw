@@ -4,21 +4,20 @@ use standards::src11::{SecurityInformation, SRC11};
 
 use std::{storage::{storage_string::*, storage_vec::*,}, string::String, vec::Vec,};
 
-configurable {
-    /// The name of the project
-    NAME: str[7] = __to_str_array("Example"),
-    /// The URL of the project
-    PROJECT_URL: str[19] = __to_str_array("https://example.com"),
-    /// The security policy of the project
-    POLICY: str[35] = __to_str_array("https://example.com/security_policy"),
-    /// The preferred languages of the project
-    PREFERRED_LANGUAGES1: str[2] = __to_str_array("en"),
-    PREFERRED_LANGUAGES2: str[2] = __to_str_array("ja"),
-    PREFERRED_LANGUAGES3: str[2] = __to_str_array("zh"),
-    PREFERRED_LANGUAGES4: str[2] = __to_str_array("hi"),
-    /// The encryption key of the project
-    ENCRYPTION: str[751] = __to_str_array(
-        "-----BEGIN PGP PUBLIC KEY BLOCK-----
+/// The name of the project
+const NAME: str[7] = __to_str_array("Example");
+/// The URL of the project
+const PROJECT_URL: str[19] = __to_str_array("https://example.com");
+/// The security policy of the project
+const POLICY: str[35] = __to_str_array("https://example.com/security_policy");
+/// The preferred languages of the project
+const PREFERRED_LANGUAGES1: str[2] = __to_str_array("en");
+const PREFERRED_LANGUAGES2: str[2] = __to_str_array("ja");
+const PREFERRED_LANGUAGES3: str[2] = __to_str_array("zh");
+const PREFERRED_LANGUAGES4: str[2] = __to_str_array("hi");
+/// The encryption key of the project
+const ENCRYPTION: str[751] = __to_str_array(
+    "-----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: Alice's OpenPGP certificate
 Comment: https://www.ietf.org/id/draft-bre-openpgp-samples-01.html
 
@@ -33,20 +32,19 @@ DAAKCRDyMVUMT0fjjlnQAQDFHUs6TIcxrNTtEZFjUFm1M0PJ1Dng/cDW4xN80fsn
 0QEA22Kr7VkCjeAEC08VSTeV+QFsmz55/lntWkwYWhmvOgE=
 =iIGO
 -----END PGP PUBLIC KEY BLOCK-----",
-    ),
-    /// The URL of the project's source code
-    SOURCE_CODE: str[31] = __to_str_array("https://github.com/example/test"),
-    /// The release identifier of this build
-    SOURCE_RELEASE: str[6] = __to_str_array("v1.0.0"),
-    /// The revision identifier of this build
-    SOURCE_REVISION: str[12] = __to_str_array("a1b2c3d4e5f6"),
-    /// The URL of the project's auditors
-    AUDITORS: str[28] = __to_str_array("https://example.com/auditors"),
-    /// The URL of the project's acknowledgements
-    ACKNOWLEDGEMENTS: str[36] = __to_str_array("https://example.com/acknowledgements"),
-    /// The URL of the project's additional information
-    ADDITIONAL_INFORMATION: str[42] = __to_str_array("https://example.com/additional_information"),
-}
+);
+/// The URL of the project's source code
+const SOURCE_CODE: str[31] = __to_str_array("https://github.com/example/test");
+/// The release identifier of this build
+const SOURCE_RELEASE: str[6] = __to_str_array("v1.0.0");
+/// The revision identifier of this build
+const SOURCE_REVISION: str[12] = __to_str_array("a1b2c3d4e5f6");
+/// The URL of the project's auditors
+const AUDITORS: str[28] = __to_str_array("https://example.com/auditors");
+/// The URL of the project's acknowledgements
+const ACKNOWLEDGEMENTS: str[36] = __to_str_array("https://example.com/acknowledgements");
+/// The URL of the project's additional information
+const ADDITIONAL_INFORMATION: str[42] = __to_str_array("https://example.com/additional_information");
 
 storage {
     /// The contact information for the security contact.
