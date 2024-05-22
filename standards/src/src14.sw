@@ -21,3 +21,8 @@ abi SRC14 {
     #[storage(write)]
     fn set_proxy_target(new_target: ContractId);
 }
+
+/// The standard storage slot to store proxy target address.
+///
+/// Value is `sha256("storage_SRC14_0")`.
+pub const SRC14_TARGET_STORAGE: b256 = 0x7bb458adc1d118713319a5baa00a2d049dd64d2916477d2688d76970c898cd55;
