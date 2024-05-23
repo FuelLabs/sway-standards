@@ -5,7 +5,6 @@ mod utils;
 use utils::{_compute_bytecode_root, _swap_configurables};
 use standards::src12::*;
 use std::{
-    constants::ZERO_B256,
     external::bytecode_root,
     hash::{
         Hash,
@@ -15,7 +14,7 @@ use std::{
 };
 
 configurable {
-    TEMPLATE_BYTECODE_ROOT: b256 = ZERO_B256,
+    TEMPLATE_BYTECODE_ROOT: b256 = b256::zero(),
 }
 
 storage {
@@ -149,12 +148,11 @@ impl SRC12 for Contract {
     ///
     /// ```sway
     /// use src12::SRC12;
-    /// use std::constants::ZERO_B256;
     ///
     /// fn foo(my_src_12_contract: ContractId) {
     ///     let src_12_contract_abi = abi(SRC12, my_src_12_contract.bits());
     ///     let root = src_12_contract_abi.factory_bytecode_root();
-    ///     assert(root.unwrap() != ZERO_B256);
+    ///     assert(root.unwrap() != b256::zero());
     /// }
     /// ```
     #[storage(read)]

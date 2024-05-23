@@ -98,7 +98,7 @@ The `token_address` field MUST represent the bridged token's address on the cano
 
 #### - token_id: `b256`
 
-The `token_id` field MUST represent the token's ID on the canonical chain. The `ZERO_B256` MUST be used if this is a fungible token and no token ID exists.
+The `token_id` field MUST represent the token's ID on the canonical chain. The `b256::zero()` MUST be used if this is a fungible token and no token ID exists.
 
 #### - decimals: `u8`
 
@@ -132,7 +132,7 @@ The `token_address` field MUST represent the bridged token's address on the cano
 
 #### token_id: `b256`
 
-The `token_id` field MUST represent the token's ID on the canonical chain. The `ZERO_B256` MUST be used if this is a fungible token and no token ID exists.
+The `token_id` field MUST represent the token's ID on the canonical chain. The `b256::zero()` MUST be used if this is a fungible token and no token ID exists.
 
 #### name: `String`
 

@@ -16,7 +16,7 @@ abi SRC3 {
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SR3, contract);
-    ///     contract_abi.mint(Identity::ContractId(contract_id), ZERO_B256, 100);
+    ///     contract_abi.mint(Identity::ContractId(contract_id), SubId::zero(), 100);
     /// }
     /// ```
     #[storage(read, write)]
@@ -45,7 +45,7 @@ abi SRC3 {
     ///         gas: 10000,
     ///         coins: 100,
     ///         asset_id: asset_id,
-    ///     }.burn(ZERO_B256, 100);
+    ///     }.burn(SubId::zero(), 100);
     /// }
     /// ```
     #[payable]
