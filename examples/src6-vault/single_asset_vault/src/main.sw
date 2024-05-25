@@ -45,7 +45,7 @@ impl SRC6 for Contract {
         let asset_amount = msg_amount();
         let underlying_asset = msg_asset_id();
 
-        require(underlying_asset == AssetId::base(), "INVALID_ASSET_ID");
+        require(underlying_asset == AssetId::base_asset_id(), "INVALID_ASSET_ID");
         let (shares, share_asset, share_asset_vault_sub_id) = preview_deposit(underlying_asset, vault_sub_id, asset_amount);
         require(asset_amount != 0, "ZERO_ASSETS");
 
@@ -100,7 +100,7 @@ impl SRC6 for Contract {
 
     #[storage(read)]
     fn managed_assets(underlying_asset: AssetId, vault_sub_id: SubId) -> u64 {
-        if underlying_asset == AssetId::base() {
+        if underlying_asset == AssetId::base_asset_id() {
             let vault_share_asset = vault_asset_id(underlying_asset, vault_sub_id).0;
             // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
             managed_assets(vault_share_asset)
@@ -115,7 +115,7 @@ impl SRC6 for Contract {
         underlying_asset: AssetId,
         vault_sub_id: SubId,
     ) -> Option<u64> {
-        if underlying_asset == AssetId::base() {
+        if underlying_asset == AssetId::base_asset_id() {
             // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
             Some(u64::max() - managed_assets(underlying_asset))
         } else {
@@ -125,7 +125,7 @@ impl SRC6 for Contract {
 
     #[storage(read)]
     fn max_withdrawable(underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64> {
-        if underlying_asset == AssetId::base() {
+        if underlying_asset == AssetId::base_asset_id() {
             // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
             Some(managed_assets(underlying_asset))
         } else {

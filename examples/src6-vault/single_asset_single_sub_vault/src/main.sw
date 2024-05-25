@@ -37,7 +37,7 @@ impl SRC6 for Contract {
         require(vault_sub_id == ACCEPTED_SUB_VAULT, "INVALID_vault_sub_id");
 
         let underlying_asset = msg_asset_id();
-        require(underlying_asset == AssetId::base(), "INVALID_ASSET_ID");
+        require(underlying_asset == AssetId::base_asset_id(), "INVALID_ASSET_ID");
 
         let asset_amount = msg_amount();
         require(asset_amount != 0, "ZERO_ASSETS");
@@ -68,7 +68,7 @@ impl SRC6 for Contract {
         underlying_asset: AssetId,
         vault_sub_id: SubId,
     ) -> u64 {
-        require(underlying_asset == AssetId::base(), "INVALID_ASSET_ID");
+        require(underlying_asset == AssetId::base_asset_id(), "INVALID_ASSET_ID");
         require(vault_sub_id == ACCEPTED_SUB_VAULT, "INVALID_vault_sub_id");
 
         let shares = msg_amount();
@@ -97,7 +97,7 @@ impl SRC6 for Contract {
 
     #[storage(read)]
     fn managed_assets(underlying_asset: AssetId, vault_sub_id: SubId) -> u64 {
-        if underlying_asset == AssetId::base() && vault_sub_id == ACCEPTED_SUB_VAULT {
+        if underlying_asset == AssetId::base_asset_id() && vault_sub_id == ACCEPTED_SUB_VAULT {
             // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
             storage.managed_assets.read()
         } else {
@@ -111,7 +111,7 @@ impl SRC6 for Contract {
         underlying_asset: AssetId,
         vault_sub_id: SubId,
     ) -> Option<u64> {
-        if underlying_asset == AssetId::base() {
+        if underlying_asset == AssetId::base_asset_id() {
             // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
             Some(u64::max() - storage.managed_assets.read())
         } else {
@@ -121,7 +121,7 @@ impl SRC6 for Contract {
 
     #[storage(read)]
     fn max_withdrawable(underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64> {
-        if underlying_asset == AssetId::base() {
+        if underlying_asset == AssetId::base_asset_id() {
             // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
             Some(storage.managed_assets.read())
         } else {

@@ -1,6 +1,6 @@
 library;
 
-use std::{alloc::alloc_bytes, bytes::Bytes, hash::{Hash, Hasher}, vec::*};
+use std::{alloc::alloc_bytes, bytes::Bytes, hash::{Hash, Hasher}};
 
 pub type BytecodeRoot = b256;
 pub type ContractConfigurables = Vec<(u64, Vec<u8>)>;

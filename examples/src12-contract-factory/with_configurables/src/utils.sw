@@ -119,6 +119,7 @@ pub fn _swap_configurables(
 
         // Overwrite the configurable data into the bytecode
         data
+            .buf
             .ptr()
             .copy_bytes_to(bytecode.ptr().add::<u8>(offset), data.len());
 
