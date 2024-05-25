@@ -11,7 +11,7 @@ const INITIAL_OWNER: Identity = Identity::Address(Address::from(ZERO_B256));
 // use sha256("storage_SRC14") as base to avoid collisions
 #[namespace(SRC14)]
 storage {
-    // target is as sha256("storage_SRC14_0")
+    // target is at sha256("storage_SRC14_0")
     target: ContractId = ContractId::from(ZERO_B256),
     owner: State = State::Initialized(INITIAL_OWNER),
 }
