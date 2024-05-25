@@ -13,32 +13,32 @@ pub enum DepositType {
 }
 
 /// Enscapsultes metadata sent between the canonical chain and Fuel when a deposit is made.
-struct DepositMessage {
+pub struct DepositMessage {
     /// The number of tokens.
-    pub amount: b256,
+    amount: b256,
     /// The user's address on the canonical chain.
-    pub from: b256,
+    from: b256,
     /// The bridging target destination on the Fuel chain.
-    pub to: Identity,
+    to: Identity,
     /// The bridged token's address on the canonical chain.
-    pub token_address: b256,
+    token_address: b256,
     /// The token's ID on the canonical chain.
-    pub token_id: b256,
+    token_id: b256,
     /// The decimals of the token.
-    pub decimals: u8,
+    decimals: u8,
     /// The type of deposit made.
-    pub deposit_type: DepositType,
+    deposit_type: DepositType,
 }
 
 pub struct MetadataMessage {
     /// The bridged token's address on the canonical chain.
-    pub token_address: b256,
+    token_address: b256,
     /// The token's ID on the canonical chain.
-    pub token_id: b256,
+    token_id: b256,
     /// The bridged token's name on the canonical chain.
-    pub name: String,
+    name: String,
     /// The bridged token's symbol on the canonical chain.
-    pub symbol: String,
+    symbol: String,
 }
 
 abi SRC10 {

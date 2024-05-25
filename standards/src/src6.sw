@@ -3,33 +3,33 @@ library;
 /// Event logged when a deposit is made.
 pub struct Deposit {
     /// The caller of the deposit function.
-    pub caller: Identity,
+    caller: Identity,
     /// The receiver of the deposit.
-    pub receiver: Identity,
+    receiver: Identity,
     /// The asset being deposited.
-    pub underlying_asset: AssetId,
+    underlying_asset: AssetId,
     /// The SubId of the vault.
-    pub vault_sub_id: SubId,
+    vault_sub_id: SubId,
     /// The amount of assets being deposited.
-    pub deposited_amount: u64,
+    deposited_amount: u64,
     /// The amount of shares being minted.
-    pub minted_shares: u64,
+    minted_shares: u64,
 }
 
 /// Event logged when a withdrawal is made.
 pub struct Withdraw {
     /// The caller of the withdrawal function.
-    pub caller: Identity,
+    caller: Identity,
     /// The receiver of the withdrawal.
-    pub receiver: Identity,
+    receiver: Identity,
     /// The asset being withdrawn.
-    pub underlying_asset: AssetId,
+    underlying_asset: AssetId,
     /// The SubId of the vault.
-    pub vault_sub_id: SubId,
+    vault_sub_id: SubId,
     /// The amount of assets being withdrawn.
-    pub withdrawn_amount: u64,
+    withdrawn_amount: u64,
     /// The amount of shares being burned.
-    pub burned_shares: u64,
+    burned_shares: u64,
 }
 
 abi SRC6 {
