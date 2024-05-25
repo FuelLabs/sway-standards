@@ -1,6 +1,6 @@
 library;
 
-use std::{alloc::alloc_bytes, bytes::Bytes, hash::{Hash, Hasher}};
+use std::{alloc::alloc_bytes, bytes::Bytes, hash::{Hash, Hasher}, vec::*};
 
 pub type BytecodeRoot = b256;
 pub type ContractConfigurables = Vec<(u64, Vec<u8>)>;
@@ -120,7 +120,7 @@ impl Hash for ContractConfigurables {
 
             // Overwrite the configurable data into the buffer
             offset_ptr.copy_bytes_to(buffer, 4);
-            data.ptr().copy_bytes_to(buffer.add::<u8>(4), data.len());
+            data.buf.ptr().copy_bytes_to(buffer.add::<u8>(4), data.len());
 
             state.write(Bytes::from(raw_slice::from_parts::<u8>(buffer, data.len() + 4)));
             configurable_iterator += 1;
