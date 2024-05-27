@@ -58,7 +58,7 @@ As it is the first attempt to standardize proxy implementation, we do not consid
 ## Security Considerations
 
 Permissioning proxy target changes is the primary consideration here.
-This standard is not opinionated about means of achieving this, use of SRC-5 is recommended.
+This standard is not opinionated about means of achieving this, use of [SRC-5](https://github.com/FuelLabs/sway-standards/blob/master/SRCs/src-5.md) is recommended.
 
 ## Example ABI
 
@@ -77,4 +77,4 @@ Example of a minimal SRC-14 implementation with no access control.
 
 ### [Owned Proxy](../examples/examples/src14-simple-proxy/owned/src/owned.sw)
 
-Example of a SRC-14 implementation that also implements SRC-5.
+Example of a SRC-14 implementation that also implements [SRC-5](https://github.com/FuelLabs/sway-standards/blob/master/SRCs/src-5.md).
