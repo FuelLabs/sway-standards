@@ -46,7 +46,7 @@ This method SHOULD implement access controls such that the target can only be ch
 
 This standard is meant to provide simple upgradability, it is deliberately minimalistic and does not provide the level of functionality of diamonds.
 
-Unlike in UUPS, this standard requires that the upgrade function is part of the proxy and not its target.
+Unlike in [UUPS](https://eips.ethereum.org/EIPS/eip-1822), this standard requires that the upgrade function is part of the proxy and not its target.
 This prevents irrecoverable updates if a proxy is made to point to another proxy and no longer has access to upgrade logic.
 
 ## Backwards Compatibility
