@@ -71,7 +71,7 @@ abi SRC14 {
 
 ## Example Implementation
 
-### [Minimal Proxy](../examples/src14-simple-proxy/owned/src/minimal.sw)
+### [Minimal Proxy](../examples/src14-simple-proxy/minimal/src/minimal.sw)
 
 Example of a minimal SRC-14 implementation with no access control.
 
