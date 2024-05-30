@@ -1,7 +1,5 @@
 # SRC-2: Inline Documentation
 
-## Abstract
-
 The following standard intends to define the structure and organization of inline documentation for functions, structs, enums, storage, configurables, and more within the Sway Language. This is a living standard.
 
 ## Motivation
@@ -18,7 +16,7 @@ A number of pre-existing functions in the [sway standard library](https://github
 
 The following describes the structure and order of inline documentation for functions. Some sections MAY NOT apply to each function. When a section is not relevant it SHALL be omitted.
 
-#### Description
+#### Functions: Description
 
 This section has no header.
 A simple explanation of the function's intent or functionality.
@@ -28,7 +26,7 @@ Example:
 /// This function computes the hash of two numbers.
 ```
 
-#### Additional Information
+#### Functions: Additional Information
 
 This section has a `h1` header.
 This section is directly below the description and can provide additional information beyond the function's intent or functionality.
@@ -40,7 +38,7 @@ Example:
 /// This function also has some complex behaviors.
 ```
 
-#### Arguments
+#### Functions: Arguments
 
 This section has a `h1` header.
 Lists the arguments of the function's definition with the `*` symbol and describes each one. The list SHALL provide the name, type, and description. The argument SHALL be encapsulated between two backticks: `argument`. The type SHALL be encapsulated between two square brackets: [type].
@@ -52,7 +50,7 @@ Example:
 /// * `argument_1`: [Identity] - This argument is a user to be hashed.
 ```
 
-#### Returns
+#### Functions: Returns
 
 This section has a `h1` header.
 Lists the return values of the function with the `*` symbol and describes each one. This list SHALL be in the order of the return index and provide the type and description. The type SHALL be encapsulated between two square brackets: [type].
@@ -64,7 +62,7 @@ Example:
 /// * [u64] - The number of hashes performed.
 ```
 
-#### Reverts
+#### Functions: Reverts
 
 This section has a `h1` header.
 Lists the cases in which the function will revert starting with the `*` symbol. The list SHALL be in the order of occurrence within the function.
@@ -76,7 +74,7 @@ Example:
 /// * When `argument_1` or `argument_2` are a zero [b256].
 ```
 
-#### Number of Storage Accesses
+#### Functions: Number of Storage Accesses
 
 This section has a `h1` header.
 Provides information on how many storage reads, writes, and clears occur within the function.
@@ -89,7 +87,7 @@ Example:
 /// * Clears: `2`
 ```
 
-#### Examples
+#### Functions: Examples
 
 This section has a `h1` header.
 This section provides an example of the use of the function. This section is not required to follow the SRC-2 standard however encouraged for auxiliary and library functions.
@@ -104,11 +102,11 @@ Example:
 /// }
 ```
 
-## Structs
+### Structs
 
 The following describes the structure and order of inline documentation for structs. Some sections MAY NOT apply to each struct. When a section is not relevant it SHALL be omitted.
 
-#### Description
+#### Structs: Description
 
 This section has no header.
 A simple explanation of the struct's purpose or functionality.
@@ -118,7 +116,7 @@ Example:
 /// This struct contains information on an NFT.
 ```
 
-#### Additional Information
+#### Structs: Additional Information
 
 This section has a `h1` header.
 This section is directly below the description and can provide additional information beyond the struct's purpose or functionality.
@@ -134,7 +132,7 @@ Example:
 
 The following describes the structure and order of inline documentation for fields within structs. Some sections MAY NOT apply to each field. When a section is not relevant it SHALL be omitted.
 
-#### Description
+#### Fields: Description
 
 This section has no header.
 Each field SHALL have its own description with a simple explanation of the field's purpose or functionality.
@@ -145,7 +143,7 @@ Example:
 field_1: Identity,
 ```
 
-#### Additional Information
+#### Fields: Additional Information
 
 This section has a `h1` header.
 This section is directly below the description and can provide additional information beyond the field's purpose or functionality.
@@ -157,11 +155,11 @@ Example:
 /// This field also has some complex behaviors.
 ```
 
-## Enums
+### Enums
 
 The following describes the structure and order of inline documentation for enums. Some sections MAY NOT apply to each enum. When a section is not relevant it SHALL be omitted.
 
-#### Description
+#### Enums: Description
 
 This section has no header.
 A simple explanation of the enum's purpose or functionality.
@@ -171,7 +169,7 @@ Example:
 /// This enum holds the state of a contract.
 ```
 
-#### Additional Information
+#### Enums: Additional Information
 
 This section has a `h1` header.
 This section is directly below the description and can provide additional information beyond the enum's purpose or functionality.
@@ -187,7 +185,7 @@ Example:
 
 The following describes the structure and order of inline documentation for fields within enums. Some sections MAY NOT apply to each field. When a section is not relevant it SHALL be omitted.
 
-#### Description
+#### Variant: Description
 
 This section has no header.
 Each variant SHALL have its own description with a simple explanation of the variant's purpose or functionality.
@@ -200,7 +198,7 @@ variant_1: (),
 variant_2: Identity,
 ```
 
-#### Additional Information
+#### Variant: Additional Information
 
 This section has a `h1` header.
 This section is directly below the description and can provide additional information beyond the variant's purpose or functionality.
@@ -212,19 +210,19 @@ Example:
 /// This variant also has some complex behaviors.
 ```
 
-## Errors
+### Errors
 
 In Sway, errors are recommended to be enums. They SHALL follow the same structure and order for inline documentation as described above for enums. Some sections MAY NOT apply to each error. When a section is not relevant it SHALL be omitted.
 
-## Logs
+### Logs
 
 In Sway, logs are recommended to be structs. They SHALL follow the same structure and order for inline documentation as described above for structs. Some sections MAY NOT apply to each log. When a section is not relevant it SHALL be omitted.
 
-## Storage
+### Storage
 
 The following describes the structure and order of inline documentation for variables within the storage block. Some sections MAY NOT apply to each storage variable. When a section is not relevant it SHALL be omitted.
 
-#### Description
+#### Storage: Description
 
 This section has no header.
 A simple explanation of the storage variable's purpose or functionality.
@@ -234,7 +232,7 @@ Example:
 /// This storage variable is used for state.
 ```
 
-#### Additional Information
+#### Storage: Additional Information
 
 This section has a `h1` header.
 This section is directly below the description and can provide additional information beyond the storage variable's purpose or functionality.
@@ -246,11 +244,11 @@ Example:
 /// This storage variable maps a user to a state.
 ```
 
-## Configurable
+### Configurable
 
 The following describes the structure and order of inline documentation for variables in the configurable block. Some sections MAY NOT apply to each storage variable. When a section is not relevant it SHALL be omitted.
 
-#### Description
+#### Configurable: Description
 
 This section has no header.
 A simple explanation of the configurable variable's purpose or functionality.
@@ -260,7 +258,7 @@ Example:
 /// This configurable variable is used for an address.
 ```
 
-#### Additional Information
+#### Configurable: Additional Information
 
 This section has a `h1` header.
 This section is directly below the description and can provide additional information beyond the configurable variable's purpose or functionality.
@@ -272,7 +270,7 @@ Example:
 /// This configurable variable makes security assumptions.
 ```
 
-## Other Sections
+### Other Sections
 
 If the above described sections are not relevant for the information that needs to documented, a custom section with a arbitrary `h1` header may be utilized.
 
@@ -300,7 +298,7 @@ This standard will improve security by providing developers with relevant inform
 
 ## Examples
 
-## Function Example
+### Function Example
 
 ```sway
 /// Ensures that the sender is the owner.
@@ -341,7 +339,7 @@ pub fn only_owner(self, number: u64) -> bool {
 }
 ```
 
-## Struct Examples
+### Struct Examples
 
 ```sway
 /// Metadata that is tied to an asset.
@@ -361,7 +359,7 @@ pub struct Bid {
 }
 ```
 
-## Enum Examples
+### Enum Examples
 
 ```sway
 /// Determines the state of ownership.
@@ -383,7 +381,7 @@ pub enum AccessError {
 }
 ```
 
-## Storage Examples
+### Storage Examples
 
 ```sway
 storage {
@@ -398,7 +396,7 @@ storage {
 }
 ```
 
-## Configurable Example
+### Configurable Example
 
 ```sway
 configurable {

@@ -60,7 +60,7 @@ This error MUST be emitted when `only_owner()` reverts.
 
 In order to provide a universal method of administrative capabilities, SRC-5 will further enable interoperability between applications and provide safeguards for smart contract security.
 
-## Backwards Compatability
+## Backwards Compatibility
 
 The SRC-5 standard is compatible with the [sway-libs](https://github.com/FuelLabs/sway-libs) repository pre-existing Ownership library. Considerations should be made to best handle multiple owners or admins.
 

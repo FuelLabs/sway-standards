@@ -1,6 +1,6 @@
 # SRC-6: Vault
 
-The following standard allows for the implementation of a standard API for asset vaults such as yield-bearing asset vaults or asset wrappers. This standard is an optional add-on to the [SRC-20](./src-20.md) standard.
+The following standard allows for the implementation of a standard API for asset vaults such as yield-bearing asset vaults or asset wrappers. This standard is an optional add-on to the [SRC-20](./src-20-native-asset.md) standard.
 
 ## Motivation
 
@@ -23,31 +23,31 @@ This function takes the `receiver` Identity and the SubId `vault_sub_id` of the 
 - This function MUST allow for depositing of the underlying asset in exchange for pro-rata shares of the vault.
 - This function MAY reject arbitrary assets based on implementation and MUST revert if unaccepted assets are forwarded.
 - This function MAY reject any arbitrary `receiver` based on implementation and MUST revert in the case of a blacklisted or non-whitelisted `receiver`.
-- This function MUST mint an asset representing the pro-rata share of the vault, with the SubId of the `sha256((underlying_asset, vault_sub_id))` digest, where `underlying_asset` is the AssetId of the deposited asset and the `vault_sub_id` is the id of the vault.
+- This function MUST mint an asset representing the pro-rata share of the vault, with the SubId of the `sha256((underlying_asset, vault_sub_id))` digest, where `underlying_asset` is the `AssetId` of the deposited asset and the `vault_sub_id` is the id of the vault.
 - This function MUST emit a `Deposit` log.
 - This function MUST return the amount of minted shares.
 
 #### `fn withdraw(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> u64`
 
-This function takes the `receiver` Identity, the `underlying_asset` AssetId, and the `vault_sub_id` of the sub vault, as arguments and returns the amount of assets transferred to the `receiver`.
+This function takes the `receiver` Identity, the `underlying_asset` `AssetId`, and the `vault_sub_id` of the sub vault, as arguments and returns the amount of assets transferred to the `receiver`.
 
 - This function MUST allow for redeeming of the vault shares in exchange for a pro-rata amount of the underlying assets.
-- This function MUST revert if any AssetId other than the AssetId representing the underlying asset's shares for the given sub vault at `vault_sub_id` is forwarded. (i.e. transferred share's AssetId must be equal to `AssetId::new(ContractId::this(), sha256((underlying_asset, vault_sub_id))`)
+- This function MUST revert if any `AssetId` other than the `AssetId` representing the underlying asset's shares for the given sub vault at `vault_sub_id` is forwarded. (i.e. transferred share's `AssetId` must be equal to `AssetId::new(ContractId::this(), sha256((underlying_asset, vault_sub_id))`)
 - This function MUST burn the received shares.
 - This function MUST emit a `Withdraw` log.
 - This function MUST return amount of assets transferred to the receiver.
 
 #### `fn managed_assets(underlying_asset: AssetId, vault_sub_id: SubId) -> u64`
 
-This function returns the total assets under management by vault. Includes assets controlled by the vault but not directly possessed by vault. It takes the `underlying_asset` AssetId and the `vault_sub_id` of the sub vault as arguments and returns the total amount of assets of AssetId under management by vault.
+This function returns the total assets under management by vault. Includes assets controlled by the vault but not directly possessed by vault. It takes the `underlying_asset` `AssetId` and the `vault_sub_id` of the sub vault as arguments and returns the total amount of assets of `AssetId` under management by vault.
 
-- This function MUST return total amount of assets of `underlying_asset` AssetId under management by vault.
-- This function MUST return 0 if there are no assets of `underlying_asset` AssetId under management by vault.
+- This function MUST return total amount of assets of `underlying_asset` `AssetId` under management by vault.
+- This function MUST return 0 if there are no assets of `underlying_asset` `AssetId` under management by vault.
 - This function MUST NOT revert under any circumstances.
 
 #### `fn max_depositable(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64>`
 
-This is a helper function for getting the maximum amount of assets that can be deposited. It takes the hypothetical `receiver` Identity, the `underlying_asset` AssetId, and the `vault_sub_id` SubId of the sub vault as an arguments and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
+This is a helper function for getting the maximum amount of assets that can be deposited. It takes the hypothetical `receiver` `Identity`, the `underlying_asset` `AssetId`, and the `vault_sub_id` `SubId` of the sub vault as an arguments and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
 
 - This function MUST return the maximum amount of assets that can be deposited into the contract, for the given `underlying_asset`, if the given `vault_sub_id` vault exists.
 - This function MUST return an `Some(amount)` if the given `vault_sub_id` vault exists.
@@ -75,27 +75,27 @@ The `Deposit` struct MUST be logged whenever new shares are minted via the `depo
 
 The `Deposit` log SHALL have the following fields.
 
-##### - `caller`: `Identity`
+##### `caller`: `Identity`
 
 The `caller` field MUST represent the `Identity` which called the deposit function.
 
-##### - `receiver`: `Identity`
+##### `receiver`: `Identity`
 
 The `receiver` field MUST represent the `Identity` which received the vault shares.
 
-##### - `underlying_asset`: `AssetId`
+##### `underlying_asset`: `AssetId`
 
 The `underlying_asset` field MUST represent the `AssetId` of the asset which was deposited into the vault.
 
-##### - `vault_sub_id`: `SubId`
+##### `vault_sub_id`: `SubId`
 
 The `vault_sub_id` field MUST represent the `SubId` of the vault which was deposited into.
 
-##### - `deposited_amount`: `u64`
+##### `deposited_amount`: `u64`
 
 The `deposited_amount` field MUST represent the `u64` amount of assets deposited into the vault.
 
-##### - `minted_shares`: `u64`
+##### `minted_shares`: `u64`
 
 The `minted_shares` field MUST represent the `u64` amount of shares minted.
 
@@ -107,27 +107,28 @@ The `Withdraw` struct MUST be logged whenever shares are redeemed for assets via
 
 The `Withdraw` log SHALL have the following fields.
 
-##### - `caller`: `Identity`
+<!-- markdownlint-disable-line MD024 -->
+##### `caller`: `Identity`
 
 The `caller` field MUST represent the Identity which called the withdraw function.
 
-##### - `receiver`: `Identity`
+##### `receiver`: `Identity`
 
 The `receiver` field MUST represent the Identity which received the withdrawn assets.
 
-##### - `underlying_asset`: `AssetId`
+##### `underlying_asset`: `AssetId`
 
-The `underlying_asset` field MUST represent the AssetId of the asset that was withdrawn.
+The `underlying_asset` field MUST represent the `AssetId` of the asset that was withdrawn.
 
-##### - `vault_sub_id`: `SubId`
+##### `vault_sub_id`: `SubId`
 
 The `vault_sub_id` field MUST represent the SubId of the vault from which was withdrawn.
 
-##### - `withdrawn_amount`: `u64`
+##### `withdrawn_amount`: `u64`
 
 The `withdrawn_amount` field MUST represent the `u64` amount of coins withdrawn.
 
-##### - `burned_shares`: `u64`
+##### `burned_shares`: `u64`
 
 The `burned_shares` field MUST represent the `u64` amount of shares burned.
 
@@ -137,7 +138,7 @@ The ABI discussed covers the known use cases of asset vaults while allowing safe
 
 ## Backwards Compatibility
 
-This standard is fully compatible with the [SRC-20 standard](./src-20.md).
+This standard is fully compatible with the [SRC-20 standard](./src-20-native-asset.md).
 
 ## Security Considerations
 
@@ -170,7 +171,7 @@ abi SRC6 {
 
 ### Multi Asset Vault
 
-A basic implementation of the vault standard that supports any number of sub vaults being created for every AssetId.
+A basic implementation of the vault standard that supports any number of sub vaults being created for every `AssetId`.
 
 ```sway
 {{#include ../examples/src6-vault/multi_asset_vault/src/main.sw}}
@@ -178,7 +179,7 @@ A basic implementation of the vault standard that supports any number of sub vau
 
 ### Single Asset Vault
 
-A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single AssetId.
+A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single `AssetId`.
 
 ```sway
 {{#include ../examples/src6-vault/single_asset_vault/src/main.sw}}
@@ -186,7 +187,7 @@ A basic implementation of the vault standard demonstrating how to restrict depos
 
 ## Single Asset Single Sub Vault
 
-A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single AssetId, and to a single Sub vault.
+A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single `AssetId`, and to a single Sub vault.
 
 ```sway
 {{#include ../examples/src6-vault/single_asset_single_sub_vault/src/main.sw}}

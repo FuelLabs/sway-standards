@@ -94,7 +94,7 @@ Example of the SRC-12 implementation where contract deployments contain configur
 
 ### Without Configurables
 
-Example of the SRC-12 implementation where all contract deployments are identitcal and thus have the same bytecode and root.
+Example of the SRC-12 implementation where all contract deployments are identical and thus have the same bytecode and root.
 
 ```sway
 {{#include ../examples/src12-contract-factory/without_configurables/src/without_configurables.sw}}

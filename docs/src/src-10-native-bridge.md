@@ -10,7 +10,7 @@ A standard interface for bridges intends to provide a safe and efficient bridge 
 
 The standard is centered on Fuel’s [Bridge Architecture](https://github.com/FuelLabs/fuel-bridge/blob/main/docs/ARCHITECTURE.md). Fuel's bridge system is built on a message protocol that allows to send (and receive) messages between entities located in two different blockchains.
 
-The following standard takes reference from the [FungibleBridge](https://github.com/FuelLabs/fuel-bridge/blob/3971081850e7961d9b649edda4cad8a848ee248e/packages/fungible-token/bridge-fungible-token/src/interface.sw#L22) ABI defined in the fuel-bridge repository.
+The following standard takes reference from the [`FungibleBridge`](https://github.com/FuelLabs/fuel-bridge/blob/3971081850e7961d9b649edda4cad8a848ee248e/packages/fungible-token/bridge-fungible-token/src/interface.sw#L22) ABI defined in the fuel-bridge repository.
 
 ## Specification
 
@@ -23,7 +23,7 @@ The following functions MUST be implemented to follow the SRC-10; Native Bridge 
 The `process_message()` function accepts incoming deposit messages from the canonical chain and issues the corresponding bridged asset.
 
 - This function MUST parse a message at the given `message_index` index.
-- This function SHALL mint an asset that follows the [SRC-8; Bridged Asset Standard](./src-8.md).
+- This function SHALL mint an asset that follows the [SRC-8; Bridged Asset Standard](./src-8-bridged-asset.md).
 - This function SHALL issue a refund if there is an error in the bridging process.
 
 ### - `fn withdraw(to_address: b256)`
@@ -45,19 +45,19 @@ The `claim_refund()` function is called if something goes wrong in the bridging 
 
 ### `DepositType`
 
-The `DepositType` enum decribes whether the bridged deposit is made to a address, contract, or contract and contains additional metatdata. There MUST be the following varients in the `DepositType` enum:
+The `DepositType` enum describes whether the bridged deposit is made to a address, contract, or contract and contains additional metadata. There MUST be the following variants in the `DepositType` enum:
 
-#### Address: `()`
+#### `Address`: `()`
 
-The `Address` varient MUST represent when the deposit is made to an address on the Fuel chain.
+The `Address` variant MUST represent when the deposit is made to an address on the Fuel chain.
 
-#### Contract: `()`
+#### `Contract`: `()`
 
-The `Contract` varient MUST represent when the deposit is made to an contract on the Fuel chain.
+The `Contract` variant MUST represent when the deposit is made to an contract on the Fuel chain.
 
-#### ContractWithData: `()`
+#### `ContractWithData`: `()`
 
-The `ContractWithData` varient MUST represent when the deposit is made to an contract and contains additional metadata for the Fuel chain.
+The `ContractWithData` variant MUST represent when the deposit is made to an contract and contains additional metadata for the Fuel chain.
 
 #### Example
 
@@ -148,7 +148,7 @@ pub struct MetadataMessage {
 
 ## Required Standards
 
-Any contract that implements the SRC-10; Native Bridge Standard MUST implement the [SRC-8; Bridged Asset Standard](./src-8.md) for all bridged assets.
+Any contract that implements the SRC-10; Native Bridge Standard MUST implement the [SRC-8; Bridged Asset Standard](./src-8-bridged-asset.md) for all bridged assets.
 
 ## Rationale
 

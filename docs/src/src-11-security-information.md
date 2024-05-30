@@ -8,7 +8,7 @@ White hat hackers may find bugs or exploits in contracts that they want to repor
 
 ## Prior Art
 
-The [security.txt](https://github.com/neodyme-labs/solana-security-txt) library for Solana has explored this idea. This standard takes inspiration from the library, with some changes.
+The [`security.txt`](https://github.com/neodyme-labs/solana-security-txt) library for Solana has explored this idea. This standard takes inspiration from the library, with some changes.
 
 ## Specification
 
@@ -21,7 +21,7 @@ The following describes the `SecurityInformation` type.
 - The struct MAY contain a URL or the information directly for the following fields: `project_url`, `policy`, `encryption`, `source_code`, `auditors`, `acknowledgments`, `additional_information`.
 - The struct MUST contain the information directly for the following fields: `name`, `contact_information`, `preferred_languages`, `source_release`, and `source_revision`.
 - The struct MUST contain at least one item in the `preferred_languages` field's `Vec`, if it is not `None`. Furthermore, the string should only contain the [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) language code and nothing else.
-- The struct MUST contain at least one item in the `contact_information` field's `Vec`. Furthermore, the string should follow the following format `<contact_type>:<contact_information>`. Where `contact_type` describes the method of contact (eg. `email` or `discord`) and `contact_information` describes the information needed to contact (eg. `example@example.com` or `@EXAMPLE`).
+- The struct MUST contain at least one item in the `contact_information` field's `Vec`. Furthermore, the string should follow the following format `<contact_type>:<contact_information>`. Where `contact_type` describes the method of contact (e.g. `email` or `discord`) and `contact_information` describes the information needed to contact (e.g. `example@example.com` or `@EXAMPLE`).
 
 #### `name: String`
 
@@ -54,11 +54,11 @@ A URL to the project's source code.
 
 #### `source_release: Option<String>`
 
-The release identifier of this build, ideally corresponding to a tag on git that can be rebuilt to reproduce the same binary. 3rd party build verification tools will use this tag to identify a matching github release.
+The release identifier of this build, ideally corresponding to a tag on git that can be rebuilt to reproduce the same binary. 3rd party build verification tools will use this tag to identify a matching GitHub release.
 
 #### `source_revision: Option<String>`
 
-The revision identifier of this build, usually a git commit hash that can be rebuilt to reproduce the same binary. 3rd party build verification tools will use this tag to identify a matching github release.
+The revision identifier of this build, usually a git commit hash that can be rebuilt to reproduce the same binary. 3rd party build verification tools will use this tag to identify a matching GitHub release.
 
 #### `auditors: Option<Vec<String>>`
 

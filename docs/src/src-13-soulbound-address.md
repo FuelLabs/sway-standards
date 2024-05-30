@@ -4,7 +4,7 @@ The following standard allows for the implementation of Soulbound Address on the
 
 ## Motivation
 
-A standard enables soulbound assets on Fuel and allows external applications to query and provide soulbound assets, whether that be decentralized exchanges, wallets, or other external applications.
+This standard enables soulbound assets on Fuel and allows external applications to query and provide soulbound assets, whether that be decentralized exchanges, wallets, or other external applications.
 
 ## Prior Art
 
@@ -60,7 +60,7 @@ On the Fuel Network, the process for sending any [Native Assets](https://docs.fu
 
 ## Backwards Compatibility
 
-This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) and the [SRC-20](./src-20.md) standard.
+This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) and the [SRC-20](./src-20-native-asset.md) standard.
 
 ## Security Considerations
 

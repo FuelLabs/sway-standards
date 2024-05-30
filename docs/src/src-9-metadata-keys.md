@@ -1,6 +1,6 @@
 # SRC-9: Native Asset
 
-The following standard attempts to define the keys of relevant on-chain metadata for any [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-9 standard MUST implement the [SRC-7](./src-7.md) and [SRC-20](./src-20.md) standards. This is a living standard where revisions may be made as the ecosystem evolves.
+The following standard attempts to define the keys of relevant on-chain metadata for any [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-9 standard MUST implement the [SRC-7](./src-7-asset-metadata.md) and [SRC-20](./src-20-native-asset.md) standards. This is a living standard where revisions may be made as the ecosystem evolves.
 
 ## Motivation
 
@@ -8,7 +8,7 @@ The SRC-9 standard seeks to enable relevant data for assets on the Fuel Network.
 
 ## Prior Art
 
-The use of generic metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) is defined in the [SRC-7](./src-7.md) standard. This standard integrates into the existing [SRC-7](./src-7.md) standard.
+The use of generic metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) is defined in the [SRC-7](./src-7-asset-metadata.md) standard. This standard integrates into the existing [SRC-7](./src-7-asset-metadata.md) standard.
 
 ## Specification
 
@@ -349,7 +349,7 @@ The SRC-9 standard should allow for standardized keys for metadata on the Fuel N
 
 ## Backwards Compatibility
 
-This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets), the [SRC-20](./src-20.md) standard, and the [SRC-7](./src-7.md) standard.
+This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets), the [SRC-20](./src-20-native-asset.md) standard, and the [SRC-7](./src-7-asset-metadata.md) standard.
 
 ## Security Considerations
 
