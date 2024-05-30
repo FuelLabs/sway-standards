@@ -3,7 +3,6 @@ contract;
 use std::{
     asset::transfer,
     call_frames::msg_asset_id,
-    constants::ZERO_B256,
     context::msg_amount,
     hash::{
         Hash,
@@ -17,7 +16,7 @@ use standards::{src20::SRC20, src6::{Deposit, SRC6, Withdraw}};
 
 configurable {
     /// The only sub vault that can be deposited and withdrawn from this vault.
-    ACCEPTED_SUB_VAULT: SubId = ZERO_B256,
+    ACCEPTED_SUB_VAULT: SubId = SubId::zero(),
     PRE_CALCULATED_SHARE_VAULT_SUB_ID: SubId = 0xf5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b,
 }
 

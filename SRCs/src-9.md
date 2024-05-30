@@ -357,7 +357,7 @@ This standard does not call external contracts, nor does it define any mutations
 ```rust
 impl SRC7 for Contract {
     fn metadata(asset: AssetId, key: String) -> Option<Metadata> {
-        if (asset != AssetId::from(ZERO_B256)) {
+        if (asset != AssetId::default()) {
             return Option::None;
         }
 
