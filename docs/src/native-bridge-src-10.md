@@ -23,7 +23,7 @@ The following functions MUST be implemented to follow the SRC-10; Native Bridge 
 The `process_message()` function accepts incoming deposit messages from the canonical chain and issues the corresponding bridged asset.
 
 - This function MUST parse a message at the given `message_index` index.
-- This function SHALL mint an asset that follows the [SRC-8; Bridged Asset Standard](./src-8-bridged-asset.md).
+- This function SHALL mint an asset that follows the [SRC-8; Bridged Asset Standard](./bridged-asset-src-8.md).
 - This function SHALL issue a refund if there is an error in the bridging process.
 
 ### - `fn withdraw(to_address: b256)`
@@ -148,7 +148,7 @@ pub struct MetadataMessage {
 
 ## Required Standards
 
-Any contract that implements the SRC-10; Native Bridge Standard MUST implement the [SRC-8; Bridged Asset Standard](./src-8-bridged-asset.md) for all bridged assets.
+Any contract that implements the SRC-10; Native Bridge Standard MUST implement the [SRC-8; Bridged Asset Standard](./bridged-asset-src-8.md) for all bridged assets.
 
 ## Rationale
 
