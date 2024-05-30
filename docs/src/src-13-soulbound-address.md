@@ -52,7 +52,7 @@ fn main() -> bool {
 
 The *Soulbound Address* is the *Soulbound Address Predicate*'s predicate address. A predicate's address(the bytecode root) is defined [here](https://github.com/FuelLabs/fuel-specs/blob/master/src/identifiers/predicate-id.md).
 
-The *Soulbound Address* may be computed from the  *Soulbound Address Predicate*'s bytecode both on-chain or off-chain. For off-chain computation, please refer to the fuels-rs [predicate docs](https://docs.fuel.network/docs/fuels-rs/predicates/). For on-chain computation, please refer to Sway-Lib's [Bytecode Library](https://github.com/FuelLabs/sway-libs/tree/master/libs/bytecode).
+The *Soulbound Address* may be computed from the  *Soulbound Address Predicate*'s bytecode both on-chain or off-chain. For off-chain computation, please refer to the fuels-rs [predicate docs](https://docs.fuel.network/docs/fuels-rs/predicates/). For on-chain computation, please refer to Sway-Lib's [Bytecode Library](https://docs.fuel.network/docs/sway-libs/bytecode/).
 
 ## Rationale
 

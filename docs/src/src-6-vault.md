@@ -75,27 +75,27 @@ The `Deposit` struct MUST be logged whenever new shares are minted via the `depo
 
 The `Deposit` log SHALL have the following fields.
 
-##### `caller`: `Identity`
+**`caller`: `Identity`**
 
 The `caller` field MUST represent the `Identity` which called the deposit function.
 
-##### `receiver`: `Identity`
+**`receiver`: `Identity`**
 
 The `receiver` field MUST represent the `Identity` which received the vault shares.
 
-##### `underlying_asset`: `AssetId`
+**`underlying_asset`: `AssetId`**
 
 The `underlying_asset` field MUST represent the `AssetId` of the asset which was deposited into the vault.
 
-##### `vault_sub_id`: `SubId`
+**`vault_sub_id`: `SubId`**
 
 The `vault_sub_id` field MUST represent the `SubId` of the vault which was deposited into.
 
-##### `deposited_amount`: `u64`
+**`deposited_amount`: `u64`**
 
 The `deposited_amount` field MUST represent the `u64` amount of assets deposited into the vault.
 
-##### `minted_shares`: `u64`
+**`minted_shares`: `u64`**
 
 The `minted_shares` field MUST represent the `u64` amount of shares minted.
 
@@ -107,28 +107,27 @@ The `Withdraw` struct MUST be logged whenever shares are redeemed for assets via
 
 The `Withdraw` log SHALL have the following fields.
 
-<!-- markdownlint-disable-line MD024 -->
-##### `caller`: `Identity`
+**`caller`: `Identity`**
 
 The `caller` field MUST represent the Identity which called the withdraw function.
 
-##### `receiver`: `Identity`
+**`receiver`: `Identity`**
 
 The `receiver` field MUST represent the Identity which received the withdrawn assets.
 
-##### `underlying_asset`: `AssetId`
+**`underlying_asset`: `AssetId`**
 
 The `underlying_asset` field MUST represent the `AssetId` of the asset that was withdrawn.
 
-##### `vault_sub_id`: `SubId`
+**`vault_sub_id`: `SubId`**
 
 The `vault_sub_id` field MUST represent the SubId of the vault from which was withdrawn.
 
-##### `withdrawn_amount`: `u64`
+**`withdrawn_amount`: `u64`**
 
 The `withdrawn_amount` field MUST represent the `u64` amount of coins withdrawn.
 
-##### `burned_shares`: `u64`
+**`burned_shares`: `u64`**
 
 The `burned_shares` field MUST represent the `u64` amount of shares burned.
 
