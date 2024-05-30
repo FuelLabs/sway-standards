@@ -1,25 +1,18 @@
-<p align="center">
-    <picture>
-        <source media="(prefers-color-scheme: dark)" srcset=".docs/src-10-logo-dark-theme.png">
-        <img alt="SRC-10 logo" width="400px" src=".docs/src-10-logo-light-theme.png">
-    </picture>
-</p>
-
-# Abstract
+# SRC-10: Native Bridge
 
 The following standard allows for the implementation of a standard API for Native Bridges using the Sway Language. The standardized design has the bridge contract send a message to the origin chain to register which token it accepts to prevent a loss of funds.
 
-# Motivation
+## Motivation
 
-A standard interface for bridges intends to provide a safe and efficient bridge between the settlement or canonical chain and the Fuel Network. 
+A standard interface for bridges intends to provide a safe and efficient bridge between the settlement or canonical chain and the Fuel Network.
 
-# Prior Art
+## Prior Art
 
 The standard is centered on Fuel’s [Bridge Architecture](https://github.com/FuelLabs/fuel-bridge/blob/main/docs/ARCHITECTURE.md). Fuel's bridge system is built on a message protocol that allows to send (and receive) messages between entities located in two different blockchains.
 
-The following standard takes reference from the [FungibleBridge](https://github.com/FuelLabs/fuel-bridge/blob/3971081850e7961d9b649edda4cad8a848ee248e/packages/fungible-token/bridge-fungible-token/src/interface.sw#L22) ABI defined in the fuel-bridge repository. 
+The following standard takes reference from the [FungibleBridge](https://github.com/FuelLabs/fuel-bridge/blob/3971081850e7961d9b649edda4cad8a848ee248e/packages/fungible-token/bridge-fungible-token/src/interface.sw#L22) ABI defined in the fuel-bridge repository.
 
-# Specification
+## Specification
 
 The following functions MUST be implemented to follow the SRC-10; Native Bridge Standard:
 
@@ -29,8 +22,8 @@ The following functions MUST be implemented to follow the SRC-10; Native Bridge 
 
 The `process_message()` function accepts incoming deposit messages from the canonical chain and issues the corresponding bridged asset.
 
-- This function MUST parse a message at the given `message_index` index. 
-- This function SHALL mint an asset that follows the [SRC-8; Bridged Asset Standard](./src-8.md). 
+- This function MUST parse a message at the given `message_index` index.
+- This function SHALL mint an asset that follows the [SRC-8; Bridged Asset Standard](./src-8.md).
 - This function SHALL issue a refund if there is an error in the bridging process.
 
 ### - `fn withdraw(to_address: b256)`
@@ -43,7 +36,7 @@ The `withdraw()` function accepts and burns a bridged Native Asset on Fuel and s
 
 ### - `fn claim_refund(to_address: b256, token_address: b256, token_id: b256, gateway_contract: b256)`
 
-The `claim_refund()` function is called if something goes wrong in the bridging process and an error occurs. It sends a message to the `gateway_contract` contract on the canonical chain to release the `token_address` token with token id `token_id` to the `to_address` address. 
+The `claim_refund()` function is called if something goes wrong in the bridging process and an error occurs. It sends a message to the `gateway_contract` contract on the canonical chain to release the `token_address` token with token id `token_id` to the `to_address` address.
 
 - This function SHALL send a message to the `gateway_contract` contract to release the `token_address` token with id `token_id` to the `to_address` address on the canonical chain.
 - This function MUST ensure a refund was issued.
@@ -108,9 +101,9 @@ The `decimals` field MUST represent the bridged token's decimals on the canonica
 
 The `deposit_type` field MUST represent the type of bridge deposit made on the canonical chain.
 
-#### Example
+#### Example Deposit Message
 
-```sway 
+```sway
 pub struct DepositMessage {
     pub amount: b256,
     pub from: b256,
@@ -142,9 +135,9 @@ The `name` field MUST represent the bridged token's name field on the canonical 
 
 The `symbol` field MUST represent the bridged token's symbol field on the canonical chain.
 
-### Example
+### Example Metadata Message
 
-```sway 
+```sway
 pub struct MetadataMessage {
     pub token_address: b256,
     pub token_id: b256,
@@ -155,17 +148,17 @@ pub struct MetadataMessage {
 
 ## Required Standards
 
-Any contract that implements the SRC-10; Native Bridge Standard MUST implement the [SRC-8; Bridged Asset Standard](./src-8.md) for all bridged assets. 
+Any contract that implements the SRC-10; Native Bridge Standard MUST implement the [SRC-8; Bridged Asset Standard](./src-8.md) for all bridged assets.
 
-# Rationale 
+## Rationale
 
-The SRC-10; Native Bridge Standard is designed to standardize the native bridge interface between all Fuel instances. 
+The SRC-10; Native Bridge Standard is designed to standardize the native bridge interface between all Fuel instances.
 
-# Backwards Compatibility
+## Backwards Compatibility
 
 This standard is compatible with the SRC-20 and SRC-8 standards.
 
-# Example ABI
+## Example ABI
 
 ```sway
 abi SRC10 {

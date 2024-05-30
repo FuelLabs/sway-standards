@@ -1,7 +1,7 @@
 <p align="center">
     <picture>
-        <source media="(prefers-color-scheme: dark)" srcset=".docs/sway-standards-logo-dark-theme.png">
-        <img alt="Sway Standards logo" width="400px" src=".docs/sway-standards-logo-light-theme.png">
+        <source media="(prefers-color-scheme: dark)" srcset="assets/sway-standards-logo-dark-theme.png">
+        <img alt="Sway Standards logo" width="400px" src="assets/sway-standards-logo-light-theme.png">
     </picture>
 </p>
 
@@ -62,7 +62,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 To import a standard the following should be added to the project's `Forc.toml` file under `[dependencies]` with the most recent release:
 
-```rust
+```toml
 standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.5.0" }
 ```
 
@@ -71,13 +71,13 @@ standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.5.0"
 
 You may then import your desired standard in your Sway Smart Contract as so:
 
-```rust
+```sway
 use standards::<standard>::<standard_abi>;
 ```
 
 For example, to import the SRC-20 Native Asset Standard use the following statement in your Sway Smart Contract file:
 
-```rust
+```sway
 use standards::src20::SRC20;
 ```
 
