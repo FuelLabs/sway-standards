@@ -26,7 +26,7 @@ The `SubId` of the asset MUST be the digest of the `sha256(origin_chain_id, orig
 
 - `origin_chain_id` is a `String` of the chain ID where the asset was originally minted.
 - `origin_asset_address` is a `b256` of the asset's address on the chain where the asset was originally minted.
-- `origin_asset_id` is a `b256` of the asset's ID such as an NFT's ID on the chain where the asset was originally minted. IF there is no ID, `ZERO_B256` SHALL be used.
+- `origin_asset_id` is a `b256` of the asset's ID such as an NFT's ID on the chain where the asset was originally minted. IF there is no ID, `b256::zero()` SHALL be used.
 
 ## SRC-20 Metadata
 
@@ -40,7 +40,7 @@ The key `bridged:chain` SHALL return an `String` variant of the chain ID where t
 
 ### - `bridged:address`
 
-The key `bridged:address` SHALL return a `B256` variant of the asset's address on the chain where the asset was originally minted. Native assets of a chain that do not have an address such as Ether on Ethereum SHALL use `ZERO_B256`.
+The key `bridged:address` SHALL return a `B256` variant of the asset's address on the chain where the asset was originally minted. Native assets of a chain that do not have an address such as Ether on Ethereum SHALL use `b256::zero()`.
 
 ### - `bridged:id`
 
@@ -69,7 +69,7 @@ This standard does not call external contracts, nor does it define any mutations
 ```rust
 impl SRC7 for Contract {
     fn metadata(asset: AssetId, key: String) -> Option<Metadata> {
-        if (asset != AssetId::from(ZERO_B256)) {
+        if (asset != AssetId::default()) {
             return Option::None;
         }
 
@@ -78,11 +78,11 @@ impl SRC7 for Contract {
                 Option::Some(String::from_ascii_str("1"))
             },
             String::from_ascii_str("bridged:address") => {
-                let origin_asset_address = ZERO_B256;
+                let origin_asset_address = b256::zero();
                 Option::Some(Metadata::B256(origin_asset_address))
             },
             String::from_ascii_str("bridged:id") => {
-                let origin_asset_id = ZERO_B256;
+                let origin_asset_id = b256::zero();
                 Option::Some(Metadata::B256(origin_asset_id))
             },
             String::from_ascii_str("bridged:decimals") => {
@@ -100,28 +100,28 @@ impl SRC20 for Contract {
 
     fn total_supply(asset: AssetId) -> Option<u64> {
         match asset { 
-            AssetId::from(ZERO_B256) => Option::Some(1),
+            AssetId::default() => Option::Some(1),
             _ => Option::None,
         }
     }
 
     fn name(asset: AssetId) -> Option<String> {
         match asset { 
-            AssetId::from(ZERO_B256) => Option::Some(String::from_ascii_str("Name")),
+            AssetId::default() => Option::Some(String::from_ascii_str("Name")),
             _ => Option::None,
         }
     }
 
     fn symbol(asset: AssetId) -> Option<String> {
         match asset { 
-            AssetId::from(ZERO_B256) => Option::Some(String::from_ascii_str("Symbol")),
+            AssetId::default() => Option::Some(String::from_ascii_str("Symbol")),
             _ => Option::None,
         }
     }
 
     fn decimals(asset: AssetId) -> Option<u8> {
         match asset { 
-            AssetId::from(ZERO_B256) => Option::Some(0u8),
+            AssetId::default() => Option::Some(0u8),
             _ => Option::None,
         }
     }

@@ -1,12 +1,9 @@
 contract;
 
 use standards::src5::{SRC5, State};
-use std::constants::ZERO_B256;
 
-configurable {
-    /// The owner of this contract at deployment.
-    INITIAL_OWNER: Identity = Identity::Address(Address::from(ZERO_B256)),
-}
+/// The owner of this contract at deployment.
+const INITIAL_OWNER: Identity = Identity::Address(Address::zero());
 
 storage {
     /// The owner in storage.

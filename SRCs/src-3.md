@@ -1,6 +1,6 @@
 # Abstract
 
-The following standard enables the minting and burning of native assets for any fungible assets within the Sway Language. It seeks to define mint and burn functions defined separately from the [SRC-20](./src-20.md) standard. Any contract that implements the SRC-3 standard MUST implement the [SRC-20](./src-20.md) standard.
+The following standard enables the minting and burning of native assets for any fungible assets within the Sway Language. It seeks to define mint and burn functions defined separately from the [SRC-20](./src-20.md) standard.
 
 # Motivation
 
@@ -16,27 +16,27 @@ Minting and burning were initially added to the [SRC-20](./src-20.md) standard.
 
 The following functions MUST be implemented to follow the SRC-3 standard:
 
-### `fn mint(recipient: Identity, vault_sub_id: SubId, amount: u64)`
+### `fn mint(recipient: Identity, sub_id: SubId, amount: u64)`
 
-This function MUST mint `amount` coins with sub-identifier `vault_sub_id` and transfer them to the `recipient`. 
+This function MUST mint `amount` coins with sub-identifier `sub_id` and transfer them to the `recipient`. 
 This function MAY contain arbitrary conditions for minting, and revert if those conditions are not met.
 
 ##### Arguments
 
 * `recipient` - The `Identity` to which the newly minted asset is transferred to.
-* `vault_sub_id` - The sub-identifier of the asset to mint.
+* `sub_id` - The sub-identifier of the asset to mint.
 * `amount` - The quantity of coins to mint.
 
-### `fn burn(vault_sub_id: SubId, amount: u64)`
+### `fn burn(sub_id: SubId, amount: u64)`
 
-This function MUST burn `amount` coins with the sub-identifier `vault_sub_id` and MUST ensure the `AssetId` of the asset is the sha-256 hash of `(ContractId, SubId)` for the implementing contract. 
+This function MUST burn `amount` coins with the sub-identifier `sub_id` and MUST ensure the `AssetId` of the asset is the sha-256 hash of `(ContractId, SubId)` for the implementing contract. 
 This function MUST ensure at least `amount` coins have been transferred to the implementing contract. 
 This function MUST update the total supply defined in the [SRC-20](./src-20.md) standard. 
 This function MAY contain arbitrary conditions for burning, and revert if those conditions are not met.
 
 ##### Arguments
 
-* `vault_sub_id` - The sub-identifier of the asset to burn.
+* `sub_id` - The sub-identifier of the asset to burn.
 * `amount` - The quantity of coins to burn.
 
 # Rationale
@@ -57,10 +57,10 @@ The burn function may also introduce a security consideration if the total suppl
 ```rust
 abi MySRC3Asset {
     #[storage(read, write)]
-    fn mint(recipient: Identity, vault_sub_id: SubId, amount: u64);
+    fn mint(recipient: Identity, sub_id: SubId, amount: u64);
     #[payable]
     #[storage(read, write)]
-    fn burn(vault_sub_id: SubId, amount: u64);
+    fn burn(sub_id: SubId, amount: u64);
 }
 ```
 
