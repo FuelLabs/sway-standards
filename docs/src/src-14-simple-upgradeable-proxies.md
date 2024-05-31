@@ -75,7 +75,7 @@ abi SRC14 {
 Example of a minimal SRC-14 implementation with no access control.
 
 ```sway
-{{#include ../examples/examples/src14-simple-proxy/owned/src/minimal.sw}}
+{{#include ../../examples/src14-simple-proxy/owned/src/minimal.sw}}
 ```
 
 ### Owned Proxy
@@ -83,5 +83,5 @@ Example of a minimal SRC-14 implementation with no access control.
 Example of a SRC-14 implementation that also implements [SRC-5](./src-5-ownership.md).
 
 ```sway
-{{#include ../examples/examples/src14-simple-proxy/owned/src/owned.sw}}
+{{#include ../../examples/src14-simple-proxy/owned/src/owned.sw}}
 ```
