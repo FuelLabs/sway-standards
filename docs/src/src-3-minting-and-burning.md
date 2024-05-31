@@ -1,14 +1,14 @@
 # SRC-3: Minting and Burning Native Assets
 
-The following standard enables the minting and burning of native assets for any fungible assets within the Sway Language. It seeks to define mint and burn functions defined separately from the [SRC-20](./native-asset-src-20.md) standard.
+The following standard enables the minting and burning of native assets for any fungible assets within the Sway Language. It seeks to define mint and burn functions defined separately from the [SRC-20](./src-20-native-asset.md) standard.
 
 ## Motivation
 
-The intent of this standard is to separate the extensions of minting and burning from the [SRC-20](./native-asset-src-20.md) standard.
+The intent of this standard is to separate the extensions of minting and burning from the [SRC-20](./src-20-native-asset.md) standard.
 
 ## Prior Art
 
-Minting and burning were initially added to the [SRC-20](./native-asset-src-20.md) standard.
+Minting and burning were initially added to the [SRC-20](./src-20-native-asset.md) standard.
 
 ## Specification
 
@@ -31,7 +31,7 @@ This function MAY contain arbitrary conditions for minting, and revert if those 
 
 This function MUST burn `amount` coins with the sub-identifier `sub_id` and MUST ensure the `AssetId` of the asset is the sha-256 hash of `(ContractId, SubId)` for the implementing contract.
 This function MUST ensure at least `amount` coins have been transferred to the implementing contract.
-This function MUST update the total supply defined in the [SRC-20](./native-asset-src-20.md) standard.
+This function MUST update the total supply defined in the [SRC-20](./src-20-native-asset.md) standard.
 This function MAY contain arbitrary conditions for burning, and revert if those conditions are not met.
 
 ##### Burn Arguments
@@ -41,16 +41,16 @@ This function MAY contain arbitrary conditions for burning, and revert if those 
 
 ## Rationale
 
-This standard has been added to enable compatibility between applications and allow minting and burning native assets per use case. This standard has been separated from the [SRC-20](./native-asset-src-20.md) standard to allow for the minting and burning for all fungible assets, irrelevant of whether they are [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) or not.
+This standard has been added to enable compatibility between applications and allow minting and burning native assets per use case. This standard has been separated from the [SRC-20](./src-20-native-asset.md) standard to allow for the minting and burning for all fungible assets, irrelevant of whether they are [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) or not.
 
 ## Backwards Compatibility
 
-This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) ensuring its compatibility with the [SRC-20](./native-asset-src-20.md) standard.
+This standard is compatible with Fuel's [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) ensuring its compatibility with the [SRC-20](./src-20-native-asset.md) standard.
 
 ## Security Considerations
 
 This standard may introduce security considerations if no checks are implemented to ensure the calling of the `mint()` function is deemed valid or permitted. Checks are highly encouraged.
-The burn function may also introduce a security consideration if the total supply within the [SRC-20](./native-asset-src-20.md) standard is not modified.
+The burn function may also introduce a security consideration if the total supply within the [SRC-20](./src-20-native-asset.md) standard is not modified.
 
 ## Example ABI
 

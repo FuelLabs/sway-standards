@@ -1,6 +1,6 @@
 # SRC-6: Vault
 
-The following standard allows for the implementation of a standard API for asset vaults such as yield-bearing asset vaults or asset wrappers. This standard is an optional add-on to the [SRC-20](./native-asset-src-20.md) standard.
+The following standard allows for the implementation of a standard API for asset vaults such as yield-bearing asset vaults or asset wrappers. This standard is an optional add-on to the [SRC-20](./src-20-native-asset.md) standard.
 
 ## Motivation
 
@@ -137,7 +137,7 @@ The ABI discussed covers the known use cases of asset vaults while allowing safe
 
 ## Backwards Compatibility
 
-This standard is fully compatible with the [SRC-20 standard](./native-asset-src-20.md).
+This standard is fully compatible with the [SRC-20 standard](./src-20-native-asset.md).
 
 ## Security Considerations
 
