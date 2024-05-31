@@ -26,19 +26,19 @@ Any bridged assets MUST use the name and symbol of the asset on the chain where 
 
 ### SRC-7 Metadata
 
-#### - `bridged:chain`
+#### `bridged:chain`
 
 The key `bridged:chain` SHALL return an `String` variant of the chain ID where the asset was originally minted.
 
-#### - `bridged:address`
+#### `bridged:address`
 
 The key `bridged:address` SHALL return a `B256` variant of the asset's address on the chain where the asset was originally minted. Native assets of a chain that do not have an address such as Ether on Ethereum SHALL use `b256::zero()`.
 
-#### - `bridged:id`
+#### `bridged:id`
 
 The key `bridged:id` MAY return a `B256` variant of the asset's ID such as an NFT's ID on the chain where the asset was originally minted. IF there is no ID, `None` SHALL be returned.
 
-#### - `bridged:decimals`
+#### `bridged:decimals`
 
 The key `bridged:decimals` MAY return an `Int` variant of the asset's decimals on the chain where the asset was originally minted. IF there are no decimals, `None` SHALL be returned.
 

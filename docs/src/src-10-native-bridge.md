@@ -18,7 +18,7 @@ The following functions MUST be implemented to follow the SRC-10; Native Bridge 
 
 ## Required Functions
 
-### - `fn process_message(message_index: u64)`
+### `fn process_message(message_index: u64)`
 
 The `process_message()` function accepts incoming deposit messages from the canonical chain and issues the corresponding bridged asset.
 
@@ -26,7 +26,7 @@ The `process_message()` function accepts incoming deposit messages from the cano
 - This function SHALL mint an asset that follows the [SRC-8; Bridged Asset Standard](./src-8-bridged-asset.md).
 - This function SHALL issue a refund if there is an error in the bridging process.
 
-### - `fn withdraw(to_address: b256)`
+### `fn withdraw(to_address: b256)`
 
 The `withdraw()` function accepts and burns a bridged Native Asset on Fuel and sends a message to the bridge contract on the canonical chain to release the originally deposited tokens to the `to_address` address.
 
@@ -34,7 +34,7 @@ The `withdraw()` function accepts and burns a bridged Native Asset on Fuel and s
 - This function MUST ensure the asset's `AssetId` sent in the transaction matches a bridged asset.
 - This function SHALL burn all coins sent in the transaction.
 
-### - `fn claim_refund(to_address: b256, token_address: b256, token_id: b256, gateway_contract: b256)`
+### `fn claim_refund(to_address: b256, token_address: b256, token_id: b256, gateway_contract: b256)`
 
 The `claim_refund()` function is called if something goes wrong in the bridging process and an error occurs. It sends a message to the `gateway_contract` contract on the canonical chain to release the `token_address` token with token id `token_id` to the `to_address` address.
 
@@ -73,31 +73,31 @@ pub enum DepositType {
 
 The following describes a struct that encapsulates various deposit message metadata to a single type. There MUST be the following fields in the `DepositMessage` struct:
 
-#### - amount: `u256`
+#### amount: `u256`
 
 The `amount` field MUST represent the number of tokens.
 
-#### - from: `b256`
+#### from: `b256`
 
 The `from` field MUST represent the bridging user’s address on the canonical chain.
 
-#### - to: `Identity`
+#### to: `Identity`
 
 The `to` field MUST represent the bridging target destination `Address` or `ContractId` on the Fuel Chain.
 
-#### - token_address: `b256`
+#### token_address: `b256`
 
 The `token_address` field MUST represent the bridged token's address on the canonical chain.
 
-#### - token_id: `b256`
+#### token_id: `b256`
 
 The `token_id` field MUST represent the token's ID on the canonical chain. The `b256::zero()` MUST be used if this is a fungible token and no token ID exists.
 
-#### - decimals: `u8`
+#### decimals: `u8`
 
 The `decimals` field MUST represent the bridged token's decimals on the canonical chain.
 
-#### - deposit_type: `DepositType`
+#### deposit_type: `DepositType`
 
 The `deposit_type` field MUST represent the type of bridge deposit made on the canonical chain.
 

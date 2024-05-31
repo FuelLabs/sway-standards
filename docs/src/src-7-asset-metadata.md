@@ -22,19 +22,19 @@ We also take a look at existing common metadata practices such as [OpenSea's Met
 
 The following describes an enum that wraps various metadata types into a single return type. There SHALL be the following variants in the `Metadata` enum:
 
-#### - `B256`
+#### `B256`
 
 The `B256` variant SHALL be used when the stored metadata for the corresponding `AssetId` and `Sting` key pair is of the `b256` type.
 
-#### - `Bytes`
+#### `Bytes`
 
 The `Bytes` variant SHALL be used when the stored metadata for the corresponding `AssetId` and `String` key pair is of the `Bytes` type. The `Bytes` variant should be used when storing custom data such as but not limited to structs and enums.
 
-#### - `Int`
+#### `Int`
 
 The `Int` variant SHALL be used when the stored metadata for the corresponding `AssetId` and `Sting` key pair is of the `u64` type.
 
-#### - `String`
+#### `String`
 
 The `String` variant SHALL be used when the stored metadata for the corresponding `AssetId` and `String` key pair is of the `String` type. The `String` variant MUST be used when a URI is required but MAY contain any arbitrary `String` data.
 
