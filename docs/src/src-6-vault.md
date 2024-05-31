@@ -12,11 +12,11 @@ Asset vaults have been thoroughly explored on Ethereum and with [EIP 4626](https
 
 ## Specification
 
-## Required public functions
+### Required public functions
 
 The following functions MUST be implemented to follow the SRC-6 standard. Any contract that implements the SRC-6 standard MUST implement the SRC-20 standard.
 
-### `fn deposit(receiver: Identity, vault_sub_id: SubId) -> u64`
+#### `fn deposit(receiver: Identity, vault_sub_id: SubId) -> u64`
 
 This function takes the `receiver` Identity and the SubId `vault_sub_id` of the sub-vault as an argument and returns the amount of shares minted to the `receiver`.
 
