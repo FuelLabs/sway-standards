@@ -75,7 +75,7 @@ abi SRC14 {
 Example of a minimal SRC-14 implementation with no access control.
 
 ```sway
-{{#include ../../examples/src14-simple-proxy/owned/src/minimal.sw}}
+{{#include ../../examples/src14-simple-proxy/minimal/src/minimal.sw}}
 ```
 
 ### Owned Proxy
