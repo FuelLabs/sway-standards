@@ -6,7 +6,7 @@ The following proposes a standard for simple upgradable proxies.
 
 ## Motivation
 
-We seek to standardize proxy implementation to improve developer experience and enable tooling to automatically deploy or update proxies as needed.
+We seek to standardize a proxy implementation to improve developer experience and enable tooling to automatically deploy or update proxies as needed.
 
 ## Prior Art
 
@@ -71,10 +71,10 @@ abi SRC14 {
 
 ## Example Implementation
 
-### [Minimal Proxy](../examples/examples/src14-simple-proxy/owned/src/minimal.sw)
+### [Minimal Proxy](../examples/src14-simple-proxy/minimal/src/minimal.sw)
 
 Example of a minimal SRC-14 implementation with no access control.
 
-### [Owned Proxy](../examples/examples/src14-simple-proxy/owned/src/owned.sw)
+### [Owned Proxy](../examples/src14-simple-proxy/owned/src/owned.sw)
 
 Example of a SRC-14 implementation that also implements [SRC-5](https://github.com/FuelLabs/sway-standards/blob/master/SRCs/src-5.md).
