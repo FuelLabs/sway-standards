@@ -4,7 +4,7 @@ The following proposes a standard for simple upgradeable proxies.
 
 ## Motivation
 
-We seek to standardize proxy implementation to improve developer experience and enable tooling to automatically deploy or update proxies as needed.
+We seek to standardize a proxy implementation to improve developer experience and enable tooling to automatically deploy or update proxies as needed.
 
 ## Prior Art
 

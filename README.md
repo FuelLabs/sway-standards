@@ -48,6 +48,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 ### Contracts
 
 - [SRC-12; Contract Factory](./docs/src/src-12-contract-factory.md) defines the implementation of a standard API for contract factories.
+- [SRC-14; Simple Upgradable Proxies](./SRCs/src-14.md) defines the implementation of a standard API for simple upgradable proxies.
 
 ### Bridge
 
@@ -148,6 +149,16 @@ Example of the SRC-12 implementation where contract deployments contain configur
 ##### [Without Configurables](./examples/src12-contract-factory/without_configurables/src/without_configurables.sw)
 
 Example of the SRC-12 implementation where all contract deployments are identical and thus have the same bytecode and root.
+
+#### SRC-14; Simple Upgradable Proxies Standard Examples
+
+##### [Minimal](./examples/src14-simple-proxy/minimal/src/minimal.sw)
+
+Example of a minimal SRC-14 implementation with no access control.
+
+##### [Owned Proxy](./examples/src14-simple-proxy/owned/src/owned.sw)
+
+Example of a SRC-14 implementation that also implements [SRC-5](https://github.com/FuelLabs/sway-standards/blob/master/SRCs/src-5.md).
 
 > **Note**
 > All standards currently use `forc v0.60.0`.
