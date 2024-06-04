@@ -48,7 +48,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 ### Contracts
 
 - [SRC-12; Contract Factory](./docs/src/src-12-contract-factory.md) defines the implementation of a standard API for contract factories.
-- [SRC-14; Simple Upgradable Proxies](./SRCs/src-14.md) defines the implementation of a standard API for simple upgradable proxies.
+- [SRC-14; Simple Upgradable Proxies](./SRCs/src-14-simple-upgradeable-proxies.md) defines the implementation of a standard API for simple upgradable proxies.
 
 ### Bridge
 
