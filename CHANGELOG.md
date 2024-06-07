@@ -18,15 +18,11 @@ Description of the upcoming release here.
 - Something changed here 1
 - Something changed here 2
 
-#### Breaking
-- Some breaking change here 3
-- Some breaking change here 4
-
 ### Fixed
 
 - Some fix here 1
 - Some fix here 2
 
 #### Breaking
-- Some breaking fix here 3
-- Some breaking fix here 4
+- Some breaking change here 1
+- Some breaking change here 2
