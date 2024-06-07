@@ -1,4 +1,5 @@
 # Change Log
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
@@ -24,5 +25,6 @@ Description of the upcoming release here.
 - Some fix here 2
 
 #### Breaking
+
 - Some breaking change here 1
 - Some breaking change here 2
