@@ -41,6 +41,14 @@ The following functions MUST be implemented by a proxy contract to follow the SR
 If a valid call is made to this function it MUST change the target address of the proxy to `new_target`.
 This method SHOULD implement access controls such that the target can only be changed by a user that possesses the right permissions (typically the proxy owner).
 
+### Optional Public Functions
+
+The following functions are RECOMMENDED to be implemented by a proxy contract to follow the SRC-14 standard:
+
+#### `fn proxy_owner() -> State;`
+
+This function SHALL return the current state of ownership for the proxy contract where the `State` is either `Uninitialized`, `Initialized`, or `Revoked`. `State` is defined in the [SRC-5; Ownership Standard](./src-5-ownership.md).
+
 ## Rationale
 
 This standard is meant to provide simple upgradeability, it is deliberately minimalistic and does not provide the level of functionality of diamonds.
@@ -57,14 +65,19 @@ As it is the first attempt to standardize proxy implementation, we do not consid
 ## Security Considerations
 
 Permissioning proxy target changes is the primary consideration here.
-This standard is not opinionated about means of achieving this, use of [SRC-5](./src-5-ownership.md) is recommended.
+Use of the [SRC-5; Ownership Standard](./src-5-ownership.md) is discouraged. If both the target and proxy contracts implement the [SRC-5](./src-5-ownership.md) standard, the `owner()` function in the target contract is unreachable through the proxy contract. Use of the `proxy_owner()` function in the proxy contract should be used instead.
 
 ## Example ABI
 
 ```sway
 abi SRC14 {
-    #[storage(write)]
+    #[storage(read, write)]
     fn set_proxy_target(new_target: ContractId);
+}
+
+abi SRC14Extension {
+    #[storage(read)]
+    fn proxy_owner() -> State;
 }
 ```
 
@@ -80,7 +93,7 @@ Example of a minimal SRC-14 implementation with no access control.
 
 ### Owned Proxy
 
-Example of a SRC-14 implementation that also implements [SRC-5](./src-5-ownership.md).
+Example of a SRC-14 implementation that also implements `proxy_owner()`.
 
 ```sway
 {{#include ../../examples/src14-simple-proxy/owned/src/owned.sw}}
