@@ -1,5 +1,7 @@
 library;
 
+use ::src5::State;
+
 abi SRC14 {
     /// Change the target address of a proxy contract.
     ///
@@ -18,8 +20,30 @@ abi SRC14 {
     ///     contract_abi.set_proxy_target(new_target);
     /// }
     /// ```
-    #[storage(write)]
+    #[storage(read, write)]
     fn set_proxy_target(new_target: ContractId);
+}
+
+abi SRC14Extension {
+    /// Returns the owner of the proxy contract.
+    ///
+    /// # Returns
+    ///
+    /// * [State] - Represents the state of ownership for this contract.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// fn foo() {
+    ///     match owner() {
+    ///         State::Uninitalized => log("The ownership is uninitalized"),
+    ///         State::Initialized(owner) => log("The ownership is initalized"),
+    ///         State::Revoked => log("The ownership is revoked"),
+    ///     }
+    /// }
+    /// ```
+    #[storage(read)]
+    fn proxy_owner() -> State;
 }
 
 /// The standard storage slot to store proxy target address.
