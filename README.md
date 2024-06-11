@@ -158,7 +158,7 @@ Example of a minimal SRC-14 implementation with no access control.
 
 ##### [Owned Proxy](./examples/src14-simple-proxy/owned/src/owned.sw)
 
-Example of a SRC-14 implementation that also implements [SRC-5](https://github.com/FuelLabs/sway-standards/blob/master/SRCs/src-5.md).
+Example of a SRC-14 implementation that also implements [SRC-5](https://github.com/FuelLabs/sway-standards/blob/master/docs/src/src-5-ownership.md).
 
 > **Note**
 > All standards currently use `forc v0.60.0`.
