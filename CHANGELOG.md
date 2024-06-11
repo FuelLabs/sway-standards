@@ -16,8 +16,7 @@ Description of the upcoming release here.
 
 ### Changed
 
-- Something changed here 1
-- Something changed here 2
+- [#107](https://github.com/FuelLabs/sway-standards/pull/107) Add `proxy_owner()` function to the SRC-14 standard.
 
 ### Fixed
 
