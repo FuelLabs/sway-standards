@@ -11,17 +11,17 @@ Description of the upcoming release here.
 
 ### Added
 
-- Something new here 1
+- [#107](https://github.com/FuelLabs/sway-standards/pull/107) Adds the `proxy_owner()` function to the SRC-14 standard.
 - Something new here 2
 
 ### Changed
 
-- [#107](https://github.com/FuelLabs/sway-standards/pull/107) Add `proxy_owner()` function to the SRC-14 standard.
+- Something changed here 1
+- Something changed here 2
 
 ### Fixed
 
-- Some fix here 1
-- Some fix here 2
+- [#107](https://github.com/FuelLabs/sway-standards/pull/107) resolves the conflict when SRC-5's `owner()` function is used in both the proxy and target contract in the SRC-14 standard.
 
 #### Breaking
 
