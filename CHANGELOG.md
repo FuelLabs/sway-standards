@@ -13,7 +13,7 @@ Description of the upcoming release here.
 
 - [#107](https://github.com/FuelLabs/sway-standards/pull/107): Adds the `proxy_owner()` function to the SRC-14 standard.
 - [#104](https://github.com/FuelLabs/sway-standards/pull/104): Adds the CHANGELOG.md file to Sway-Standards.
-- [#103](https://github.com/FuelLabs/sway-standards/pull/103): Adds Sway-Standards to the docs hub https://docs.fuel.network/docs/sway-standards/
+- [#103](https://github.com/FuelLabs/sway-standards/pull/103): Adds Sway-Standards to the [docs hub](https://docs.fuel.network/docs/sway-standards/).
 
 ### Changed
 
