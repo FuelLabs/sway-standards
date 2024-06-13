@@ -38,8 +38,12 @@ The following functions MUST be implemented by a proxy contract to follow the SR
 
 #### `fn set_proxy_target(new_target: ContractId);`
 
-If a valid call is made to this function it MUST change the target address of the proxy to `new_target`.
+If a valid call is made to this function it MUST change the target contract of the proxy to `new_target`.
 This method SHOULD implement access controls such that the target can only be changed by a user that possesses the right permissions (typically the proxy owner).
+
+#### `fn proxy_target() -> Option<ContractId>;`
+
+This function MUST return the target contract of the proxy as `Some`. If no proxy is set then `None` MUST be returned.
 
 ### Optional Public Functions
 
@@ -73,6 +77,8 @@ Use of the [SRC-5; Ownership Standard](./src-5-ownership.md) is discouraged. If 
 abi SRC14 {
     #[storage(read, write)]
     fn set_proxy_target(new_target: ContractId);
+    #[storage(read)]
+    fn proxy_target() -> Option<ContractId>;
 }
 
 abi SRC14Extension {
