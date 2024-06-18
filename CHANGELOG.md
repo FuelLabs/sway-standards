@@ -13,6 +13,7 @@ Description of the upcoming release here.
 
 - [#107](https://github.com/FuelLabs/sway-standards/pull/107): Adds the `proxy_owner()` function to the SRC-14 standard.
 - [#104](https://github.com/FuelLabs/sway-standards/pull/104): Adds the CHANGELOG.md file to Sway-Standards.
+- [#110](https://github.com/FuelLabs/sway-standards/pull/110) Adds the `proxy_target()` function to the SRC-14 standard.
 - [#103](https://github.com/FuelLabs/sway-standards/pull/103): Adds Sway-Standards to the [docs hub](https://docs.fuel.network/docs/sway-standards/).
 
 ### Changed
@@ -26,4 +27,13 @@ Description of the upcoming release here.
 
 #### Breaking
 
-- None
+- [#110](https://github.com/FuelLabs/sway-standards/pull/110) Breaks the `SRC14` abi by adding the `proxy_target()` function. This will need to be added to any SRC14 implementation. The new abi is as follows:
+
+```sway
+abi SRC14 {
+    #[storage(read, write)]
+    fn set_proxy_target(new_target: ContractId);
+    #[storage(read)]
+    fn proxy_target() -> Option<ContractId>;
+}
+```

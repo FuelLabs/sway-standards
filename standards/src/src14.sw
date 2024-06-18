@@ -3,7 +3,7 @@ library;
 use ::src5::State;
 
 abi SRC14 {
-    /// Change the target address of a proxy contract.
+    /// Change the target contract of a proxy contract.
     ///
     /// # Arguments
     ///
@@ -22,6 +22,25 @@ abi SRC14 {
     /// ```
     #[storage(read, write)]
     fn set_proxy_target(new_target: ContractId);
+
+    /// Returns the target contract of a proxy contract.
+    ///
+    /// # Returns
+    ///
+    /// * [Option<ContractId>] - The new proxy contract to which all fallback calls will be passed or `None`.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use src14::SRC14;
+    ///
+    /// fn foo(contract_id: ContractId) {
+    ///     let contract_abi = abi(SRC14, contract_id.bits());
+    ///     let target_contract: Option<ContractId> = contract_abi.proxy_target();
+    /// }
+    /// ```
+    #[storage(read)]
+    fn proxy_target() -> Option<ContractId>;
 }
 
 abi SRC14Extension {

@@ -21,6 +21,11 @@ impl SRC14 for Contract {
         only_owner();
         storage.target.write(new_target);
     }
+
+    #[storage(read)]
+    fn proxy_target() -> Option<ContractId> {
+        storage.target.try_read()
+    }
 }
 
 impl SRC14Extension for Contract {
