@@ -15,6 +15,11 @@ impl SRC14 for Contract {
     fn set_proxy_target(new_target: ContractId) {
         storage.target.write(new_target);
     }
+
+    #[storage(read)]
+    fn proxy_target() -> Option<ContractId> {
+        storage.target.try_read()
+    }
 }
 
 #[fallback]
