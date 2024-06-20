@@ -8,7 +8,7 @@ The standard seeks to provide a better developer experience using Fuel's tooling
 
 ## Prior Art
 
-A number of pre-existing functions in the [sway standard library](https://github.com/FuelLabs/sway/tree/master/sway-lib-std), [sway-applications](https://github.com/FuelLabs/sway-applications), and [sway-libs](https://github.com/FuelLabs/sway-libs) repositories have inline documentation. The inline documentation for these is already compatible with Fuel's VS Code extension. These however do not all follow the same structure and outline.
+A number of pre-existing functions in the [sway standard library](https://fuellabs.github.io/sway/master/std/), [sway-applications](https://github.com/FuelLabs/sway-applications), and [sway-libs](https://docs.fuel.network/docs/sway-libs/) repositories have inline documentation. The inline documentation for these is already compatible with Fuel's VS Code extension. These however do not all follow the same structure and outline.
 
 ## Specification
 
