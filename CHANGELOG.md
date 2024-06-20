@@ -19,6 +19,7 @@ Description of the upcoming release here.
 ### Changed
 
 - [#103](https://github.com/FuelLabs/sway-standards/pull/103) Removes standards in the `./SRC` folder in favor of `./docs`.
+- [#106](https://github.com/FuelLabs/sway-standards/pull/106) Updates links from the Sway Book to Docs Hub.
 
 ### Fixed
 
