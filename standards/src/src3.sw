@@ -15,7 +15,7 @@ abi SRC3 {
     /// use src3::SRC3;
     ///
     /// fn foo(contract_id: ContractId) {
-    ///     let contract_abi = abi(SR3, contract);
+    ///     let contract_abi = abi(SRC3, contract);
     ///     contract_abi.mint(Identity::ContractId(contract_id), SubId::zero(), 100);
     /// }
     /// ```
@@ -40,7 +40,7 @@ abi SRC3 {
     /// use src3::SRC3;
     ///
     /// fn foo(contract_id: ContractId, asset_id: AssetId) {
-    ///     let contract_abi = abi(SR3, contract_id);
+    ///     let contract_abi = abi(SRC3, contract_id);
     ///     contract_abi {
     ///         gas: 10000,
     ///         coins: 100,
