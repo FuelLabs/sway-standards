@@ -5,24 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased] - yyyy-mm-dd
+## [Version 0.5.1]
 
 Description of the upcoming release here.
 
 ### Added
 
-- [#107](https://github.com/FuelLabs/sway-standards/pull/107) Adds the `proxy_owner()` function to the SRC-14 standard.
+- [#107](https://github.com/FuelLabs/sway-standards/pull/107): Adds the `proxy_owner()` function to the SRC-14 standard.
+- [#104](https://github.com/FuelLabs/sway-standards/pull/104): Adds the CHANGELOG.md file to Sway-Standards.
 - [#110](https://github.com/FuelLabs/sway-standards/pull/110) Adds the `proxy_target()` function to the SRC-14 standard.
-- Something new here 2
+- [#103](https://github.com/FuelLabs/sway-standards/pull/103): Adds Sway-Standards to the [docs hub](https://docs.fuel.network/docs/sway-standards/).
 
 ### Changed
 
-- Something changed here 1
-- Something changed here 2
+- [#103](https://github.com/FuelLabs/sway-standards/pull/103) Removes standards in the `./SRC` folder in favor of `./docs`.
+- [#106](https://github.com/FuelLabs/sway-standards/pull/106) Updates links from the Sway Book to Docs Hub.
 
 ### Fixed
 
 - [#107](https://github.com/FuelLabs/sway-standards/pull/107) resolves the conflict when SRC-5's `owner()` function is used in both the proxy and target contract in the SRC-14 standard.
+- [#99](https://github.com/FuelLabs/sway-standards/pull/99) Fixes links and typos in the SRC-14 standard.
+- [#112](https://github.com/FuelLabs/sway-standards/pull/112) Fixes inline documentation code in the SRC-3 standard.
 
 #### Breaking
 
