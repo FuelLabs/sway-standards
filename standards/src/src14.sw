@@ -1,7 +1,9 @@
 library;
 
+use ::src5::State;
+
 abi SRC14 {
-    /// Change the target address of a proxy contract.
+    /// Change the target contract of a proxy contract.
     ///
     /// # Arguments
     ///
