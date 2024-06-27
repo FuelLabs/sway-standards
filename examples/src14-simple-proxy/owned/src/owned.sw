@@ -1,33 +1,37 @@
 contract;
 
 use std::execution::run_external;
-use std::constants::ZERO_B256;
-use standards::src5::{AccessError, SRC5, State};
-use standards::src14::SRC14;
+use standards::src5::{AccessError, State};
+use standards::src14::{SRC14, SRC14Extension};
 
 /// The owner of this contract at deployment.
-const INITIAL_OWNER: Identity = Identity::Address(Address::from(ZERO_B256));
+const INITIAL_OWNER: Identity = Identity::Address(Address::zero());
 
 // use sha256("storage_SRC14") as base to avoid collisions
 #[namespace(SRC14)]
 storage {
     // target is at sha256("storage_SRC14_0")
-    target: ContractId = ContractId::from(ZERO_B256),
+    target: ContractId = ContractId::zero(),
     owner: State = State::Initialized(INITIAL_OWNER),
 }
 
-impl SRC5 for Contract {
-    #[storage(read)]
-    fn owner() -> State {
-        storage.owner.read()
-    }
-}
-
 impl SRC14 for Contract {
-    #[storage(write)]
+    #[storage(read, write)]
     fn set_proxy_target(new_target: ContractId) {
         only_owner();
         storage.target.write(new_target);
+    }
+
+    #[storage(read)]
+    fn proxy_target() -> Option<ContractId> {
+        storage.target.try_read()
+    }
+}
+
+impl SRC14Extension for Contract {
+    #[storage(read)]
+    fn proxy_owner() -> State {
+        storage.owner.read()
     }
 }
 

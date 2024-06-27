@@ -1,7 +1,7 @@
 <p align="center">
     <picture>
-        <source media="(prefers-color-scheme: dark)" srcset=".docs/sway-standards-logo-dark-theme.png">
-        <img alt="Sway Standards logo" width="400px" src=".docs/sway-standards-logo-light-theme.png">
+        <source media="(prefers-color-scheme: dark)" srcset="assets/sway-standards-logo-dark-theme.png">
+        <img alt="Sway Standards logo" width="400px" src="assets/sway-standards-logo-light-theme.png">
     </picture>
 </p>
 
@@ -35,35 +35,37 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 ### Native Assets
 
-- [SRC-20; Native Asset Standard](./SRCs/src-20.md) defines the implementation of a standard API for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) using the Sway Language.
-- [SRC-3; Mint and Burn](./SRCs/src-3.md) is used to enable mint and burn functionality for fungible assets.
-- [SRC-7; Arbitrary Asset Metadata Standard](./SRCs/src-7.md) is used to store metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
-- [SRC-9; Metadata Keys Standard](./SRCs/src-9.md) is used to store standardized metadata keys for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) in combination with the SRC-7 standard.
-- [SRC-6; Vault Standard](./SRCs/src-6.md) defines the implementation of a standard API for asset vaults developed in Sway.
+- [SRC-20; Native Asset Standard](https://docs.fuel.network/docs/sway-standards/src-20-native-asset/) defines the implementation of a standard API for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) using the Sway Language.
+- [SRC-3; Mint and Burn](https://docs.fuel.network/docs/sway-standards/src-3-minting-and-burning/) is used to enable mint and burn functionality for fungible assets.
+- [SRC-7; Arbitrary Asset Metadata Standard](https://docs.fuel.network/docs/sway-standards/src-7-asset-metadata/) is used to store metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
+- [SRC-9; Metadata Keys Standard](https://docs.fuel.network/docs/sway-standards/src-9-metadata-keys/) is used to store standardized metadata keys for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) in combination with the SRC-7 standard.
+- [SRC-6; Vault Standard](https://docs.fuel.network/docs/sway-standards/src-6-vault/) defines the implementation of a standard API for asset vaults developed in Sway.
+- [SRC-13; Soulbound Address](https://docs.fuel.network/docs/sway-standards/src-13-soulbound-address/) provides a predicate interface to lock [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) as soulbound.
 
 ### Access Control
 
-- [SRC-5; Ownership Standard](./SRCs/src-5.md) is used to restrict function calls to admin users in contracts.
+- [SRC-5; Ownership Standard](https://docs.fuel.network/docs/sway-standards/src-5-ownership/) is used to restrict function calls to admin users in contracts.
 
 ### Contracts
 
-- [SRC-12; Contract Factory](./SRCs/src-12.md) defines the implementation of a standard API for contract factories.
+- [SRC-12; Contract Factory](https://docs.fuel.network/docs/sway-standards/src-12-contract-factory/) defines the implementation of a standard API for contract factories.
+- [SRC-14; Simple Upgradable Proxies](https://docs.fuel.network/docs/sway-standards/src-14-simple-upgradeable-proxies/) defines the implementation of a standard API for simple upgradable proxies.
 
 ### Bridge
 
-- [SRC-8; Bridged Asset](./SRCs/src-8.md) defines the metadata required for an asset bridged to the Fuel Network.
-- [SRC-10; Native Bridge Standard](./SRCs/src-10.md) defines the standard API for the Native Bridge between the Fuel Chain and the canonical base chain.
+- [SRC-8; Bridged Asset](https://docs.fuel.network/docs/sway-standards/src-8-bridged-asset/) defines the metadata required for an asset bridged to the Fuel Network.
+- [SRC-10; Native Bridge Standard](https://docs.fuel.network/docs/sway-standards/src-10-native-bridge/) defines the standard API for the Native Bridge between the Fuel Chain and the canonical base chain.
 
 ### Documentation
 
-- [SRC-2; Inline Documentation](./SRCs/src-2.md) defines how to document your Sway files.
+- [SRC-2; Inline Documentation](https://docs.fuel.network/docs/sway-standards/src-2-inline-documentation/) defines how to document your Sway files.
 
 ## Using a standard
 
 To import a standard the following should be added to the project's `Forc.toml` file under `[dependencies]` with the most recent release:
 
-```rust
-standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.5.0" }
+```toml
+standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.5.1" }
 ```
 
 > **NOTE:**
@@ -71,13 +73,13 @@ standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.5.0"
 
 You may then import your desired standard in your Sway Smart Contract as so:
 
-```rust
+```sway
 use standards::<standard>::<standard_abi>;
 ```
 
 For example, to import the SRC-20 Native Asset Standard use the following statement in your Sway Smart Contract file:
 
-```rust
+```sway
 use standards::src20::SRC20;
 ```
 
@@ -148,6 +150,16 @@ Example of the SRC-12 implementation where contract deployments contain configur
 ##### [Without Configurables](./examples/src12-contract-factory/without_configurables/src/without_configurables.sw)
 
 Example of the SRC-12 implementation where all contract deployments are identical and thus have the same bytecode and root.
+
+#### SRC-14; Simple Upgradable Proxies Standard Examples
+
+##### [Minimal](./examples/src14-simple-proxy/minimal/src/minimal.sw)
+
+Example of a minimal SRC-14 implementation with no access control.
+
+##### [Owned Proxy](./examples/src14-simple-proxy/owned/src/owned.sw)
+
+Example of a SRC-14 implementation that also implements [SRC-5](https://docs.fuel.network/docs/sway-standards/src-5-ownership/).
 
 > **Note**
 > All standards currently use `forc v0.60.0`.

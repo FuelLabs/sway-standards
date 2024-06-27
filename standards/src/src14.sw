@@ -1,7 +1,9 @@
 library;
 
+use ::src5::State;
+
 abi SRC14 {
-    /// Change the target address of a proxy contract.
+    /// Change the target contract of a proxy contract.
     ///
     /// # Arguments
     ///
@@ -18,8 +20,49 @@ abi SRC14 {
     ///     contract_abi.set_proxy_target(new_target);
     /// }
     /// ```
-    #[storage(write)]
+    #[storage(read, write)]
     fn set_proxy_target(new_target: ContractId);
+
+    /// Returns the target contract of a proxy contract.
+    ///
+    /// # Returns
+    ///
+    /// * [Option<ContractId>] - The new proxy contract to which all fallback calls will be passed or `None`.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use src14::SRC14;
+    ///
+    /// fn foo(contract_id: ContractId) {
+    ///     let contract_abi = abi(SRC14, contract_id.bits());
+    ///     let target_contract: Option<ContractId> = contract_abi.proxy_target();
+    /// }
+    /// ```
+    #[storage(read)]
+    fn proxy_target() -> Option<ContractId>;
+}
+
+abi SRC14Extension {
+    /// Returns the owner of the proxy contract.
+    ///
+    /// # Returns
+    ///
+    /// * [State] - Represents the state of ownership for this contract.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// fn foo() {
+    ///     match owner() {
+    ///         State::Uninitalized => log("The ownership is uninitalized"),
+    ///         State::Initialized(owner) => log("The ownership is initalized"),
+    ///         State::Revoked => log("The ownership is revoked"),
+    ///     }
+    /// }
+    /// ```
+    #[storage(read)]
+    fn proxy_owner() -> State;
 }
 
 /// The standard storage slot to store proxy target address.
