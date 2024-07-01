@@ -1,10 +1,8 @@
 contract;
 
 use std::execution::run_external;
-use standards::src14::SRC14;
+use standards::src14::{SRC14, SRC14_TARGET_STORAGE};
 
-// use sha256("storage_SRC14") as base to avoid collisions
-#[namespace(SRC14)]
 storage {
     // target is at sha256("storage_SRC14_0")
     target: ContractId = ContractId::zero(),
