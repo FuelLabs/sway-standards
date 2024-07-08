@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+Description of the upcoming release here.
+
+### Added
+
+- Something new here
+
+### Changed
+
+- Something new here
+
+### Fixed
+
+- [#122](https://github.com/FuelLabs/sway-standards/pull/107) Fixes the SRC-6 example contract from a critical bug where the contract can be drained.
+
 ## [Version 0.5.1]
 
 Description of the upcoming release here.
