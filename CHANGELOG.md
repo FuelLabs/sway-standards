@@ -19,7 +19,7 @@ Description of the upcoming release here.
 
 ### Fixed
 
-- [#122](https://github.com/FuelLabs/sway-standards/pull/107) Fixes the SRC-6 example contract from a critical bug where the contract can be drained.
+- [#122](https://github.com/FuelLabs/sway-standards/pull/122) Fixes the SRC-6 example contract from a critical bug where the contract can be drained.
 
 ## [Version 0.5.1]
 
