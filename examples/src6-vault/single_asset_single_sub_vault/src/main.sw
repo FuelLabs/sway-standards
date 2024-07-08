@@ -78,6 +78,10 @@ impl SRC6 for Contract {
         require(msg_asset_id() == share_asset_id, "INVALID_ASSET_ID");
         let assets = preview_withdraw(shares);
 
+        storage
+            .managed_assets
+            .write(storage.managed_assets.read() - shares);
+
         _burn(share_asset_id, shares);
 
         transfer(receiver, underlying_asset, assets);
