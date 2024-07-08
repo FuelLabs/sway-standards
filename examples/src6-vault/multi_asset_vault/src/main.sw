@@ -83,6 +83,7 @@ impl SRC6 for Contract {
 
         let mut vault_info = storage.vault_info.get(share_asset_id).read();
         vault_info.managed_assets = vault_info.managed_assets - shares;
+        storage.vault_info.insert(share_asset_id, vault_info);
 
         _burn(share_asset_id, share_asset_vault_sub_id, shares);
 
