@@ -51,7 +51,14 @@ impl SRC6 for Contract {
 
         _mint(receiver, share_asset, share_asset_vault_sub_id, shares);
 
-        let mut vault_info = storage.vault_info.get(share_asset).read();
+        let mut vault_info = match storage.vault_info.get(share_asset).try_read() {
+            Some(vault_info) => vault_info,
+            None => VaultInfo {
+                managed_assets: 0,
+                vault_sub_id,
+                asset: underlying_asset,
+            },
+        };
         vault_info.managed_assets = vault_info.managed_assets + asset_amount;
         storage.vault_info.insert(share_asset, vault_info);
 
