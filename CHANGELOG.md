@@ -11,8 +11,7 @@ Description of the upcoming release here.
 
 ### Added Unreleased
 
-- Something new here 1
-- Something new here 2
+- Something new here
 
 ### Changed Unreleased
 
@@ -22,8 +21,9 @@ Description of the upcoming release here.
 ### Fixed Unreleased
 
 - [#121](https://github.com/FuelLabs/sway-standards/pull/121) Fixes the `deposit` function in the SRC-6 standard, uses try_read instead of read in order to allow first time deposits to a vault.
+- [#122](https://github.com/FuelLabs/sway-standards/pull/122) Fixes the SRC-6 example contract from a critical bug where the contract can be drained.
 
-#### Breaking Unreleased
+### Breaking Unreleased
 
 - Some breaking change here 1
 - Some breaking change here 2
