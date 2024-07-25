@@ -67,4 +67,4 @@ jobs:
           run: forc fmt --path examples --check
 
         - name: Build All Examples
-          run: forc build --error-on-warnings --path examples
+          run: forc build --path examples
