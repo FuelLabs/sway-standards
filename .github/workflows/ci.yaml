@@ -61,10 +61,10 @@ jobs:
           run: forc fmt --path standards --check
 
         - name: Build All Standards
-          run: forc build --path standards
+          run: forc build --error-on-warnings --path standards
 
         - name: Check Sway Formatting Examples
           run: forc fmt --path examples --check
 
         - name: Build All Examples
-          run: forc build --path examples
+          run: forc build --error-on-warnings --path examples
