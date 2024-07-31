@@ -22,6 +22,7 @@ Description of the upcoming release here.
 
 - [#121](https://github.com/FuelLabs/sway-standards/pull/121) Fixes the `deposit` function in the SRC-6 standard, uses try_read instead of read in order to allow first time deposits to a vault.
 - [#122](https://github.com/FuelLabs/sway-standards/pull/122) Fixes the SRC-6 example contract from a critical bug where the contract can be drained.
+- [#124](https://github.com/FuelLabs/sway-standards/pull/124) Fixes compiler warnings for libraries
 
 ### Breaking Unreleased
 
