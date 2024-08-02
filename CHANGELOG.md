@@ -29,6 +29,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Version 0.5.2]
 
+### Changed v0.5.2
+
+- [#126](https://github.com/FuelLabs/sway-standards/pull/126) Prepares for v0.5.2 release.
+
 ### Fixed v0.5.2
 
 - [#121](https://github.com/FuelLabs/sway-standards/pull/121) Fixes the `deposit` function in the SRC-6 standard, uses try_read instead of read in order to allow first time deposits to a vault.
