@@ -7,11 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-Description of the upcoming release here.
-
 ### Added Unreleased
 
-- Something new here
+- Something new here 1
+- Something new here 2
 
 ### Changed Unreleased
 
@@ -20,25 +19,34 @@ Description of the upcoming release here.
 
 ### Fixed Unreleased
 
-- [#121](https://github.com/FuelLabs/sway-standards/pull/121) Fixes the `deposit` function in the SRC-6 standard, uses try_read instead of read in order to allow first time deposits to a vault.
-- [#122](https://github.com/FuelLabs/sway-standards/pull/122) Fixes the SRC-6 example contract from a critical bug where the contract can be drained.
-- [#124](https://github.com/FuelLabs/sway-standards/pull/124) Fixes compiler warnings for libraries
+- Some fix here 1
+- Some fix here 2
 
 ### Breaking Unreleased
 
 - Some breaking change here 1
 - Some breaking change here 2
 
-## [Version 0.5.1]
+## [Version 0.5.2]
 
-Description of the upcoming release here.
+### Changed v0.5.2
+
+- [#126](https://github.com/FuelLabs/sway-standards/pull/126) Prepares for v0.5.2 release.
+
+### Fixed v0.5.2
+
+- [#121](https://github.com/FuelLabs/sway-standards/pull/121) Fixes the `deposit` function in the SRC-6 standard, uses try_read instead of read in order to allow first time deposits to a vault.
+- [#122](https://github.com/FuelLabs/sway-standards/pull/122) Fixes the SRC-6 example contract from a critical bug where the contract can be drained.
+- [#124](https://github.com/FuelLabs/sway-standards/pull/124) Fixes compiler warnings for libraries
+
+## [Version 0.5.1]
 
 ### Added v0.5.1
 
-- [#107](https://github.com/FuelLabs/sway-standards/pull/107): Adds the `proxy_owner()` function to the SRC-14 standard.
-- [#104](https://github.com/FuelLabs/sway-standards/pull/104): Adds the CHANGELOG.md file to Sway-Standards.
+- [#107](https://github.com/FuelLabs/sway-standards/pull/107) Adds the `proxy_owner()` function to the SRC-14 standard.
+- [#104](https://github.com/FuelLabs/sway-standards/pull/104) Adds the CHANGELOG.md file to Sway-Standards.
 - [#110](https://github.com/FuelLabs/sway-standards/pull/110) Adds the `proxy_target()` function to the SRC-14 standard.
-- [#103](https://github.com/FuelLabs/sway-standards/pull/103): Adds Sway-Standards to the [docs hub](https://docs.fuel.network/docs/sway-standards/).
+- [#103](https://github.com/FuelLabs/sway-standards/pull/103) Adds Sway-Standards to the [docs hub](https://docs.fuel.network/docs/sway-standards/).
 
 ### Changed v0.5.1
 
@@ -53,7 +61,7 @@ Description of the upcoming release here.
 - [#112](https://github.com/FuelLabs/sway-standards/pull/112) Fixes inline documentation code in the SRC-3 standard.
 - [#115](https://github.com/FuelLabs/sway-standards/pull/115) Hotfixes the Cargo.toml version to the v0.5.1 release.
 
-#### Breaking v0.5.1
+### Breaking v0.5.1
 
 - [#110](https://github.com/FuelLabs/sway-standards/pull/110) Breaks the `SRC14` abi by adding the `proxy_target()` function. This will need to be added to any SRC14 implementation. The new abi is as follows:
 
