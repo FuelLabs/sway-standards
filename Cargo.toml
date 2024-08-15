@@ -2,3 +2,12 @@
 name = "sway-standards"
 version = "0.5.2"
 edition = "2021"
+
+[[test]]
+harness = true
+name = "sway-standards-examples-tests"
+path = "examples/harness.rs"
+
+[dependencies]
+fuels = { version = "0.64.0", features = ["fuel-core-lib"] }
+tokio = { version = "1.12", features = ["rt", "macros"] }

@@ -67,4 +67,7 @@ jobs:
           run: forc fmt --path examples --check
 
         - name: Build All Examples
-          run: forc build --path examples
+          run: forc build --path examples --
+          
+        - name: Run Cargo Tests
+          run: cargo test

@@ -1,7 +1,7 @@
 [workspace]
 members = [
-  "src3-mint-burn/single_asset",
-  "src3-mint-burn/multi_asset",
+  "src3_mint_burn/single_asset",
+  "src3_mint_burn/multi_asset",
   "src5-ownership/initialized_example",
   "src5-ownership/uninitialized_example",
   "src6-vault/multi_asset_vault",
