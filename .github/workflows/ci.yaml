@@ -21,7 +21,7 @@ env:
   PATH_TO_SCRIPTS: .github/scripts
 
 jobs:
-  build-sway-lib:
+  build-sway-standards:
       runs-on: ubuntu-latest
       
       steps:
@@ -67,7 +67,7 @@ jobs:
           run: forc fmt --path examples --check
 
         - name: Build All Examples
-          run: forc build --path examples --
+          run: forc build --path examples --release
           
         - name: Run Cargo Tests
           run: cargo test
