@@ -89,75 +89,75 @@ Minimal example implementations for every standard can be found in the [`example
 
 #### SRC-20; Native Asset Standard Examples
 
-##### - [Single Native Asset](./examples/src20-native-asset/single_asset/src/single_asset.sw)
+##### - [Single Native Asset](./examples/src20_native_asset/single_asset/src/single_asset.sw)
 
 Example of the SRC-20 implementation where a contract contains a single asset with one `SubId`. This implementation is recommended for users that intend to deploy a single asset with their contract.
 
-##### - [Multi Native Asset](./examples/src20-native-asset/multi_asset/src/multi_asset.sw)
+##### - [Multi Native Asset](./examples/src20_native_asset/multi_asset/src/multi_asset.sw)
 
 Example of the SRC-20 implementation where a contract contains multiple assets with differing `SubId`s. This implementation is recommended for users that intend to deploy multiple assets with their contract.
 
 #### SRC-3; Mint and Burn Standard Examples
 
-##### - [Single Native Asset](./examples/src3-mint-burn/single_asset/src/single_asset.sw)
+##### - [Single Native Asset](./examples/src3_mint_burn/single_asset/src/single_asset.sw)
 
 Example of the SRC-3 implementation where a contract only mints a single asset with one `SubId`.
 
-##### - [Multi Native Asset](./examples/src3-mint-burn/multi_asset/src/multi_asset.sw)
+##### - [Multi Native Asset](./examples/src3_mint_burn/multi_asset/src/multi_asset.sw)
 
 Example of the SRC-3 implementation where a contract mints multiple assets with differing `SubId`s.
 
 #### SRC-5; Ownership Examples
 
-##### - [Uninitalized](./examples/src5-ownership/uninitialized_example/src/uninitialized_example.sw)
+##### - [Uninitalized](./examples/src5_ownership/uninitialized_example/src/uninitialized_example.sw)
 
 Example of the SRC-5 implementation where a contract does not have an owner set at compile time with the intent to set it during runtime.
 
-##### - [Initialized](./examples/src5-ownership/initialized_example/src/initialized_example.sw)
+##### - [Initialized](./examples/src5_ownership/initialized_example/src/initialized_example.sw)
 
 Example of the SRC-5 implementation where a contract has an owner set at compile time.
 
 #### SRC-6; Vault Standard Examples
 
-##### [Multi Asset Vault](./examples/src6-vault/multi_asset_vault/)
+##### [Multi Asset Vault](./examples/src6_vault/multi_asset_vault/)
 
 A basic implementation of the vault standard that supports any number of sub vaults being created for every `AssetId`.
 
-##### [Single Asset Vault](./examples/src6-vault/single_asset_vault/)
+##### [Single Asset Vault](./examples/src6_vault/single_asset_vault/)
 
 A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single `AssetId`.
 
-##### [Single Asset Single Sub Vault](./examples/src6-vault/single_asset_single_sub_vault/)
+##### [Single Asset Single Sub Vault](./examples/src6_vault/single_asset_single_sub_vault/)
 
 A basic implementation of the vault standard demonstrating how to restrict deposits and withdrawals to a single `AssetId`, and to a single Sub vault.
 
 #### SRC-7; Arbitrary Asset Metadata Standard Examples
 
-##### - [Single Native Asset](./examples/src7-metadata/single_asset/src/single_asset.sw)
+##### - [Single Native Asset](./examples/src7_metadata/single_asset/src/single_asset.sw)
 
 Example of the SRC-7 implementation where metadata exists for only a single asset with one `SubId`.
 
-##### - [Multi Native Asset](./examples/src7-metadata/multi_asset/src/multi_asset.sw)
+##### - [Multi Native Asset](./examples/src7_metadata/multi_asset/src/multi_asset.sw)
 
 Example of the SRC-7 implementation where metadata exists for multiple assets with differing `SubId`s.
 
 #### SRC-12; Contract Factory Standard Examples
 
-##### [With Configurables](./examples/src12-contract-factory/with_configurables/src/with_configurables.sw)
+##### [With Configurables](./examples/src12_contract_factory/with_configurables/src/with_configurables.sw)
 
 Example of the SRC-12 implementation where contract deployments contain configurable values that differentiate the bytecode root from other contracts with the same bytecode.
 
-##### [Without Configurables](./examples/src12-contract-factory/without_configurables/src/without_configurables.sw)
+##### [Without Configurables](./examples/src12_contract_factory/without_configurables/src/without_configurables.sw)
 
 Example of the SRC-12 implementation where all contract deployments are identical and thus have the same bytecode and root.
 
 #### SRC-14; Simple Upgradable Proxies Standard Examples
 
-##### [Minimal](./examples/src14-simple-proxy/minimal/src/minimal.sw)
+##### [Minimal](./examples/src14_simple_proxy/minimal/src/minimal.sw)
 
 Example of a minimal SRC-14 implementation with no access control.
 
-##### [Owned Proxy](./examples/src14-simple-proxy/owned/src/owned.sw)
+##### [Owned Proxy](./examples/src14_simple_proxy/owned/src/owned.sw)
 
 Example of a SRC-14 implementation that also implements [SRC-5](https://docs.fuel.network/docs/sway-standards/src-5-ownership/).
 

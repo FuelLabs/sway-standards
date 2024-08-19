@@ -9,13 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added Unreleased
 
-- Something new here 1
-- Something new here 2
+- [#129](https://github.com/FuelLabs/sway-standards/pull/129) Adds setup for testing this repository.
 
 ### Changed Unreleased
 
-- Something changed here 1
-- Something changed here 2
+- [#129](https://github.com/FuelLabs/sway-standards/pull/129) Changed folder names of examples to use underscores instead of dashes.
 
 ### Fixed Unreleased
 
