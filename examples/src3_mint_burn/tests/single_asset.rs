@@ -2,7 +2,8 @@ use fuels::{
     prelude::{
         abigen, launch_custom_provider_and_get_wallets, AssetConfig, Contract, ContractId,
         LoadConfiguration, TxPolicies, WalletUnlocked, WalletsConfig,
-    }, programs::calls::CallParameters, types::{transaction_builders::VariableOutputPolicy, AssetId, Bits256}
+    }, programs::calls::CallParameters, types::{transaction_builders::VariableOutputPolicy, AssetId, Bits256},
+    tx::ContractIdExt,
 };
 
 abigen!(Contract(
