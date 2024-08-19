@@ -1,10 +1,9 @@
 use fuels::{
-    accounts::ViewOnlyAccount,
     prelude::{
         abigen, launch_custom_provider_and_get_wallets, AssetConfig, Contract, ContractId,
         LoadConfiguration, TxPolicies, WalletUnlocked, WalletsConfig,
     },
-    types::{Address, AssetId, Bits256, Bytes32, Identity},
+    types::AssetId,
 };
 
 abigen!(Contract(
