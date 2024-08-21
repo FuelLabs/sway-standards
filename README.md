@@ -109,7 +109,7 @@ Example of the SRC-3 implementation where a contract mints multiple assets with 
 
 #### SRC-5; Ownership Examples
 
-##### - [Uninitalized](./examples/src5-ownership/uninitialized_example/src/uninitialized_example.sw)
+##### - [Uninitialized](./examples/src5-ownership/uninitialized_example/src/uninitialized_example.sw)
 
 Example of the SRC-5 implementation where a contract does not have an owner set at compile time with the intent to set it during runtime.
 

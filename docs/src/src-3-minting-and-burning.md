@@ -23,9 +23,9 @@ This function MAY contain arbitrary conditions for minting, and revert if those 
 
 ##### Mint Arguments
 
-* `recipient` - The `Identity` to which the newly minted asset is transferred to.
-* `sub_id` - The sub-identifier of the asset to mint.
-* `amount` - The quantity of coins to mint.
+- `recipient` - The `Identity` to which the newly minted asset is transferred to.
+- `sub_id` - The sub-identifier of the asset to mint.
+- `amount` - The quantity of coins to mint.
 
 #### `fn burn(sub_id: SubId, amount: u64)`
 
@@ -36,8 +36,8 @@ This function MAY contain arbitrary conditions for burning, and revert if those 
 
 ##### Burn Arguments
 
-* `sub_id` - The sub-identifier of the asset to burn.
-* `amount` - The quantity of coins to burn.
+- `sub_id` - The sub-identifier of the asset to burn.
+- `amount` - The quantity of coins to burn.
 
 ## Rationale
 

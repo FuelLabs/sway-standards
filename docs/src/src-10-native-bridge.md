@@ -8,7 +8,7 @@ A standard interface for bridges intends to provide a safe and efficient bridge 
 
 ## Prior Art
 
-The standard is centered on Fuel’s [Bridge Architecture](https://github.com/FuelLabs/fuel-bridge/blob/main/docs/ARCHITECTURE.md). Fuel's bridge system is built on a message protocol that allows to send (and receive) messages between entities located in two different blockchains.
+The standard is centred on Fuel’s [Bridge Architecture](https://github.com/FuelLabs/fuel-bridge/blob/main/docs/ARCHITECTURE.md). Fuel's bridge system is built on a message protocol that allows to send (and receive) messages between entities located in two different blockchains.
 
 The following standard takes reference from the [`FungibleBridge`](https://github.com/FuelLabs/fuel-bridge/blob/3971081850e7961d9b649edda4cad8a848ee248e/packages/fungible-token/bridge-fungible-token/src/interface.sw#L22) ABI defined in the fuel-bridge repository.
 
