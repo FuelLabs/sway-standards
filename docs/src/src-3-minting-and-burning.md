@@ -19,7 +19,7 @@ The following functions MUST be implemented to follow the SRC-3 standard:
 #### `fn mint(recipient: Identity, sub_id: Option<SubId>, amount: u64)`
 
 This function MUST mint `amount` coins with a sub-identifier and transfer them to the `recipient`.
-This function MUST use the `sub_id` as the sub-identifier IF `sub_id` is `Some`, otherwise this funtion MUST assign a `SubId` if the `sub_id` argument is `None`.
+This function MUST use the `sub_id` as the sub-identifier IF `sub_id` is `Some`, otherwise this function MUST assign a `SubId` if the `sub_id` argument is `None`.
 This function MAY contain arbitrary conditions for minting, and revert if those conditions are not met.
 
 ##### Mint Arguments
