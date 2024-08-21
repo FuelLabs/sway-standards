@@ -261,3 +261,7 @@ glTF
 GLB
 Uninitalized
 upgradeability
+SetMetadataEvent
+SetNameEvent
+SetSymbolEvent
+SetDecimalsEvent

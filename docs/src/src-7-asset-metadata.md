@@ -44,7 +44,6 @@ The `String` variant SHALL be used when the stored metadata for the correspondin
 
 This function MUST return valid metadata for the corresponding `asset` and `key`, where the data is either a `B256`, `Bytes`, `Int`, or `String` variant. If the asset does not exist or no metadata exists, the function MUST return `None`.
 
-
 ### Logging
 
 The following logs MUST be implemented upon value changes to follow the SRC-7 standard:
