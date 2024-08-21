@@ -15,9 +15,9 @@ concurrency:
 env:
   CARGO_TERM_COLOR: always
   REGISTRY: ghcr.io
-  RUST_VERSION: 1.77.0
-  FORC_VERSION: 0.61.0
-  CORE_VERSION: 0.26.0
+  RUST_VERSION: 1.80.1
+  FORC_VERSION: 0.63.1
+  CORE_VERSION: 0.34.0
   PATH_TO_SCRIPTS: .github/scripts
 
 jobs:
