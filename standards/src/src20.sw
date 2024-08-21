@@ -123,3 +123,21 @@ abi SRC20 {
     #[storage(read)]
     fn decimals(asset: AssetId) -> Option<u8>;
 }
+
+pub struct SetNameEvent {
+    pub asset: AssetId,
+    pub name: Option<String>,
+    pub sender: Identity,
+}
+
+pub struct SetSymbolEvent {
+    pub asset: AssetId,
+    pub symbol: Option<String>,
+    pub sender: Identity,
+}
+
+pub struct SetDecimalsEvent {
+    pub asset: AssetId,
+    pub decimals: u8,
+    pub sender: Identity,
+}
