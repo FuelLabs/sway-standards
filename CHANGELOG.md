@@ -24,8 +24,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Breaking Unreleased
 
-- Some breaking change here 1
-- Some breaking change here 2
+- [#131](https://github.com/FuelLabs/sway-standards/pull/131) Makes the SRC-3 `mint()` function's `SubId` argument an `Option`.
+
+Before:
+```sway
+mint(Identity::Address(Address::zero()), SubId::zero(), 100);
+```
+
+After:
+```sway
+mint(Identity::Address(Address::zero()), Some(SubId::zero()), 100);
+```
 
 ## [Version 0.5.2]
 
