@@ -1,6 +1,15 @@
 contract;
 
-use standards::{src20::{SRC20, SetNameEvent, SetSymbolEvent, SetDecimalsEvent, UpdateTotalSupplyEvent}, src3::SRC3};
+use standards::{
+    src20::{
+        SetDecimalsEvent,
+        SetNameEvent,
+        SetSymbolEvent,
+        SRC20,
+        UpdateTotalSupplyEvent,
+    },
+    src3::SRC3,
+};
 use std::{
     asset::{
         burn,
@@ -71,14 +80,12 @@ impl SRC3 for Contract {
 
         // Increment total supply of the asset and mint to the recipient.
         let new_supply = amount + asset_supply.unwrap_or(0);
-        storage
-            .total_supply
-            .insert(asset_id, new_supply);
+        storage.total_supply.insert(asset_id, new_supply);
 
-        log(UpdateTotalSupplyEvent{
+        log(UpdateTotalSupplyEvent {
             asset: asset_id,
             supply: new_supply,
-            sender: msg_sender().unwrap()
+            sender: msg_sender().unwrap(),
         });
 
         mint_to(recipient, sub_id, amount);
@@ -201,10 +208,10 @@ impl SetSRC20Data for Contract {
             sender,
         });
 
-        log(UpdateTotalSupplyEvent{
+        log(UpdateTotalSupplyEvent {
             asset,
             supply,
-            sender
+            sender,
         });
     }
 }

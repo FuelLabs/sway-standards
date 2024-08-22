@@ -1,6 +1,19 @@
 contract;
 
-use standards::{src20::{SRC20, SetNameEvent, SetSymbolEvent, SetDecimalsEvent, UpdateTotalSupplyEvent}, src7::{Metadata, SRC7, SetMetadataEvent}};
+use standards::{
+    src20::{
+        SetDecimalsEvent,
+        SetNameEvent,
+        SetSymbolEvent,
+        SRC20,
+        UpdateTotalSupplyEvent,
+    },
+    src7::{
+        Metadata,
+        SetMetadataEvent,
+        SRC7,
+    },
+};
 
 use std::{hash::Hash, storage::storage_string::*, string::String};
 
@@ -198,10 +211,10 @@ impl SetSRC20Data for Contract {
             sender,
         });
 
-        log(UpdateTotalSupplyEvent{
+        log(UpdateTotalSupplyEvent {
             asset,
             supply,
-            sender
+            sender,
         });
     }
 }
