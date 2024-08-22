@@ -47,12 +47,12 @@ pub enum Metadata {
 pub struct SetMetadataEvent {
     /// The asset for which metadata is set.
     pub asset: AssetId,
-    /// The `Identity` of the caller that set the metadata.
-    pub sender: Identity,
     /// The Metadata that is set.
     pub metadata: Option<Metadata>,
     /// The key used for the metadata.
     pub key: String,
+    /// The `Identity` of the caller that set the metadata.
+    pub sender: Identity,
 }
 
 impl core::ops::Eq for Metadata {

@@ -124,7 +124,7 @@ abi SRC20 {
     fn decimals(asset: AssetId) -> Option<u8>;
 }
 
-/// The event emitted when the name is set via a function call.
+/// The event emitted when the name is set.
 pub struct SetNameEvent {
     /// The asset for which name is set.
     pub asset: AssetId,
@@ -134,7 +134,7 @@ pub struct SetNameEvent {
     pub sender: Identity,
 }
 
-/// The event emitted when the symbol is set via a function call.
+/// The event emitted when the symbol is set.
 pub struct SetSymbolEvent {
     /// The asset for which symbol is set.
     pub asset: AssetId,
@@ -144,12 +144,22 @@ pub struct SetSymbolEvent {
     pub sender: Identity,
 }
 
-/// The event emitted when the decimals is set via a function call.
+/// The event emitted when the decimals is set.
 pub struct SetDecimalsEvent {
     /// The asset for which decimals is set.
     pub asset: AssetId,
     /// The decimals that is set.
     pub decimals: u8,
     /// The caller that set the decimals.
+    pub sender: Identity,
+}
+
+/// The event emitted when the total supply is updated.
+pub struct UpdateTotalSupplyEvent {
+    /// The asset for which supply is updated.
+    pub asset: AssetId,
+    /// The supply that is set.
+    pub supply: u64,
+    /// The caller that modified the supply.
     pub sender: Identity,
 }
