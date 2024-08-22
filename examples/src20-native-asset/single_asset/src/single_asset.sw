@@ -1,7 +1,7 @@
 contract;
 
-use standards::src20::SRC20;
-use std::string::String;
+use standards::src20::{SRC20, SetNameEvent, SetSymbolEvent, SetDecimalsEvent, UpdateTotalSupplyEvent};
+use std::{auth::msg_sender, string::String};
 
 configurable {
     /// The total supply of coins for the asset minted by this contract.
@@ -163,5 +163,41 @@ impl SRC20 for Contract {
         } else {
             None
         }
+    }
+}
+
+abi EmitSRC20Events {
+    fn emitSRC20Events();
+}
+
+impl EmitSRC20Events for Contract {
+    fn emitSRC20Events() {
+        // Metadata that is stored as a configurable should only be emitted once.
+        let asset = AssetId::default();
+        let sender = msg_sender().unwrap();
+
+        log(SetNameEvent {
+            asset,
+            name: Some(String::from_ascii_str(from_str_array(NAME))),
+            sender,
+        });
+
+        log(SetSymbolEvent {
+            asset,
+            symbol: Some(String::from_ascii_str(from_str_array(SYMBOL))),
+            sender,
+        });
+
+        log(SetDecimalsEvent {
+            asset,
+            decimals: DECIMALS,
+            sender,
+        });
+
+        log(UpdateTotalSupplyEvent{
+            asset,
+            supply: TOTAL_SUPPLY,
+            sender
+        });
     }
 }

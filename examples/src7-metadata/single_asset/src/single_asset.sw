@@ -1,6 +1,6 @@
 contract;
 
-use standards::{src20::SRC20, src7::{Metadata, SRC7}};
+use standards::{src20::{SRC20, SetNameEvent, SetSymbolEvent, SetDecimalsEvent, UpdateTotalSupplyEvent}, src7::{Metadata, SRC7, SetMetadataEvent}};
 
 use std::string::String;
 
@@ -66,6 +66,39 @@ impl SRC7 for Contract {
     }
 }
 
+abi EmitSRC7Events {
+    fn emitSRC7Events();
+}
+
+impl EmitSRC7Events for Contract {
+    fn emitSRC7Events() {
+        let asset = AssetId::default();
+        let sender = msg_sender().unwrap();
+
+        log(SetMetadataEvent {
+            asset,
+            metadata: Some(Metadata::String(String::from_ascii_str(from_str_array(SOCIAL_X)))),
+            key: String::from_ascii_str("social:x"),
+            sender,
+        });
+
+        log(SetMetadataEvent {
+            asset,
+            metadata: Some(Metadata::String(String::from_ascii_str(from_str_array(SITE_FORUM)))),
+            key: String::from_ascii_str("site:forum"),
+            sender,
+        });
+
+        log(SetMetadataEvent {
+            asset,
+            metadata: Some(Metadata::Int(ATTR_HEALTH)),
+            key:String::from_ascii_str("attr:health"),
+            sender,
+        });
+    }
+}
+
+// SRC7 extends SRC20, so this must be included
 impl SRC20 for Contract {
     #[storage(read)]
     fn total_assets() -> u64 {
@@ -106,5 +139,41 @@ impl SRC20 for Contract {
         } else {
             None
         }
+    }
+}
+
+abi EmitSRC20Events {
+    fn emitSRC20Events();
+}
+
+impl EmitSRC20Events for Contract {
+    fn emitSRC20Events() {
+        // Metadata that is stored as a configurable should only be emitted once.
+        let asset = AssetId::default();
+        let sender = msg_sender().unwrap();
+
+        log(SetNameEvent {
+            asset,
+            name: Some(String::from_ascii_str(from_str_array(NAME))),
+            sender,
+        });
+
+        log(SetSymbolEvent {
+            asset,
+            symbol: Some(String::from_ascii_str(from_str_array(SYMBOL))),
+            sender,
+        });
+
+        log(SetDecimalsEvent {
+            asset,
+            decimals: DECIMALS,
+            sender,
+        });
+
+        log(UpdateTotalSupplyEvent{
+            asset,
+            supply: TOTAL_SUPPLY,
+            sender
+        });
     }
 }

@@ -1,11 +1,12 @@
 contract;
 
-use standards::{src20::SRC20, src3::SRC3};
+use standards::{src20::{SRC20, SetNameEvent, SetSymbolEvent, SetDecimalsEvent, UpdateTotalSupplyEvent}, src3::SRC3};
 use std::{
     asset::{
         burn,
         mint_to,
     },
+    auth::msg_sender,
     call_frames::msg_asset_id,
     context::msg_amount,
     hash::Hash,
@@ -69,9 +70,17 @@ impl SRC3 for Contract {
         }
 
         // Increment total supply of the asset and mint to the recipient.
+        let new_supply = amount + asset_supply.unwrap_or(0);
         storage
             .total_supply
-            .insert(asset_id, amount + asset_supply.unwrap_or(0));
+            .insert(asset_id, new_supply);
+
+        log(UpdateTotalSupplyEvent{
+            asset: asset_id,
+            supply: new_supply,
+            sender: msg_sender().unwrap()
+        });
+
         mint_to(recipient, sub_id, amount);
     }
 
@@ -156,5 +165,46 @@ impl SRC20 for Contract {
             Some(_) => Some(DECIMALS),
             None => None,
         }
+    }
+}
+
+abi SetSRC20Data {
+    #[storage(read)]
+    fn setSRC20Data(asset: AssetId, total_supply: u64);
+}
+
+impl SetSRC20Data for Contract {
+    #[storage(read)]
+    fn setSRC20Data(asset: AssetId, supply: u64) {
+        // NOTE: There are no checks for if the caller has permissions to update the metadata
+        // If this asset does not exist, revert
+        if storage.total_supply.get(asset).try_read().is_none() {
+            revert(0);
+        }
+        let sender = msg_sender().unwrap();
+
+        log(SetNameEvent {
+            asset,
+            name: Some(String::from_ascii_str(from_str_array(NAME))),
+            sender,
+        });
+
+        log(SetSymbolEvent {
+            asset,
+            symbol: Some(String::from_ascii_str(from_str_array(SYMBOL))),
+            sender,
+        });
+
+        log(SetDecimalsEvent {
+            asset,
+            decimals: DECIMALS,
+            sender,
+        });
+
+        log(UpdateTotalSupplyEvent{
+            asset,
+            supply,
+            sender
+        });
     }
 }

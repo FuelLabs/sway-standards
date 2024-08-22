@@ -1,6 +1,6 @@
 contract;
 
-use standards::{src20::SRC20, src7::{Metadata, SRC7}};
+use standards::{src20::{SRC20, SetNameEvent, SetSymbolEvent, SetDecimalsEvent, UpdateTotalSupplyEvent}, src7::{Metadata, SRC7, SetMetadataEvent}};
 
 use std::{hash::Hash, storage::storage_string::*, string::String};
 
@@ -56,11 +56,19 @@ impl SRC7 for Contract {
     /// ```
     #[storage(read)]
     fn metadata(asset: AssetId, key: String) -> Option<Metadata> {
+        // If this asset does not exist, return None
+        if storage.total_supply.get(asset).try_read().is_none() {
+            return None
+        }
+
         if key == String::from_ascii_str("social:x") {
+            // The "social:x" for all assets minted by this contract are the same.
             Some(Metadata::String(String::from_ascii_str(from_str_array(SOCIAL_X))))
         } else if key == String::from_ascii_str("site:forum") {
+            // The "site:forums" for all assets minted by this contract are the same.
             Some(Metadata::String(String::from_ascii_str(from_str_array(SITE_FORUM))))
         } else if key == String::from_ascii_str("image:svg") {
+            // The SVG image is stored as a String in storage for each asset
             let svg_image = storage.svg_images.get(asset).read_slice();
 
             match svg_image {
@@ -68,6 +76,7 @@ impl SRC7 for Contract {
                 None => None,
             }
         } else if key == String::from_ascii_str("attr:health") {
+            // The health attribute is stored as a u64 in storage for each asset
             let health_attribute = storage.health_attributes.get(asset).try_read();
 
             match health_attribute {
@@ -77,6 +86,51 @@ impl SRC7 for Contract {
         } else {
             None
         }
+    }
+}
+
+abi SetSRC7Events {
+    #[storage(read, write)]
+    fn setSRC7Events(asset: AssetId, svg_image: String, health_attribute: u64);
+}
+
+impl SetSRC7Events for Contract {
+    #[storage(read, write)]
+    fn setSRC7Events(asset: AssetId, svg_image: String, health_attribute: u64) {
+        // NOTE: There are no checks for if the caller has permissions to update the metadata
+        // If this asset does not exist, revert
+        if storage.total_supply.get(asset).try_read().is_none() {
+            revert(0);
+        }
+        let sender = msg_sender().unwrap();
+
+        log(SetMetadataEvent {
+            asset,
+            metadata: Some(Metadata::String(String::from_ascii_str(from_str_array(SOCIAL_X)))),
+            key: String::from_ascii_str("social:x"),
+            sender,
+        });
+
+        log(SetMetadataEvent {
+            asset,
+            metadata: Some(Metadata::String(String::from_ascii_str(from_str_array(SITE_FORUM)))),
+            key: String::from_ascii_str("site:forum"),
+            sender,
+        });
+
+        log(SetMetadataEvent {
+            asset,
+            metadata: Some(Metadata::String(svg_image)),
+            key: String::from_ascii_str("image:svg"),
+            sender,
+        });
+
+        log(SetMetadataEvent {
+            asset,
+            metadata: Some(Metadata::Int(health_attribute)),
+            key: String::from_ascii_str("attr:health"),
+            sender,
+        });
     }
 }
 
@@ -114,5 +168,40 @@ impl SRC20 for Contract {
             Some(_) => Some(DECIMALS),
             None => None,
         }
+    }
+}
+
+abi SetSRC20Data {
+    fn setSRC20Data(asset: AssetId, total_supply: u64);
+}
+
+impl SetSRC20Data for Contract {
+    fn setSRC20Data(asset: AssetId, supply: u64) {
+        // NOTE: There are no checks for if the caller has permissions to update the metadata
+        let sender = msg_sender().unwrap();
+
+        log(SetNameEvent {
+            asset,
+            name: Some(String::from_ascii_str(from_str_array(NAME))),
+            sender,
+        });
+
+        log(SetSymbolEvent {
+            asset,
+            symbol: Some(String::from_ascii_str(from_str_array(SYMBOL))),
+            sender,
+        });
+
+        log(SetDecimalsEvent {
+            asset,
+            decimals: DECIMALS,
+            sender,
+        });
+
+        log(UpdateTotalSupplyEvent{
+            asset,
+            supply,
+            sender
+        });
     }
 }
