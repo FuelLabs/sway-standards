@@ -57,10 +57,10 @@ The `SetMetadataEvent` MUST be emitted when the metadata of an asset has updated
 
 There SHALL be the following fields in the `SetMetadataEvent` struct:
 
-- `asset`: The `asset` field SHALL be used for the corresponding `AssetId` of the asset has been updated.
-- `metadata`: The `metadata` field SHALL be used for the corresponding `Option<Metadata>` which represents the metadata of the asset.
-- `key`: The `key` field SHALL be used for the corresponding `String` which represents the key used for storing the metadata.
-- `sender`: The `sender` field SHALL be used for the corresponding `Identity` which made the function call that has updated the metadata of the asset.
+* `asset`: The `asset` field SHALL be used for the corresponding `AssetId` of the asset has been updated.
+* `metadata`: The `metadata` field SHALL be used for the corresponding `Option<Metadata>` which represents the metadata of the asset.
+* `key`: The `key` field SHALL be used for the corresponding `String` which represents the key used for storing the metadata.
+* `sender`: The `sender` field SHALL be used for the corresponding `Identity` which made the function call that has updated the metadata of the asset.
 
 Example:
 
