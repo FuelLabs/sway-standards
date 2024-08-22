@@ -49,7 +49,10 @@ Non-Fungible Tokens (NFT) or Non-Fungible Assets on Fuel are Native Assets and t
 
 ### Logging
 
-The following logs MUST be implemented upon value changes to follow the SRC-20 standard:
+The following logs MUST be implemented and emitted to follow the SRC-20 standard.
+
+* IF a value is updated via a function call, a log MUST be emitted.
+* IF a value is embedded in a contract as a constant, configurable, or other manner, an event MUST be emitted at least once.
 
 #### SetNameEvent
 
@@ -111,6 +114,26 @@ pub struct SetDecimalsEvent {
 }
 ```
 
+#### UpdateTotalSupplyEvent
+
+The `UpdateTotalSupplyEvent` MUST be emitted when the total supply of an asset has updated.
+
+There SHALL be the following fields in the `UpdateTotalSupplyEvent` struct:
+
+* `asset`: The `asset` field SHALL be used for the corresponding `AssetId` of the asset has been updated.
+* `supply`: The `supply` field SHALL be used for the corresponding `u64` which represents the total supply of the asset.
+* `sender`: The `sender` field SHALL be used for the corresponding `Identity` which made the function call that has updated the total supply of the asset.
+
+Example:
+
+```sway
+pub struct UpdateTotalSupplyEvent {
+    pub asset: AssetId,
+    pub supply: u64,
+    pub sender: Identity,
+}
+```
+
 ## Rationale
 
 As the SRC-20 Native Asset Standard leverages Native Assets on Fuel, we do not require the implementation of certain functions such as transfer or approval. This is done directly within the FuelVM and there is no smart contract that requires updating of balances. As Fuel is UTXO based, any transfer events may be indexed on transaction receipts.
@@ -124,8 +147,6 @@ This standard is compatible with Fuel's [Native Assets](https://docs.fuel.networ
 ## Security Considerations
 
 This standard does not introduce any security concerns, as it does not call external contracts, nor does it define any mutations of the contract state.
-
-It should be noted that if a contract embeds metadata into the contract and does not update the name, symbol, or decimals in a function call, no logs will be emitted.
 
 ## Example ABI
 

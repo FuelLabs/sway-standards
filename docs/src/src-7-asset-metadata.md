@@ -46,7 +46,10 @@ This function MUST return valid metadata for the corresponding `asset` and `key`
 
 ### Logging
 
-The following logs MUST be implemented upon value changes to follow the SRC-7 standard:
+The following logs MUST be implemented and emitted to follow the SRC-7 standard.
+
+* IF a value is updated via a function call, a log MUST be emitted.
+* IF a value is embedded in a contract as a constant, configurable, or other manner, an event MUST be emitted at least once.
 
 #### SetMetadataEvent
 
@@ -81,8 +84,6 @@ This standard is compatible with Fuel's [Native Assets](https://docs.fuel.networ
 ## Security Considerations
 
 This standard does not introduce any security concerns, as it does not call external contracts, nor does it define any mutations of the contract state.
-
-It should be noted that if a contract embeds metadata into the contract and does not update the metadata in a function call, no logs will be emitted.
 
 ## Example ABI
 
