@@ -3,6 +3,7 @@ contract;
 use standards::src5::{SRC5, State};
 
 /// The owner of this contract at deployment.
+#[allow(dead_code)]
 const INITIAL_OWNER: Identity = Identity::Address(Address::zero());
 
 storage {

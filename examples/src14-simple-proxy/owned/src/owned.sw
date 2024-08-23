@@ -5,6 +5,7 @@ use standards::src5::{AccessError, State};
 use standards::src14::{SRC14, SRC14_TARGET_STORAGE, SRC14Extension};
 
 /// The owner of this contract at deployment.
+#[allow(dead_code)]
 const INITIAL_OWNER: Identity = Identity::Address(Address::zero());
 
 storage {
