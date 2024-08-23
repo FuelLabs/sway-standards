@@ -147,9 +147,9 @@ impl SRC20 for Contract {
     }
 
     #[storage(read)]
-    fn name(asset: AssetId) -> Option<String> {      
+    fn name(asset: AssetId) -> Option<String> {
         if asset == vault_assetid() {
-            Some(String::from_ascii_str("Vault Shares"))        
+            Some(String::from_ascii_str("Vault Shares"))
         } else {
             None
         }
