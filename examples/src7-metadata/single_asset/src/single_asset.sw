@@ -80,11 +80,11 @@ impl SRC7 for Contract {
 }
 
 abi EmitSRC7Events {
-    fn emitSRC7Events();
+    fn emit_src7_events();
 }
 
 impl EmitSRC7Events for Contract {
-    fn emitSRC7Events() {
+    fn emit_src7_events() {
         let asset = AssetId::default();
         let sender = msg_sender().unwrap();
 
@@ -156,11 +156,11 @@ impl SRC20 for Contract {
 }
 
 abi EmitSRC20Events {
-    fn emitSRC20Events();
+    fn emit_src20_events();
 }
 
 impl EmitSRC20Events for Contract {
-    fn emitSRC20Events() {
+    fn emit_src20_events() {
         // Metadata that is stored as a configurable should only be emitted once.
         let asset = AssetId::default();
         let sender = msg_sender().unwrap();

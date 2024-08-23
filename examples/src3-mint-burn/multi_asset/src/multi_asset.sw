@@ -177,12 +177,12 @@ impl SRC20 for Contract {
 
 abi SetSRC20Data {
     #[storage(read)]
-    fn setSRC20Data(asset: AssetId, total_supply: u64);
+    fn set_src20_data(asset: AssetId, total_supply: u64);
 }
 
 impl SetSRC20Data for Contract {
     #[storage(read)]
-    fn setSRC20Data(asset: AssetId, supply: u64) {
+    fn set_src20_data(asset: AssetId, supply: u64) {
         // NOTE: There are no checks for if the caller has permissions to update the metadata
         // If this asset does not exist, revert
         if storage.total_supply.get(asset).try_read().is_none() {

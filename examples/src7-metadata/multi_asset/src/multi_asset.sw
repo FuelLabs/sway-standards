@@ -104,12 +104,12 @@ impl SRC7 for Contract {
 
 abi SetSRC7Events {
     #[storage(read, write)]
-    fn setSRC7Events(asset: AssetId, svg_image: String, health_attribute: u64);
+    fn set_src7_events(asset: AssetId, svg_image: String, health_attribute: u64);
 }
 
 impl SetSRC7Events for Contract {
     #[storage(read, write)]
-    fn setSRC7Events(asset: AssetId, svg_image: String, health_attribute: u64) {
+    fn set_src7_events(asset: AssetId, svg_image: String, health_attribute: u64) {
         // NOTE: There are no checks for if the caller has permissions to update the metadata
         // If this asset does not exist, revert
         if storage.total_supply.get(asset).try_read().is_none() {
@@ -185,11 +185,11 @@ impl SRC20 for Contract {
 }
 
 abi SetSRC20Data {
-    fn setSRC20Data(asset: AssetId, total_supply: u64);
+    fn set_src20_data(asset: AssetId, total_supply: u64);
 }
 
 impl SetSRC20Data for Contract {
-    fn setSRC20Data(asset: AssetId, supply: u64) {
+    fn set_src20_data(asset: AssetId, supply: u64) {
         // NOTE: There are no checks for if the caller has permissions to update the metadata
         let sender = msg_sender().unwrap();
 

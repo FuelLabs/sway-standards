@@ -180,7 +180,7 @@ impl SRC20 for Contract {
 
 abi SetSRC20Data {
     #[storage(read)]
-    fn setSRC20Data(
+    fn set_src20_data(
         asset: AssetId,
         total_supply: u64,
         name: String,
@@ -191,7 +191,7 @@ abi SetSRC20Data {
 
 impl SetSRC20Data for Contract {
     #[storage(read)]
-    fn setSRC20Data(
+    fn set_src20_data(
         asset: AssetId,
         supply: u64,
         name: String,
