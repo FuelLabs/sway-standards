@@ -131,6 +131,8 @@ impl SetSRC7Events for Contract {
             sender,
         });
 
+        storage.svg_images.try_insert(asset, StorageString {});
+        storage.svg_images.get(asset).write_slice(svg_image);
         log(SetMetadataEvent {
             asset,
             metadata: Some(Metadata::String(svg_image)),
@@ -138,6 +140,7 @@ impl SetSRC7Events for Contract {
             sender,
         });
 
+        storage.health_attributes.insert(asset, health_attribute);
         log(SetMetadataEvent {
             asset,
             metadata: Some(Metadata::Int(health_attribute)),
