@@ -52,12 +52,17 @@ impl SRC3 for Contract {
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC3, contract);
-    ///     contract_abi.mint(Identity::ContractId(contract_id), DEFAULT_SUB_ID, 100);
+    ///     contract_abi.mint(Identity::ContractId(contract_id), Some(DEFAULT_SUB_ID), 100);
     /// }
     /// ```
     #[storage(read, write)]
-    fn mint(recipient: Identity, sub_id: SubId, amount: u64) {
-        require(sub_id == DEFAULT_SUB_ID, "Incorrect Sub Id");
+    fn mint(recipient: Identity, sub_id: Option<SubId>, amount: u64) {
+        require(
+            sub_id
+                .is_some() && sub_id
+                .unwrap() == DEFAULT_SUB_ID,
+            "Incorrect Sub Id",
+        );
 
         // Increment total supply of the asset and mint to the recipient.
         storage

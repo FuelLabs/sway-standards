@@ -7,6 +7,7 @@ use std::{
         mint_to,
     },
     call_frames::msg_asset_id,
+    constants::DEFAULT_SUB_ID,
     context::msg_amount,
     hash::Hash,
     storage::storage_string::*,
@@ -36,7 +37,7 @@ impl SRC3 for Contract {
     /// # Arguments
     ///
     /// * `recipient`: [Identity] - The user to which the newly minted asset is transferred to.
-    /// * `sub_id`: [SubId] - The sub-identifier of the newly minted asset.
+    /// * `sub_id`: [Option<SubId>] - The sub-identifier of the newly minted asset.
     /// * `amount`: [u64] - The quantity of coins to mint.
     ///
     /// # Number of Storage Accesses
@@ -52,11 +53,15 @@ impl SRC3 for Contract {
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC3, contract_id);
-    ///     contract_abi.mint(Identity::ContractId(contract_id), DEFAULT_SUB_ID, 100);
+    ///     contract_abi.mint(Identity::ContractId(contract_id), Some(DEFAULT_SUB_ID), 100);
     /// }
     /// ```
     #[storage(read, write)]
-    fn mint(recipient: Identity, sub_id: SubId, amount: u64) {
+    fn mint(recipient: Identity, sub_id: Option<SubId>, amount: u64) {
+        let sub_id = match sub_id {
+            Some(s) => s,
+            None => DEFAULT_SUB_ID,
+        };
         let asset_id = AssetId::new(ContractId::this(), sub_id);
 
         // If this SubId is new, increment the total number of distinguishable assets this contract has minted.
