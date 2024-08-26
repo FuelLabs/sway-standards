@@ -39,6 +39,7 @@ Description of the upcoming release here.
 ### Changed v0.6.0
 
 - [#130](https://github.com/FuelLabs/sway-standards/pull/130) Splits examples into seperate workspace projects for improved continuous integration.
+- [#139](https://github.com/FuelLabs/sway-standards/pull/139) Prepares for the v0.6.0 release.
 
 ### Breaking v0.6.0
 
