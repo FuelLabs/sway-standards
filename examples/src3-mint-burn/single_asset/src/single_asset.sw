@@ -1,11 +1,21 @@
 contract;
 
-use standards::{src20::SRC20, src3::SRC3};
+use standards::{
+    src20::{
+        SetDecimalsEvent,
+        SetNameEvent,
+        SetSymbolEvent,
+        SRC20,
+        TotalSupplyEvent,
+    },
+    src3::SRC3,
+};
 use std::{
     asset::{
         burn,
         mint_to,
     },
+    auth::msg_sender,
     call_frames::msg_asset_id,
     constants::DEFAULT_SUB_ID,
     context::msg_amount,
@@ -65,9 +75,15 @@ impl SRC3 for Contract {
         );
 
         // Increment total supply of the asset and mint to the recipient.
-        storage
-            .total_supply
-            .write(amount + storage.total_supply.read());
+        let new_supply = amount + storage.total_supply.read();
+        storage.total_supply.write(new_supply);
+
+        log(TotalSupplyEvent {
+            asset: AssetId::new(ContractId::this(), DEFAULT_SUB_ID),
+            supply: new_supply,
+            sender: msg_sender().unwrap(),
+        });
+
         mint_to(recipient, DEFAULT_SUB_ID, amount);
     }
 
@@ -163,5 +179,35 @@ impl SRC20 for Contract {
         } else {
             None
         }
+    }
+}
+
+abi EmitSRC20Events {
+    fn emit_src20_events();
+}
+
+impl EmitSRC20Events for Contract {
+    fn emit_src20_events() {
+        // Metadata that is stored as a configurable should only be emitted once.
+        let asset = AssetId::default();
+        let sender = msg_sender().unwrap();
+
+        log(SetNameEvent {
+            asset,
+            name: Some(String::from_ascii_str(from_str_array(NAME))),
+            sender,
+        });
+
+        log(SetSymbolEvent {
+            asset,
+            symbol: Some(String::from_ascii_str(from_str_array(SYMBOL))),
+            sender,
+        });
+
+        log(SetDecimalsEvent {
+            asset,
+            decimals: DECIMALS,
+            sender,
+        });
     }
 }

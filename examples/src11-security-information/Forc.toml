@@ -1,0 +1,2 @@
+[workspace]
+members = ["hardcoded-information", "variable-information"]

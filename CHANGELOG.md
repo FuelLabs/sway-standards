@@ -9,13 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added Unreleased
 
-- Something new here 1
-- Something new here 2
+- [#130](https://github.com/FuelLabs/sway-standards/pull/130) Adds the `SetNameEvent`, `SetSymbolEvent`, and `SetDecimalsEvent` to the SRC-20 standard.
+- [#130](https://github.com/FuelLabs/sway-standards/pull/130) Adds the `SetMetadataEvent` to the SRC-7 standard.
 
 ### Changed Unreleased
 
-- Something changed here 1
-- Something changed here 2
+- [#130](https://github.com/FuelLabs/sway-standards/pull/130) Splits examples into seperate workspace projects for improved continuous integration.
 
 ### Fixed Unreleased
 
