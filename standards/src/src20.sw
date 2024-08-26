@@ -154,12 +154,12 @@ pub struct SetDecimalsEvent {
     pub sender: Identity,
 }
 
-/// The event emitted when the total supply is updated.
-pub struct UpdateTotalSupplyEvent {
+/// The event emitted when the total supply is changed.
+pub struct TotalSupplyEvent {
     /// The asset for which supply is updated.
     pub asset: AssetId,
-    /// The supply that is set.
+    /// The new supply of the asset.
     pub supply: u64,
-    /// The caller that modified the supply.
+    /// The caller that updated the supply.
     pub sender: Identity,
 }

@@ -6,7 +6,7 @@ use standards::{
         SetNameEvent,
         SetSymbolEvent,
         SRC20,
-        UpdateTotalSupplyEvent,
+        TotalSupplyEvent,
     },
     src7::{
         Metadata,
@@ -214,7 +214,7 @@ impl SetSRC20Data for Contract {
             sender,
         });
 
-        log(UpdateTotalSupplyEvent {
+        log(TotalSupplyEvent {
             asset,
             supply,
             sender,

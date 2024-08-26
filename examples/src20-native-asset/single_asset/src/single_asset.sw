@@ -1,12 +1,6 @@
 contract;
 
-use standards::src20::{
-    SetDecimalsEvent,
-    SetNameEvent,
-    SetSymbolEvent,
-    SRC20,
-    UpdateTotalSupplyEvent,
-};
+use standards::src20::{SetDecimalsEvent, SetNameEvent, SetSymbolEvent, SRC20, TotalSupplyEvent,};
 use std::{auth::msg_sender, string::String};
 
 configurable {
@@ -200,7 +194,7 @@ impl EmitSRC20Events for Contract {
             sender,
         });
 
-        log(UpdateTotalSupplyEvent {
+        log(TotalSupplyEvent {
             asset,
             supply: TOTAL_SUPPLY,
             sender,

@@ -6,7 +6,7 @@ use standards::{
         SetNameEvent,
         SetSymbolEvent,
         SRC20,
-        UpdateTotalSupplyEvent,
+        TotalSupplyEvent,
     },
     src3::SRC3,
 };
@@ -73,7 +73,7 @@ impl SRC3 for Contract {
         let new_supply = amount + storage.total_supply.read();
         storage.total_supply.write(new_supply);
 
-        log(UpdateTotalSupplyEvent {
+        log(TotalSupplyEvent {
             asset: AssetId::new(ContractId::this(), DEFAULT_SUB_ID),
             supply: new_supply,
             sender: msg_sender().unwrap(),

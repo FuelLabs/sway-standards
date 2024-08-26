@@ -6,7 +6,7 @@ use standards::{
         SetNameEvent,
         SetSymbolEvent,
         SRC20,
-        UpdateTotalSupplyEvent,
+        TotalSupplyEvent,
     },
     src3::SRC3,
 };
@@ -82,7 +82,7 @@ impl SRC3 for Contract {
         let new_supply = amount + asset_supply.unwrap_or(0);
         storage.total_supply.insert(asset_id, new_supply);
 
-        log(UpdateTotalSupplyEvent {
+        log(TotalSupplyEvent {
             asset: asset_id,
             supply: new_supply,
             sender: msg_sender().unwrap(),
@@ -177,12 +177,12 @@ impl SRC20 for Contract {
 
 abi SetSRC20Data {
     #[storage(read)]
-    fn set_src20_data(asset: AssetId, total_supply: u64);
+    fn set_src20_data(asset: AssetId);
 }
 
 impl SetSRC20Data for Contract {
     #[storage(read)]
-    fn set_src20_data(asset: AssetId, supply: u64) {
+    fn set_src20_data(asset: AssetId) {
         // NOTE: There are no checks for if the caller has permissions to update the metadata
         // If this asset does not exist, revert
         if storage.total_supply.get(asset).try_read().is_none() {
@@ -205,12 +205,6 @@ impl SetSRC20Data for Contract {
         log(SetDecimalsEvent {
             asset,
             decimals: DECIMALS,
-            sender,
-        });
-
-        log(UpdateTotalSupplyEvent {
-            asset,
-            supply,
             sender,
         });
     }
