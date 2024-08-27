@@ -1,12 +1,23 @@
 contract;
 
-use standards::{src20::SRC20, src3::SRC3};
+use standards::{
+    src20::{
+        SetDecimalsEvent,
+        SetNameEvent,
+        SetSymbolEvent,
+        SRC20,
+        TotalSupplyEvent,
+    },
+    src3::SRC3,
+};
 use std::{
     asset::{
         burn,
         mint_to,
     },
+    auth::msg_sender,
     call_frames::msg_asset_id,
+    constants::DEFAULT_SUB_ID,
     context::msg_amount,
     hash::Hash,
     storage::storage_string::*,
@@ -36,7 +47,7 @@ impl SRC3 for Contract {
     /// # Arguments
     ///
     /// * `recipient`: [Identity] - The user to which the newly minted asset is transferred to.
-    /// * `sub_id`: [SubId] - The sub-identifier of the newly minted asset.
+    /// * `sub_id`: [Option<SubId>] - The sub-identifier of the newly minted asset.
     /// * `amount`: [u64] - The quantity of coins to mint.
     ///
     /// # Number of Storage Accesses
@@ -52,11 +63,15 @@ impl SRC3 for Contract {
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC3, contract_id);
-    ///     contract_abi.mint(Identity::ContractId(contract_id), DEFAULT_SUB_ID, 100);
+    ///     contract_abi.mint(Identity::ContractId(contract_id), Some(DEFAULT_SUB_ID), 100);
     /// }
     /// ```
     #[storage(read, write)]
-    fn mint(recipient: Identity, sub_id: SubId, amount: u64) {
+    fn mint(recipient: Identity, sub_id: Option<SubId>, amount: u64) {
+        let sub_id = match sub_id {
+            Some(s) => s,
+            None => DEFAULT_SUB_ID,
+        };
         let asset_id = AssetId::new(ContractId::this(), sub_id);
 
         // If this SubId is new, increment the total number of distinguishable assets this contract has minted.
@@ -69,9 +84,15 @@ impl SRC3 for Contract {
         }
 
         // Increment total supply of the asset and mint to the recipient.
-        storage
-            .total_supply
-            .insert(asset_id, amount + asset_supply.unwrap_or(0));
+        let new_supply = amount + asset_supply.unwrap_or(0);
+        storage.total_supply.insert(asset_id, new_supply);
+
+        log(TotalSupplyEvent {
+            asset: asset_id,
+            supply: new_supply,
+            sender: msg_sender().unwrap(),
+        });
+
         mint_to(recipient, sub_id, amount);
     }
 
@@ -156,5 +177,40 @@ impl SRC20 for Contract {
             Some(_) => Some(DECIMALS),
             None => None,
         }
+    }
+}
+
+abi SetSRC20Data {
+    #[storage(read)]
+    fn set_src20_data(asset: AssetId);
+}
+
+impl SetSRC20Data for Contract {
+    #[storage(read)]
+    fn set_src20_data(asset: AssetId) {
+        // NOTE: There are no checks for if the caller has permissions to update the metadata
+        // If this asset does not exist, revert
+        if storage.total_supply.get(asset).try_read().is_none() {
+            revert(0);
+        }
+        let sender = msg_sender().unwrap();
+
+        log(SetNameEvent {
+            asset,
+            name: Some(String::from_ascii_str(from_str_array(NAME))),
+            sender,
+        });
+
+        log(SetSymbolEvent {
+            asset,
+            symbol: Some(String::from_ascii_str(from_str_array(SYMBOL))),
+            sender,
+        });
+
+        log(SetDecimalsEvent {
+            asset,
+            decimals: DECIMALS,
+            sender,
+        });
     }
 }

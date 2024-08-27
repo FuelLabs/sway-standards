@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+Description of the upcoming release here.
+
 ### Added Unreleased
 
 - Something new here 1
@@ -22,10 +24,38 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Some fix here 1
 - Some fix here 2
 
-### Breaking Unreleased
+#### Breaking Unreleased
 
 - Some breaking change here 1
 - Some breaking change here 2
+
+## [Version 0.6.0]
+
+### Added v0.6.0
+
+- [#130](https://github.com/FuelLabs/sway-standards/pull/130) Adds the `SetNameEvent`, `SetSymbolEvent`, `SetDecimalsEvent` and `TotalSupplyEvent` to the SRC-20 standard.
+- [#130](https://github.com/FuelLabs/sway-standards/pull/130) Adds the `SetMetadataEvent` to the SRC-7 standard.
+
+### Changed v0.6.0
+
+- [#130](https://github.com/FuelLabs/sway-standards/pull/130) Splits examples into seperate workspace projects for improved continuous integration.
+- [#139](https://github.com/FuelLabs/sway-standards/pull/139) Prepares for the v0.6.0 release.
+
+### Breaking v0.6.0
+
+- [#131](https://github.com/FuelLabs/sway-standards/pull/131) Makes the SRC-3 `mint()` function's `SubId` argument an `Option`.
+
+Before:
+
+```sway
+mint(Identity::Address(Address::zero()), SubId::zero(), 100);
+```
+
+After:
+
+```sway
+mint(Identity::Address(Address::zero()), Some(SubId::zero()), 100);
+```
 
 ## [Version 0.5.2]
 
