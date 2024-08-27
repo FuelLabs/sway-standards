@@ -122,25 +122,33 @@ impl SRC6 for Contract {
 
     #[storage(read)]
     fn max_depositable(
-        receiver: Identity,
+        _receiver: Identity,
         underlying_asset: AssetId,
         vault_sub_id: SubId,
     ) -> Option<u64> {
-        if underlying_asset == AssetId::base() {
+        let vault_share_asset = vault_asset_id(underlying_asset, vault_sub_id).0;
+
+        match (
+            underlying_asset == AssetId::base(),
+            storage.vault_info.get(vault_share_asset).try_read(),
+        ) {
             // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
-            Some(u64::max() - managed_assets(underlying_asset))
-        } else {
-            None
+            (true, Some(vault_info)) => Some(u64::max() - vault_info.managed_assets),
+            _ => None,
         }
     }
 
     #[storage(read)]
     fn max_withdrawable(underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64> {
-        if underlying_asset == AssetId::base() {
-            // In this implementation total_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
-            Some(managed_assets(underlying_asset))
-        } else {
-            None
+        let vault_share_asset = vault_asset_id(underlying_asset, vault_sub_id).0;
+
+        match (
+            underlying_asset == AssetId::base(),
+            storage.vault_info.get(vault_share_asset).try_read(),
+        ) {
+            // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
+            (true, Some(vault_info)) => Some(vault_info.managed_assets),
+            _ => None,
         }
     }
 }
@@ -180,8 +188,8 @@ fn vault_asset_id(underlying_asset: AssetId, vault_sub_id: SubId) -> (AssetId, S
 }
 
 #[storage(read)]
-fn managed_assets(share_asset: AssetId) -> u64 {
-    match storage.vault_info.get(share_asset).try_read() {
+fn managed_assets(vault_share_asset_id: AssetId) -> u64 {
+    match storage.vault_info.get(vault_share_asset_id).try_read() {
         Some(vault_info) => vault_info.managed_assets,
         None => 0,
     }
