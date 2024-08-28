@@ -17,13 +17,13 @@ abi SRC7 {
     /// # Examples
     ///
     /// ```sway
-    /// use src7::{SRC7, Metadata};
+    /// use standards::src7::{SRC7, Metadata};
     /// use std::string::String;
     ///
     /// fn foo(contract_id: ContractId, asset: AssetId) {
-    ///     let contract_abi = abi(SRC7, contract_id);
+    ///     let contract_abi = abi(SRC7, contract_id.bits());
     ///     let key = String::from_ascii_str("image");
-    ///     let data = contract_abi.metadata(asset, key);
+    ///     let result_metadata: Option<Metadata> = contract_abi.metadata(asset, key);
     ///     assert(data.is_some());
     /// }
     /// ```

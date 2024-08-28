@@ -12,11 +12,11 @@ abi SRC20 {
     /// # Examples
     ///
     /// ```sway
-    /// use src20::SRC20;
+    /// use standards::src20::SRC20;
     ///
-    /// fn foo(contract: ContractId) {
-    ///     let contract_abi = abi(SRC20, contract);
-    ///     let total_assets = contract_abi.total_assets();
+    /// fn foo(contract_id: ContractId) {
+    ///     let contract_abi = abi(SRC20, contract_id.bits());
+    ///     let total_assets: u64 = contract_abi.total_assets();
     ///     assert(total_assets != 0);
     /// }
     /// ```
@@ -36,11 +36,11 @@ abi SRC20 {
     /// # Examples
     ///
     /// ```sway
-    /// use src20::SRC20;
+    /// use standards::src20::SRC20;
     ///
-    /// fn foo(contract: ContractId, asset: AssetId) {
-    ///     let contract_abi = abi(SRC20, contract);
-    ///     let total_supply = contract_abi.total_supply(asset);
+    /// fn foo(contract_id: ContractId, asset: AssetId) {
+    ///     let contract_abi = abi(SRC20, contract_id.bits());
+    ///     let total_supply: Option<u64> = contract_abi.total_supply(asset);
     ///     assert(total_supply.unwrap() != 0);
     /// }
     /// ```
@@ -60,12 +60,12 @@ abi SRC20 {
     /// # Examples
     ///
     /// ```sway
-    /// use src20::SRC20;
+    /// use standards::src20::SRC20;
     /// use std::string::String;
     ///
-    /// fn foo(contract: ContractId, asset: AssetId) {
-    ///     let contract_abi = abi(SRC20, contract);
-    ///     let name = contract_abi.name(asset);
+    /// fn foo(contract_id: ContractId, asset: AssetId) {
+    ///     let contract_abi = abi(SRC20, contract_id.bits());
+    ///     let name: Option<String> = contract_abi.name(asset);
     ///     assert(name.is_some());
     /// }
     /// ```
@@ -84,12 +84,12 @@ abi SRC20 {
     /// # Examples
     ///
     /// ```sway
-    /// use src20::SRC20;
+    /// use standards::src20::SRC20;
     /// use std::string::String;
     ///
-    /// fn foo(contract: ContractId, asset: AssetId) {
-    ///     let contract_abi = abi(SRC20, contract);
-    ///     let symbol = contract_abi.symbol(asset);
+    /// fn foo(contract_id: ContractId, asset: AssetId) {
+    ///     let contract_abi = abi(SRC20, contract_id.bits());
+    ///     let symbol: Option<String> = contract_abi.symbol(asset);
     ///     assert(symbol.is_some());
     /// }
     /// ```
@@ -112,11 +112,11 @@ abi SRC20 {
     /// # Examples
     ///
     /// ```sway
-    /// use src20::SRC20;
+    /// use standards::src20::SRC20;
     ///
-    /// fn foo(contract: ContractId, asset: AssedId) {
-    ///     let contract_abi = abi(SRC20, contract);
-    ///     let decimals = contract_abi.decimals(asset);
+    /// fn foo(contract_id: ContractId, asset: AssedId) {
+    ///     let contract_abi = abi(SRC20, contract_id.bits());
+    ///     let decimals: Option<u8> = contract_abi.decimals(asset);
     ///     assert(decimals.unwrap() == 8u8);
     /// }
     /// ```
