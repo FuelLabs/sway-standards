@@ -22,6 +22,7 @@ Description of the upcoming release here.
 ### Fixed Unreleased
 
 - [#137](https://github.com/FuelLabs/sway-standards/pull/137) Resolves warnings for SRC-6, SRC-14, and SRC-5 standard examples.
+- [#142](https://github.com/FuelLabs/sway-standards/pull/142) Fixes errors in inline documentation for SRC-10, SRC-12, SRC-14, SRC-20, SRC-3, SRC-5, SRC-7 standards.
 
 #### Breaking Unreleased
 
