@@ -11,8 +11,7 @@ Description of the upcoming release here.
 
 ### Added Unreleased
 
-- Something new here 1
-- Something new here 2
+- [#144](https://github.com/FuelLabs/sway-standards/pull/144) Adds the following helper functions for `Metadata` to check and return the underlying type: `as_string()`, `is_string()`, `as_bytes()`, `is_bytes()`, `as_b256()`, `is_u64()`, `as_u64()`.
 
 ### Changed Unreleased
 
