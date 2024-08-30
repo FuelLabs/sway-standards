@@ -41,7 +41,7 @@ abi SRC5 {
     /// ```sway
     /// fn foo() {
     ///     match owner() {
-    ///         State::Uninitalized => log("The ownership is uninitalized"),
+    ///         State::Uninitialized => log("The ownership is uninitialized"),
     ///         State::Initialized(owner) => log("The ownership is initalized"),
     ///         State::Revoked => log("The ownership is revoked"),
     ///     }

@@ -93,14 +93,14 @@ This section has a `h1` header.
 This section provides an example of the use of the function. This section is not required to follow the SRC-2 standard however encouraged for auxiliary and library functions.
 Example:
 
-````sway
+```sway
 /// # Examples
 ///
 /// ```sway
 /// fn foo(argument_1: b256, argument_2: b256) {
 ///     let result = my_function(argument_1, argument_2);
 /// }
-````
+```
 
 ### Structs
 
@@ -300,7 +300,7 @@ This standard will improve security by providing developers with relevant inform
 
 ### Function Example
 
-````sway
+```sway
 /// Ensures that the sender is the owner.
 ///
 /// # Arguments
@@ -337,7 +337,7 @@ pub fn only_owner(self, number: u64) -> bool {
     require(self.owner() == State::Initialized(msg_sender().unwrap()), AccessError::NotOwner);
     number == 5
 }
-````
+```
 
 ### Struct Examples
 

@@ -18,11 +18,11 @@ Proxy designs fall into three essential categories:
 
 This document falls in the second category. We want to standardize the implementation of simple upgradeable pass-through contracts.
 
-The FuelVM provides an `LDC` instruction that is used by Sway's `std::execution::run_external` to provide a similar behaviour to EVM's `delegatecall` and execute instructions from another contract while retaining one's own storage context. This is the intended means of implementation of this standard.
+The FuelVM provides an `LDC` instruction that is used by Sway's `std::execution::run_external` to provide a similar behavior to EVM's `delegatecall` and execute instructions from another contract while retaining one's own storage context. This is the intended means of implementation of this standard.
 
 ## Specification
 
-### Required Behaviour
+### Required Behavior
 
 The proxy contract MUST maintain the address of its target in its storage at slot `0x7bb458adc1d118713319a5baa00a2d049dd64d2916477d2688d76970c898cd55` (equivalent to `sha256("storage_SRC14_0")`).
 It SHOULD base other proxy specific storage fields in the `SRC14` namespace to avoid collisions with target storage.

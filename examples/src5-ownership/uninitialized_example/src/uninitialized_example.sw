@@ -27,7 +27,7 @@ impl SRC5 for Contract {
     ///     let ownership_abi = abi(contract_id, SRC_5);
     ///
     ///     match ownership_abi.owner() {
-    ///         State::Uninitalized => log("The ownership is uninitalized"),
+    ///         State::Uninitialized => log("The ownership is uninitialized"),
     ///         _ => log("This example will never reach this statement"),
     ///     }
     /// }
