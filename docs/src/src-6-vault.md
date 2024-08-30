@@ -157,7 +157,7 @@ abi SRC6 {
 
     #[storage(read)]
     fn managed_assets(underlying_asset: AssetId, vault_sub_id: SubId) -> u64;
-    
+
     #[storage(read)]
     fn max_depositable(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64>;
 
