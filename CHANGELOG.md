@@ -9,23 +9,42 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Description of the upcoming release here.
 
-### Added Unreleased
+### Added
 
-- [#144](https://github.com/FuelLabs/sway-standards/pull/144) Adds the following helper functions for `Metadata` to check and return the underlying type: `as_string()`, `is_string()`, `as_bytes()`, `is_bytes()`, `as_b256()`, `is_u64()`, `as_u64()`.
+- Something new here 1
+- Something new here 2
 
-### Changed Unreleased
+### Changed
 
-- [#135](https://github.com/FuelLabs/sway-standards/pull/135) Updates standards, examples and CI to latest forc 0.63.3.
+- Something changed here 1
+- Something changed here 2
 
-### Fixed Unreleased
+### Fixed
 
-- [#137](https://github.com/FuelLabs/sway-standards/pull/137) Resolves warnings for SRC-6, SRC-14, and SRC-5 standard examples.
-- [#136](https://github.com/FuelLabs/sway-standards/pull/136) Fixes SRC14 to recommend namespacing all non-standardized storage variables under the SRC14 namespace, fixes typos, and improves markdown in docs and inline documentation.
+- Some fix here 1
+- Some fix here 2
 
-#### Breaking Unreleased
+#### Breaking
 
 - Some breaking change here 1
 - Some breaking change here 2
+
+## [Version 0.6.1]
+
+Description of the upcoming release here.
+
+### Added v0.6.1
+
+- [#144](https://github.com/FuelLabs/sway-standards/pull/144) Adds the following helper functions for `Metadata` to check and return the underlying type: `as_string()`, `is_string()`, `as_bytes()`, `is_bytes()`, `as_b256()`, `is_u64()`, `as_u64()`.
+
+### Changed v0.6.1
+
+- [#135](https://github.com/FuelLabs/sway-standards/pull/135) Updates standards, examples and CI to latest forc 0.63.3.
+
+### Fixed v0.6.1
+
+- [#137](https://github.com/FuelLabs/sway-standards/pull/137) Resolves warnings for SRC-6, SRC-14, and SRC-5 standard examples.
+- [#136](https://github.com/FuelLabs/sway-standards/pull/136) Fixes SRC14 to recommend namespacing all non-standardized storage variables under the SRC14 namespace, fixes typos, and improves markdown in docs and inline documentation.
 
 ## [Version 0.6.0]
 
