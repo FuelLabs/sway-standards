@@ -6,7 +6,7 @@ abi SRC3 {
     /// # Arguments
     ///
     /// * `recipient`: [Identity] - The user to which the newly minted asset is transferred to.
-    /// * `sub_id`: [SubId] - The sub-identifier of the newly minted asset.
+    /// * `sub_id`: [Option<SubId>] - The sub-identifier of the newly minted asset.
     /// * `amount`: [u64] - The quantity of coins to mint.
     ///
     /// # Examples
@@ -20,7 +20,7 @@ abi SRC3 {
     /// }
     /// ```
     #[storage(read, write)]
-    fn mint(recipient: Identity, sub_id: SubId, amount: u64);
+    fn mint(recipient: Identity, sub_id: Option<SubId>, amount: u64);
 
     /// Burns assets sent with the given `sub_id`.
     ///

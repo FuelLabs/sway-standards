@@ -47,6 +47,93 @@ Non-Fungible Tokens (NFT) or Non-Fungible Assets on Fuel are Native Assets and t
 * Non-Fungible Assets SHALL have a total supply of one per asset.
 * Non-Fungible Assets SHALL have a decimal of `0u8`.
 
+### Logging
+
+The following logs MUST be implemented and emitted to follow the SRC-20 standard.
+
+* IF a value is updated via a function call, a log MUST be emitted.
+* IF a value is embedded in a contract as a constant, configurable, or other manner, an event MUST be emitted at least once.
+
+#### SetNameEvent
+
+The `SetNameEvent` MUST be emitted when the name of an asset has updated.
+
+There SHALL be the following fields in the `SetNameEvent` struct:
+
+* `asset`: The `asset` field SHALL be used for the corresponding `AssetId` of the asset has been updated.
+* `name`: The `name` field SHALL be used for the corresponding `Option<String>` which represents the name of the asset.
+* `sender`: The `sender` field SHALL be used for the corresponding `Identity` which made the function call that has updated the name of the asset.
+
+Example:
+
+```sway
+pub struct SetNameEvent {
+    pub asset: AssetId,
+    pub name: Option<String>,
+    pub sender: Identity,
+}
+```
+
+#### SetSymbolEvent
+
+The `SetSymbolEvent` MUST be emitted when the symbol of an asset has updated.
+
+There SHALL be the following fields in the `SetSymbolEvent` struct:
+
+* `asset`: The `asset` field SHALL be used for the corresponding `AssetId` of the asset has been updated.
+* `symbol`: The `symbol` field SHALL be used for the corresponding `Option<String>` which represents the symbol of the asset.
+* `sender`: The `sender` field SHALL be used for the corresponding `Identity` which made the function call that has updated the symbol of the asset.
+
+Example:
+
+```sway
+pub struct SetSymbolEvent {
+    pub asset: AssetId,
+    pub symbol: Option<String>,
+    pub sender: Identity,
+}
+```
+
+#### SetDecimalsEvent
+
+The `SetDecimalsEvent` MUST be emitted when the decimals of an asset has updated.
+
+There SHALL be the following fields in the `SetDecimalsEvent` struct:
+
+* `asset`: The `asset` field SHALL be used for the corresponding `AssetId` of the asset has been updated.
+* `decimals`: The `decimals` field SHALL be used for the corresponding `u8` which represents the decimals of the asset.
+* `sender`: The `sender` field SHALL be used for the corresponding `Identity` which made the function call that has updated the decimals of the asset.
+
+Example:
+
+```sway
+pub struct SetDecimalsEvent {
+    pub asset: AssetId,
+    pub decimals: u8,
+    pub sender: Identity,
+}
+```
+
+#### UpdateTotalSupplyEvent
+
+The `UpdateTotalSupplyEvent` MUST be emitted when the total supply of an asset has updated.
+
+There SHALL be the following fields in the `UpdateTotalSupplyEvent` struct:
+
+* `asset`: The `asset` field SHALL be used for the corresponding `AssetId` of the asset has been updated.
+* `supply`: The `supply` field SHALL be used for the corresponding `u64` which represents the total supply of the asset.
+* `sender`: The `sender` field SHALL be used for the corresponding `Identity` which made the function call that has updated the total supply of the asset.
+
+Example:
+
+```sway
+pub struct UpdateTotalSupplyEvent {
+    pub asset: AssetId,
+    pub supply: u64,
+    pub sender: Identity,
+}
+```
+
 ## Rationale
 
 As the SRC-20 Native Asset Standard leverages Native Assets on Fuel, we do not require the implementation of certain functions such as transfer or approval. This is done directly within the FuelVM and there is no smart contract that requires updating of balances. As Fuel is UTXO based, any transfer events may be indexed on transaction receipts.

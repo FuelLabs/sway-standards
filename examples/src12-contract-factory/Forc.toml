@@ -1,0 +1,2 @@
+[workspace]
+members = ["with_configurables", "without_configurables"]

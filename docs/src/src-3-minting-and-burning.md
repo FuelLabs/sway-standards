@@ -16,16 +16,17 @@ Minting and burning were initially added to the [SRC-20](./src-20-native-asset.m
 
 The following functions MUST be implemented to follow the SRC-3 standard:
 
-#### `fn mint(recipient: Identity, sub_id: SubId, amount: u64)`
+#### `fn mint(recipient: Identity, sub_id: Option<SubId>, amount: u64)`
 
-This function MUST mint `amount` coins with sub-identifier `sub_id` and transfer them to the `recipient`.
+This function MUST mint `amount` coins with a sub-identifier and transfer them to the `recipient`.
+This function MUST use the `sub_id` as the sub-identifier IF `sub_id` is `Some`, otherwise this function MUST assign a `SubId` if the `sub_id` argument is `None`.
 This function MAY contain arbitrary conditions for minting, and revert if those conditions are not met.
 
 ##### Mint Arguments
 
-- `recipient` - The `Identity` to which the newly minted asset is transferred to.
-- `sub_id` - The sub-identifier of the asset to mint.
-- `amount` - The quantity of coins to mint.
+* `recipient` - The `Identity` to which the newly minted asset is transferred to.
+* `sub_id` - The sub-identifier of the asset to mint. If this is `None`, a `SubId` MUST be assigned.
+* `amount` - The quantity of coins to mint.
 
 #### `fn burn(sub_id: SubId, amount: u64)`
 
@@ -57,7 +58,7 @@ The burn function may also introduce a security consideration if the total suppl
 ```sway
 abi MySRC3Asset {
     #[storage(read, write)]
-    fn mint(recipient: Identity, sub_id: SubId, amount: u64);
+    fn mint(recipient: Identity, sub_id: Option<SubId>, amount: u64);
     #[payable]
     #[storage(read, write)]
     fn burn(sub_id: SubId, amount: u64);

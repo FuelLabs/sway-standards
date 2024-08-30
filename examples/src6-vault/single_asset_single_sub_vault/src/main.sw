@@ -25,8 +25,6 @@ storage {
     managed_assets: u64 = 0,
     /// The total amount of shares minted by this vault.
     total_supply: u64 = 0,
-    /// Whether the vault shares have been minted.
-    minted: bool = false,
 }
 
 impl SRC6 for Contract {
@@ -110,11 +108,11 @@ impl SRC6 for Contract {
 
     #[storage(read)]
     fn max_depositable(
-        receiver: Identity,
+        _receiver: Identity,
         underlying_asset: AssetId,
         vault_sub_id: SubId,
     ) -> Option<u64> {
-        if underlying_asset == AssetId::base() {
+        if underlying_asset == AssetId::base() && vault_sub_id == ACCEPTED_SUB_VAULT {
             // This is the max value of u64 minus the current managed_assets. Ensures that the sum will always be lower than u64::MAX.
             Some(u64::max() - storage.managed_assets.read())
         } else {
@@ -124,7 +122,7 @@ impl SRC6 for Contract {
 
     #[storage(read)]
     fn max_withdrawable(underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64> {
-        if underlying_asset == AssetId::base() {
+        if underlying_asset == AssetId::base() && vault_sub_id == ACCEPTED_SUB_VAULT {
             // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
             Some(storage.managed_assets.read())
         } else {
@@ -150,17 +148,29 @@ impl SRC20 for Contract {
 
     #[storage(read)]
     fn name(asset: AssetId) -> Option<String> {
-        Some(String::from_ascii_str("Vault Shares"))
+        if asset == vault_assetid() {
+            Some(String::from_ascii_str("Vault Shares"))
+        } else {
+            None
+        }
     }
 
     #[storage(read)]
     fn symbol(asset: AssetId) -> Option<String> {
-        Some(String::from_ascii_str("VLTSHR"))
+        if asset == vault_assetid() {
+            Some(String::from_ascii_str("VLTSHR"))
+        } else {
+            None
+        }
     }
 
     #[storage(read)]
     fn decimals(asset: AssetId) -> Option<u8> {
-        Some(9_u8)
+        if asset == vault_assetid() {
+            Some(9_u8)
+        } else {
+            None
+        }
     }
 }
 

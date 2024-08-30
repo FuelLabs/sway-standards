@@ -44,6 +44,35 @@ The `String` variant SHALL be used when the stored metadata for the correspondin
 
 This function MUST return valid metadata for the corresponding `asset` and `key`, where the data is either a `B256`, `Bytes`, `Int`, or `String` variant. If the asset does not exist or no metadata exists, the function MUST return `None`.
 
+### Logging
+
+The following logs MUST be implemented and emitted to follow the SRC-7 standard.
+
+* IF a value is updated via a function call, a log MUST be emitted.
+* IF a value is embedded in a contract as a constant, configurable, or other manner, an event MUST be emitted at least once.
+
+#### SetMetadataEvent
+
+The `SetMetadataEvent` MUST be emitted when the metadata of an asset has updated.
+
+There SHALL be the following fields in the `SetMetadataEvent` struct:
+
+* `asset`: The `asset` field SHALL be used for the corresponding `AssetId` of the asset has been updated.
+* `metadata`: The `metadata` field SHALL be used for the corresponding `Option<Metadata>` which represents the metadata of the asset.
+* `key`: The `key` field SHALL be used for the corresponding `String` which represents the key used for storing the metadata.
+* `sender`: The `sender` field SHALL be used for the corresponding `Identity` which made the function call that has updated the metadata of the asset.
+
+Example:
+
+```sway
+pub struct SetMetadataEvent {
+    pub asset: AssetId,
+    pub metadata: Option<Metadata>,
+    pub key: String,
+    pub sender: Identity,
+}
+```
+
 ## Rationale
 
 The SRC-7 standard should allow for data-rich assets to interact with one another in a safe manner.
