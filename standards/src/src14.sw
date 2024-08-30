@@ -61,7 +61,7 @@ abi SRC14Extension {
     ///
     ///     match contract_abi.proxy_owner() {
     ///         State::Uninitialized => log("The ownership is uninitialized"),
-    ///         State::Initialized(owner) => log("The ownership is initalized"),
+    ///         State::Initialized(owner) => log("The ownership is initialized"),
     ///         State::Revoked => log("The ownership is revoked"),
     ///     }
     /// }
