@@ -37,8 +37,8 @@ This function MAY contain arbitrary conditions for burning, and revert if those 
 
 ##### Burn Arguments
 
-- `sub_id` - The sub-identifier of the asset to burn.
-- `amount` - The quantity of coins to burn.
+* `sub_id` - The sub-identifier of the asset to burn.
+* `amount` - The quantity of coins to burn.
 
 ## Rationale
 
