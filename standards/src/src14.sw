@@ -60,7 +60,7 @@ abi SRC14Extension {
     ///     let contract_abi = abi(SRC14Extension, contract_id.bits());
     ///
     ///     match contract_abi.proxy_owner() {
-    ///         State::Uninitalized => log("The ownership is uninitalized"),
+    ///         State::Uninitialized => log("The ownership is uninitialized"),
     ///         State::Initialized(owner) => log("The ownership is initalized"),
     ///         State::Revoked => log("The ownership is revoked"),
     ///     }

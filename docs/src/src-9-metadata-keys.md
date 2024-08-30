@@ -135,7 +135,7 @@ The key `link:contact` SHALL return a `String` variant of the asset's project co
 
 #### `link:docs`
 
- The key `link:docs` SHALL return a `String` variant of the asset's project documentation webpage.
+The key `link:docs` SHALL return a `String` variant of the asset's project documentation webpage.
 
 #### `link:forum`
 

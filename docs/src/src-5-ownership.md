@@ -81,7 +81,7 @@ abi SRC5 {
 
 ## Example Implementation
 
-### Uninitalized
+### Uninitialized
 
 Example of the SRC-5 implementation where a contract does not have an owner set at compile time with the intent to set it during runtime.
 

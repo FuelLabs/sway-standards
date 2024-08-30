@@ -25,15 +25,15 @@ We must also ensure every `Address` on Fuel has its own Predicate. This can be g
 ### Definitions
 
 - **Soulbound Address Predicate** - The resulting predicate which owns assets on behalf of an `Address`.
-- **Soulbound Address** - The computed `Address` of the *Soulbound Asset Predicate*.
-- **Soulbound Asset** - Any [Native Asset](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) sent to the *Soulbound Address*.
+- **Soulbound Address** - The computed `Address` of the _Soulbound Asset Predicate_.
+- **Soulbound Asset** - Any [Native Asset](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) sent to the _Soulbound Address_.
 
 ### Soulbound Address Predicate Specification
 
-- The *Soulbound Address Predicate* SHALL never spend the assets sent to its computed predicate `Address` or *Soulbound Address*.
-- The *Soulbound Address Predicate* SHALL encode an `Address` of which it represents the soulbound address.
+- The _Soulbound Address Predicate_ SHALL never spend the assets sent to its computed predicate `Address` or _Soulbound Address_.
+- The _Soulbound Address Predicate_ SHALL encode an `Address` of which it represents the soulbound address.
 
-Below we define the *Soulbound Address Predicate* where `ADDRESS` MUST be replaced with the `Address` of which the *Soulbound Address Predicate* represents.
+Below we define the _Soulbound Address Predicate_ where `ADDRESS` MUST be replaced with the `Address` of which the _Soulbound Address Predicate_ represents.
 
 ```sway
 predicate;
@@ -50,9 +50,9 @@ fn main() -> bool {
 
 ### Soulbound Address
 
-The *Soulbound Address* is the *Soulbound Address Predicate*'s predicate address. A predicate's address(the bytecode root) is defined [here](https://github.com/FuelLabs/fuel-specs/blob/master/src/identifiers/predicate-id.md).
+The _Soulbound Address_ is the _Soulbound Address Predicate_'s predicate address. A predicate's address(the bytecode root) is defined [here](https://github.com/FuelLabs/fuel-specs/blob/master/src/identifiers/predicate-id.md).
 
-The *Soulbound Address* may be computed from the  *Soulbound Address Predicate*'s bytecode both on-chain or off-chain. For off-chain computation, please refer to the fuels-rs [predicate docs](https://docs.fuel.network/docs/fuels-rs/predicates/). For on-chain computation, please refer to Sway-Lib's [Bytecode Library](https://docs.fuel.network/docs/sway-libs/bytecode/).
+The _Soulbound Address_ may be computed from the _Soulbound Address Predicate_'s bytecode both on-chain or off-chain. For off-chain computation, please refer to the fuels-rs [predicate docs](https://docs.fuel.network/docs/fuels-rs/predicates/). For on-chain computation, please refer to Sway-Lib's [Bytecode Library](https://docs.fuel.network/docs/sway-libs/bytecode/).
 
 ## Rationale
 
@@ -66,13 +66,13 @@ This standard is compatible with Fuel's [Native Assets](https://docs.fuel.networ
 
 This standard does not introduce any security concerns, as it does not call external contracts, nor does it define any mutations of the contract state.
 
-It should however be noted that any Native Asset on the Fuel Network is not a Soulbound Asset until it is sent to a *Soulbound Address*.
+It should however be noted that any Native Asset on the Fuel Network is not a Soulbound Asset until it is sent to a _Soulbound Address_.
 
 ## Example
 
-The following example shows the *Soulbound Address Predicate* for the `0xe033369a522e3cd2fc19a5a705a7f119938027e8e287c0ec35b784e68dab2be6` `Address`.
+The following example shows the _Soulbound Address Predicate_ for the `0xe033369a522e3cd2fc19a5a705a7f119938027e8e287c0ec35b784e68dab2be6` `Address`.
 
-The resulting *Soulbound Address* is `0x7f28a538d06788a3d98bb72f4b41012d86abc4b0369ee5dedf56cfbaf245d609`. Any Native Assets sent to this address will become Soulbound Assets.
+The resulting _Soulbound Address_ is `0x7f28a538d06788a3d98bb72f4b41012d86abc4b0369ee5dedf56cfbaf245d609`. Any Native Assets sent to this address will become Soulbound Assets.
 
 ```sway
 predicate;

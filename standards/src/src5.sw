@@ -45,8 +45,8 @@ abi SRC5 {
     ///     let contract_abi = abi(SRC5, contract_id.bits());
     ///
     ///     match contract_abi.owner() {
-    ///         State::Uninitalized => log("The ownership is uninitalized"),
-    ///         State::Initialized(owner) => log("The ownership is initalized"),
+    ///         State::Uninitialized => log("The ownership is uninitialized"),
+    ///         State::Initialized(owner) => log("The ownership is initialized"),
     ///         State::Revoked => log("The ownership is revoked"),
     ///     }
     /// }

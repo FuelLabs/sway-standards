@@ -9,8 +9,8 @@
     <a href="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yml" alt="CI">
         <img src="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yml/badge.svg" />
     </a>
-    <a href="https://crates.io/crates/forc/0.61.0" alt="forc">
-        <img src="https://img.shields.io/badge/forc-v0.61.0-orange" />
+    <a href="https://crates.io/crates/forc/0.63.3" alt="forc">
+        <img src="https://img.shields.io/badge/forc-v0.63.3-orange" />
     </a>
     <a href="./LICENSE" alt="forc">
         <img src="https://img.shields.io/github/license/FuelLabs/sway-standards" />
@@ -109,7 +109,7 @@ Example of the SRC-3 implementation where a contract mints multiple assets with 
 
 #### SRC-5; Ownership Examples
 
-##### - [Uninitalized](./examples/src5-ownership/uninitialized_example/src/uninitialized_example.sw)
+##### - [Uninitialized](./examples/src5-ownership/uninitialized_example/src/uninitialized_example.sw)
 
 Example of the SRC-5 implementation where a contract does not have an owner set at compile time with the intent to set it during runtime.
 
@@ -162,12 +162,12 @@ Example of a minimal SRC-14 implementation with no access control.
 Example of a SRC-14 implementation that also implements [SRC-5](https://docs.fuel.network/docs/sway-standards/src-5-ownership/).
 
 > **Note**
-> All standards currently use `forc v0.61.0`.
+> All standards currently use `forc v0.63.3`.
 
 <!-- TODO:
 ## Contributing
 
-Check out the [book](https://fuellabs.github.io/sway-libs/book/index.html) for more info! 
+Check out the [book](https://fuellabs.github.io/sway-libs/book/index.html) for more info!
 -->
 
 > **Note**
