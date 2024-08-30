@@ -21,6 +21,7 @@ Description of the upcoming release here.
 ### Fixed Unreleased
 
 - [#137](https://github.com/FuelLabs/sway-standards/pull/137) Resolves warnings for SRC-6, SRC-14, and SRC-5 standard examples.
+- [#136](https://github.com/FuelLabs/sway-standards/pull/136) Fixes SRC14 to recommend namespacing all non-standardized storage variables under the SRC14 namespace and general typos and markdown in docs and inline documentation.
 
 #### Breaking Unreleased
 
