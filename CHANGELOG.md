@@ -40,6 +40,7 @@ Description of the upcoming release here.
 ### Changed v0.6.1
 
 - [#135](https://github.com/FuelLabs/sway-standards/pull/135) Updates standards, examples and CI to latest forc 0.63.3.
+- [#147](https://github.com/FuelLabs/sway-standards/pull/147) Prepares for the v0.6.1 release.
 
 ### Fixed v0.6.1
 
