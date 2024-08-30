@@ -9,8 +9,8 @@
     <a href="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yml" alt="CI">
         <img src="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yml/badge.svg" />
     </a>
-    <a href="https://crates.io/crates/forc/0.63.1" alt="forc">
-        <img src="https://img.shields.io/badge/forc-v0.63.1-orange" />
+    <a href="https://crates.io/crates/forc/0.63.3" alt="forc">
+        <img src="https://img.shields.io/badge/forc-v0.63.3-orange" />
     </a>
     <a href="./LICENSE" alt="forc">
         <img src="https://img.shields.io/github/license/FuelLabs/sway-standards" />
@@ -162,7 +162,7 @@ Example of a minimal SRC-14 implementation with no access control.
 Example of a SRC-14 implementation that also implements [SRC-5](https://docs.fuel.network/docs/sway-standards/src-5-ownership/).
 
 > **Note**
-> All standards currently use `forc v0.63.1`.
+> All standards currently use `forc v0.63.3`.
 
 <!-- TODO:
 ## Contributing

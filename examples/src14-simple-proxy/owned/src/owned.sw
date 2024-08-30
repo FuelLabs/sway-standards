@@ -36,7 +36,7 @@ impl SRC14 for Contract {
 impl SRC14Extension for Contract {
     #[storage(read)]
     fn proxy_owner() -> State {
-         storage::SRC14.owner.read()
+        storage::SRC14.owner.read()
     }
 }
 
