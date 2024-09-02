@@ -20,11 +20,12 @@ abi SRC12 {
     /// # Examples
     ///
     /// ```sway
-    /// use src12::SRC12;
+    /// use standards::src12::SRC12;
     ///
-    /// fn foo(my_src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
-    ///     let src_12_contract_abi = abi(SRC12, my_src_12_contract.bits());
-    ///     src_12_contract_abi.register_contract(my_deployed_contract, my_configurables);
+    /// fn foo(src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
+    ///     let src_12_contract_abi = abi(SRC12, src_12_contract.bits());
+    ///     let result = src_12_contract_abi.register_contract(my_deployed_contract, my_configurables);
+    ///     assert(result.is_ok());
     ///     assert(src_12_contract_abi.is_valid(my_deployed_contract));
     /// }
     /// ```
@@ -47,12 +48,14 @@ abi SRC12 {
     /// # Examples
     ///
     /// ```sway
-    /// use src12::SRC12;
+    /// use standards::src12::SRC12;
     ///
-    /// fn foo(my_src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
-    ///     let src_12_contract_abi = abi(SRC12, my_src_12_contract.bits());
-    ///     src_12_contract_abi.register_contract(my_deployed_contract, my_configurables);
-    ///     assert(src_12_contract_abi.is_valid(my_deployed_contract));
+    /// fn foo(src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
+    ///     let src_12_contract_abi = abi(SRC12, src_12_contract.bits());
+    ///     let _ = src_12_contract_abi.register_contract(my_deployed_contract, my_configurables);
+    ///
+    ///     let result: bool = src_12_contract_abi.is_valid(my_deployed_contract)
+    ///     assert(result);
     /// }
     /// ```
     #[storage(read)]
@@ -67,11 +70,11 @@ abi SRC12 {
     /// # Examples
     ///
     /// ```sway
-    /// use src12::SRC12;
+    /// use standards::src12::SRC12;
     ///
-    /// fn foo(my_src_12_contract: ContractId) {
-    ///     let src_12_contract_abi = abi(SRC12, my_src_12_contract.bits());
-    ///     let root = src_12_contract_abi.factory_bytecode_root();
+    /// fn foo(src_12_contract: ContractId) {
+    ///     let src_12_contract_abi = abi(SRC12, src_12_contract.bits());
+    ///     let root: Option<BytecodeRoot> = src_12_contract_abi.factory_bytecode_root();
     ///     assert(root.unwrap() != b256::zero());
     /// }
     /// ```
@@ -93,12 +96,13 @@ abi SRC12_Extension {
     /// # Examples
     ///
     /// ```sway
-    /// use src12::SRC12;
+    /// use standards::src12::SRC12;
     ///
-    /// fn foo(my_src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
-    ///     let src_12_contract_abi = abi(SRC12, my_src_12_contract.bits());
-    ///     src_12_contract_abi.register_contract(my_deployed_contract, my_configurables);
-    ///     let result_contract_id = src_12_contract_abi.get_contract_id(my_configurables);
+    /// fn foo(src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
+    ///     let src_12_contract_abi = abi(SRC12, src_12_contract.bits());
+    ///     let _ = src_12_contract_abi.register_contract(my_deployed_contract, my_configurables);
+    ///
+    ///     let result_contract_id: Option<ContractId> = src_12_contract_abi.get_contract_id(my_configurables);
     ///     assert(result_contract_id.unwrap() == my_deployed_contract);
     /// }
     /// ```

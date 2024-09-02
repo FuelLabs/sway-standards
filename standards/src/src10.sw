@@ -58,10 +58,10 @@ abi SRC10 {
     /// # Examples
     ///
     /// ```sway
-    /// use src10::SRC10;
+    /// use standards::src10::SRC10;
     ///
     /// fn foo(message_index: u64, bridge: ContractId) {
-    ///     let bridge_abi = abi(SRC10, bridge.value);
+    ///     let bridge_abi = abi(SRC10, bridge.bits());
     ///     bridge_abi.process_message(message_index);
     /// }
     /// ```
@@ -79,10 +79,10 @@ abi SRC10 {
     /// # Examples
     ///
     /// ```sway
-    /// use src10::SRC10;
+    /// use standards::src10::SRC10;
     ///
     /// fn foo(to_address: b256, bridge: ContractId, bridged_asset: AssetId) {
-    ///     let bridge_abi = abi(SRC10, bridge.value);
+    ///     let bridge_abi = abi(SRC10, bridge.bits());
     ///     bridge_abi {
     ///         gas: 10000,
     ///         coins: 100,
@@ -105,10 +105,10 @@ abi SRC10 {
     /// # Examples
     ///
     /// ```sway
-    /// use src10::SRC10;
+    /// use standards::src10::SRC10;
     ///
     /// fn foo(to_address: b256, token_address: b256, token_id: b256, gateway_contract: b256, bridge: ContractId) {
-    ///     let bridge_abi = abi(SRC10, bridge.value);
+    ///     let bridge_abi = abi(SRC10, bridge.bits());
     ///     bridge_abi.claim_refund(to_address, token_address, token_id, gateway_contract);
     /// }
     /// ```

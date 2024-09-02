@@ -39,10 +39,14 @@ abi SRC5 {
     /// # Examples
     ///
     /// ```sway
-    /// fn foo() {
-    ///     match owner() {
+    /// use standards::src5::{SRC5, Owner, State};
+    ///
+    /// fn foo(contract_id: ContractId) {
+    ///     let contract_abi = abi(SRC5, contract_id.bits());
+    ///
+    ///     match contract_abi.owner() {
     ///         State::Uninitialized => log("The ownership is uninitialized"),
-    ///         State::Initialized(owner) => log("The ownership is initalized"),
+    ///         State::Initialized(owner) => log("The ownership is initialized"),
     ///         State::Revoked => log("The ownership is revoked"),
     ///     }
     /// }

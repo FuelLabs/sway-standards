@@ -35,7 +35,7 @@ Description of the upcoming release here.
 
 ### Added v0.6.1
 
-- [#144](https://github.com/FuelLabs/sway-standards/pull/144) Adds the following helper functions for `Metadata` to check and return the underlying type: `as_string()`, `is_string()`, `as_bytes()`, `is_bytes()`, `as_b256()`, `is_u64()`, `as_u64()`.
+- None
 
 ### Changed v0.6.1
 
@@ -46,6 +46,7 @@ Description of the upcoming release here.
 
 - [#137](https://github.com/FuelLabs/sway-standards/pull/137) Resolves warnings for SRC-6, SRC-14, and SRC-5 standard examples.
 - [#136](https://github.com/FuelLabs/sway-standards/pull/136) Fixes SRC14 to recommend namespacing all non-standardized storage variables under the SRC14 namespace, fixes typos, and improves markdown in docs and inline documentation.
+- [#142](https://github.com/FuelLabs/sway-standards/pull/142) Fixes errors in inline documentation for SRC-10, SRC-12, SRC-14, SRC-20, SRC-3, SRC-5, SRC-7 standards.
 
 ## [Version 0.6.0]
 
