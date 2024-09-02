@@ -31,7 +31,7 @@ impl SRC5 for Contract {
     ///     let ownership_abi = abi(contract_id, SRC_5);
     ///
     ///     match ownership_abi.owner() {
-    ///         State::Initialized(owner) => log("The ownership is initalized"),
+    ///         State::Initialized(owner) => log("The ownership is initialized"),
     ///         _ => log("This example will never reach this statement"),
     ///     }
     /// }

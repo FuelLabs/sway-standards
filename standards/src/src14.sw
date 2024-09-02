@@ -12,7 +12,7 @@ abi SRC14 {
     /// # Examples
     ///
     /// ```sway
-    /// use src14::SRC14;
+    /// use standards::src14::SRC14;
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC14, contract_id.bits());
@@ -32,11 +32,12 @@ abi SRC14 {
     /// # Examples
     ///
     /// ```sway
-    /// use src14::SRC14;
+    /// use standards::src14::SRC14;
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC14, contract_id.bits());
     ///     let target_contract: Option<ContractId> = contract_abi.proxy_target();
+    ///     assert(target_contract.is_some());
     /// }
     /// ```
     #[storage(read)]
@@ -53,10 +54,14 @@ abi SRC14Extension {
     /// # Examples
     ///
     /// ```sway
-    /// fn foo() {
-    ///     match owner() {
+    /// use standards::{src5::State, src14::{SRC14Extension, proxy_owner}};
+    ///
+    /// fn foo(contract_id: ContractId) {
+    ///     let contract_abi = abi(SRC14Extension, contract_id.bits());
+    ///
+    ///     match contract_abi.proxy_owner() {
     ///         State::Uninitialized => log("The ownership is uninitialized"),
-    ///         State::Initialized(owner) => log("The ownership is initalized"),
+    ///         State::Initialized(owner) => log("The ownership is initialized"),
     ///         State::Revoked => log("The ownership is revoked"),
     ///     }
     /// }
