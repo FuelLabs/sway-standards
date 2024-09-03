@@ -580,3 +580,71 @@ impl MetadataMessage {
         self.symbol
     }
 }
+
+impl DepositType {
+    /// Returns whether the deposit type is an address.
+    ///
+    /// # Return Values
+    ///
+    /// * [bool] - `true` if the deposit type is an address, otherwise `false`.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use standards::src10::DepositType;
+    ///
+    /// fn foo(deposit_type: DepositType) {
+    ///     assert(DepositType.is_address());
+    /// }
+    /// ```
+    pub fn is_address(self) -> bool {
+        match self {
+            Self::Address => true,
+            _ => false,
+        }
+    }
+
+    /// Returns whether the deposit type is a contract.
+    ///
+    /// # Return Values
+    ///
+    /// * [bool] - `true` if the deposit type is a contract, otherwise `false`.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use standards::src10::DepositType;
+    ///
+    /// fn foo(deposit_type: DepositType) {
+    ///     assert(DepositType.is_contract());
+    /// }
+    /// ```
+    pub fn is_contract(self) -> bool {
+        match self {
+            Self::Contract => true,
+            _ => false,
+        }
+    }
+
+    /// Returns whether the deposit type is a contract with data.
+    ///
+    /// # Return Values
+    ///
+    /// * [bool] - `true` if the deposit type is a contract with data, otherwise `false`.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use standards::src10::DepositType;
+    ///
+    /// fn foo(deposit_type: DepositType) {
+    ///     assert(DepositType.is_contract_with_data());
+    /// }
+    /// ```
+    pub fn is_contract_with_data(self) -> bool {
+        match self {
+            Self::ContractWithData => true,
+            _ => false,
+        }
+    }
+}
