@@ -74,3 +74,147 @@ impl core::ops::Eq for Metadata {
         }
     }
 }
+
+impl core::ops::Eq for SetMetadataEvent {
+    fn eq(self, other: Self) -> bool {
+        self.asset == other.asset && self.metadata == other.metadata && self.key == other.key && self.sender == other.sender
+    }
+}
+
+impl SetMetadataEvent {
+    /// Returns a new `SetMetadataEvent` event.
+    ///
+    /// # Arguments
+    ///
+    /// * `asset`: [AssetId] - The asset for which metadata is set.
+    /// * `metadata`: [Option<Metdata>] - The Metadata that is set.
+    /// * `ket`: [String] - The key used for the metadata.
+    /// * `sender`: [Identity] - The caller that set the metadata.
+    ///
+    /// # Returns
+    ///
+    /// * [SetMetadataEvent] - The new `SetMetadataEvent` event.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use standards::src7::SetMetadataEvent;
+    ///
+    /// fn foo(asset: AssetId, metadata: Option<Metadata>, key: String, sender: Identity) {
+    ///     let my_set_metadata_event = SetMetadataEvent::new(asset, metadata, key, sender);
+    ///     assert(my_set_metadata_event.asset == asset);
+    ///     assert(my_set_metadata_event.metadata == metadata);
+    ///     assert(my_set_metadata_event.key == key);
+    ///     assert(my_set_metadata_event.sender == sender);
+    /// }
+    /// ```
+    pub fn new(
+        asset: AssetId,
+        metadata: Option<Metadata>,
+        key: String,
+        sender: Identity,
+    ) -> Self {
+        Self {
+            asset,
+            metadata,
+            key,
+            sender,
+        }
+    }
+
+    /// Returns the asset of the `SetMetadataEvent` event.
+    ///
+    /// # Returns
+    ///
+    /// * [AssetId] - The asset for the event.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use standards::src7::SetMetadataEvent;
+    ///
+    /// fn foo(asset: AssetId, metadata: Option<Metadata>, key: String, sender: Identity) {
+    ///     let my_set_metadata_event = SetMetadataEvent::new(asset, metadata, key, sender);
+    ///     assert(my_set_metadata_event.asset() == asset);
+    /// }
+    /// ```
+    pub fn asset(self) -> AssetId {
+        self.asset
+    }
+
+    /// Returns the metadata of the `SetMetadataEvent` event.
+    ///
+    /// # Returns
+    ///
+    /// * [Option<Metadata>] - The metadata for the event.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use standards::src7::SetMetadataEvent;
+    ///
+    /// fn foo(asset: AssetId, metadata: Option<Metadata>, key: String, sender: Identity) {
+    ///     let my_set_metadata_event = SetMetadataEvent::new(asset, metadata, key, sender);
+    ///     assert(my_set_metadata_event.metadata() == metadata);
+    /// }
+    /// ```
+    pub fn metadata(self) -> Option<Metadata> {
+        self.metadata
+    }
+
+    /// Returns the key of the `SetMetadataEvent` event.
+    ///
+    /// # Returns
+    ///
+    /// * [String] - The key for the event.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use standards::src7::SetMetadataEvent;
+    ///
+    /// fn foo(asset: AssetId, metadata: Option<Metadata>, key: String, sender: Identity) {
+    ///     let my_set_metadata_event = SetMetadataEvent::new(asset, metadata, key, sender);
+    ///     assert(my_set_metadata_event.key() == key);
+    /// }
+    /// ```
+    pub fn key(self) -> String {
+        self.key
+    }
+
+    /// Returns the sender of the `SetMetadataEvent` event.
+    ///
+    /// # Returns
+    ///
+    /// * [Identity] - The sender of the event.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use standards::src7::SetMetadataEvent;
+    ///
+    /// fn foo(asset: AssetId, metadata: Option<Metadata>, key: String, sender: Identity) {
+    ///     let my_set_metadata_event = SetMetadataEvent::new(asset, metadata, key, sender);
+    ///     assert(my_set_metadata_event.sender() == sender);
+    /// }
+    /// ```
+    pub fn sender(self) -> Identity {
+        self.sender
+    }
+
+    /// Logs the `SetMetadataEvent`.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use standards::src7::SetMetadataEvent;
+    ///
+    /// fn foo(asset: AssetId, metadata: Option<Metadata>, key: String, sender: Identity) {
+    ///     let my_event = SetMetadataEvent::new(asset, metadata, key, sender);
+    ///     my_event.log();
+    /// }
+    /// ```
+    pub fn log(self) {
+        log(self);
+    }
+}

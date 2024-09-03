@@ -13,11 +13,11 @@ pub enum State {
 impl core::ops::Eq for State {
     fn eq(self, other: Self) -> bool {
         match (self, other) {
-            (State::Initialized(owner1), State::Initialized(owner2)) => {
+            (Self::Initialized(owner1), Self::Initialized(owner2)) => {
                 owner1 == owner2
             },
-            (State::Uninitialized, State::Uninitialized) => true,
-            (State::Revoked, State::Revoked) => true,
+            (Self::Uninitialized, Self::Uninitialized) => true,
+            (Self::Revoked, Self::Revoked) => true,
             _ => false,
         }
     }
@@ -27,6 +27,14 @@ impl core::ops::Eq for State {
 pub enum AccessError {
     /// Emitted when the caller is not the owner of the contract.
     NotOwner: (),
+}
+
+impl core::ops::Eq for AccessError {
+    fn eq(self, other: Self) -> bool {
+        match (self, other) {
+            (Self::NotOwner, Self::NotOwner) => true,
+        }
+    }
 }
 
 abi SRC5 {

@@ -115,38 +115,29 @@ impl SetSRC7Events for Contract {
         if storage.total_supply.get(asset).try_read().is_none() {
             revert(0);
         }
-        let sender = msg_sender().unwrap();
-
-        log(SetMetadataEvent {
-            asset,
-            metadata: Some(Metadata::String(String::from_ascii_str(from_str_array(SOCIAL_X)))),
-            key: String::from_ascii_str("social:x"),
-            sender,
-        });
-
-        log(SetMetadataEvent {
-            asset,
-            metadata: Some(Metadata::String(String::from_ascii_str(from_str_array(SITE_FORUM)))),
-            key: String::from_ascii_str("site:forum"),
-            sender,
-        });
 
         storage.svg_images.try_insert(asset, StorageString {});
         storage.svg_images.get(asset).write_slice(svg_image);
-        log(SetMetadataEvent {
-            asset,
-            metadata: Some(Metadata::String(svg_image)),
-            key: String::from_ascii_str("image:svg"),
-            sender,
-        });
-
         storage.health_attributes.insert(asset, health_attribute);
-        log(SetMetadataEvent {
-            asset,
-            metadata: Some(Metadata::Int(health_attribute)),
-            key: String::from_ascii_str("attr:health"),
-            sender,
-        });
+
+        let sender = msg_sender().unwrap();
+        let metadata_1 = Some(Metadata::String(String::from_ascii_str(from_str_array(SOCIAL_X))));
+        let metadata_2 = Some(Metadata::String(String::from_ascii_str(from_str_array(SITE_FORUM))));
+        let metadata_3 = Some(Metadata::String(svg_image));
+        let metadata_4 = Some(Metadata::Int(health_attribute));
+        let key_1 = String::from_ascii_str("social:x");
+        let key_2 = String::from_ascii_str("site:forum");
+        let key_3 = String::from_ascii_str("image:svg");
+        let key_4 = String::from_ascii_str("attr:health");
+
+        SetMetadataEvent::new(asset, metadata_1, key_1, sender)
+            .log();
+        SetMetadataEvent::new(asset, metadata_2, key_2, sender)
+            .log();
+        SetMetadataEvent::new(asset, metadata_3, key_3, sender)
+            .log();
+        SetMetadataEvent::new(asset, metadata_4, key_4, sender)
+            .log();
     }
 }
 
@@ -195,29 +186,12 @@ impl SetSRC20Data for Contract {
     fn set_src20_data(asset: AssetId, supply: u64) {
         // NOTE: There are no checks for if the caller has permissions to update the metadata
         let sender = msg_sender().unwrap();
+        let name = Some(String::from_ascii_str(from_str_array(NAME)));
+        let symbol = Some(String::from_ascii_str(from_str_array(SYMBOL)));
 
-        log(SetNameEvent {
-            asset,
-            name: Some(String::from_ascii_str(from_str_array(NAME))),
-            sender,
-        });
-
-        log(SetSymbolEvent {
-            asset,
-            symbol: Some(String::from_ascii_str(from_str_array(SYMBOL))),
-            sender,
-        });
-
-        log(SetDecimalsEvent {
-            asset,
-            decimals: DECIMALS,
-            sender,
-        });
-
-        log(TotalSupplyEvent {
-            asset,
-            supply,
-            sender,
-        });
+        SetNameEvent::new(asset, name, sender).log();
+        SetSymbolEvent::new(asset, symbol, sender).log();
+        SetDecimalsEvent::new(asset, DECIMALS, sender).log();
+        TotalSupplyEvent::new(asset, supply, sender).log();
     }
 }

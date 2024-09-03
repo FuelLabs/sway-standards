@@ -61,14 +61,16 @@ impl SRC6 for Contract {
         vault_info.managed_assets = vault_info.managed_assets + asset_amount;
         storage.vault_info.insert(share_asset, vault_info);
 
-        log(Deposit {
-            caller: msg_sender().unwrap(),
+        Deposit::new(
+            msg_sender()
+                .unwrap(),
             receiver,
             underlying_asset,
             vault_sub_id,
-            deposited_amount: asset_amount,
-            minted_shares: shares,
-        });
+            asset_amount,
+            shares,
+        )
+            .log();
 
         shares
     }
@@ -96,14 +98,16 @@ impl SRC6 for Contract {
 
         transfer(receiver, underlying_asset, assets);
 
-        log(Withdraw {
-            caller: msg_sender().unwrap(),
+        Withdraw::new(
+            msg_sender()
+                .unwrap(),
             receiver,
             underlying_asset,
             vault_sub_id,
-            withdrawn_amount: assets,
-            burned_shares: shares,
-        });
+            assets,
+            shares,
+        )
+            .log();
 
         assets
     }
