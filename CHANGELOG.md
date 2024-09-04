@@ -9,27 +9,47 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Description of the upcoming release here.
 
-### Added Unreleased
+### Added
+
+- Something new here 1
+- Something new here 2
+
+### Changed
+
+- Something changed here 1
+- Something changed here 2
+
+### Fixed
+
+- Some fix here 1
+- Some fix here 2
+
+#### Breaking
+
+- Some breaking change here 1
+- Some breaking change here 2
+
+## [Version 0.6.1]
+
+Description of the upcoming release here.
+
+### Added v0.6.1
 
 - [#149](https://github.com/FuelLabs/sway-standards/pull/149) Adds struct field getters, `new()`, and `Eq` implementations to SRC-10's `DepositMessage` and `MetadataMessage` types and SRC-11's `SecurityInformation` type.
 - [#149](https://github.com/FuelLabs/sway-standards/pull/149) Adds `Eq` implementation to SRC-5's `AccessError` error.
 - [#149](https://github.com/FuelLabs/sway-standards/pull/149) Adds check functions and `Eq` implementation to SRC-5's `State` type and SRC-10's `DepositType` type.
 - [#149](https://github.com/FuelLabs/sway-standards/pull/149) Adds struct field getters, `new()`, `log()`, and `Eq` implementations to SRC-6's `Deposit`, and `Withdraw` types, SRC-20's `SetNameEvent`, `SetSymbolEvent`, `SetDecimalsEvent`, and `TotalSupplyEvent` events, and SRC-7's `SetMetadataEvent` event.
 
-### Changed Unreleased
+### Changed v0.6.1
 
 - [#135](https://github.com/FuelLabs/sway-standards/pull/135) Updates standards, examples and CI to latest forc 0.63.3.
+- [#147](https://github.com/FuelLabs/sway-standards/pull/147) Prepares for the v0.6.1 release.
 
-### Fixed Unreleased
+### Fixed v0.6.1
 
 - [#137](https://github.com/FuelLabs/sway-standards/pull/137) Resolves warnings for SRC-6, SRC-14, and SRC-5 standard examples.
 - [#136](https://github.com/FuelLabs/sway-standards/pull/136) Fixes SRC14 to recommend namespacing all non-standardized storage variables under the SRC14 namespace, fixes typos, and improves markdown in docs and inline documentation.
 - [#142](https://github.com/FuelLabs/sway-standards/pull/142) Fixes errors in inline documentation for SRC-10, SRC-12, SRC-14, SRC-20, SRC-3, SRC-5, SRC-7 standards.
-
-#### Breaking Unreleased
-
-- Some breaking change here 1
-- Some breaking change here 2
 
 ## [Version 0.6.0]
 
