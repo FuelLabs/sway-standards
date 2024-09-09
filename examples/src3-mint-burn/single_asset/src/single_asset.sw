@@ -78,13 +78,10 @@ impl SRC3 for Contract {
         let new_supply = amount + storage.total_supply.read();
         storage.total_supply.write(new_supply);
 
-        log(TotalSupplyEvent {
-            asset: AssetId::new(ContractId::this(), DEFAULT_SUB_ID),
-            supply: new_supply,
-            sender: msg_sender().unwrap(),
-        });
-
         mint_to(recipient, DEFAULT_SUB_ID, amount);
+
+        TotalSupplyEvent::new(AssetId::default(), new_supply, msg_sender().unwrap())
+            .log();
     }
 
     /// Unconditionally burns assets sent with the default SubId.
@@ -131,10 +128,13 @@ impl SRC3 for Contract {
         );
 
         // Decrement total supply of the asset and burn.
-        storage
-            .total_supply
-            .write(storage.total_supply.read() - amount);
+        let new_supply = storage.total_supply.read() - amount;
+        storage.total_supply.write(new_supply);
+
         burn(DEFAULT_SUB_ID, amount);
+
+        TotalSupplyEvent::new(AssetId::default(), new_supply, msg_sender().unwrap())
+            .log();
     }
 }
 
@@ -191,23 +191,11 @@ impl EmitSRC20Events for Contract {
         // Metadata that is stored as a configurable should only be emitted once.
         let asset = AssetId::default();
         let sender = msg_sender().unwrap();
+        let name = Some(String::from_ascii_str(from_str_array(NAME)));
+        let symbol = Some(String::from_ascii_str(from_str_array(SYMBOL)));
 
-        log(SetNameEvent {
-            asset,
-            name: Some(String::from_ascii_str(from_str_array(NAME))),
-            sender,
-        });
-
-        log(SetSymbolEvent {
-            asset,
-            symbol: Some(String::from_ascii_str(from_str_array(SYMBOL))),
-            sender,
-        });
-
-        log(SetDecimalsEvent {
-            asset,
-            decimals: DECIMALS,
-            sender,
-        });
+        SetNameEvent::new(asset, name, sender).log();
+        SetSymbolEvent::new(asset, symbol, sender).log();
+        SetDecimalsEvent::new(asset, DECIMALS, sender).log();
     }
 }

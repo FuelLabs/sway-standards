@@ -35,7 +35,10 @@ Description of the upcoming release here.
 
 ### Added v0.6.1
 
-- None
+- [#149](https://github.com/FuelLabs/sway-standards/pull/149) Adds struct field getters, `new()`, and `Eq` implementations to SRC-10's `DepositMessage` and `MetadataMessage` types and SRC-11's `SecurityInformation` type.
+- [#149](https://github.com/FuelLabs/sway-standards/pull/149) Adds `Eq` implementation to SRC-5's `AccessError` error.
+- [#149](https://github.com/FuelLabs/sway-standards/pull/149) Adds check functions and `Eq` implementation to SRC-5's `State` type and SRC-10's `DepositType` type.
+- [#149](https://github.com/FuelLabs/sway-standards/pull/149) Adds struct field getters, `new()`, `log()`, and `Eq` implementations to SRC-6's `Deposit`, and `Withdraw` types, SRC-20's `SetNameEvent`, `SetSymbolEvent`, `SetDecimalsEvent`, and `TotalSupplyEvent` events, and SRC-7's `SetMetadataEvent` event.
 
 ### Changed v0.6.1
 

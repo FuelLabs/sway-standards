@@ -87,13 +87,10 @@ impl SRC3 for Contract {
         let new_supply = amount + asset_supply.unwrap_or(0);
         storage.total_supply.insert(asset_id, new_supply);
 
-        log(TotalSupplyEvent {
-            asset: asset_id,
-            supply: new_supply,
-            sender: msg_sender().unwrap(),
-        });
-
         mint_to(recipient, sub_id, amount);
+
+        TotalSupplyEvent::new(asset_id, new_supply, msg_sender().unwrap())
+            .log();
     }
 
     /// Unconditionally burns assets sent with the `sub_id` sub-identifier.
@@ -136,10 +133,13 @@ impl SRC3 for Contract {
         require(msg_asset_id() == asset_id, "Incorrect asset provided");
 
         // Decrement total supply of the asset and burn.
-        storage
-            .total_supply
-            .insert(asset_id, storage.total_supply.get(asset_id).read() - amount);
+        let new_supply = storage.total_supply.get(asset_id).read() - amount;
+        storage.total_supply.insert(asset_id, new_supply);
+
         burn(sub_id, amount);
+
+        TotalSupplyEvent::new(asset_id, new_supply, msg_sender().unwrap())
+            .log();
     }
 }
 
@@ -194,23 +194,11 @@ impl SetSRC20Data for Contract {
             revert(0);
         }
         let sender = msg_sender().unwrap();
+        let name = Some(String::from_ascii_str(from_str_array(NAME)));
+        let symbol = Some(String::from_ascii_str(from_str_array(SYMBOL)));
 
-        log(SetNameEvent {
-            asset,
-            name: Some(String::from_ascii_str(from_str_array(NAME))),
-            sender,
-        });
-
-        log(SetSymbolEvent {
-            asset,
-            symbol: Some(String::from_ascii_str(from_str_array(SYMBOL))),
-            sender,
-        });
-
-        log(SetDecimalsEvent {
-            asset,
-            decimals: DECIMALS,
-            sender,
-        });
+        SetNameEvent::new(asset, name, sender).log();
+        SetSymbolEvent::new(asset, symbol, sender).log();
+        SetDecimalsEvent::new(asset, DECIMALS, sender).log();
     }
 }
