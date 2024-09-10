@@ -13,14 +13,16 @@ use std::{
 };
 
 use standards::{
-    src20::SRC20,
-    src6::{
-        Deposit,
+    src20::{
         SetDecimalsEvent,
         SetNameEvent,
         SetSymbolEvent,
-        SRC6,
+        SRC20,
         TotalSupplyEvent,
+    },
+    src6::{
+        Deposit,
+        SRC6,
         Withdraw,
     },
 };
