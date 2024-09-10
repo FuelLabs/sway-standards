@@ -25,7 +25,7 @@ The FuelVM provides an `LDC` instruction that is used by Sway's `std::execution:
 ### Required Behavior
 
 The proxy contract MUST maintain the address of its target in its storage at slot `0x7bb458adc1d118713319a5baa00a2d049dd64d2916477d2688d76970c898cd55` (equivalent to `sha256("storage_SRC14_0")`).
-It SHOULD base other proxy specific storage fields at `sha256("storage_SRC14")` to avoid collisions with target storage.
+It SHOULD base other proxy specific storage fields in the `SRC14` namespace to avoid collisions with target storage.
 It MAY have its storage definition overlap with that of its target if necessary.
 
 The proxy contract MUST delegate any method call not part of its interface to the target contract.

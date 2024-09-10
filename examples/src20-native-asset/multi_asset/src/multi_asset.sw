@@ -177,8 +177,8 @@ abi SetSRC20Data {
     fn set_src20_data(
         asset: AssetId,
         total_supply: u64,
-        name: String,
-        symbol: String,
+        name: Option<String>,
+        symbol: Option<String>,
         decimals: u8,
     );
 }
@@ -188,8 +188,8 @@ impl SetSRC20Data for Contract {
     fn set_src20_data(
         asset: AssetId,
         supply: u64,
-        name: String,
-        symbol: String,
+        name: Option<String>,
+        symbol: Option<String>,
         decimals: u8,
     ) {
         // NOTE: There are no checks for if the caller has permissions to update the metadata
@@ -199,28 +199,9 @@ impl SetSRC20Data for Contract {
         }
         let sender = msg_sender().unwrap();
 
-        log(SetNameEvent {
-            asset,
-            name: Some(name),
-            sender,
-        });
-
-        log(SetSymbolEvent {
-            asset,
-            symbol: Some(symbol),
-            sender,
-        });
-
-        log(SetDecimalsEvent {
-            asset,
-            decimals,
-            sender,
-        });
-
-        log(TotalSupplyEvent {
-            asset,
-            supply,
-            sender,
-        });
+        SetNameEvent::new(asset, name, sender).log();
+        SetSymbolEvent::new(asset, symbol, sender).log();
+        SetDecimalsEvent::new(asset, decimals, sender).log();
+        TotalSupplyEvent::new(asset, supply, sender).log();
     }
 }

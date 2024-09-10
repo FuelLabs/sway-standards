@@ -62,7 +62,7 @@ There are no other standards that the SRC-12 requires compatibility.
 
 ## Security Considerations
 
-This standard takes into consideration child contracts that are deployed with differentiating configurable values, however individual contract behaviors may be dependent on storage variables. As storage variables may change after the contract has been registered with the SRC-12 compliant contract, the standard suggests to check these values upon registration however it is not enforced.
+This standard takes into consideration child contracts that are deployed with differentiating configurable values, however individual contract behaviours may be dependent on storage variables. As storage variables may change after the contract has been registered with the SRC-12 compliant contract, the standard suggests to check these values upon registration however it is not enforced.
 
 ## Example ABI
 

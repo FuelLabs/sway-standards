@@ -175,29 +175,12 @@ impl EmitSRC20Events for Contract {
         // Metadata that is stored as a configurable should only be emitted once.
         let asset = AssetId::default();
         let sender = msg_sender().unwrap();
+        let name = Some(String::from_ascii_str(from_str_array(NAME)));
+        let symbol = Some(String::from_ascii_str(from_str_array(SYMBOL)));
 
-        log(SetNameEvent {
-            asset,
-            name: Some(String::from_ascii_str(from_str_array(NAME))),
-            sender,
-        });
-
-        log(SetSymbolEvent {
-            asset,
-            symbol: Some(String::from_ascii_str(from_str_array(SYMBOL))),
-            sender,
-        });
-
-        log(SetDecimalsEvent {
-            asset,
-            decimals: DECIMALS,
-            sender,
-        });
-
-        log(TotalSupplyEvent {
-            asset,
-            supply: TOTAL_SUPPLY,
-            sender,
-        });
+        SetNameEvent::new(asset, name, sender).log();
+        SetSymbolEvent::new(asset, symbol, sender).log();
+        SetDecimalsEvent::new(asset, DECIMALS, sender).log();
+        TotalSupplyEvent::new(asset, TOTAL_SUPPLY, sender).log();
     }
 }

@@ -88,31 +88,31 @@ impl SRC7 for Contract {
 impl SRC20 for Contract {
     fn total_assets() -> u64 {
         1
-    }         
+    }
 
     fn total_supply(asset: AssetId) -> Option<u64> {
-        match asset { 
+        match asset {
             AssetId::default() => Option::Some(1),
             _ => Option::None,
         }
     }
 
     fn name(asset: AssetId) -> Option<String> {
-        match asset { 
+        match asset {
             AssetId::default() => Option::Some(String::from_ascii_str("Name")),
             _ => Option::None,
         }
     }
 
     fn symbol(asset: AssetId) -> Option<String> {
-        match asset { 
+        match asset {
             AssetId::default() => Option::Some(String::from_ascii_str("Symbol")),
             _ => Option::None,
         }
     }
 
     fn decimals(asset: AssetId) -> Option<u8> {
-        match asset { 
+        match asset {
             AssetId::default() => Option::Some(0u8),
             _ => Option::None,
         }
