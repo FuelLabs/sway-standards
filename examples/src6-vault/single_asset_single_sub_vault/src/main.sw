@@ -211,7 +211,7 @@ impl SetSRC20Data for Contract {
     ) {
         // NOTE: There are no checks for if the caller has permissions to update the metadata
         // If this asset does not exist, revert
-        if storage.total_supply.get(asset).try_read().is_none() {
+        if storage.total_supply.try_read().is_none() {
             revert(0);
         }
         let sender = msg_sender().unwrap();
