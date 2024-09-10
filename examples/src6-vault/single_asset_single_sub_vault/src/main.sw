@@ -203,7 +203,6 @@ impl SetSRC20Data for Contract {
     #[storage(read)]
     fn set_src20_data(
         asset: AssetId,
-        supply: u64,
         name: Option<String>,
         symbol: Option<String>,
         decimals: u8,
