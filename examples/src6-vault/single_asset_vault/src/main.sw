@@ -292,7 +292,15 @@ pub fn _mint(
         .total_supply
         .insert(asset_id, current_supply + amount);
     mint_to(recipient, vault_sub_id, amount);
-    TotalSupplyEvent::new(asset_id, storage.total_supply.get(asset_id).unwrap(), msg_sender().unwrap())
+    TotalSupplyEvent::new(
+        asset_id,
+        storage
+            .total_supply
+            .get(asset_id)
+            .unwrap(),
+        msg_sender()
+            .unwrap(),
+    )
         .log();
 }
 
@@ -308,6 +316,14 @@ pub fn _burn(asset_id: AssetId, vault_sub_id: SubId, amount: u64) {
     let supply = storage.total_supply.get(asset_id).try_read().unwrap();
     storage.total_supply.insert(asset_id, supply - amount);
     burn(vault_sub_id, amount);
-    TotalSupplyEvent::new(asset_id, storage.total_supply.get(asset_id).unwrap(), msg_sender().unwrap())
+    TotalSupplyEvent::new(
+        asset_id,
+        storage
+            .total_supply
+            .get(asset_id)
+            .unwrap(),
+        msg_sender()
+            .unwrap(),
+    )
         .log();
 }
