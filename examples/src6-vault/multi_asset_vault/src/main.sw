@@ -282,7 +282,7 @@ pub fn _mint(
         storage
             .total_supply
             .get(asset_id)
-            .unwrap(),
+            .read(),
         msg_sender()
             .unwrap(),
     )
@@ -306,7 +306,7 @@ pub fn _burn(asset_id: AssetId, vault_sub_id: SubId, amount: u64) {
         storage
             .total_supply
             .get(asset_id)
-            .unwrap(),
+            .read(),
         msg_sender()
             .unwrap(),
     )
