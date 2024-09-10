@@ -12,7 +12,18 @@ use std::{
     string::String,
 };
 
-use standards::{src20::SRC20, src6::{Deposit, SRC6, Withdraw}};
+use standards::{
+    src20::SRC20,
+    src6::{
+        Deposit,
+        SetDecimalsEvent,
+        SetNameEvent,
+        SetSymbolEvent,
+        SRC6,
+        TotalSupplyEvent,
+        Withdraw,
+    },
+};
 
 pub struct VaultInfo {
     /// Amount of assets currently managed by this vault
@@ -170,6 +181,38 @@ impl SRC20 for Contract {
     }
 }
 
+abi SetSRC20Data {
+    #[storage(read)]
+    fn set_src20_data(
+        asset: AssetId,
+        name: Option<String>,
+        symbol: Option<String>,
+        decimals: u8,
+    );
+}
+
+impl SetSRC20Data for Contract {
+    #[storage(read)]
+    fn set_src20_data(
+        asset: AssetId,
+        supply: u64,
+        name: Option<String>,
+        symbol: Option<String>,
+        decimals: u8,
+    ) {
+        // NOTE: There are no checks for if the caller has permissions to update the metadata
+        // If this asset does not exist, revert
+        if storage.total_supply.get(asset).try_read().is_none() {
+            revert(0);
+        }
+        let sender = msg_sender().unwrap();
+
+        SetNameEvent::new(asset, name, sender).log();
+        SetSymbolEvent::new(asset, symbol, sender).log();
+        SetDecimalsEvent::new(asset, decimals, sender).log();
+    }
+}
+
 /// Returns the vault shares assetid and subid for the given assets assetid and the vaults sub id
 fn vault_asset_id(asset: AssetId, vault_sub_id: SubId) -> (AssetId, SubId) {
     let share_asset_vault_sub_id = sha256((asset, vault_sub_id));
@@ -233,6 +276,16 @@ pub fn _mint(
         .total_supply
         .insert(asset_id, supply.unwrap_or(0) + amount);
     mint_to(recipient, vault_sub_id, amount);
+    TotalSupplyEvent::new(
+        asset_id,
+        storage
+            .total_supply
+            .get(asset_id)
+            .unwrap(),
+        msg_sender()
+            .unwrap(),
+    )
+        .log();
 }
 
 #[storage(read, write)]
@@ -247,4 +300,14 @@ pub fn _burn(asset_id: AssetId, vault_sub_id: SubId, amount: u64) {
     let supply = storage.total_supply.get(asset_id).try_read().unwrap();
     storage.total_supply.insert(asset_id, supply - amount);
     burn(vault_sub_id, amount);
+    TotalSupplyEvent::new(
+        asset_id,
+        storage
+            .total_supply
+            .get(asset_id)
+            .unwrap(),
+        msg_sender()
+            .unwrap(),
+    )
+        .log();
 }

@@ -12,7 +12,18 @@ use std::{
     string::String,
 };
 
-use standards::{src20::SRC20, src6::{Deposit, SRC6, Withdraw}};
+use standards::{
+    src20::SRC20,
+    src6::{
+        Deposit,
+        SetDecimalsEvent,
+        SetNameEvent,
+        SetSymbolEvent,
+        SRC6,
+        TotalSupplyEvent,
+        Withdraw,
+    },
+};
 
 configurable {
     /// The only sub vault that can be deposited and withdrawn from this vault.
@@ -178,6 +189,38 @@ impl SRC20 for Contract {
     }
 }
 
+abi SetSRC20Data {
+    #[storage(read)]
+    fn set_src20_data(
+        asset: AssetId,
+        name: Option<String>,
+        symbol: Option<String>,
+        decimals: u8,
+    );
+}
+
+impl SetSRC20Data for Contract {
+    #[storage(read)]
+    fn set_src20_data(
+        asset: AssetId,
+        supply: u64,
+        name: Option<String>,
+        symbol: Option<String>,
+        decimals: u8,
+    ) {
+        // NOTE: There are no checks for if the caller has permissions to update the metadata
+        // If this asset does not exist, revert
+        if storage.total_supply.get(asset).try_read().is_none() {
+            revert(0);
+        }
+        let sender = msg_sender().unwrap();
+
+        SetNameEvent::new(asset, name, sender).log();
+        SetSymbolEvent::new(asset, symbol, sender).log();
+        SetDecimalsEvent::new(asset, decimals, sender).log();
+    }
+}
+
 /// Returns the vault shares assetid for the given assets assetid and the vaults sub id
 fn vault_assetid() -> AssetId {
     let share_asset_id = AssetId::new(ContractId::this(), PRE_CALCULATED_SHARE_VAULT_SUB_ID);
@@ -211,6 +254,15 @@ pub fn _mint(recipient: Identity, amount: u64) {
     let supply = storage.total_supply.read();
     storage.total_supply.write(supply + amount);
     mint_to(recipient, PRE_CALCULATED_SHARE_VAULT_SUB_ID, amount);
+    TotalSupplyEvent::new(
+        vault_assetid(),
+        storage
+            .total_supply
+            .read(),
+        msg_sender()
+            .unwrap(),
+    )
+        .log();
 }
 
 #[storage(read, write)]
@@ -225,4 +277,13 @@ pub fn _burn(asset_id: AssetId, amount: u64) {
     let supply = storage.total_supply.read();
     storage.total_supply.write(supply - amount);
     burn(PRE_CALCULATED_SHARE_VAULT_SUB_ID, amount);
+    TotalSupplyEvent::new(
+        vault_assetid(),
+        storage
+            .total_supply
+            .read(),
+        msg_sender()
+            .unwrap(),
+    )
+        .log();
 }
