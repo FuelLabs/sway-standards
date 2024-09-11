@@ -198,7 +198,7 @@ impl SRC20 for Contract {
 }
 
 abi SetSRC20Data {
-    #[storage(read)]
+    #[storage(read, write)]
     fn set_src20_data(
         asset: AssetId,
         name: Option<String>,
@@ -208,7 +208,7 @@ abi SetSRC20Data {
 }
 
 impl SetSRC20Data for Contract {
-    #[storage(read)]
+    #[storage(read, write)]
     fn set_src20_data(
         asset: AssetId,
         name: Option<String>,
