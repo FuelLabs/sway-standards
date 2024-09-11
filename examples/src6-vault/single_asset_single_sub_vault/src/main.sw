@@ -38,7 +38,6 @@ storage {
     managed_assets: u64 = 0,
     /// The total amount of shares minted by this vault.
     total_supply: u64 = 0,
-
     /// The name of a specific asset minted by this contract.
     name: StorageString = StorageString {},
     /// The symbol of a specific asset minted by this contract.
@@ -287,12 +286,7 @@ pub fn _mint(recipient: Identity, amount: u64) {
     let new_supply = supply + amount;
     storage.total_supply.write(new_supply);
     mint_to(recipient, PRE_CALCULATED_SHARE_VAULT_SUB_ID, amount);
-    TotalSupplyEvent::new(
-        vault_assetid(),
-        new_supply,
-        msg_sender()
-            .unwrap(),
-    )
+    TotalSupplyEvent::new(vault_assetid(), new_supply, msg_sender().unwrap())
         .log();
 }
 
@@ -309,11 +303,6 @@ pub fn _burn(asset_id: AssetId, amount: u64) {
     let new_supply = supply - amount;
     storage.total_supply.write(new_supply);
     burn(PRE_CALCULATED_SHARE_VAULT_SUB_ID, amount);
-    TotalSupplyEvent::new(
-        vault_assetid(),
-        new_supply,
-        msg_sender()
-            .unwrap(),
-    )
+    TotalSupplyEvent::new(vault_assetid(), new_supply, msg_sender().unwrap())
         .log();
 }
