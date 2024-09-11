@@ -210,27 +210,27 @@ impl SetSRC20Data for Contract {
 
         match name {
             Some(unwrapped_name) => {
-                storage.name.write_slice(unwrapped_name);
+                storage.name.get(asset).write_slice(unwrapped_name);
                 SetNameEvent::new(asset, name, sender).log();
             },
             None => {
-                let _ = storage.name.clear();
+                let _ = storage.name.get(asset).clear();
                 SetNameEvent::new(asset, name, sender).log();
             }
         }
 
         match symbol {
             Some(unwrapped_symbol) => {
-                storage.symbol.write_slice(unwrapped_symbol);
+                storage.symbol.get(asset).write_slice(unwrapped_symbol);
                 SetSymbolEvent::new(asset, symbol, sender).log();
             },
             None => {
-                let _ = storage.symbol.clear();
+                let _ = storage.symbol.get(asset).clear();
                 SetSymbolEvent::new(asset, symbol, sender).log();
             }
         }
 
-        storage.decimals.write(decimals);
+        storage.decimals.get(asset).write(decimals);
         SetDecimalsEvent::new(asset, decimals, sender).log();
     }
 }
