@@ -222,8 +222,29 @@ impl SetSRC20Data for Contract {
         }
         let sender = msg_sender().unwrap();
 
-        SetNameEvent::new(asset, name, sender).log();
-        SetSymbolEvent::new(asset, symbol, sender).log();
+        match name {
+            Some(unwrapped_name) => {
+                storage.name.write_slice(unwrapped_name);
+                SetNameEvent::new(asset, name, sender).log();
+            },
+            None => {
+                let _ = storage.name.clear();
+                SetNameEvent::new(asset, name, sender).log();
+            }
+        }
+
+        match symbol {
+            Some(unwrapped_symbol) => {
+                storage.symbol.write_slice(unwrapped_symbol);
+                SetSymbolEvent::new(asset, symbol, sender).log();
+            },
+            None => {
+                let _ = storage.symbol.clear();
+                SetSymbolEvent::new(asset, symbol, sender).log();
+            }
+        }
+
+        storage.decimals.write(decimals);
         SetDecimalsEvent::new(asset, decimals, sender).log();
     }
 }
@@ -287,17 +308,12 @@ pub fn _mint(
     if supply.is_none() {
         storage.total_assets.write(storage.total_assets.read() + 1);
     }
-    let current_supply = supply.unwrap_or(0);
-    storage
-        .total_supply
-        .insert(asset_id, current_supply + amount);
+    let new_supply = supply.unwrap_or(0) + amount;
+    storage.total_supply.insert(asset_id, new_supply);
     mint_to(recipient, vault_sub_id, amount);
     TotalSupplyEvent::new(
         asset_id,
-        storage
-            .total_supply
-            .get(asset_id)
-            .read(),
+        new_supply,
         msg_sender()
             .unwrap(),
     )
@@ -314,14 +330,12 @@ pub fn _burn(asset_id: AssetId, vault_sub_id: SubId, amount: u64) {
     );
     // If we pass the check above, we can assume it is safe to unwrap.
     let supply = storage.total_supply.get(asset_id).try_read().unwrap();
-    storage.total_supply.insert(asset_id, supply - amount);
+    let new_supply = supply - amount;
+    storage.total_supply.insert(asset_id, new_supply);
     burn(vault_sub_id, amount);
     TotalSupplyEvent::new(
         asset_id,
-        storage
-            .total_supply
-            .get(asset_id)
-            .read(),
+        new_supply,
         msg_sender()
             .unwrap(),
     )

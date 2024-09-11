@@ -38,6 +38,13 @@ storage {
     managed_assets: u64 = 0,
     /// The total amount of shares minted by this vault.
     total_supply: u64 = 0,
+
+    /// The name of a specific asset minted by this contract.
+    name: StorageString = StorageString {},
+    /// The symbol of a specific asset minted by this contract.
+    symbol: StorageString = StorageString {},
+    /// The decimals of a specific asset minted by this contract.
+    decimals: u8 = 9,
 }
 
 impl SRC6 for Contract {
@@ -166,7 +173,10 @@ impl SRC20 for Contract {
     #[storage(read)]
     fn name(asset: AssetId) -> Option<String> {
         if asset == vault_assetid() {
-            Some(String::from_ascii_str("Vault Shares"))
+            match storage.name.read_slice() {
+                Some(name) => Some(name),
+                None => None,
+            }
         } else {
             None
         }
@@ -175,7 +185,10 @@ impl SRC20 for Contract {
     #[storage(read)]
     fn symbol(asset: AssetId) -> Option<String> {
         if asset == vault_assetid() {
-            Some(String::from_ascii_str("VLTSHR"))
+            match storage.symbol.read_slice() {
+                Some(symbol) => Some(symbol),
+                None => None,
+            }
         } else {
             None
         }
@@ -184,7 +197,7 @@ impl SRC20 for Contract {
     #[storage(read)]
     fn decimals(asset: AssetId) -> Option<u8> {
         if asset == vault_assetid() {
-            Some(9_u8)
+            Some(storage.decimals.read())
         } else {
             None
         }
@@ -210,14 +223,32 @@ impl SetSRC20Data for Contract {
         decimals: u8,
     ) {
         // NOTE: There are no checks for if the caller has permissions to update the metadata
-        // If this asset does not exist, revert
-        if storage.total_supply.try_read().is_none() {
-            revert(0);
-        }
+        require(asset == vault_assetid(), "INVALID_ASSET_ID");
         let sender = msg_sender().unwrap();
 
-        SetNameEvent::new(asset, name, sender).log();
-        SetSymbolEvent::new(asset, symbol, sender).log();
+        match name {
+            Some(unwrapped_name) => {
+                storage.name.write_slice(unwrapped_name);
+                SetNameEvent::new(asset, name, sender).log();
+            },
+            None => {
+                let _ = storage.name.clear();
+                SetNameEvent::new(asset, name, sender).log();
+            }
+        }
+
+        match symbol {
+            Some(unwrapped_symbol) => {
+                storage.symbol.write_slice(unwrapped_symbol);
+                SetSymbolEvent::new(asset, symbol, sender).log();
+            },
+            None => {
+                let _ = storage.symbol.clear();
+                SetSymbolEvent::new(asset, symbol, sender).log();
+            }
+        }
+
+        storage.decimals.write(decimals);
         SetDecimalsEvent::new(asset, decimals, sender).log();
     }
 }
@@ -253,13 +284,12 @@ pub fn _mint(recipient: Identity, amount: u64) {
     use std::asset::mint_to;
 
     let supply = storage.total_supply.read();
-    storage.total_supply.write(supply + amount);
+    let new_supply = supply + amount;
+    storage.total_supply.write(new_supply);
     mint_to(recipient, PRE_CALCULATED_SHARE_VAULT_SUB_ID, amount);
     TotalSupplyEvent::new(
         vault_assetid(),
-        storage
-            .total_supply
-            .read(),
+        new_supply,
         msg_sender()
             .unwrap(),
     )
@@ -276,13 +306,12 @@ pub fn _burn(asset_id: AssetId, amount: u64) {
     );
     // If we pass the check above, we can assume it is safe to unwrap.
     let supply = storage.total_supply.read();
-    storage.total_supply.write(supply - amount);
+    let new_supply = supply - amount;
+    storage.total_supply.write(new_supply);
     burn(PRE_CALCULATED_SHARE_VAULT_SUB_ID, amount);
     TotalSupplyEvent::new(
         vault_assetid(),
-        storage
-            .total_supply
-            .read(),
+        new_supply,
         msg_sender()
             .unwrap(),
     )
