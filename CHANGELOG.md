@@ -7,23 +7,75 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-### Added Unreleased
+Description of the upcoming release here.
+
+### Added
 
 - [#129](https://github.com/FuelLabs/sway-standards/pull/129) Adds setup for testing this repository.
 
-### Changed Unreleased
+### Changed
 
 - [#129](https://github.com/FuelLabs/sway-standards/pull/129) Changed folder names of examples to use underscores instead of dashes.
 
-### Fixed Unreleased
+### Fixed
 
 - Some fix here 1
 - Some fix here 2
 
-### Breaking Unreleased
+#### Breaking
 
 - Some breaking change here 1
 - Some breaking change here 2
+
+## [Version 0.6.1]
+
+Description of the upcoming release here.
+
+### Added v0.6.1
+
+- [#149](https://github.com/FuelLabs/sway-standards/pull/149) Adds struct field getters, `new()`, and `Eq` implementations to SRC-10's `DepositMessage` and `MetadataMessage` types and SRC-11's `SecurityInformation` type.
+- [#149](https://github.com/FuelLabs/sway-standards/pull/149) Adds `Eq` implementation to SRC-5's `AccessError` error.
+- [#149](https://github.com/FuelLabs/sway-standards/pull/149) Adds check functions and `Eq` implementation to SRC-5's `State` type and SRC-10's `DepositType` type.
+- [#149](https://github.com/FuelLabs/sway-standards/pull/149) Adds struct field getters, `new()`, `log()`, and `Eq` implementations to SRC-6's `Deposit`, and `Withdraw` types, SRC-20's `SetNameEvent`, `SetSymbolEvent`, `SetDecimalsEvent`, and `TotalSupplyEvent` events, and SRC-7's `SetMetadataEvent` event.
+
+### Changed v0.6.1
+
+- [#135](https://github.com/FuelLabs/sway-standards/pull/135) Updates standards, examples and CI to latest forc 0.63.3.
+- [#147](https://github.com/FuelLabs/sway-standards/pull/147) Prepares for the v0.6.1 release.
+
+### Fixed v0.6.1
+
+- [#137](https://github.com/FuelLabs/sway-standards/pull/137) Resolves warnings for SRC-6, SRC-14, and SRC-5 standard examples.
+- [#136](https://github.com/FuelLabs/sway-standards/pull/136) Fixes SRC14 to recommend namespacing all non-standardized storage variables under the SRC14 namespace, fixes typos, and improves markdown in docs and inline documentation.
+- [#142](https://github.com/FuelLabs/sway-standards/pull/142) Fixes errors in inline documentation for SRC-10, SRC-12, SRC-14, SRC-20, SRC-3, SRC-5, SRC-7 standards.
+
+## [Version 0.6.0]
+
+### Added v0.6.0
+
+- [#130](https://github.com/FuelLabs/sway-standards/pull/130) Adds the `SetNameEvent`, `SetSymbolEvent`, `SetDecimalsEvent` and `TotalSupplyEvent` to the SRC-20 standard.
+- [#130](https://github.com/FuelLabs/sway-standards/pull/130) Adds the `SetMetadataEvent` to the SRC-7 standard.
+
+### Changed v0.6.0
+
+- [#130](https://github.com/FuelLabs/sway-standards/pull/130) Splits examples into seperate workspace projects for improved continuous integration.
+- [#139](https://github.com/FuelLabs/sway-standards/pull/139) Prepares for the v0.6.0 release.
+
+### Breaking v0.6.0
+
+- [#131](https://github.com/FuelLabs/sway-standards/pull/131) Makes the SRC-3 `mint()` function's `SubId` argument an `Option`.
+
+Before:
+
+```sway
+mint(Identity::Address(Address::zero()), SubId::zero(), 100);
+```
+
+After:
+
+```sway
+mint(Identity::Address(Address::zero()), Some(SubId::zero()), 100);
+```
 
 ## [Version 0.5.2]
 

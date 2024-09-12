@@ -1,6 +1,6 @@
 contract;
 
-use standards::src20::SRC20;
+use standards::src20::{SetDecimalsEvent, SetNameEvent, SetSymbolEvent, SRC20, TotalSupplyEvent,};
 use std::{hash::Hash, storage::storage_string::*, string::String};
 
 storage {
@@ -169,5 +169,39 @@ impl SRC20 for Contract {
     #[storage(read)]
     fn decimals(asset: AssetId) -> Option<u8> {
         storage.decimals.get(asset).try_read()
+    }
+}
+
+abi SetSRC20Data {
+    #[storage(read)]
+    fn set_src20_data(
+        asset: AssetId,
+        total_supply: u64,
+        name: Option<String>,
+        symbol: Option<String>,
+        decimals: u8,
+    );
+}
+
+impl SetSRC20Data for Contract {
+    #[storage(read)]
+    fn set_src20_data(
+        asset: AssetId,
+        supply: u64,
+        name: Option<String>,
+        symbol: Option<String>,
+        decimals: u8,
+    ) {
+        // NOTE: There are no checks for if the caller has permissions to update the metadata
+        // If this asset does not exist, revert
+        if storage.total_supply.get(asset).try_read().is_none() {
+            revert(0);
+        }
+        let sender = msg_sender().unwrap();
+
+        SetNameEvent::new(asset, name, sender).log();
+        SetSymbolEvent::new(asset, symbol, sender).log();
+        SetDecimalsEvent::new(asset, decimals, sender).log();
+        TotalSupplyEvent::new(asset, supply, sender).log();
     }
 }

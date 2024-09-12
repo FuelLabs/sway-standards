@@ -325,7 +325,7 @@ This standard will improve security by providing developers with relevant inform
 /// use ownable::Ownership;
 ///
 /// storage {
-///     owner: Ownership = Ownership::initalized(Identity::Address(Address::zero())),
+///     owner: Ownership = Ownership::initialized(Identity::Address(Address::zero())),
 /// }
 ///
 /// fn foo() {

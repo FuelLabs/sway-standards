@@ -259,5 +259,10 @@ WAV
 OGA
 glTF
 GLB
-Uninitalized
+Uninitialized
 upgradeability
+SetMetadataEvent
+SetNameEvent
+SetSymbolEvent
+SetDecimalsEvent
+UpdateTotalSupplyEvent

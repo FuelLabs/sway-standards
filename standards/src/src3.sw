@@ -6,21 +6,21 @@ abi SRC3 {
     /// # Arguments
     ///
     /// * `recipient`: [Identity] - The user to which the newly minted asset is transferred to.
-    /// * `sub_id`: [SubId] - The sub-identifier of the newly minted asset.
+    /// * `sub_id`: [Option<SubId>] - The sub-identifier of the newly minted asset.
     /// * `amount`: [u64] - The quantity of coins to mint.
     ///
     /// # Examples
     ///
     /// ```sway
-    /// use src3::SRC3;
+    /// use standards::src3::SRC3;
     ///
     /// fn foo(contract_id: ContractId) {
-    ///     let contract_abi = abi(SRC3, contract);
+    ///     let contract_abi = abi(SRC3, contract_id.bits());
     ///     contract_abi.mint(Identity::ContractId(contract_id), SubId::zero(), 100);
     /// }
     /// ```
     #[storage(read, write)]
-    fn mint(recipient: Identity, sub_id: SubId, amount: u64);
+    fn mint(recipient: Identity, sub_id: Option<SubId>, amount: u64);
 
     /// Burns assets sent with the given `sub_id`.
     ///
@@ -37,10 +37,10 @@ abi SRC3 {
     /// # Examples
     ///
     /// ```sway
-    /// use src3::SRC3;
+    /// use standards::src3::SRC3;
     ///
     /// fn foo(contract_id: ContractId, asset_id: AssetId) {
-    ///     let contract_abi = abi(SRC3, contract_id);
+    ///     let contract_abi = abi(SRC3, contract_id.bits());
     ///     contract_abi {
     ///         gas: 10000,
     ///         coins: 100,
