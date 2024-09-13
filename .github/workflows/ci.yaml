@@ -70,14 +70,14 @@ jobs:
           matrix:
             project:
               [
-                "examples/src3_mint_burn",
-                "examples/src5_ownership",
-                "examples/src6_vault",
-                "examples/src7_metadata",
-                "examples/src11_security_information",
-                "examples/src12_contract_factory",
-                "examples/src14_simple_proxy",
-                "examples/src20_native_asset",
+                "examples/src3-mint-burn",
+                "examples/src5-ownership",
+                "examples/src6-vault",
+                "examples/src7-metadata",
+                "examples/src11-security-information",
+                "examples/src12-contract-factory",
+                "examples/src14-simple-proxy",
+                "examples/src20-native-asset",
               ]
       
       steps:
