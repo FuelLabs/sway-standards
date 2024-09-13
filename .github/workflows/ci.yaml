@@ -120,4 +120,4 @@ jobs:
           run: forc build --path ${{ matrix.project }} --release
           
         - name: Run Cargo Tests
-          run: cargo test
+          run: cargo test --path ${{ matrix.project }}

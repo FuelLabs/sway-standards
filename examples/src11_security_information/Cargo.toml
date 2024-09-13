@@ -1,12 +1,12 @@
 [package]
-name = "sway-standards"
+name = "src11_security_information"
 version = "0.6.1"
 edition = "2021"
 
 [[test]]
 harness = true
-name = "sway-standards-examples-tests"
-path = "examples/harness.rs"
+name = "src11_security_information_tests"
+path = "tests/harness.rs"
 
 [dependencies]
 fuels = { version = "0.66.1" }

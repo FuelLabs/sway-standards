@@ -1,0 +1,13 @@
+[package]
+name = "src20_native_asset"
+version = "0.6.1"
+edition = "2021"
+
+[[test]]
+harness = true
+name = "src20_native_asset_tests"
+path = "tests/harness.rs"
+
+[dependencies]
+fuels = { version = "0.66.1" }
+tokio = { version = "1.12", features = ["rt", "macros"] }

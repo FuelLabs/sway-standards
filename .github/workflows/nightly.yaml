@@ -10,8 +10,22 @@ env:
   REGISTRY: ghcr.io
 
 jobs:
-  standards-nightly-tests:
+  examples-nightly-tests:
     runs-on: ubuntu-latest
+
+    strategy:
+        matrix:
+          project:
+            [
+              "examples/src3_mint_burn",
+              "examples/src5_ownership",
+              "examples/src6_vault",
+              "examples/src7_metadata",
+              "examples/src11_security_information",
+              "examples/src12_contract_factory",
+              "examples/src14_simple_proxy",
+              "examples/src20_native_asset",
+            ]
     
     steps:
       - name: Checkout repository
@@ -41,17 +55,11 @@ jobs:
         with:
           toolchain: nightly
 
-      - name: Check Sway Formatting Standards
-        run: forc fmt --path standards --check
-
-      - name: Build All Standards
-        run: forc build --error-on-warnings --path standards
-
       - name: Check Sway Formatting Examples
-        run: forc fmt --path examples --check
+        run: forc fmt --path ${{ matrix.project }} --check
 
       - name: Build All Examples
-        run: forc build --path examples --release
+        run: forc build --path ${{ matrix.project }} --release
         
       - name: Run Cargo Tests
-        run: cargo test
+        run: cargo test --path ${{ matrix.project }}
