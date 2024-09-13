@@ -118,3 +118,6 @@ jobs:
 
         - name: Build All Examples
           run: forc build --path ${{ matrix.project }} --release
+          
+        - name: Run Cargo Tests
+          run: cargo test --manifest-path ${{ matrix.project }}/Cargo.toml

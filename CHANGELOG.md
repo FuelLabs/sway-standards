@@ -11,8 +11,7 @@ Description of the upcoming release here.
 
 ### Added
 
-- Something new here 1
-- Something new here 2
+- [#129](https://github.com/FuelLabs/sway-standards/pull/129) Adds setup for testing this repository.
 
 ### Changed
 
