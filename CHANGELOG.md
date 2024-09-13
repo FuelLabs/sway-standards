@@ -15,7 +15,8 @@ Description of the upcoming release here.
 
 ### Changed
 
-- [#129](https://github.com/FuelLabs/sway-standards/pull/129) Changed folder names of examples to use underscores instead of dashes.
+- Something changed here 1
+- Something changed here 2
 
 ### Fixed
 
