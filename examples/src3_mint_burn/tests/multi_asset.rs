@@ -8,10 +8,10 @@ use fuels::{
 
 abigen!(Contract(
     name = "MultiAsset",
-    abi = "./examples/src3_mint_burn/multi_asset/out/release/multi_src3_asset-abi.json"
+    abi = "./multi_asset/out/release/multi_src3_asset-abi.json"
 ));
 
-const MULTI_ASSET_CONTRACT_BINARY_PATH: &str = "./out/release/multi_asset.bin";
+const MULTI_ASSET_CONTRACT_BINARY_PATH: &str = "./multi_asset/out/release/multi_src3_asset.bin";
 
 pub(crate) async fn setup() -> (WalletUnlocked, ContractId, MultiAsset<WalletUnlocked>) {
     let number_of_coins = 1;

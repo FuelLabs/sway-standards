@@ -8,11 +8,11 @@ use fuels::{
 
 abigen!(Contract(
     name = "SingleAsset",
-    abi = "./examples/src3_mint_burn/single_asset/out/release/single_src3_asset-abi.json"
+    abi = "./single_asset/out/release/single_src3_asset-abi.json"
 ));
 
 const SINGLE_ASSET_CONTRACT_BINARY_PATH: &str =
-    "./examples/src3_mint_burn/single_asset/out/release/single_src3_asset.bin";
+    "./single_asset/out/release/single_src3_asset.bin";
 
 pub(crate) async fn setup() -> (WalletUnlocked, ContractId, SingleAsset<WalletUnlocked>) {
     let number_of_coins = 1;
@@ -53,7 +53,7 @@ async fn test_mint_single_asset() {
 
     let _mint_tx = instance
         .methods()
-        .mint(wallet1.address().into(), Bits256::zeroed(), 100)
+        .mint(wallet1.address().into(), Some(Bits256::zeroed()), 100)
         .with_variable_output_policy(VariableOutputPolicy::Exactly(1))
         .call()
         .await
@@ -66,7 +66,7 @@ async fn test_burn_single_asset() {
 
     let _mint_tx = instance
         .methods()
-        .mint(wallet1.address().into(), Bits256::zeroed(), 100)
+        .mint(wallet1.address().into(), Some(Bits256::zeroed()), 100)
         .with_variable_output_policy(VariableOutputPolicy::Exactly(1))
         .call()
         .await
