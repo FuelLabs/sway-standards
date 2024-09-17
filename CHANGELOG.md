@@ -11,8 +11,7 @@ Description of the upcoming release here.
 
 ### Added
 
-- Something new here 1
-- Something new here 2
+- [#152](https://github.com/FuelLabs/sway-standards/pull/152) Adds inline documentation examples to the SRC-6 standard.
 
 ### Changed
 
