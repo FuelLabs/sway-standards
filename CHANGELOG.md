@@ -15,8 +15,7 @@ Description of the upcoming release here.
 
 ### Changed
 
-- Something changed here 1
-- Something changed here 2
+- [#154](https://github.com/FuelLabs/sway-standards/pull/154) Updates the examples in the standards specififcations to use the offical abi name.
 
 ### Fixed
 
