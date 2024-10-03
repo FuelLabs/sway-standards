@@ -88,7 +88,7 @@ This standard does not introduce any security concerns, as it does not call exte
 ## Example ABI
 
 ```sway
-abi SRC7Metadata {
+abi SRC7 {
      #[storage(read)]
      fn metadata(asset: AssetId, key: String) -> Option<Metadata>;
 }
