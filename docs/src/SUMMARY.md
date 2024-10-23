@@ -6,7 +6,7 @@
 - [SRC-3: Minting and Burning](./src-3-minting-and-burning.md)
 - [SRC-5: Ownership](./src-5-ownership.md)
 - [SRC-6: Vault](./src-6-vault.md)
-- [SRC-7: Asset Metadata](./src-7-asset-metadata.md)
+- [SRC-7: Onchain Asset Metadata](./src-7-asset-metadata.md)
 - [SRC-8: Bridged Asset](./src-8-bridged-asset.md)
 - [SRC-9: Metadata Keys](./src-9-metadata-keys.md)
 - [SRC-10: Native Bridge](./src-10-native-bridge.md)
