@@ -16,6 +16,7 @@ Description of the upcoming release here.
 ### Changed
 
 - [#154](https://github.com/FuelLabs/sway-standards/pull/154) Updates the examples in the standards specififcations to use the offical abi name.
+- [#157](https://github.com/FuelLabs/sway-standards/pull/157) Updates the name of the SRC-7 standard to "Onchain Native Asset Metadata Standard".
 
 ### Fixed
 
