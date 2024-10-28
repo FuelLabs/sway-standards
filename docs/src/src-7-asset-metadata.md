@@ -1,10 +1,10 @@
-# SRC-7: Arbitrary Native Asset Metadata
+# SRC-7: Onchain Native Asset Metadata
 
-The following standard attempts to define the retrieval of on-chain arbitrary metadata for any [Native Asset](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-7 standard MUST implement the [SRC-20](./src-20-native-asset.md) standard.
+The following standard attempts to define the retrieval of on-chain arbitrary metadata for any [Native Asset](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). This standard should be used if a stateful approach is needed. Any contract that implements the SRC-7 standard MUST implement the [SRC-20](./src-20-native-asset.md) standard.
 
 ## Motivation
 
-The SRC-7 standard seeks to enable data-rich assets on the Fuel Network while maintaining compatibility between multiple assets minted by the same contract. The standard ensures type safety with the use of an `enum` and an `Option`. All metadata queries are done through a single function to facilitate cross-contract calls.
+The SRC-7 standard seeks to enable stateful data-rich assets on the Fuel Network while maintaining compatibility between multiple assets minted by the same contract. The standard ensures type safety with the use of an `enum` and an `Option`. All metadata queries are done through a single function to facilitate cross-contract calls.
 
 ## Prior Art
 
@@ -57,7 +57,7 @@ The `SetMetadataEvent` MUST be emitted when the metadata of an asset has updated
 
 There SHALL be the following fields in the `SetMetadataEvent` struct:
 
-* `asset`: The `asset` field SHALL be used for the corresponding `AssetId` of the asset has been updated.
+* `asset`: The `asset` field SHALL be used for the corresponding `AssetId` for the asset that has been updated.
 * `metadata`: The `metadata` field SHALL be used for the corresponding `Option<Metadata>` which represents the metadata of the asset.
 * `key`: The `key` field SHALL be used for the corresponding `String` which represents the key used for storing the metadata.
 * `sender`: The `sender` field SHALL be used for the corresponding `Identity` which made the function call that has updated the metadata of the asset.
@@ -75,7 +75,7 @@ pub struct SetMetadataEvent {
 
 ## Rationale
 
-The SRC-7 standard should allow for data-rich assets to interact with one another in a safe manner.
+The SRC-7 standard should allow for stateful data-rich assets to interact with one another in a safe manner.
 
 ## Backwards Compatibility
 
