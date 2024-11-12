@@ -1,6 +1,9 @@
 contract;
 
 use standards::{
+    src15::{
+        SRC15MetadataEvent,
+    },
     src20::{
         SetDecimalsEvent,
         SetNameEvent,
@@ -10,9 +13,6 @@ use standards::{
     },
     src7::{
         Metadata,
-    },
-    src15::{
-        SRC15MetadataEvent,
     },
 };
 
@@ -49,12 +49,9 @@ impl EmitSRC15Events for Contract {
         let metadata_2 = Metadata::String(String::from_ascii_str(from_str_array(SITE_FORUM)));
         let metadata_3 = Metadata::Int(ATTR_HEALTH);
 
-        SRC15MetadataEvent::new(asset, metadata_1, sender)
-            .log();
-        SRC15MetadataEvent::new(asset, metadata_2, sender)
-            .log();
-        SRC15MetadataEvent::new(asset, metadata_3, sender)
-            .log();
+        SRC15MetadataEvent::new(asset, metadata_1, sender).log();
+        SRC15MetadataEvent::new(asset, metadata_2, sender).log();
+        SRC15MetadataEvent::new(asset, metadata_3, sender).log();
     }
 }
 

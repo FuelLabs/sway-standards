@@ -1,6 +1,9 @@
 contract;
 
 use standards::{
+    src15::{
+        SRC15MetadataEvent,
+    },
     src20::{
         SetDecimalsEvent,
         SetNameEvent,
@@ -10,9 +13,6 @@ use standards::{
     },
     src7::{
         Metadata,
-    },
-    src15::{
-        SRC15MetadataEvent,
     },
 };
 
@@ -49,7 +49,7 @@ impl EmitSRC15Events for Contract {
     fn emit_src15_events(asset: AssetId, svg_image: String, health_attribute: u64) {
         // NOTE: There are no checks for if the caller has permissions to emit the metadata
         // NOTE: Nothing is stored in storage and there is no method to retrieve the configurables.
-        
+
         // If this asset does not exist, revert
         if storage.total_supply.get(asset).try_read().is_none() {
             revert(0);
@@ -61,14 +61,10 @@ impl EmitSRC15Events for Contract {
         let metadata_3 = Metadata::String(svg_image);
         let metadata_4 = Metadata::Int(health_attribute);
 
-        SRC15MetadataEvent::new(asset, metadata_1, sender)
-            .log();
-        SRC15MetadataEvent::new(asset, metadata_2, sender)
-            .log();
-        SRC15MetadataEvent::new(asset, metadata_3, sender)
-            .log();
-        SRC15MetadataEvent::new(asset, metadata_4, sender)
-            .log();
+        SRC15MetadataEvent::new(asset, metadata_1, sender).log();
+        SRC15MetadataEvent::new(asset, metadata_2, sender).log();
+        SRC15MetadataEvent::new(asset, metadata_3, sender).log();
+        SRC15MetadataEvent::new(asset, metadata_4, sender).log();
     }
 }
 

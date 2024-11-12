@@ -43,11 +43,7 @@ impl SRC15MetadataEvent {
     ///     assert(my_src15_metadata_event.sender == sender);
     /// }
     /// ```
-    pub fn new(
-        asset: AssetId,
-        metadata: Metadata,
-        sender: Identity,
-    ) -> Self {
+    pub fn new(asset: AssetId, metadata: Metadata, sender: Identity) -> Self {
         Self {
             asset,
             metadata,
