@@ -172,7 +172,7 @@ abi EmitSRC20Events {
 
 impl EmitSRC20Events for Contract {
     fn emit_src20_events() {
-        // Metadata that is stored as a configurable should only be emitted once.
+        // Metadata that is stored as a configurable must be emitted once.
         let asset = AssetId::default();
         let sender = msg_sender().unwrap();
         let name = Some(String::from_ascii_str(from_str_array(NAME)));
