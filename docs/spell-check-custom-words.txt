@@ -270,3 +270,4 @@ Onchain
 onchain
 Offchain
 offchain
+MetadataEvent
