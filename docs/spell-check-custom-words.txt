@@ -268,3 +268,5 @@ SetDecimalsEvent
 UpdateTotalSupplyEvent
 Onchain
 onchain
+Offchain
+offchain

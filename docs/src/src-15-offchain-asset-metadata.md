@@ -75,4 +75,3 @@ Example of the SRC-15 implementation where metadata exists for multiple assets w
 ```sway
 {{#include ../examples/src15-offchain-metadata/multi_asset/src/multi_asset.sw}}
 ```
-
