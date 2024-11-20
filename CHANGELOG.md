@@ -21,6 +21,7 @@ Description of the upcoming release here.
 ### Fixed
 
 - [#153](https://github.com/FuelLabs/sway-standards/pull/153) Actually write to storage in `set_src20_data()` in the SRC-20 multi asset example.
+- [#160](https://github.com/FuelLabs/sway-standards/pull/160) Fixes a typo in the SRC-7 inline docs.
 
 #### Breaking
 
