@@ -32,7 +32,7 @@ There SHALL be the following fields in the `SRC15MetadataEvent` struct:
 
 * `asset`: The `asset` field SHALL be used for the corresponding `AssetId` for the metadata.
 * `metadata`: The `metadata` field SHALL be used for the corresponding `Metadata` which represents the metadata of the asset.
-* `sender`: The `sender` field SHALL be used for the corresponding `Identity` which made the function call that has emitted the metadata of the asset.
+* `nonce`: The nonce of the metadata. This SHALL begin at zero and increment by one upon every emission such that each emission has a unique nonce.
 
 Example:
 
@@ -40,7 +40,7 @@ Example:
 pub struct SRC15MetadataEvent {
     pub asset: AssetId,
     pub metadata: Metadata,
-    pub sender: Identity,
+    pub nonce: u64,
 }
 ```
 
