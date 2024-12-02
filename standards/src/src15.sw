@@ -8,13 +8,13 @@ pub struct SRC15MetadataEvent {
     pub asset: AssetId,
     /// The Metadata of the SRC-15 event.
     pub metadata: Metadata,
-    /// The `Identity` of the caller that emitted the metadata.
-    pub sender: Identity,
+    /// The unique nonce for the metadata.
+    pub nonce: u64,
 }
 
 impl core::ops::Eq for SRC15MetadataEvent {
     fn eq(self, other: Self) -> bool {
-        self.asset == other.asset && self.metadata == other.metadata && self.sender == other.sender
+        self.asset == other.asset && self.metadata == other.metadata && self.nonce == other.nonce
     }
 }
 
@@ -25,7 +25,7 @@ impl SRC15MetadataEvent {
     ///
     /// * `asset`: [AssetId] - The asset for which metadata is set.
     /// * `metadata`: [Option<Metdata>] - The Metadata that is set.
-    /// * `sender`: [Identity] - The caller that set the metadata.
+    /// * `nonce`: [u64] - The unique nonce of the metadata.
     ///
     /// # Returns
     ///
@@ -36,18 +36,18 @@ impl SRC15MetadataEvent {
     /// ```sway
     /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
     ///
-    /// fn foo(asset: AssetId, metadata: Metadata, sender: Identity) {
-    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata, sender);
+    /// fn foo(asset: AssetId, metadata: Metadata, nonce: u64) {
+    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata, nonce);
     ///     assert(my_src15_metadata_event.asset == asset);
     ///     assert(my_src15_metadata_event.metadata == metadata);
-    ///     assert(my_src15_metadata_event.sender == sender);
+    ///     assert(my_src15_metadata_event.nonce == nonce);
     /// }
     /// ```
-    pub fn new(asset: AssetId, metadata: Metadata, sender: Identity) -> Self {
+    pub fn new(asset: AssetId, metadata: Metadata, nonce: u64) -> Self {
         Self {
             asset,
             metadata,
-            sender,
+            nonce,
         }
     }
 
@@ -62,8 +62,8 @@ impl SRC15MetadataEvent {
     /// ```sway
     /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
     ///
-    /// fn foo(asset: AssetId, metadata: Metadata, sender: Identity) {
-    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata, sender);
+    /// fn foo(asset: AssetId, metadata: Metadata, nonce: u64) {
+    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata, nonce);
     ///     assert(my_src15_metadata_event.asset() == asset);
     /// }
     /// ```
@@ -82,8 +82,8 @@ impl SRC15MetadataEvent {
     /// ```sway
     /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
     ///
-    /// fn foo(asset: AssetId, metadata: Metadata, sender: Identity) {
-    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata, sender);
+    /// fn foo(asset: AssetId, metadata: Metadata, nonce: u64) {
+    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata, nonce);
     ///     assert(my_src15_metadata_event.metadata() == metadata);
     /// }
     /// ```
@@ -91,24 +91,24 @@ impl SRC15MetadataEvent {
         self.metadata
     }
 
-    /// Returns the sender of the `SRC15MetadataEvent` event.
+    /// Returns the unique nonce of the `SRC15MetadataEvent` event.
     ///
     /// # Returns
     ///
-    /// * [Identity] - The sender of the event.
+    /// * [u64] - The nonce of the event.
     ///
     /// # Examples
     ///
     /// ```sway
     /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
     ///
-    /// fn foo(asset: AssetId, metadata: Metadata, sender: Identity) {
-    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata, sender);
-    ///     assert(my_src15_metadata_event.sender() == sender);
+    /// fn foo(asset: AssetId, metadata: Metadata, nonce: u64) {
+    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata, nonce);
+    ///     assert(my_src15_metadata_event.nonce() == nonce);
     /// }
     /// ```
-    pub fn sender(self) -> Identity {
-        self.sender
+    pub fn nonce(self) -> u64 {
+        self.nonce
     }
 
     /// Logs the `SRC15MetadataEvent`.
@@ -118,8 +118,8 @@ impl SRC15MetadataEvent {
     /// ```sway
     /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
     ///
-    /// fn foo(asset: AssetId, metadata: Metadata, sender: Identity) {
-    ///     let my_event = SRC15MetadataEvent::new(asset, metadata, sender);
+    /// fn foo(asset: AssetId, metadata: Metadata, nonce: u64) {
+    ///     let my_event = SRC15MetadataEvent::new(asset, metadata, nonce);
     ///     my_event.log();
     /// }
     /// ```
