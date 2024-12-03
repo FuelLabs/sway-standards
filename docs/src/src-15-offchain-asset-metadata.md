@@ -54,9 +54,7 @@ This standard is compatible with Fuel's [Native Assets](https://docs.fuel.networ
 
 ## Security Considerations
 
-When indexing for SRC-15 metadata, developers should confirm that the contract that emitted the `SRC15MetadataEvent` is also the contract that minted the asset that the metadata associates with.
-
-This standard does not introduce any onchain security concerns, as it does not call external contracts, nor does it define any mutations of the contract state.
+When indexing for SRC-15 metadata, developers should confirm that the contract that emitted the `SRC15MetadataEvent` is also the contract that minted the asset that the metadata associates with. Additionally, restrictions via access control on who may emit the Metadata should be considered.
 
 ## Example Implementation
 
