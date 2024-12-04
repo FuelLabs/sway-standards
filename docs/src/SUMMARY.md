@@ -14,4 +14,5 @@
 - [SRC-12: Contract Factory](./src-12-contract-factory.md)
 - [SRC-13: Soulbound Address](./src-13-soulbound-address.md)
 - [SRC-14: Simple Upgradeable Contract](./src-14-simple-upgradeable-proxies.md)
+- [SRC-16: Typed Structured Data](./src-16-typed-structured-data.md)
 - [SRC-20: Native Asset](./src-20-native-asset.md)
