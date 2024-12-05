@@ -37,17 +37,15 @@ storage {
     total_assets: u64 = 0,
     /// The total supply of a particular asset.
     total_supply: StorageMap<AssetId, u64> = StorageMap {},
-    /// The nonce for the SRC15 Metadata event.
-    src_15_nonce: u64 = 0,
 }
 
 abi EmitSRC15Events {
-    #[storage(read, write)]
+    #[storage(read)]
     fn emit_src15_events(asset: AssetId, svg_image: String, health_attribute: u64);
 }
 
 impl EmitSRC15Events for Contract {
-    #[storage(read, write)]
+    #[storage(read)]
     fn emit_src15_events(asset: AssetId, svg_image: String, health_attribute: u64) {
         // NOTE: There are no checks for if the caller has permissions to emit the metadata
         // NOTE: Nothing is stored in storage and there is no method to retrieve the configurables.
@@ -62,14 +60,10 @@ impl EmitSRC15Events for Contract {
         let metadata_3 = Metadata::String(svg_image);
         let metadata_4 = Metadata::Int(health_attribute);
 
-        // Update the nonce
-        let nonce = storage.src_15_nonce.read();
-        storage.src_15_nonce.write(nonce + 1);
-
-        SRC15MetadataEvent::new(asset, metadata_1, nonce).log();
-        SRC15MetadataEvent::new(asset, metadata_2, nonce).log();
-        SRC15MetadataEvent::new(asset, metadata_3, nonce).log();
-        SRC15MetadataEvent::new(asset, metadata_4, nonce).log();
+        SRC15MetadataEvent::new(asset, metadata_1).log();
+        SRC15MetadataEvent::new(asset, metadata_2).log();
+        SRC15MetadataEvent::new(asset, metadata_3).log();
+        SRC15MetadataEvent::new(asset, metadata_4).log();
     }
 }
 

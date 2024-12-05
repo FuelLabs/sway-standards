@@ -26,13 +26,12 @@ The following logs MUST be implemented and emitted to follow the SRC-15 standard
 
 #### SRC15MetadataEvent
 
-The `SRC15MetadataEvent` MUST be emitted once for each distinct piece of metadata.
+The `SRC15MetadataEvent` MUST be emitted at least once for each distinct piece of metadata. The latest emitted `SRC15MetadataEvent` is determined to be the current metadata.
 
 There SHALL be the following fields in the `SRC15MetadataEvent` struct:
 
 * `asset`: The `asset` field SHALL be used for the corresponding `AssetId` for the metadata.
 * `metadata`: The `metadata` field SHALL be used for the corresponding `Metadata` which represents the metadata of the asset.
-* `nonce`: The nonce of the metadata. This SHALL begin at zero and increment by one upon every emission such that each emission has a unique nonce.
 
 Example:
 
@@ -40,7 +39,6 @@ Example:
 pub struct SRC15MetadataEvent {
     pub asset: AssetId,
     pub metadata: Metadata,
-    pub nonce: u64,
 }
 ```
 

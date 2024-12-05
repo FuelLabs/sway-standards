@@ -8,13 +8,11 @@ pub struct SRC15MetadataEvent {
     pub asset: AssetId,
     /// The Metadata of the SRC-15 event.
     pub metadata: Metadata,
-    /// The unique nonce for the metadata.
-    pub nonce: u64,
 }
 
 impl core::ops::Eq for SRC15MetadataEvent {
     fn eq(self, other: Self) -> bool {
-        self.asset == other.asset && self.metadata == other.metadata && self.nonce == other.nonce
+        self.asset == other.asset && self.metadata == other.metadata
     }
 }
 
@@ -25,7 +23,6 @@ impl SRC15MetadataEvent {
     ///
     /// * `asset`: [AssetId] - The asset for which metadata is set.
     /// * `metadata`: [Option<Metdata>] - The Metadata that is set.
-    /// * `nonce`: [u64] - The unique nonce of the metadata.
     ///
     /// # Returns
     ///
@@ -36,18 +33,16 @@ impl SRC15MetadataEvent {
     /// ```sway
     /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
     ///
-    /// fn foo(asset: AssetId, metadata: Metadata, nonce: u64) {
-    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata, nonce);
+    /// fn foo(asset: AssetId, metadata: Metadata) {
+    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata);
     ///     assert(my_src15_metadata_event.asset == asset);
     ///     assert(my_src15_metadata_event.metadata == metadata);
-    ///     assert(my_src15_metadata_event.nonce == nonce);
     /// }
     /// ```
-    pub fn new(asset: AssetId, metadata: Metadata, nonce: u64) -> Self {
+    pub fn new(asset: AssetId, metadata: Metadata) -> Self {
         Self {
             asset,
             metadata,
-            nonce,
         }
     }
 
@@ -62,8 +57,8 @@ impl SRC15MetadataEvent {
     /// ```sway
     /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
     ///
-    /// fn foo(asset: AssetId, metadata: Metadata, nonce: u64) {
-    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata, nonce);
+    /// fn foo(asset: AssetId, metadata: Metadata) {
+    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata);
     ///     assert(my_src15_metadata_event.asset() == asset);
     /// }
     /// ```
@@ -71,7 +66,7 @@ impl SRC15MetadataEvent {
         self.asset
     }
 
-    /// Returns the metadata of the `v` event.
+    /// Returns the metadata of the `SRC15MetadataEvent` event.
     ///
     /// # Returns
     ///
@@ -82,33 +77,13 @@ impl SRC15MetadataEvent {
     /// ```sway
     /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
     ///
-    /// fn foo(asset: AssetId, metadata: Metadata, nonce: u64) {
-    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata, nonce);
+    /// fn foo(asset: AssetId, metadata: Metadata) {
+    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata);
     ///     assert(my_src15_metadata_event.metadata() == metadata);
     /// }
     /// ```
     pub fn metadata(self) -> Metadata {
         self.metadata
-    }
-
-    /// Returns the unique nonce of the `SRC15MetadataEvent` event.
-    ///
-    /// # Returns
-    ///
-    /// * [u64] - The nonce of the event.
-    ///
-    /// # Examples
-    ///
-    /// ```sway
-    /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
-    ///
-    /// fn foo(asset: AssetId, metadata: Metadata, nonce: u64) {
-    ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata, nonce);
-    ///     assert(my_src15_metadata_event.nonce() == nonce);
-    /// }
-    /// ```
-    pub fn nonce(self) -> u64 {
-        self.nonce
     }
 
     /// Logs the `SRC15MetadataEvent`.
@@ -118,8 +93,8 @@ impl SRC15MetadataEvent {
     /// ```sway
     /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
     ///
-    /// fn foo(asset: AssetId, metadata: Metadata, nonce: u64) {
-    ///     let my_event = SRC15MetadataEvent::new(asset, metadata, nonce);
+    /// fn foo(asset: AssetId, metadata: Metadata) {
+    ///     let my_event = SRC15MetadataEvent::new(asset, metadata);
     ///     my_event.log();
     /// }
     /// ```

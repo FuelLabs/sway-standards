@@ -35,18 +35,11 @@ configurable {
     ATTR_HEALTH: u64 = 100,
 }
 
-storage {
-    /// The nonce for the SRC15 Metadata event.
-    src_15_nonce: u64 = 0,
-}
-
 abi EmitSRC15Events {
-    #[storage(read, write)]
     fn emit_src15_events();
 }
 
 impl EmitSRC15Events for Contract {
-    #[storage(read, write)]
     fn emit_src15_events() {
         // NOTE: There are no checks for if the caller has permissions to emit the metadata.
         // NOTE: Nothing is stored in storage and there is no method to retrieve the configurables.
@@ -55,13 +48,9 @@ impl EmitSRC15Events for Contract {
         let metadata_2 = Metadata::String(String::from_ascii_str(from_str_array(SITE_FORUM)));
         let metadata_3 = Metadata::Int(ATTR_HEALTH);
 
-        // Update the nonce
-        let nonce = storage.src_15_nonce.read();
-        storage.src_15_nonce.write(nonce + 1);
-
-        SRC15MetadataEvent::new(asset, metadata_1, nonce).log();
-        SRC15MetadataEvent::new(asset, metadata_2, nonce).log();
-        SRC15MetadataEvent::new(asset, metadata_3, nonce).log();
+        SRC15MetadataEvent::new(asset, metadata_1).log();
+        SRC15MetadataEvent::new(asset, metadata_2).log();
+        SRC15MetadataEvent::new(asset, metadata_3).log();
     }
 }
 
