@@ -42,6 +42,7 @@ use standards::src20::SRC20;
 - [SRC-9; Metadata Keys Standard](./src-9-metadata-keys.md) is used to store standardized metadata keys for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) in combination with the SRC-7 standard.
 - [SRC-6; Vault Standard](./src-6-vault.md) defines the implementation of a standard API for asset vaults developed in Sway.
 - [SRC-13; Soulbound Address](./src-13-soulbound-address.md) defines the implementation of a soulbound address.
+- [SRC-15; Offchain Asset Metadata Standard](./src-15-offchain-asset-metadata.md) is used to associated metadata with [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) offchain.
 
 ### Security and Access Control
 
