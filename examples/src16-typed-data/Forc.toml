@@ -1,8 +1,5 @@
-[project]
-authors = ["Antony <antony@l3labs.org>"]
-entry = "src16_typed_data.sw"
-license = "Apache-2.0"
-name = "src16_typed_data"
-
-[dependencies]
-standards = { path = "../standards" }
+[workspace]
+members = [
+  "fuel_example",
+  "ethereum_example",
+]

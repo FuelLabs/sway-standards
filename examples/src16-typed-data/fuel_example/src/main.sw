@@ -1,8 +1,10 @@
 contract;
 
 use standards::src16::{
+    SRC16Base,
     SRC16,
     SRC16Domain,
+    DomainHash,
     TypedDataHash,
     DataEncoder,
     SRC16Payload,
@@ -98,11 +100,7 @@ impl SRC16Encode<Mail> for Mail {
 }
 
 
-impl SRC16 for Contract {
-
-    fn domain_separator() -> SRC16Domain {
-        _get_domain_separator()
-    }
+impl SRC16Base for Contract {
 
     fn domain_separator_hash() -> b256 {
         _get_domain_separator().domain_hash()
@@ -111,8 +109,16 @@ impl SRC16 for Contract {
     fn data_type_hash() -> b256 {
         MAIL_TYPE_HASH
     }
+}
+
+impl SRC16 for Contract {
+
+    fn domain_separator() -> SRC16Domain {
+        _get_domain_separator()
+    }
 
 }
+
 
 abi MailMe {
     fn send_mail_get_hash(
@@ -153,7 +159,7 @@ impl MailMe for Contract {
 
 }
 
-/// A program specific implementation to get the SRC16Domain
+/// A program specific implementation to get the Fuel SRC16Domain
 ///
 /// In a Contract the ContractID can be obtain with ContractId::this()
 ///
@@ -169,6 +175,5 @@ fn _get_domain_separator() -> SRC16Domain {
         ContractId::this().into()
     )
 }
-
 
 

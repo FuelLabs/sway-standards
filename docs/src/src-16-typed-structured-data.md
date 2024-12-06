@@ -170,6 +170,17 @@ impl TypedDataHash for Mail {
 
 This standard is compatible with existing Sway data structures and can be implemented alongside other Fuel standards. It does not conflict with existing signature verification methods.
 
+The standard is also backwards compatible with EIP712 and encoding. The EIP712 domain separator data encoding uses the rightmost 20 bytes from a 32-byte Fuel ContractId in the address of the `verifying_contract` in the `EIP712Domain` separator.
+
+```rust
+#[derive(Eip712, Clone, Debug, EthAbiType)]
+#[eip712(
+    name = "MyDomain",
+    version = "1",
+    chain_id = 9889,
+    verifying_contract = "0xc563dea1a8c6b7dace5a1412a26b8a71637b08a7"
+)]
+```
 
 ## Security Considerations
 
@@ -191,5 +202,7 @@ Implementations must validate all type information and enforce strict encoding r
 Example of the SRC-16 implementation where a contract utilizes the encoding scheme to produce a typed structured data hash of the Mail type.
 
 ```sway
-{{#include ../examples/src16-typed-structured-data/src/src16_typed_data.sw}}
+{{#include ../examples/src16-typed-data/fuel_example/src/main.sw}}
+
+{{#include ../examples/src16-typed-data/ethereum_example/src/main.sw}}
 ```
