@@ -1,0 +1,10 @@
+{
+    "ignorePatterns": [
+        {
+            "pattern": "^https://crates\\.io.*"
+        },
+        {
+            "pattern": "https://github.com/FuelLabs/devrel-requests/issues/new/choose"
+        }
+    ]
+}

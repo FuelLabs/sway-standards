@@ -6,8 +6,8 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yml" alt="CI">
-        <img src="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yml/badge.svg" />
+    <a href="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yaml" alt="CI">
+        <img src="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yaml/badge.svg" />
     </a>
     <a href="https://crates.io/crates/forc/0.63.3" alt="forc">
         <img src="https://img.shields.io/badge/forc-v0.63.3-orange" />
