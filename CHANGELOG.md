@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added v0.6.2
 
 - [#152](https://github.com/FuelLabs/sway-standards/pull/152) Adds inline documentation examples to the SRC-6 standard.
+- [#162](https://github.com/FuelLabs/sway-standards/pull/162) Adds link checker to CI.
 
 ### Changed v0.6.2
 
