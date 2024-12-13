@@ -29,9 +29,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Version 0.6.2]
 
+### New Standards v0.6.2
+
+- [#159](https://github.com/FuelLabs/sway-standards/pull/159) Defines the SRC-15; Offchain Metadata Standard.
+
 ### Added v0.6.2
 
 - [#152](https://github.com/FuelLabs/sway-standards/pull/152) Adds inline documentation examples to the SRC-6 standard.
+- [#159](https://github.com/FuelLabs/sway-standards/pull/159) Adds the SRC-15 standard files and docs.
 - [#162](https://github.com/FuelLabs/sway-standards/pull/162) Adds link checker to CI.
 
 ### Changed v0.6.2
