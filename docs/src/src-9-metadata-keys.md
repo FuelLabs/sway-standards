@@ -180,11 +180,11 @@ The key `res:description` SHALL return a `String` variant describing the asset's
 
 #### `res:date`
 
-The key `res:date` SHALL return a `Int` variant of a UNIX timestamp.
+The key `res:date` SHALL return an `Int` variant of a UNIX timestamp.
 
 #### `res:block`
 
-The key `res:block` SHALL return a `Int` variant of a block number.
+The key `res:block` SHALL return an `Int` variant of a block number.
 
 ### Images
 

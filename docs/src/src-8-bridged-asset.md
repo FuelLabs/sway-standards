@@ -28,7 +28,7 @@ Any bridged assets MUST use the name and symbol of the asset on the chain where 
 
 #### `bridged:chain`
 
-The key `bridged:chain` SHALL return an `String` variant of the chain ID where the asset was originally minted.
+The key `bridged:chain` SHALL return a `String` variant of the chain ID where the asset was originally minted.
 
 #### `bridged:address`
 

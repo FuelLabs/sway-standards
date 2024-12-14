@@ -50,8 +50,8 @@ This function returns the total assets under management by vault. Includes asset
 This is a helper function for getting the maximum amount of assets that can be deposited. It takes the hypothetical `receiver` `Identity`, the `underlying_asset` `AssetId`, and the `vault_sub_id` `SubId` of the sub vault as an arguments and returns the maximum amount of assets that can be deposited into the contract, for the given asset.
 
 - This function MUST return the maximum amount of assets that can be deposited into the contract, for the given `underlying_asset`, if the given `vault_sub_id` vault exists.
-- This function MUST return an `Some(amount)` if the given `vault_sub_id` vault exists.
-- This function MUST return an `None` if the given `vault_sub_id` vault does not exist.
+- This function MUST return a `Some(amount)` if the given `vault_sub_id` vault exists.
+- This function MUST return a `None` if the given `vault_sub_id` vault does not exist.
 - This function MUST account for both global and user specific limits. For example: if deposits are disabled, even temporarily, MUST return 0.
 
 #### `fn max_withdrawable(receiver: Identity, underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64>`
@@ -59,8 +59,8 @@ This is a helper function for getting the maximum amount of assets that can be d
 This is a helper function for getting maximum withdrawable. It takes the hypothetical `receiver` `Identity`, the `underlying_asset` `AssetId`, and the `vault_sub_id` SubId of the sub vault as an argument and returns the maximum amount of assets that can be withdrawn from the contract, for the given asset.
 
 - This function MUST return the maximum amount of assets that can be withdrawn from the contract, for the given `underlying_asset`, if the given `vault_sub_id` vault exists.
-- This function MUST return an `Some(amount)` if the given `vault_sub_id` vault exists.
-- This function MUST return an `None` if the given `vault_sub_id` vault does not exist.
+- This function MUST return a `Some(amount)` if the given `vault_sub_id` vault exists.
+- This function MUST return a `None` if the given `vault_sub_id` vault does not exist.
 - This function MUST account for global limits. For example: if withdrawals are disabled, even temporarily, MUST return 0.
 
 ### Required logs
