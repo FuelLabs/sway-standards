@@ -7,30 +7,54 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-Description of the upcoming release here.
-
 ### Added
 
-- [#152](https://github.com/FuelLabs/sway-standards/pull/152) Adds inline documentation examples to the SRC-6 standard.
+- Something new here 1
+- Something new here 2
 
 ### Changed
 
-- [#154](https://github.com/FuelLabs/sway-standards/pull/154) Updates the examples in the standards specififcations to use the offical abi name.
-- [#157](https://github.com/FuelLabs/sway-standards/pull/157) Updates the name of the SRC-7 standard to "Onchain Native Asset Metadata Standard".
+- Something changed here 1
+- Something changed here 2
 
 ### Fixed
 
-- [#153](https://github.com/FuelLabs/sway-standards/pull/153) Actually write to storage in `set_src20_data()` in the SRC-20 multi asset example.
-- [#160](https://github.com/FuelLabs/sway-standards/pull/160) Fixes a typo in the SRC-7 inline docs.
+- Some fix here 1
+- Some fix here 2
 
-#### Breaking
+### Breaking
 
 - Some breaking change here 1
 - Some breaking change here 2
 
-## [Version 0.6.1]
+## [Version 0.6.2]
 
-Description of the upcoming release here.
+### New Standards v0.6.2
+
+- [#159](https://github.com/FuelLabs/sway-standards/pull/159) Defines the SRC-15; Offchain Metadata Standard.
+
+### Added v0.6.2
+
+- [#152](https://github.com/FuelLabs/sway-standards/pull/152) Adds inline documentation examples to the SRC-6 standard.
+- [#159](https://github.com/FuelLabs/sway-standards/pull/159) Adds the SRC-15 standard files and docs.
+- [#162](https://github.com/FuelLabs/sway-standards/pull/162) Adds link checker to CI.
+
+### Changed v0.6.2
+
+- [#154](https://github.com/FuelLabs/sway-standards/pull/154) Updates the examples in the standards specififcations to use the offical abi name.
+- [#157](https://github.com/FuelLabs/sway-standards/pull/157) Updates the name of the SRC-7 standard to "Onchain Native Asset Metadata Standard".
+- [#163](https://github.com/FuelLabs/sway-standards/pull/163) Prepares for the v0.6.2 release.
+
+### Fixed v0.6.2
+
+- [#153](https://github.com/FuelLabs/sway-standards/pull/153) Actually write to storage in `set_src20_data()` in the SRC-20 multi asset example.
+- [#160](https://github.com/FuelLabs/sway-standards/pull/160) Fixes a typo in the SRC-7 inline docs.
+
+#### Breaking v0.6.2
+
+- None
+
+## [Version 0.6.1]
 
 ### Added v0.6.1
 
