@@ -20,6 +20,7 @@ Description of the upcoming release here.
 ### Fixed
 
 - [#153](https://github.com/FuelLabs/sway-standards/pull/153) Actually write to storage in `set_src20_data()` in the SRC-20 multi asset example.
+- [#155](https://github.com/FuelLabs/sway-standards/pull/155) Fix typos in docs/src/src-10-native-bridge.md, docs/src/src-2-inline-documentation.md, docs/src/src-6-vault.md, docs/src/src-8-bridged-asset.md, docs/src/src-9-metadata-keys.md.
 
 #### Breaking
 
