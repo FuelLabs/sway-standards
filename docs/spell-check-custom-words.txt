@@ -266,3 +266,8 @@ SetNameEvent
 SetSymbolEvent
 SetDecimalsEvent
 UpdateTotalSupplyEvent
+Onchain
+onchain
+Offchain
+offchain
+MetadataEvent

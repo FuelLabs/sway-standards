@@ -151,7 +151,7 @@ This standard does not introduce any security concerns, as it does not call exte
 ## Example ABI
 
 ```sway
-abi MyAsset {
+abi SRC20 {
     #[storage(read)]
     fn total_assets() -> u64;
     #[storage(read)]

@@ -56,7 +56,7 @@ The burn function may also introduce a security consideration if the total suppl
 ## Example ABI
 
 ```sway
-abi MySRC3Asset {
+abi SRC3 {
     #[storage(read, write)]
     fn mint(recipient: Identity, sub_id: Option<SubId>, amount: u64);
     #[payable]

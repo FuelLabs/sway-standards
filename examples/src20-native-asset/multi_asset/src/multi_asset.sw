@@ -173,7 +173,7 @@ impl SRC20 for Contract {
 }
 
 abi SetSRC20Data {
-    #[storage(read)]
+    #[storage(read, write)]
     fn set_src20_data(
         asset: AssetId,
         total_supply: u64,
@@ -184,7 +184,7 @@ abi SetSRC20Data {
 }
 
 impl SetSRC20Data for Contract {
-    #[storage(read)]
+    #[storage(read, write)]
     fn set_src20_data(
         asset: AssetId,
         supply: u64,
@@ -199,9 +199,32 @@ impl SetSRC20Data for Contract {
         }
         let sender = msg_sender().unwrap();
 
-        SetNameEvent::new(asset, name, sender).log();
-        SetSymbolEvent::new(asset, symbol, sender).log();
+        match name {
+            Some(unwrapped_name) => {
+                storage.name.get(asset).write_slice(unwrapped_name);
+                SetNameEvent::new(asset, name, sender).log();
+            },
+            None => {
+                let _ = storage.name.get(asset).clear();
+                SetNameEvent::new(asset, name, sender).log();
+            }
+        }
+
+        match symbol {
+            Some(unwrapped_symbol) => {
+                storage.symbol.get(asset).write_slice(unwrapped_symbol);
+                SetSymbolEvent::new(asset, symbol, sender).log();
+            },
+            None => {
+                let _ = storage.symbol.get(asset).clear();
+                SetSymbolEvent::new(asset, symbol, sender).log();
+            }
+        }
+
+        storage.decimals.get(asset).write(decimals);
         SetDecimalsEvent::new(asset, decimals, sender).log();
+
+        storage.total_supply.get(asset).write(supply);
         TotalSupplyEvent::new(asset, supply, sender).log();
     }
 }
