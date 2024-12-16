@@ -88,7 +88,11 @@ impl SetMetadataEvent {
     ///
     /// * `asset`: [AssetId] - The asset for which metadata is set.
     /// * `metadata`: [Option<Metdata>] - The Metadata that is set.
+<<<<<<< HEAD
     /// * `key`: [String] - The key used for the metadata.
+=======
+    /// * `ket`: [String] - The key used for the metadata.
+>>>>>>> release
     /// * `sender`: [Identity] - The caller that set the metadata.
     ///
     /// # Returns
