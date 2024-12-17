@@ -1,0 +1,8 @@
+[project]
+authors = ["Antony <antony@l3labs.org>"]
+entry = "main.sw"
+license = "Apache-2.0"
+name = "src16_ethereum_typed_data"
+
+[dependencies]
+standards = { path = "../../../standards" }
