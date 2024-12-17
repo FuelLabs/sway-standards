@@ -227,6 +227,7 @@ pub struct EIP712Domain {
     chain_id: u256,
     verifying_contract: b256,      // Only rightmost 20 bytes used
 }
+```
 
 Note: When implementing EIP712 compatibility within SRC16, the verifying_contract address in the EIP712Domain must be constructed by taking only the rightmost 20 bytes from either a Fuel ContractId or Address. This ensures proper compatibility with Ethereum's 20-byte addressing scheme in the domain separator.
 
