@@ -31,22 +31,27 @@ configurable {
 /// A demo struct representing a mail message
 pub struct Mail {
     /// The sender's address
-    pub from: b256,
+    pub from: Address,
     /// The recipient's address
-    pub to: b256,
+    pub to: Address,
     /// The message contents
     pub contents: String,
 }
 
 /// The Keccak256 hash of the type Mail as UTF8 encoded bytes.
 ///
-/// "Mail(bytes32 from,bytes32 to,string contents)"
+/// "Mail(address from,address to,string contents)"
 ///
-/// cfc972d321844e0304c5a752957425d5df13c3b09c563624a806b517155d7056
+/// 536e54c54e6699204b424f41f6dea846ee38ac369afec3e7c141d2c92c65e67f
 ///
-const MAIL_TYPE_HASH: b256 = 0xcfc972d321844e0304c5a752957425d5df13c3b09c563624a806b517155d7056;
+const MAIL_TYPE_HASH: b256 = 0x536e54c54e6699204b424f41f6dea846ee38ac369afec3e7c141d2c92c65e67f;
 
 impl TypedDataHash for Mail {
+
+    fn type_hash() -> b256 {
+        MAIL_TYPE_HASH
+    }
+
     fn struct_hash(self) -> b256 {
         let mut encoded = Bytes::new();
         // Add the Mail type hash.
@@ -55,10 +60,10 @@ impl TypedDataHash for Mail {
         );
         // Use the DataEncoder to encode each field for known types
         encoded.append(
-            DataEncoder::encode_bytes32(self.from).to_be_bytes()
+            DataEncoder::encode_address(self.from).to_be_bytes()
         );
         encoded.append(
-            DataEncoder::encode_bytes32(self.to).to_be_bytes()
+            DataEncoder::encode_address(self.to).to_be_bytes()
         );
         encoded.append(
             DataEncoder::encode_string(self.contents).to_be_bytes()
@@ -68,7 +73,7 @@ impl TypedDataHash for Mail {
     }
 }
 
-/// Implement the encode fucntion for Mail using SRC16Payload
+/// Implement the encode function for Mail using SRC16Payload
 ///
 /// # Additional Information
 ///
@@ -122,8 +127,8 @@ impl SRC16 for Contract {
 
 abi MailMe {
     fn send_mail_get_hash(
-        from_addr: b256,
-        to_addr: b256,
+        from_addr: Address,
+        to_addr: Address,
         contents: String,
     ) -> b256;
 }
@@ -134,8 +139,8 @@ impl MailMe for Contract {
     ///
     /// # Arguments
     ///
-    /// * `from_addr`: [b256] - The sender's address
-    /// * `to_addr`: [b256] - The recipient's address
+    /// * `from_addr`: [Address] - The sender's address
+    /// * `to_addr`: [Address] - The recipient's address
     /// * `contents`: [String] - The message contents
     ///
     /// # Returns
@@ -143,8 +148,8 @@ impl MailMe for Contract {
     /// * [b256] - The encoded hash of the mail data
     ///
     fn send_mail_get_hash(
-        from_addr: b256,
-        to_addr: b256,
+        from_addr: Address,
+        to_addr: Address,
         contents: String,
     ) -> b256 {
         // Create the mail struct from data passed in call
@@ -172,7 +177,7 @@ fn _get_domain_separator() -> SRC16Domain {
         String::from_ascii_str(from_str_array(DOMAIN)),
         String::from_ascii_str(from_str_array(VERSION)),
         CHAIN_ID,
-        ContractId::this().into()
+        ContractId::this()
     )
 }
 

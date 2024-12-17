@@ -30,7 +30,6 @@ The set of structured data 𝕊 consists of all instances of struct types that c
 
 Atomic Types:
 ```sway
-bytes1 to bytes32
 u8 to u256
 bool
 b256 (hash)
@@ -38,8 +37,8 @@ b256 (hash)
 
 Dynamic Types:
 ```sway
-Bytes
-String
+Bytes   // Variable-length byte sequences
+String  // Variable-length strings
 ```
 
 Reference Types:
@@ -52,8 +51,8 @@ Example struct definition:
 
 ```sway
 struct Mail {
-    from: b256,
-    to: b256,
+    from: Address,
+    to: Address,
     contents: String,
 }
 ```
@@ -64,10 +63,10 @@ The domain separator provides context for the signing operation, preventing cros
 
 ```sway
 pub struct SRC16Domain {
-    name: String,               // The protocol name (e.g., "MyProtocol")
-    version: String,            // The protocol version (e.g., "1")
-    chain_id: u64,              // The Fuel chain ID
-    verifying_contract: b256,   // The contract address that will verify the signature
+    name: String,                   // The protocol name (e.g., "MyProtocol")
+    version: String,                // The protocol version (e.g., "1")
+    chain_id: u64,                  // The Fuel chain ID
+    verifying_contract: ContractId, // The contract id that will verify the signature
 }
 ```
 
@@ -77,7 +76,7 @@ The encoding follows this scheme:
 * Add Keccak256 hash of name string
 * Add Keccak256 hash of version string
 * Add chain ID as 32-byte big-endian
-* Add verifying contract address as 32 bytes
+* Add verifying contract id as 32 bytes
 
 
 ## Type Encoding
@@ -108,14 +107,18 @@ where:
 
 The encoding of a struct instance is enc(value₁) ‖ enc(value₂) ‖ … ‖ enc(valueₙ), the concatenation of the encoded member values in the order they appear in the type. Each encoded member value is exactly 32 bytes long.
 
-The atomic values are encoded as follows:
+The values are encoded as follows:
 
-* Boolean false and true are encoded as u64 values 0 and 1
-* Addresses/b256 are encoded directly as 32 bytes
-* Integer values are encoded as big-endian bytes, padded to 32 bytes
-* bytes1 to bytes31 are padded at the end to 32 bytes
-* Dynamic types (bytes and string) are encoded as their Keccak256 hash
-* Arrays are encoded as the Keccak256 hash of their concatenated encodings
+Atomic Values:
+* Boolean false and true are encoded as u64 values 0 and 1, padded to 32 bytes
+* Addresses, ContractId, Identity, and b256 are encoded directly as 32 bytes
+* Unsigned Integer values (u8 to u256) are encoded as big-endian bytes, padded to 32 bytes
+
+Dynamic Types:
+* Bytes and String are encoded as their Keccak256 hash
+
+Reference Types:
+* Arrays (both fixed and dynamic) are encoded as the Keccak256 hash of their concatenated encodings
 * Struct values are encoded recursively as hashStruct(value)
 
 The implementation of `TypedDataHash` for `𝕊` SHALL utilize the `DataEncoder` for encoding each element of the struct based on its type.
@@ -138,20 +141,29 @@ where:
 ## Example implementation:
 
 ```sway
-const MAIL_TYPEHASH: b256 = 0xcfc972d321844e0304c5a752957425d5df13c3b09c563624a806b517155d7056;
+const MAIL_TYPE_HASH: b256 = 0x536e54c54e6699204b424f41f6dea846ee38ac369afec3e7c141d2c92c65e67f;
 
 impl TypedDataHash for Mail {
+
+    fn type_hash() -> b256 {
+        MAIL_TYPE_HASH
+    }
+
     fn struct_hash(self) -> b256 {
         let mut encoded = Bytes::new();
-        // Add type hash
-        encoded.append(MAIL_TYPEHASH.to_be_bytes());
-        // Encode each field
-        encoded.append(self.from.to_be_bytes());
-        encoded.append(self.to.to_be_bytes());
         encoded.append(
-            DefaultEncoder::encode_string(self.contents).to_be_bytes()
+            MAIL_TYPE_HASH.to_be_bytes()
         );
-        // Return final hash
+        encoded.append(
+            DataEncoder::encode_address(self.from).to_be_bytes()
+        );
+        encoded.append(
+            DataEncoder::encode_address(self.to).to_be_bytes()
+        );
+        encoded.append(
+            DataEncoder::encode_string(self.contents).to_be_bytes()
+        );
+
         keccak256(encoded)
     }
 }
@@ -170,17 +182,53 @@ impl TypedDataHash for Mail {
 
 This standard is compatible with existing Sway data structures and can be implemented alongside other Fuel standards. It does not conflict with existing signature verification methods.
 
-The standard is also backwards compatible with EIP712 and encoding. The EIP712 domain separator data encoding uses the rightmost 20 bytes from a 32-byte Fuel ContractId in the address of the `verifying_contract` in the `EIP712Domain` separator.
+### Type System Compatibility Notes
 
+When implementing SRC16 in relation to EIP712, the following type mappings and considerations apply:
+
+#### String Encoding
+- Both standards use the same String type and encoding
+- SRC16 specifically uses String type only (not Sway's `str` or `str[]`)
+- String values are encoded identically in both standards using keccak256 hash
+
+#### Fixed Bytes
+- EIP712's `bytes32` maps directly to Sway's `b256`
+- Encoded using `encode_b256` in the DataEncoder
+- Both standards handle 32-byte values identically
+- Smaller fixed byte arrays (bytes1 to bytes31) are not supported in SRC16
+
+#### Address Types
+- EIP712 uses 20-byte Ethereum addresses
+- When encoding an EIP712 address, SRC16:
+  - Takes only rightmost 20 bytes from a 32-byte Fuel Address
+  - Pads with zeros on the left for EIP712 compatibility
+  - Example: Fuel Address of 32 bytes becomes rightmost 20 bytes in EIP712 encoding
+
+#### ContractId Handling
+- ContractId is unique to Fuel/SRC16 (no equivalent in EIP712)
+- When encoding for EIP712 compatibility:
+  - Uses rightmost 20 bytes of ContractId
+  - Particularly important in domain separators where EIP712 expects a 20-byte address
+
+#### Domain Separator Compatibility
 ```rust
-#[derive(Eip712, Clone, Debug, EthAbiType)]
-#[eip712(
-    name = "MyDomain",
-    version = "1",
-    chain_id = 9889,
-    verifying_contract = "0xc563dea1a8c6b7dace5a1412a26b8a71637b08a7"
-)]
-```
+// SRC16 Domain (Fuel native)
+pub struct SRC16Domain {
+    name: String,                   // Same as EIP712
+    version: String,                // Same as EIP712
+    chain_id: u64,                  // Fuel chain ID
+    verifying_contract: ContractId, // Full 32-byte ContractId
+}
+
+// EIP712 Domain (Ethereum compatible)
+pub struct EIP712Domain {
+    name: String,
+    version: String,
+    chain_id: u256,
+    verifying_contract: b256,      // Only rightmost 20 bytes used
+}
+
+Note: When implementing EIP712 compatibility within SRC16, the verifying_contract address in the EIP712Domain must be constructed by taking only the rightmost 20 bytes from either a Fuel ContractId or Address. This ensures proper compatibility with Ethereum's 20-byte addressing scheme in the domain separator.
 
 ## Security Considerations
 

@@ -47,18 +47,24 @@ pub struct Mail {
 const MAIL_TYPE_HASH: b256 = 0xcfc972d321844e0304c5a752957425d5df13c3b09c563624a806b517155d7056;
 
 impl TypedDataHash for Mail {
+
+    fn type_hash() -> b256 {
+        MAIL_TYPE_HASH
+    }
+
     fn struct_hash(self) -> b256 {
         let mut encoded = Bytes::new();
+
         // Add the Mail type hash.
         encoded.append(
             MAIL_TYPE_HASH.to_be_bytes()
         );
         // Use the DataEncoder to encode each field for known types
         encoded.append(
-            DataEncoder::encode_bytes32(self.from).to_be_bytes()
+            DataEncoder::encode_b256(self.from).to_be_bytes()
         );
         encoded.append(
-            DataEncoder::encode_bytes32(self.to).to_be_bytes()
+            DataEncoder::encode_b256(self.to).to_be_bytes()
         );
         encoded.append(
             DataEncoder::encode_string(self.contents).to_be_bytes()
@@ -68,7 +74,7 @@ impl TypedDataHash for Mail {
     }
 }
 
-/// Implement the encode fucntion for Mail using SRC16Payload
+/// Implement the encode function for Mail using SRC16Payload
 ///
 /// # Additional Information
 ///
@@ -172,7 +178,7 @@ fn _get_domain_separator() -> EIP712Domain {
         String::from_ascii_str(from_str_array(DOMAIN)),
         String::from_ascii_str(from_str_array(VERSION)),
         (asm(r1: (0, 0, 0, CHAIN_ID)) { r1: u256 }),
-        ContractId::this().into()
+        ContractId::this()
     )
 }
 
