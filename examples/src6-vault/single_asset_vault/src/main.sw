@@ -12,7 +12,20 @@ use std::{
     string::String,
 };
 
-use standards::{src20::SRC20, src6::{Deposit, SRC6, Withdraw}};
+use standards::{
+    src20::{
+        SetDecimalsEvent,
+        SetNameEvent,
+        SetSymbolEvent,
+        SRC20,
+        TotalSupplyEvent,
+    },
+    src6::{
+        Deposit,
+        SRC6,
+        Withdraw,
+    },
+};
 
 pub struct VaultInfo {
     /// Amount of assets currently managed by this vault
@@ -150,7 +163,7 @@ impl SRC6 for Contract {
             underlying_asset == AssetId::base(),
             storage.vault_info.get(vault_share_asset).try_read(),
         ) {
-            // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, total_assets should be greater than max_withdrawable.
+            // In this implementation managed_assets and max_withdrawable are the same. However in case of lending out of assets, managed_assets should be greater than max_withdrawable.
             (true, Some(vault_info)) => Some(vault_info.managed_assets),
             _ => None,
         }
@@ -181,6 +194,58 @@ impl SRC20 for Contract {
     #[storage(read)]
     fn decimals(asset: AssetId) -> Option<u8> {
         storage.decimals.get(asset).try_read()
+    }
+}
+
+abi SetSRC20Data {
+    #[storage(read, write)]
+    fn set_src20_data(
+        asset: AssetId,
+        name: Option<String>,
+        symbol: Option<String>,
+        decimals: u8,
+    );
+}
+
+impl SetSRC20Data for Contract {
+    #[storage(read, write)]
+    fn set_src20_data(
+        asset: AssetId,
+        name: Option<String>,
+        symbol: Option<String>,
+        decimals: u8,
+    ) {
+        // NOTE: There are no checks for if the caller has permissions to update the metadata
+        // If this asset does not exist, revert
+        if storage.total_supply.get(asset).try_read().is_none() {
+            revert(0);
+        }
+        let sender = msg_sender().unwrap();
+
+        match name {
+            Some(unwrapped_name) => {
+                storage.name.get(asset).write_slice(unwrapped_name);
+                SetNameEvent::new(asset, name, sender).log();
+            },
+            None => {
+                let _ = storage.name.get(asset).clear();
+                SetNameEvent::new(asset, name, sender).log();
+            }
+        }
+
+        match symbol {
+            Some(unwrapped_symbol) => {
+                storage.symbol.get(asset).write_slice(unwrapped_symbol);
+                SetSymbolEvent::new(asset, symbol, sender).log();
+            },
+            None => {
+                let _ = storage.symbol.get(asset).clear();
+                SetSymbolEvent::new(asset, symbol, sender).log();
+            }
+        }
+
+        storage.decimals.get(asset).write(decimals);
+        SetDecimalsEvent::new(asset, decimals, sender).log();
     }
 }
 
@@ -243,11 +308,11 @@ pub fn _mint(
     if supply.is_none() {
         storage.total_assets.write(storage.total_assets.read() + 1);
     }
-    let current_supply = supply.unwrap_or(0);
-    storage
-        .total_supply
-        .insert(asset_id, current_supply + amount);
+    let new_supply = supply.unwrap_or(0) + amount;
+    storage.total_supply.insert(asset_id, new_supply);
     mint_to(recipient, vault_sub_id, amount);
+    TotalSupplyEvent::new(asset_id, new_supply, msg_sender().unwrap())
+        .log();
 }
 
 #[storage(read, write)]
@@ -260,6 +325,9 @@ pub fn _burn(asset_id: AssetId, vault_sub_id: SubId, amount: u64) {
     );
     // If we pass the check above, we can assume it is safe to unwrap.
     let supply = storage.total_supply.get(asset_id).try_read().unwrap();
-    storage.total_supply.insert(asset_id, supply - amount);
+    let new_supply = supply - amount;
+    storage.total_supply.insert(asset_id, new_supply);
     burn(vault_sub_id, amount);
+    TotalSupplyEvent::new(asset_id, new_supply, msg_sender().unwrap())
+        .log();
 }

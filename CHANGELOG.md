@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-Description of the upcoming release here.
-
 ### Added
 
 - Something new here 1
@@ -24,14 +22,39 @@ Description of the upcoming release here.
 - Some fix here 1
 - Some fix here 2
 
-#### Breaking
+### Breaking
 
 - Some breaking change here 1
 - Some breaking change here 2
 
-## [Version 0.6.1]
+## [Version 0.6.2]
 
-Description of the upcoming release here.
+### New Standards v0.6.2
+
+- [#159](https://github.com/FuelLabs/sway-standards/pull/159) Defines the SRC-15; Offchain Metadata Standard.
+
+### Added v0.6.2
+
+- [#152](https://github.com/FuelLabs/sway-standards/pull/152) Adds inline documentation examples to the SRC-6 standard.
+- [#159](https://github.com/FuelLabs/sway-standards/pull/159) Adds the SRC-15 standard files and docs.
+- [#162](https://github.com/FuelLabs/sway-standards/pull/162) Adds link checker to CI.
+
+### Changed v0.6.2
+
+- [#154](https://github.com/FuelLabs/sway-standards/pull/154) Updates the examples in the standards specififcations to use the offical abi name.
+- [#157](https://github.com/FuelLabs/sway-standards/pull/157) Updates the name of the SRC-7 standard to "Onchain Native Asset Metadata Standard".
+- [#163](https://github.com/FuelLabs/sway-standards/pull/163) Prepares for the v0.6.2 release.
+
+### Fixed v0.6.2
+
+- [#153](https://github.com/FuelLabs/sway-standards/pull/153) Actually write to storage in `set_src20_data()` in the SRC-20 multi asset example.
+- [#160](https://github.com/FuelLabs/sway-standards/pull/160) Fixes a typo in the SRC-7 inline docs.
+
+#### Breaking v0.6.2
+
+- None
+
+## [Version 0.6.1]
 
 ### Added v0.6.1
 
@@ -50,6 +73,8 @@ Description of the upcoming release here.
 - [#137](https://github.com/FuelLabs/sway-standards/pull/137) Resolves warnings for SRC-6, SRC-14, and SRC-5 standard examples.
 - [#136](https://github.com/FuelLabs/sway-standards/pull/136) Fixes SRC14 to recommend namespacing all non-standardized storage variables under the SRC14 namespace, fixes typos, and improves markdown in docs and inline documentation.
 - [#142](https://github.com/FuelLabs/sway-standards/pull/142) Fixes errors in inline documentation for SRC-10, SRC-12, SRC-14, SRC-20, SRC-3, SRC-5, SRC-7 standards.
+- [#151](https://github.com/FuelLabs/sway-standards/pull/151) Fixes SRC-6 standard examples conform to the latest SRC-20 spec of logging values after updates.
+- [#151](https://github.com/FuelLabs/sway-standards/pull/151) Formats code of SRC-6 examples, and fixes some comments.
 
 ## [Version 0.6.0]
 

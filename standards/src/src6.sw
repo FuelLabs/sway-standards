@@ -53,6 +53,28 @@ abi SRC6 {
     /// * If the asset is not supported by the contract.
     /// * If the amount of assets forwarded to the contract is zero.
     /// * The user crosses any global or user specific deposit limits.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use standards::src6::SRC6;
+    ///
+    /// fn foo(
+    ///     contract_id: ContractId,
+    ///     receiver: Identity,
+    ///     vault_sub_id: SubId,
+    ///     amount: u64,
+    ///     asset_id: AssetId
+    /// ) {
+    ///     let contract_abi = abi(SRC6, contract_id.bits());
+    ///     let minted_shares: u64 = contract_abi.deposit {
+    ///         gas: 10000,
+    ///         coins: amount,
+    ///         asset_id: asset_id.bits()
+    ///     } (receiver, vault_sub_id);
+    ///     assert(minted_shares != 0);
+    /// }
+    /// ```
     #[payable]
     #[storage(read, write)]
     fn deposit(receiver: Identity, vault_sub_id: SubId) -> u64;
@@ -79,6 +101,27 @@ abi SRC6 {
     /// * If the amount of shares is zero.
     /// * If the transferred shares do not corresspond to the given asset.
     /// * The user crosses any global or user specific withdrawal limits.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use standards::src6::SRC6;
+    ///
+    /// fn foo(
+    ///     contract_id: ContractId,
+    ///     receiver: Identity,
+    ///     underlying_asset: AssetId,
+    ///     vault_sub_id: SubId,
+    ///     share_asset_id: AssetId,
+    ///     amount: u64
+    /// ) {
+    ///     let contract_abi = abi(SRC6, contract_id.bits());
+    ///     let withdrawn_amount: u64 = contract_abi.withdraw {
+    ///         gas: 10000,
+    ///         coins: amount,
+    ///         asset_id: share_asset_id.bits()
+    ///     } (receiver, underlying_asset, vault_sub_id);
+    ///     assert(withdrawn_amount != 0);
     #[payable]
     #[storage(read, write)]
     fn withdraw(
@@ -97,6 +140,22 @@ abi SRC6 {
     /// # Returns
     ///
     /// * [u64] - The amount of managed assets of the given asset.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use standards::src6::SRC6;
+    ///
+    /// fn foo(
+    ///     contract_id: ContractId,
+    ///     underlying_asset: AssetId,
+    ///     vault_sub_id: SubId
+    /// ) {
+    ///     let contract_abi = abi(SRC6, contract_id.bits());
+    ///     let managed_assets: u64 = contract_abi.managed_assets(underlying_asset, vault_sub_id);
+    ///     assert(managed_assets != 0);
+    /// }
+    /// ```
     #[storage(read)]
     fn managed_assets(underlying_asset: AssetId, vault_sub_id: SubId) -> u64;
 
@@ -116,6 +175,23 @@ abi SRC6 {
     ///
     /// * [Some(u64)] - The maximum amount of assets that can be deposited into the contract, for the given asset.
     /// * [None] - If the asset is not supported by the contract.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use standards::src6::SRC6;
+    ///
+    /// fn foo(
+    ///     contract_id: ContractId,
+    ///     receiver: Identity,
+    ///     underlying_asset: AssetId,
+    ///     vault_sub_id: SubId
+    /// ) {
+    ///     let contract_abi = abi(SRC6, contract_id.bits());
+    ///     let max_depositable: u64 = contract_abi.max_depositable(receiver, underlying_asset, vault_sub_id).unwrap();
+    ///     assert(max_depositable != 0);
+    /// }
+    /// ```
     #[storage(read)]
     fn max_depositable(
         receiver: Identity,
@@ -138,6 +214,22 @@ abi SRC6 {
     ///
     /// * [Some(u64)] - The maximum amount of assets that can be withdrawn from the contract, for the given asset.
     /// * [None] - If the asset is not supported by the contract.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use standards::src6::SRC6;
+    ///
+    /// fn foo(
+    ///     contract_id: ContractId,
+    ///     underlying_asset: AssetId,
+    ///     vault_sub_id: SubId
+    /// ) {
+    ///     let contract_abi = abi(SRC6, contract_id.bits());
+    ///     let max_withdrawable: u64 = contract_abi.max_withdrawable(underlying_asset, vault_sub_id).unwrap();
+    ///     assert(max_withdrawable != 0);
+    /// }
+    /// ```
     #[storage(read)]
     fn max_withdrawable(underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64>;
 }
