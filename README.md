@@ -41,6 +41,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 - [SRC-9; Metadata Keys Standard](https://docs.fuel.network/docs/sway-standards/src-9-metadata-keys/) is used to store standardized metadata keys for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) in combination with the SRC-7 standard.
 - [SRC-6; Vault Standard](https://docs.fuel.network/docs/sway-standards/src-6-vault/) defines the implementation of a standard API for asset vaults developed in Sway.
 - [SRC-13; Soulbound Address](https://docs.fuel.network/docs/sway-standards/src-13-soulbound-address/) provides a predicate interface to lock [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) as soulbound.
+- [SRC-15; Offchain Asset Metadata Standard](https://docs.fuel.network/docs/sway-standards/src-15-offchain-asset-metadata/) enables arbitrary metadata that is not required by other contracts onchain, in a stateless manner for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
 
 ### Access Control
 
