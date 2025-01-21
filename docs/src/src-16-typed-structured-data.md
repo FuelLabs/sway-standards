@@ -97,7 +97,7 @@ The hash_struct function is defined as:
 hash_struct(s : 𝕊) = keccak256(type_hash ‖ encode_data(s))
 where:
 
-* type_hash = keccak256(encode_type(typeOf(s)))
+* type_hash = keccak256(encode_type(type of s))
 * ‖ represents byte concatenation
 * encode_type and encode_data are defined below
 
