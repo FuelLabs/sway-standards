@@ -57,7 +57,7 @@ struct Mail {
 
 ### Domain Separator Encoding
 
-The domain separator provides context for the signing operation, preventing cross-protocol replay attacks. It is computed as hashStruct(domain) where domain is defined as:
+The domain separator provides context for the signing operation, preventing cross-protocol replay attacks. It is computed as hash_struct(domain) where domain is defined as:
 
 ```sway
 pub struct SRC16Domain {
@@ -78,8 +78,6 @@ The domain separator encoding follows this scheme:
 * Add chain ID as 32-byte big-endian
 * Add verifying contract id as 32 bytes
 
-
-
 ## Type Encoding
 
 Each struct type is encoded as name ‖ "(" ‖ member₁ ‖ "," ‖ member₂ ‖ "," ‖ … ‖ memberₙ ")" where each member is written as type ‖ " " ‖ name.
@@ -92,18 +90,18 @@ Mail(address from,address to,string contents)
 
 ## Data Encoding
 
-### Definition of hashStruct
+### Definition of hash_struct
 
-The hashStruct function is defined as:
+The hash_struct function is defined as:
 
-hashStruct(s : 𝕊) = keccak256(typeHash ‖ encodeData(s))
+hash_struct(s : 𝕊) = keccak256(type_hash ‖ encode_data(s))
 where:
 
-* typeHash = keccak256(encodeType(typeOf(s)))
+* type_hash = keccak256(encode_type(typeOf(s)))
 * ‖ represents byte concatenation
-* encodeType and encodeData are defined below
+* encode_type and encode_data are defined below
 
-### Definition of encodeData
+### Definition of encode_data
 
 The encoding of a struct instance is enc(value₁) ‖ enc(value₂) ‖ … ‖ enc(valueₙ), the concatenation of the encoded member values in the order they appear in the type. Each encoded member value is exactly 32 bytes long.
 
@@ -112,17 +110,17 @@ The values are encoded as follows:
 Atomic Values:
 
 * Boolean false and true are encoded as u64 values 0 and 1, padded to 32 bytes
-* Addresses, ContractId, Identity, and b256 are encoded directly as 32 bytes
+* `Address`, `ContractId`, `Identity`, and `b256` are encoded directly as 32 bytes
 * Unsigned Integer values (u8 to u256) are encoded as big-endian bytes, padded to 32 bytes
 
 Dynamic Types:
 
-* Bytes and String are encoded as their Keccak256 hash
+* `Bytes` and `String` are encoded as their Keccak256 hash
 
 Reference Types:
 
 * Arrays (both fixed and dynamic) are encoded as the Keccak256 hash of their concatenated encodings
-* Struct values are encoded recursively as hashStruct(value)
+* Struct values are encoded recursively as hash_struct(value)
 
 The implementation of `TypedDataHash` for `𝕊` SHALL utilize the `DataEncoder` for encoding each element of the struct based on its type.
 
@@ -130,14 +128,14 @@ The implementation of `TypedDataHash` for `𝕊` SHALL utilize the `DataEncoder`
 
 The encoding of structured data follows this pattern:
 
-encode(domainSeparator : 𝔹²⁵⁶, message : 𝕊) = "\x19\x01" ‖ domainSeparator ‖ hashStruct(message)
+encode(domain_separator : 𝔹²⁵⁶, message : 𝕊) = "\x19\x01" ‖ `domain_separator` ‖ `hash_struct`(message)
 
 where:
 
 * \x19\x01 is a constant prefix
 * ‖ represents byte concatenation
-* domainSeparator is the 32-byte hash of the domain parameters
-* hashStruct(message) is the 32-byte hash of the structured data
+* `domain_separator` is the 32-byte hash of the domain parameters
+* `hash_struct`(message) is the 32-byte hash of the structured data
 
 ## Example implementation
 
@@ -187,30 +185,31 @@ When implementing SRC16 in relation to EIP712, the following type mappings and c
 
 #### String Encoding
 
-- Both standards use the same String type and encoding
-- SRC16 specifically uses String type only (not Sway's `str` or `str[]`)
-- String values are encoded identically in both standards using keccak256 hash
+* Both standards use the same String type and encoding
+* SRC16 specifically uses String type only (not Sway's `str` or `str[]`)
+* String values are encoded identically in both standards using keccak256 hash
 
 #### Fixed Bytes
 
-- EIP712's `bytes32` maps directly to Sway's `b256`
-- Encoded using `encode_b256` in the DataEncoder
-- Both standards handle 32-byte values identically
-- Smaller fixed byte arrays (bytes1 to bytes31) are not supported in SRC16
+* EIP712's `bytes32` maps directly to Sway's `b256`
+* Encoded using `encode_b256` in the `DataEncoder`
+* Both standards handle 32-byte values identically
+* Smaller fixed byte arrays (`bytes1` to `bytes31`) are not supported in SRC16
 
 #### Address Types
 
-- EIP712 uses 20-byte Ethereum addresses
-- When encoding an EIP712 address, SRC16:
-  - Takes only rightmost 20 bytes from a 32-byte Fuel Address
-  - Pads with zeros on the left for EIP712 compatibility
-  - Example: Fuel Address of 32 bytes becomes rightmost 20 bytes in EIP712 encoding
+* EIP712 uses 20-byte Ethereum addresses
+* When encoding an EIP712 address, SRC16:
+  * Takes only rightmost 20 bytes from a 32-byte Fuel Address
+  * Pads with zeros on the left for EIP712 compatibility
+  * Example: Fuel `Address` of 32 bytes becomes rightmost 20 bytes in EIP712 encoding
 
 #### ContractId Handling
-- ContractId is unique to Fuel/SRC16 (no equivalent in EIP712)
-- When encoding for EIP712 compatibility:
-  - Uses rightmost 20 bytes of ContractId
-  - Particularly important in domain separators where EIP712 expects a 20-byte address
+
+* `ContractId` is unique to Fuel/SRC16 (no equivalent in EIP712)
+* When encoding for EIP712 compatibility:
+  * Uses rightmost 20 bytes of `ContractId`
+  * Particularly important in domain separators where EIP712 expects a 20-byte address
 
 #### Domain Separator Compatibility
 
@@ -232,7 +231,7 @@ pub struct EIP712Domain {
 }
 ```
 
-Note on `verifying_contract` field; When implementing EIP712 compatibility within SRC16, the `verifying_contract` address in the EIP712Domain must be constructed by taking only the rightmost 20 bytes from either a Fuel ContractId. This ensures proper compatibility with Ethereum's 20-byte addressing scheme in the domain separator.
+Note on `verifying_contract` field; When implementing EIP712 compatibility within SRC16, the `verifying_contract` address in the `EIP712Domain` must be constructed by taking only the rightmost 20 bytes from either a Fuel `ContractId`. This ensures proper compatibility with Ethereum's 20-byte addressing scheme in the domain separator.
 
 ```sway
 // Example ContractId conversion:
@@ -245,13 +244,13 @@ Note on `verifying_contract` field; When implementing EIP712 compatibility withi
 //    └─────────────── 20 bytes ───────────────┘
 ```
 
-Note on EIP712 Domain Separator `salt`; Within EIP712 the field `salt` is an optional field to be used at the discretion of the protocol designer. Within SRC16 the EIP712Domain does not use the `salt` field. The other fields in `EIP712Domain` are mandatory within SRC16.
+Note on EIP712 Domain Separator `salt`; Within EIP712 the field `salt` is an optional field to be used at the discretion of the protocol designer. Within SRC16 the `EIP712Domain` does not use the `salt` field. The other fields in `EIP712Domain` are mandatory within SRC16.
 
 ## Security Considerations
 
 ### Replay Attacks
 
-Implementers must ensure signatures cannot be replayed across:
+Implementations must ensure signatures cannot be replayed across:
 
 Different chains (prevented by chain_id)
 Different protocols (prevented by domain separator)
@@ -263,7 +262,7 @@ Implementations must validate all type information and enforce strict encoding r
 
 ## Example Implementation
 
-Example of the SRC-16 implementation where a contract utilizes the encoding scheme to produce a typed structured data hash of the Mail type.
+Example of the SRC16 implementation where a contract utilizes the encoding scheme to produce a typed structured data hash of the Mail type.
 
 ```sway
 {{#include ../examples/src16-typed-data/fuel_example/src/main.sw}}
