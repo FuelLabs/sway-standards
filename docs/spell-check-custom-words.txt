@@ -271,3 +271,7 @@ onchain
 Offchain
 offchain
 MetadataEvent
+injective
+encodings
+endian
+DeFi
