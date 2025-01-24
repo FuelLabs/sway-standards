@@ -2,7 +2,6 @@ library;
 
 use std::{bytes::Bytes, hash::*, string::String};
 use std::bytes_conversions::{b256::*, u256::*, u64::*};
-use std::core::codec::{AbiEncode, encode};
 
 /// This base ABI provides the common hashing functionality that is
 /// shared between the Fuel (SRC16) and Ethereum (EIP712) implementations.
