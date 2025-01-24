@@ -1,22 +1,16 @@
 contract;
 
 use standards::src16::{
-    SRC16Base,
-    SRC16,
-    SRC16Domain,
-    DomainHash,
-    TypedDataHash,
     DataEncoder,
-    SRC16Payload,
+    DomainHash,
+    SRC16,
+    SRC16Base,
+    SRC16Domain,
     SRC16Encode,
+    SRC16Payload,
+    TypedDataHash,
 };
-use std::{
-    bytes::Bytes,
-    string::String,
-    hash::*,
-    contract_id::*,
-};
-
+use std::{bytes::Bytes, contract_id::*, hash::*, string::String};
 
 configurable {
     /// The name of the signing domain.
@@ -26,7 +20,6 @@ configurable {
     /// The active chain ID where the signing is intended to be used. Cast to u256 in domain_hash
     CHAIN_ID: u64 = 9889u64,
 }
-
 
 /// A demo struct representing a mail message
 pub struct Mail {
@@ -47,7 +40,6 @@ pub struct Mail {
 const MAIL_TYPE_HASH: b256 = 0x536e54c54e6699204b424f41f6dea846ee38ac369afec3e7c141d2c92c65e67f;
 
 impl TypedDataHash for Mail {
-
     fn type_hash() -> b256 {
         MAIL_TYPE_HASH
     }
@@ -55,19 +47,11 @@ impl TypedDataHash for Mail {
     fn struct_hash(self) -> b256 {
         let mut encoded = Bytes::new();
         // Add the Mail type hash.
-        encoded.append(
-            MAIL_TYPE_HASH.to_be_bytes()
-        );
+        encoded.append(MAIL_TYPE_HASH.to_be_bytes());
         // Use the DataEncoder to encode each field for known types
-        encoded.append(
-            DataEncoder::encode_address(self.from).to_be_bytes()
-        );
-        encoded.append(
-            DataEncoder::encode_address(self.to).to_be_bytes()
-        );
-        encoded.append(
-            DataEncoder::encode_string(self.contents).to_be_bytes()
-        );
+        encoded.append(DataEncoder::encode_address(self.from).to_be_bytes());
+        encoded.append(DataEncoder::encode_address(self.to).to_be_bytes());
+        encoded.append(DataEncoder::encode_string(self.contents).to_be_bytes());
 
         keccak256(encoded)
     }
@@ -85,9 +69,7 @@ impl TypedDataHash for Mail {
 ///    SRC16Payload::encode_hash()
 ///
 impl SRC16Encode<Mail> for Mail {
-
     fn encode(s: Mail) -> b256 {
-
         // encodeData hash
         let data_hash = s.struct_hash();
         // setup payload
@@ -104,9 +86,7 @@ impl SRC16Encode<Mail> for Mail {
     }
 }
 
-
 impl SRC16Base for Contract {
-
     fn domain_separator_hash() -> b256 {
         _get_domain_separator().domain_hash()
     }
@@ -117,24 +97,16 @@ impl SRC16Base for Contract {
 }
 
 impl SRC16 for Contract {
-
     fn domain_separator() -> SRC16Domain {
         _get_domain_separator()
     }
-
 }
 
-
 abi MailMe {
-    fn send_mail_get_hash(
-        from_addr: Address,
-        to_addr: Address,
-        contents: String,
-    ) -> b256;
+    fn send_mail_get_hash(from_addr: Address, to_addr: Address, contents: String) -> b256;
 }
 
 impl MailMe for Contract {
-
     /// Sends a some mail and returns its encoded hash
     ///
     /// # Arguments
@@ -147,11 +119,7 @@ impl MailMe for Contract {
     ///
     /// * [b256] - The encoded hash of the mail data
     ///
-    fn send_mail_get_hash(
-        from_addr: Address,
-        to_addr: Address,
-        contents: String,
-    ) -> b256 {
+    fn send_mail_get_hash(from_addr: Address, to_addr: Address, contents: String) -> b256 {
         // Create the mail struct from data passed in call
         let some_mail = Mail {
             from: from_addr,
@@ -161,7 +129,6 @@ impl MailMe for Contract {
 
         Mail::encode(some_mail)
     }
-
 }
 
 /// A program specific implementation to get the Fuel SRC16Domain
@@ -177,8 +144,6 @@ fn _get_domain_separator() -> SRC16Domain {
         String::from_ascii_str(from_str_array(DOMAIN)),
         String::from_ascii_str(from_str_array(VERSION)),
         CHAIN_ID,
-        ContractId::this()
+        ContractId::this(),
     )
 }
-
-
