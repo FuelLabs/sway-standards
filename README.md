@@ -9,8 +9,8 @@
     <a href="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yaml" alt="CI">
         <img src="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yaml/badge.svg" />
     </a>
-    <a href="https://crates.io/crates/forc/0.63.3" alt="forc">
-        <img src="https://img.shields.io/badge/forc-v0.63.3-orange" />
+    <a href="https://crates.io/crates/forc/0.66.6" alt="forc">
+        <img src="https://img.shields.io/badge/forc-v0.66.6-orange" />
     </a>
     <a href="./LICENSE" alt="forc">
         <img src="https://img.shields.io/github/license/FuelLabs/sway-standards" />
@@ -41,6 +41,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 - [SRC-9; Metadata Keys Standard](https://docs.fuel.network/docs/sway-standards/src-9-metadata-keys/) is used to store standardized metadata keys for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) in combination with the SRC-7 standard.
 - [SRC-6; Vault Standard](https://docs.fuel.network/docs/sway-standards/src-6-vault/) defines the implementation of a standard API for asset vaults developed in Sway.
 - [SRC-13; Soulbound Address](https://docs.fuel.network/docs/sway-standards/src-13-soulbound-address/) provides a predicate interface to lock [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) as soulbound.
+- [SRC-15; Offchain Asset Metadata Standard](https://docs.fuel.network/docs/sway-standards/src-15-offchain-asset-metadata/) enables arbitrary metadata that is not required by other contracts onchain, in a stateless manner for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
 
 ### Access Control
 
@@ -162,7 +163,7 @@ Example of a minimal SRC-14 implementation with no access control.
 Example of a SRC-14 implementation that also implements [SRC-5](https://docs.fuel.network/docs/sway-standards/src-5-ownership/).
 
 > **Note**
-> All standards currently use `forc v0.63.3`.
+> All standards currently use `forc v0.66.6`.
 
 <!-- TODO:
 ## Contributing

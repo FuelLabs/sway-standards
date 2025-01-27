@@ -1,0 +1,2 @@
+[workspace]
+members = ["fuel_example", "ethereum_example"]

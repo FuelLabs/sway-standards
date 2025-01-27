@@ -15,4 +15,5 @@
 - [SRC-13: Soulbound Address](./src-13-soulbound-address.md)
 - [SRC-14: Simple Upgradeable Contract](./src-14-simple-upgradeable-proxies.md)
 - [SRC-15: Offchain Asset Metadata](./src-15-offchain-asset-metadata.md)
+- [SRC-16: Typed Structured Data](./src-16-typed-structured-data.md)
 - [SRC-20: Native Asset](./src-20-native-asset.md)

@@ -2,7 +2,7 @@ contract;
 
 use standards::src11::{SecurityInformation, SRC11};
 
-use std::{storage::{storage_string::*, storage_vec::*,}, string::String, vec::Vec,};
+use std::{storage::{storage_string::*, storage_vec::*}, string::String, vec::Vec};
 
 /// The name of the project
 const NAME: str[7] = __to_str_array("Example");

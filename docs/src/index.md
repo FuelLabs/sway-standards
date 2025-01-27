@@ -7,7 +7,7 @@ Standards in this repository may be in various stages of development. Use of dra
 If you don't find what you're looking for, feel free to create an issue and propose a new standard!
 
 > **Note**
-> All standards currently use `forc v0.63.3`.
+> All standards currently use `forc v0.66.6`.
 
 ## Using a standard
 
@@ -58,6 +58,10 @@ use standards::src20::SRC20;
 
 - [SRC-8; Bridged Asset](./src-8-bridged-asset.md) defines the metadata required for an asset bridged to the Fuel Network.
 - [SRC-10; Native Bridge Standard](./src-10-native-bridge.md) defines the standard API for the Native Bridge between the Fuel Chain and the canonical base chain.
+
+### Encoding and hashing
+
+- [SRC-16; Typed Structured Data](./src-16-typed-structured-data.md) defines standard encoding and hashing of typed structured data.
 
 ### Documentation
 
