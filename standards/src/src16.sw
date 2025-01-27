@@ -1,13 +1,7 @@
 library;
 
-use std::{
-    bytes::Bytes,
-    string::String,
-    hash::*,
-};
+use std::{bytes::Bytes, hash::*, string::String};
 use std::bytes_conversions::{b256::*, u256::*, u64::*};
-use std::core::codec::{AbiEncode, encode};
-
 
 /// This base ABI provides the common hashing functionality that is
 /// shared between the Fuel (SRC16) and Ethereum (EIP712) implementations.
@@ -57,7 +51,6 @@ abi EIP712 : SRC16Base {
     fn domain_separator() -> EIP712Domain;
 }
 
-
 /// Contains the core parameters that uniquely identify a domain for typed
 /// data signing on Fuel.
 pub struct SRC16Domain {
@@ -94,14 +87,15 @@ impl AbiEncode for SRC16Domain {
         let buffer = SRC16_DOMAIN_TYPE_HASH.abi_encode(buffer);
         let buffer = keccak256(Bytes::from(self.name)).abi_encode(buffer);
         let buffer = keccak256(Bytes::from(self.version)).abi_encode(buffer);
-        let buffer = (asm(r1: (0, 0, 0, self.chain_id)) { r1: b256 }).abi_encode(buffer);
+        let buffer = (asm(r1: (0, 0, 0, self.chain_id)) {
+            r1: b256
+        }).abi_encode(buffer);
         let buffer = self.verifying_contract.abi_encode(buffer);
         buffer
     }
 }
 
 impl SRC16Domain {
-
     /// Creates a new SRC16Domain instance with the provided parameters
     ///
     /// # Arguments
@@ -144,7 +138,6 @@ impl SRC16Domain {
         let bytes = Bytes::from(encoded);
         keccak256(bytes)
     }
-
 }
 
 /// The EIP712 Domain struct matching Ethereum's implementation
@@ -189,7 +182,6 @@ impl AbiEncode for EIP712Domain {
 }
 
 impl EIP712Domain {
-
     /// Creates a new EIP712Domain instance with the provided parameters
     ///
     /// # Arguments
@@ -209,7 +201,6 @@ impl EIP712Domain {
         chain_id: u256,
         verifying_contract: ContractId,
     ) -> EIP712Domain {
-
         // Take only the rightmost 20 bytes from a 32-byte Fuel ContractId
         let mut verifying_contract_last_20 = Bytes::with_capacity(32);
         let mut i = 0;
@@ -243,14 +234,11 @@ impl EIP712Domain {
         let bytes = Bytes::from(encoded);
         keccak256(bytes)
     }
-
 }
-
 
 /// Trait for types that can be hashed in a structured way
 ///
 pub trait TypedDataHash {
-
     /// The type hash constant for this struct
     fn type_hash() -> b256;
 
@@ -295,7 +283,6 @@ pub struct SRC16Payload<D> {
 }
 
 impl<D> SRC16Payload<D> {
-
     /// Computes the final encoded hash according to SRC16/EIP712 specification
     ///
     /// # Additional Information
@@ -326,7 +313,8 @@ impl<D> SRC16Payload<D> {
     /// }
     /// ```
     pub fn encode_hash(self) -> Option<b256>
-        where D: DomainHash
+    where
+        D: DomainHash,
     {
         let domain_separator_bytes = self.domain.domain_hash().to_be_bytes();
         let data_hash_bytes = self.data_hash.to_be_bytes();
@@ -339,7 +327,6 @@ impl<D> SRC16Payload<D> {
 
         Some(final_hash)
     }
-
 }
 
 /// Trait for domain types that can be hashed
@@ -372,9 +359,7 @@ impl DomainHash for EIP712Domain {
     }
 }
 
-
 pub trait SRC16Encode<T> {
-
     /// Returns the combined typed data hash according to SRC16 specification.
     ///
     /// # Arguments
@@ -398,7 +383,6 @@ pub trait SRC16Encode<T> {
     ///
     fn encode<T>(s: T) -> b256;
 }
-
 
 /// This trait provides common encoding methods for different data types.
 ///
@@ -439,7 +423,6 @@ pub struct DataEncoder {}
 /// specification.
 ///
 impl TypedDataEncoder for DataEncoder {
-
     /// Encodes a String value by taking the Keccak256 hash of its bytes.
     ///
     /// # Arguments
@@ -463,7 +446,9 @@ impl TypedDataEncoder for DataEncoder {
     ///
     /// * [b256] - The value padded to 32 bytes
     fn encode_u8(value: u8) -> b256 {
-        asm(r1: (0, 0, 0, value.as_u64())) { r1: b256 }
+        asm(r1: (0, 0, 0, value.as_u64())) {
+            r1: b256
+        }
     }
 
     /// Encodes a u16 value into a 32-byte value (big-endian, padded with zeros).
@@ -476,7 +461,9 @@ impl TypedDataEncoder for DataEncoder {
     ///
     /// * [b256] - The value padded to 32 bytes
     fn encode_u16(value: u16) -> b256 {
-        asm(r1: (0, 0, 0, value.as_u64())) { r1: b256 }
+        asm(r1: (0, 0, 0, value.as_u64())) {
+            r1: b256
+        }
     }
 
     /// Encodes a u32 value into a 32-byte value (big-endian, padded with zeros).
@@ -489,7 +476,9 @@ impl TypedDataEncoder for DataEncoder {
     ///
     /// * [b256] - The value padded to 32 bytes
     fn encode_u32(value: u32) -> b256 {
-        asm(r1: (0, 0, 0, value.as_u64())) { r1: b256 }
+        asm(r1: (0, 0, 0, value.as_u64())) {
+            r1: b256
+        }
     }
 
     /// Encodes a u64 value into a 32-byte value (big-endian, padded with zeros).
@@ -502,7 +491,9 @@ impl TypedDataEncoder for DataEncoder {
     ///
     /// * [b256] - The value padded to 32 bytes
     fn encode_u64(value: u64) -> b256 {
-        asm(r1: (0, 0, 0, value)) { r1: b256 }
+        asm(r1: (0, 0, 0, value)) {
+            r1: b256
+        }
     }
 
     /// Encodes a u256 value into a 32-byte value (big-endian, padded with zeros).
@@ -548,7 +539,9 @@ impl TypedDataEncoder for DataEncoder {
     /// * [b256] - The encoded value
     fn encode_bool(value: bool) -> b256 {
         let value_as_uint = if value { 1u64 } else { 0u64 };
-        asm(r1: (0, 0, 0, value_as_uint)) { r1: b256 }
+        asm(r1: (0, 0, 0, value_as_uint)) {
+            r1: b256
+        }
     }
 
     /// Encodes a dynamic array of u8 values into a single 32-byte hash.
@@ -571,11 +564,13 @@ impl TypedDataEncoder for DataEncoder {
         let mut encoded = Bytes::new();
         for v in array.iter() {
             encoded.append(
-                (asm(r1: (0, 0, 0, v.as_u64())) { r1: b256 }).to_be_bytes()
+                (asm(r1: (0, 0, 0, v.as_u64())) {
+                        r1: b256
+                    })
+                    .to_be_bytes(),
             );
         }
         keccak256(encoded)
-
     }
 
     /// Encodes a dynamic array of u16 values into a single 32-byte hash.
@@ -598,7 +593,10 @@ impl TypedDataEncoder for DataEncoder {
         let mut encoded = Bytes::new();
         for v in array.iter() {
             encoded.append(
-                (asm(r1: (0, 0, 0, v.as_u64())) { r1: b256 }).to_be_bytes()
+                (asm(r1: (0, 0, 0, v.as_u64())) {
+                        r1: b256
+                    })
+                    .to_be_bytes(),
             );
         }
         keccak256(encoded)
@@ -624,7 +622,10 @@ impl TypedDataEncoder for DataEncoder {
         let mut encoded = Bytes::new();
         for v in array.iter() {
             encoded.append(
-                (asm(r1: (0, 0, 0, v.as_u64())) { r1: b256 }).to_be_bytes()
+                (asm(r1: (0, 0, 0, v.as_u64())) {
+                        r1: b256
+                    })
+                    .to_be_bytes(),
             );
         }
         keccak256(encoded)
@@ -649,9 +650,9 @@ impl TypedDataEncoder for DataEncoder {
     fn dynamic_u64_array(array: Vec<u64>) -> b256 {
         let mut encoded = Bytes::new();
         for v in array.iter() {
-            encoded.append(
-                (asm(r1: (0, 0, 0, v)) { r1: b256 }).to_be_bytes()
-            );
+            encoded.append((asm(r1: (0, 0, 0, v)) {
+                r1: b256
+            }).to_be_bytes());
         }
         keccak256(encoded)
     }
@@ -675,9 +676,7 @@ impl TypedDataEncoder for DataEncoder {
     fn dynamic_u256_array(array: Vec<u256>) -> b256 {
         let mut encoded = Bytes::new();
         for v in array.iter() {
-            encoded.append(
-                v.to_be_bytes()
-            );
+            encoded.append(v.to_be_bytes());
         }
         keccak256(encoded)
     }
@@ -701,9 +700,7 @@ impl TypedDataEncoder for DataEncoder {
     fn dynamic_b256_array(array: Vec<b256>) -> b256 {
         let mut encoded = Bytes::new();
         for v in array.iter() {
-            encoded.append(
-                v.to_be_bytes()
-            );
+            encoded.append(v.to_be_bytes());
         }
         keccak256(encoded)
     }
@@ -753,9 +750,7 @@ impl TypedDataEncoder for DataEncoder {
             Identity::ContractId(contract_id) => contract_id.bits(),
         }
     }
-
 }
-
 
 /// This enum determines the encoder type for fixed-length array encoding.
 pub enum EncoderType {
@@ -768,7 +763,7 @@ pub enum EncoderType {
     B256: (),
     Address: (),
     ContractId: (),
-    Identity: ()
+    Identity: (),
 }
 
 /// This trait provides standard methods for encoding a fixed array of typed
@@ -791,7 +786,6 @@ pub enum EncoderType {
 /// * [b256] - The Keccak256 hash of the concatenated encoded values
 ///
 pub trait FixedDataEncoder {
-
     fn encode_fixed_string_array(slice: raw_slice) -> b256;
     fn encode_fixed_u8_array(slice: raw_slice) -> b256;
     fn encode_fixed_u16_array(slice: raw_slice) -> b256;
@@ -802,11 +796,9 @@ pub trait FixedDataEncoder {
     fn encode_fixed_address_array(slice: raw_slice) -> b256;
     fn encode_fixed_contract_id_array(slice: raw_slice) -> b256;
     fn encode_fixed_identity_array(slice: raw_slice) -> b256;
-
 }
 
 impl FixedDataEncoder for DataEncoder {
-
     /// Encodes a fixed array of String values into a single 32-byte hash.
     fn encode_fixed_string_array(slice: raw_slice) -> b256 {
         let mut encoded = Bytes::new();
@@ -956,47 +948,44 @@ impl FixedDataEncoder for DataEncoder {
         }
         keccak256(encoded)
     }
-
 }
-
 
 /// This trait provides encoding functionality for fixed-length arrays of different types.
 pub trait FixedArrayEncoder {
-   /// Encodes a fixed-length array into a 32-byte hash based on the specified encoder type.
-   ///
-   /// # Additional Information
-   ///
-   /// This function acts as a dispatcher that routes to specific encoding implementations
-   /// based on the provided EncoderType. The encoding follows this scheme:
-   /// 1. Each element is encoded according to its type-specific rules
-   /// 2. The encoded values are concatenated in order
-   /// 3. The concatenated bytes are hashed with Keccak256
-   ///
-   /// # Arguments
-   ///
-   /// * `slice`: [raw_slice] - The raw slice containing the array data
-   /// * `encoder_type`: [EncoderType] - The type of encoder to use for the array elements
-   ///
-   /// # Returns
-   ///
-   /// * [b256] - The Keccak256 hash of the concatenated encoded values
-   fn encode_fixed_array(slice: raw_slice, encoder_type: EncoderType) -> b256;
+    /// Encodes a fixed-length array into a 32-byte hash based on the specified encoder type.
+    ///
+    /// # Additional Information
+    ///
+    /// This function acts as a dispatcher that routes to specific encoding implementations
+    /// based on the provided EncoderType. The encoding follows this scheme:
+    /// 1. Each element is encoded according to its type-specific rules
+    /// 2. The encoded values are concatenated in order
+    /// 3. The concatenated bytes are hashed with Keccak256
+    ///
+    /// # Arguments
+    ///
+    /// * `slice`: [raw_slice] - The raw slice containing the array data
+    /// * `encoder_type`: [EncoderType] - The type of encoder to use for the array elements
+    ///
+    /// # Returns
+    ///
+    /// * [b256] - The Keccak256 hash of the concatenated encoded values
+    fn encode_fixed_array(slice: raw_slice, encoder_type: EncoderType) -> b256;
 }
 
 impl FixedArrayEncoder for DataEncoder {
-
-   fn encode_fixed_array(slice: raw_slice, encoder_type: EncoderType) -> b256 {
-       match encoder_type {
-           EncoderType::String => Self::encode_fixed_string_array(slice),
-           EncoderType::U8 => Self::encode_fixed_u8_array(slice),
-           EncoderType::U16 => Self::encode_fixed_u16_array(slice),
-           EncoderType::U32 => Self::encode_fixed_u32_array(slice),
-           EncoderType::U64 => Self::encode_fixed_u64_array(slice),
-           EncoderType::U256 => Self::encode_fixed_u256_array(slice),
-           EncoderType::B256 => Self::encode_fixed_b256_array(slice),
-           EncoderType::Address => Self::encode_fixed_address_array(slice),
-           EncoderType::ContractId => Self::encode_fixed_contract_id_array(slice),
-           EncoderType::Identity => Self::encode_fixed_identity_array(slice),
-       }
-   }
+    fn encode_fixed_array(slice: raw_slice, encoder_type: EncoderType) -> b256 {
+        match encoder_type {
+            EncoderType::String => Self::encode_fixed_string_array(slice),
+            EncoderType::U8 => Self::encode_fixed_u8_array(slice),
+            EncoderType::U16 => Self::encode_fixed_u16_array(slice),
+            EncoderType::U32 => Self::encode_fixed_u32_array(slice),
+            EncoderType::U64 => Self::encode_fixed_u64_array(slice),
+            EncoderType::U256 => Self::encode_fixed_u256_array(slice),
+            EncoderType::B256 => Self::encode_fixed_b256_array(slice),
+            EncoderType::Address => Self::encode_fixed_address_array(slice),
+            EncoderType::ContractId => Self::encode_fixed_contract_id_array(slice),
+            EncoderType::Identity => Self::encode_fixed_identity_array(slice),
+        }
+    }
 }

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### New Standards
+
+- [#161](https://github.com/FuelLabs/sway-standards/pull/161) Defines the SRC-16; Typed Structured Data Standard.
+
 ### Added
 
 - Something new here 1
@@ -14,8 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- Something changed here 1
-- Something changed here 2
+- [#166](https://github.com/FuelLabs/sway-standards/pull/166) Updates standards, examples, and CI to forc `v0.66.6` and fuel-core `v0.40.0`.
 
 ### Fixed
 
