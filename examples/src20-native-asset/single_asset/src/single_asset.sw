@@ -1,6 +1,6 @@
 contract;
 
-use standards::src20::{SetDecimalsEvent, SetNameEvent, SetSymbolEvent, SRC20, TotalSupplyEvent,};
+use standards::src20::{SetDecimalsEvent, SetNameEvent, SetSymbolEvent, SRC20, TotalSupplyEvent};
 use std::{auth::msg_sender, string::String};
 
 configurable {

@@ -1,6 +1,6 @@
 library;
 
-use std::{alloc::{alloc, alloc_bytes, realloc_bytes}, bytes::Bytes,};
+use std::{alloc::{alloc, alloc_bytes, realloc_bytes}, bytes::Bytes};
 
 /// Pre-defined number of bytes of a leaf in a bytecode merkle tree.
 const LEAF_SIZE = 16 * 1024;

@@ -5,27 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [Version 0.6.3]
 
-### Added
+### New Standards v0.6.3
 
-- Something new here 1
-- Something new here 2
+- [#161](https://github.com/FuelLabs/sway-standards/pull/161) Defines the SRC-16; Typed Structured Data Standard.
 
-### Changed
+### Added v0.6.3
 
-- Something changed here 1
-- Something changed here 2
+- [#165](https://github.com/FuelLabs/sway-standards/pull/165) Adds the SRC-15 standard to the README.
 
-### Fixed
+### Changed v0.6.3
 
-- Some fix here 1
-- Some fix here 2
+- [#166](https://github.com/FuelLabs/sway-standards/pull/166) Updates standards, examples, and CI to forc `v0.66.6` and fuel-core `v0.40.0`.
+- [#167](https://github.com/FuelLabs/sway-standards/pull/167) Prepares for the v0.6.3 release.
 
-### Breaking
+### Fixed v0.6.3
 
-- Some breaking change here 1
-- Some breaking change here 2
+- None
+
+### Breaking v0.6.3
+
+- None
 
 ## [Version 0.6.2]
 
