@@ -266,6 +266,8 @@ Example of the SRC16 implementation where a contract utilizes the encoding schem
 
 ```sway
 {{#include ../examples/src16-typed-data/fuel_example/src/main.sw}}
+```
 
+```sway
 {{#include ../examples/src16-typed-data/ethereum_example/src/main.sw}}
 ```
