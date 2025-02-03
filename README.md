@@ -72,7 +72,7 @@ use standards::src20::SRC20;
 ### Security and Access Control
 
 - [SRC-5; Ownership Standard](https://docs.fuel.network/docs/sway-standards/src-5-ownership/) is used to restrict function calls to admin users in contracts.
-- [SRC-11; Security Information Standard]([./src-11-security-information.md](https://docs.fuel.network/docs/sway-standards/src-11-security-information/)) is used to make communication information readily available in the case white hat hackers find a vulnerability in a contract.
+- [SRC-11; Security Information Standard](https://docs.fuel.network/docs/sway-standards/src-11-security-information/) is used to make communication information readily available in the case white hat hackers find a vulnerability in a contract.
 
 ### Contracts
 
