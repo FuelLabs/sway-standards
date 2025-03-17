@@ -15,25 +15,18 @@ pub enum DepositType {
 /// Enscapsultes metadata sent between the canonical chain and Fuel when a deposit is made.
 pub struct DepositMessage {
     /// The number of tokens.
-    #[allow(dead_code)]
     pub amount: b256,
     /// The user's address on the canonical chain.
-    #[allow(dead_code)]
     pub from: b256,
     /// The bridging target destination on the Fuel chain.
-    #[allow(dead_code)]
     pub to: Identity,
     /// The bridged token's address on the canonical chain.
-    #[allow(dead_code)]
     pub token_address: b256,
     /// The token's ID on the canonical chain.
-    #[allow(dead_code)]
     pub token_id: b256,
     /// The decimals of the token.
-    #[allow(dead_code)]
     pub decimals: u8,
     /// The type of deposit made.
-    #[allow(dead_code)]
     pub deposit_type: DepositType,
 }
 
@@ -121,7 +114,7 @@ abi SRC10 {
     );
 }
 
-impl core::ops::Eq for DepositType {
+impl PartialEq for DepositType {
     fn eq(self, other: Self) -> bool {
         match (self, other) {
             (Self::Address, Self::Address) => true,
@@ -132,17 +125,23 @@ impl core::ops::Eq for DepositType {
     }
 }
 
-impl core::ops::Eq for DepositMessage {
+impl Eq for DepositType {}
+
+impl PartialEq for DepositMessage {
     fn eq(self, other: Self) -> bool {
         self.amount == other.amount && self.from == other.from && self.to == other.to && self.token_address == other.token_address && self.token_id == other.token_id && self.decimals == other.decimals && self.deposit_type == other.deposit_type
     }
 }
 
-impl core::ops::Eq for MetadataMessage {
+impl Eq for DepositMessage {}
+
+impl PartialEq for MetadataMessage {
     fn eq(self, other: Self) -> bool {
         self.token_address == other.token_address && self.token_id == other.token_id && self.name == other.name && self.symbol == other.symbol
     }
 }
+
+impl Eq for MetadataMessage {}
 
 impl DepositMessage {
     /// Returns a new `DepositMessage`.

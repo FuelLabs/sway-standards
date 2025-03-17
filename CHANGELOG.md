@@ -5,6 +5,46 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- Some addition here.
+- Some addition here.
+
+### Changed
+
+- Some change here.
+- Some change here.
+
+### Fixed
+
+- Some fix here.
+- Some fix here.
+
+### Breaking
+
+- Some breaking change here.
+- Some breaking change here.
+
+## [Version 0.7.0]
+
+### Added v0.7.0
+
+- [#169](https://github.com/FuelLabs/sway-standards/pull/169) Adds a metadata section to the README and about page of the docs hub.
+
+### Changed v0.7.0
+
+- [#172](https://github.com/FuelLabs/sway-standards/pull/172) Prepares for the `v0.7.0` release.
+
+### Fixed v0.7.0
+
+- None
+
+### Breaking v0.7.0
+
+- [#172](https://github.com/FuelLabs/sway-standards/pull/172) Updates to the forc `v0.67.0` release. Earlier releases are not compatible.
+
 ## [Version 0.6.3]
 
 ### New Standards v0.6.3

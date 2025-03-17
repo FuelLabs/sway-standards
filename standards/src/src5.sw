@@ -42,7 +42,7 @@ abi SRC5 {
     fn owner() -> State;
 }
 
-impl core::ops::Eq for State {
+impl PartialEq for State {
     fn eq(self, other: Self) -> bool {
         match (self, other) {
             (Self::Initialized(owner1), Self::Initialized(owner2)) => {
@@ -55,13 +55,17 @@ impl core::ops::Eq for State {
     }
 }
 
-impl core::ops::Eq for AccessError {
+impl Eq for State {}
+
+impl PartialEq for AccessError {
     fn eq(self, other: Self) -> bool {
         match (self, other) {
             (Self::NotOwner, Self::NotOwner) => true,
         }
     }
 }
+
+impl Eq for AccessError {}
 
 impl State {
     /// Returns whether the state is uninitialized.
