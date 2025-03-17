@@ -9,22 +9,41 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- [#169](https://github.com/FuelLabs/sway-standards/pull/169) Adds a metadata section to the README and about page of the docs hub.
+- Some addition here.
+- Some addition here.
 
 ### Changed
 
-- Some change here 1
-- Some change here 2
+- Some change here.
+- Some change here.
 
 ### Fixed
 
-- Some fix here 1
-- Some fix here 2
+- Some fix here.
+- Some fix here.
 
 ### Breaking
 
-- Some breaking change here 1
-- Some breaking change here 2
+- Some breaking change here.
+- Some breaking change here.
+
+## [Version 0.7.0]
+
+### Added v0.7.0
+
+- [#169](https://github.com/FuelLabs/sway-standards/pull/169) Adds a metadata section to the README and about page of the docs hub.
+
+### Changed v0.7.0
+
+- [#172](https://github.com/FuelLabs/sway-standards/pull/172) Prepares for the `v0.7.0` release.
+
+### Fixed v0.7.0
+
+- None
+
+### Breaking v0.7.0
+
+- [#172](https://github.com/FuelLabs/sway-standards/pull/172) Updates to the forc `v0.67.0` release. Earlier releases are not compatible.
 
 ## [Version 0.6.3]
 
