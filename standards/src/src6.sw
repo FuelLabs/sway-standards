@@ -234,17 +234,21 @@ abi SRC6 {
     fn max_withdrawable(underlying_asset: AssetId, vault_sub_id: SubId) -> Option<u64>;
 }
 
-impl core::ops::Eq for Deposit {
+impl PartialEq for Deposit {
     fn eq(self, other: Self) -> bool {
         self.caller == other.caller && self.receiver == other.receiver && self.underlying_asset == other.underlying_asset && self.vault_sub_id == other.vault_sub_id && self.deposited_amount == other.deposited_amount && self.minted_shares == other.minted_shares
     }
 }
 
-impl core::ops::Eq for Withdraw {
+impl Eq for Deposit {}
+
+impl PartialEq for Withdraw {
     fn eq(self, other: Self) -> bool {
         self.caller == other.caller && self.receiver == other.receiver && self.underlying_asset == other.underlying_asset && self.vault_sub_id == other.vault_sub_id && self.withdrawn_amount == other.withdrawn_amount && self.burned_shares == other.burned_shares
     }
 }
+
+impl Eq for Withdraw {}
 
 impl Deposit {
     /// Returns a new `Deposit` event.

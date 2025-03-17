@@ -47,7 +47,7 @@ abi SRC11 {
     fn security_information() -> SecurityInformation;
 }
 
-impl core::ops::Eq for SecurityInformation {
+impl PartialEq for SecurityInformation {
     fn eq(self, other: Self) -> bool {
         // If both contact info contain data, check each string
         let self_contact_information_len = self.contact_information.len();
@@ -119,6 +119,8 @@ impl core::ops::Eq for SecurityInformation {
         self.name == other.name && self.project_url == other.project_url && self.policy == other.policy && self.encryption == other.encryption && self.source_code == other.source_code && self.source_release == other.source_release && self.source_revision == other.source_revision && self.acknowledgments == other.acknowledgments && self.additional_information == other.additional_information
     }
 }
+
+impl Eq for SecurityInformation {}
 
 impl SecurityInformation {
     /// Returns a new `SecurityInformation`.
