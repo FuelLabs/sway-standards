@@ -9,8 +9,8 @@
     <a href="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yaml" alt="CI">
         <img src="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yaml/badge.svg" />
     </a>
-    <a href="https://crates.io/crates/forc/0.66.6" alt="forc">
-        <img src="https://img.shields.io/badge/forc-v0.66.6-orange" />
+    <a href="https://crates.io/crates/forc/0.67.0" alt="forc">
+        <img src="https://img.shields.io/badge/forc-v0.67.0-orange" />
     </a>
     <a href="./LICENSE" alt="forc">
         <img src="https://img.shields.io/github/license/FuelLabs/sway-standards" />
@@ -36,7 +36,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 To import a standard the following should be added to the project's `Forc.toml` file under `[dependencies]` with the most recent release:
 
 ```toml
-standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.6.3" }
+standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.6.4" }
 ```
 
 > **NOTE:**
@@ -171,7 +171,7 @@ Example of a minimal SRC-14 implementation with no access control.
 Example of a SRC-14 implementation that also implements [SRC-5](https://docs.fuel.network/docs/sway-standards/src-5-ownership/).
 
 > **Note**
-> All standards currently use `forc v0.66.6`.
+> All standards currently use `forc v0.67.0`.
 
 <!-- TODO:
 ## Contributing

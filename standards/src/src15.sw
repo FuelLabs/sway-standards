@@ -10,11 +10,13 @@ pub struct SRC15MetadataEvent {
     pub metadata: Metadata,
 }
 
-impl core::ops::Eq for SRC15MetadataEvent {
+impl PartialEq for SRC15MetadataEvent {
     fn eq(self, other: Self) -> bool {
         self.asset == other.asset && self.metadata == other.metadata
     }
 }
+
+impl Eq for SRC15MetadataEvent {}
 
 impl SRC15MetadataEvent {
     /// Returns a new `SRC15MetadataEvent` event.

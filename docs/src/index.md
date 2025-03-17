@@ -7,14 +7,14 @@ Standards in this repository may be in various stages of development. Use of dra
 If you don't find what you're looking for, feel free to create an issue and propose a new standard!
 
 > **Note**
-> All standards currently use `forc v0.66.6`.
+> All standards currently use `forc v0.67.0`.
 
 ## Using a standard
 
 To import a standard the following should be added to the project's `Forc.toml` file under `[dependencies]` with the most recent release:
 
 ```toml
-standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.6.3" }
+standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.6.4" }
 ```
 
 > **NOTE:**
