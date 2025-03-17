@@ -164,11 +164,13 @@ pub struct TotalSupplyEvent {
     pub sender: Identity,
 }
 
-impl core::ops::Eq for SetNameEvent {
+impl PartialEq for SetNameEvent {
     fn eq(self, other: Self) -> bool {
         self.asset == other.asset && self.name == other.name && self.sender == other.sender
     }
 }
+
+impl Eq for SetNameEvent {}
 
 impl SetNameEvent {
     /// Returns a new `SetNameEvent` event.
@@ -275,11 +277,13 @@ impl SetNameEvent {
     }
 }
 
-impl core::ops::Eq for SetSymbolEvent {
+impl PartialEq for SetSymbolEvent {
     fn eq(self, other: Self) -> bool {
         self.asset == other.asset && self.symbol == other.symbol && self.sender == other.sender
     }
 }
+
+impl Eq for SetSymbolEvent {}
 
 impl SetSymbolEvent {
     /// Returns a new `SetSymbolEvent` event.
@@ -386,11 +390,13 @@ impl SetSymbolEvent {
     }
 }
 
-impl core::ops::Eq for SetDecimalsEvent {
+impl PartialEq for SetDecimalsEvent {
     fn eq(self, other: Self) -> bool {
         self.asset == other.asset && self.decimals == other.decimals && self.sender == other.sender
     }
 }
+
+impl Eq for SetDecimalsEvent {}
 
 impl SetDecimalsEvent {
     /// Returns a new `SetDecimalsEvent` event.
@@ -502,11 +508,13 @@ impl SetDecimalsEvent {
     }
 }
 
-impl core::ops::Eq for TotalSupplyEvent {
+impl PartialEq for TotalSupplyEvent {
     fn eq(self, other: Self) -> bool {
         self.asset == other.asset && self.supply == other.supply && self.sender == other.sender
     }
 }
+
+impl Eq for TotalSupplyEvent {}
 
 impl TotalSupplyEvent {
     /// Returns a new `TotalSupplyEvent` event.

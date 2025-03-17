@@ -55,7 +55,7 @@ pub struct SetMetadataEvent {
     pub sender: Identity,
 }
 
-impl core::ops::Eq for Metadata {
+impl PartialEq for Metadata {
     fn eq(self, other: Self) -> bool {
         match (self, other) {
             (Metadata::B256(bytes1), Metadata::B256(bytes2)) => {
@@ -75,11 +75,15 @@ impl core::ops::Eq for Metadata {
     }
 }
 
-impl core::ops::Eq for SetMetadataEvent {
+impl Eq for Metadata {}
+
+impl PartialEq for SetMetadataEvent {
     fn eq(self, other: Self) -> bool {
         self.asset == other.asset && self.metadata == other.metadata && self.key == other.key && self.sender == other.sender
     }
 }
+
+impl Eq for SetMetadataEvent {}
 
 impl SetMetadataEvent {
     /// Returns a new `SetMetadataEvent` event.

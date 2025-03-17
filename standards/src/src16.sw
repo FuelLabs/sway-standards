@@ -215,7 +215,7 @@ impl EIP712Domain {
             name: domain_name,
             version: version,
             chain_id: chain_id,
-            verifying_contract: verifying_contract_last_20.into(),
+            verifying_contract: verifying_contract_last_20.try_into().unwrap(),
         }
     }
 
