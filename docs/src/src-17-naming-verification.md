@@ -148,5 +148,5 @@ abi SRC17 {
 An example of the SRC-17 implementation where a Sparse Merkle Tree is used to verify the validity of names. In the example, the `name` is the key in the Sparse Merkle Tree and the `asset`, `resolver`, and `metadata` are the data which make up the leaf. The example supports both inclusion and exclusion proofs. If an AltBn128 proof is provided instead, the verification fails.
 
 ```sway
-{{#include ../examples/src20-native-asset/multi_asset/src/multi_asset.sw}}
+{{#include ../examples/src17-naming-verification/sparse_merkle_proof/src/main.sw}}
 ```
