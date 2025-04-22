@@ -210,7 +210,7 @@ impl SRC17NameEvent {
     ///     my_event.log();
     /// }
     /// ```
-    fn new(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) -> Self {
+    pub fn new(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) -> Self {
         Self { name, resolver, asset, metadata }
     }
 
@@ -232,7 +232,7 @@ impl SRC17NameEvent {
     ///     assert(returned_name == name);
     /// }
     /// ```
-    fn name(self) -> String {
+    pub fn name(self) -> String {
         self.name
     }
 
@@ -254,7 +254,7 @@ impl SRC17NameEvent {
     ///     assert(returned_resolver == resolver);
     /// }
     /// ```
-    fn resolver(self) -> Identity {
+    pub fn resolver(self) -> Identity {
         self.resolver
     }
 
@@ -276,7 +276,7 @@ impl SRC17NameEvent {
     ///     assert(returned_asset == asset);
     /// }
     /// ```
-    fn asset(self) -> AssetId {
+    pub fn asset(self) -> AssetId {
         self.asset
     }
 
@@ -298,7 +298,7 @@ impl SRC17NameEvent {
     ///     assert(returned_metadata == metadata);
     /// }
     /// ```
-    fn metadata(self) -> Option<Bytes> {
+    pub fn metadata(self) -> Option<Bytes> {
         self.metadata
     }
 

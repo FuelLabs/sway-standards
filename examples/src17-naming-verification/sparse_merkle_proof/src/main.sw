@@ -1,8 +1,8 @@
 contract;
 
-use std::{bytes::Bytes, string::String, hash::{Hash, sha256}};
+use std::{bytes::Bytes, hash::{Hash, sha256}, string::String};
 use standards::src17::*;
-use sway_libs::merkle::{sparse::*, common::MerkleRoot};
+use sway_libs::merkle::{common::MerkleRoot, sparse::*};
 
 storage {
     merkle_root: MerkleRoot = MerkleRoot::zero(),
@@ -10,7 +10,13 @@ storage {
 
 impl SRC17 for Contract {
     #[storage(read)]
-    fn verify(proof: SRC17Proof, name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) -> Result<(), SRC17VerificationError> {
+    fn verify(
+        proof: SRC17Proof,
+        name: String,
+        resolver: Identity,
+        asset: AssetId,
+        metadata: Option<Bytes>,
+    ) -> Result<(), SRC17VerificationError> {
         match proof {
             SRC17Proof::AltBn128Proof(_) => Err(SRC17VerificationError::VerificationFailed),
             SRC17Proof::SparseMerkleProof(proof) => {
@@ -29,7 +35,8 @@ impl SRC17 for Contract {
                             None => (),
                         }
 
-                        if proof.verify(storage.merkle_root.read(), key, Some(leaf_bytes)) {
+                        if proof.verify(storage.merkle_root.read(), key, Some(leaf_bytes))
+                        {
                             Ok(())
                         } else {
                             Err(SRC17VerificationError::VerificationFailed)
@@ -49,7 +56,21 @@ impl SRC17 for Contract {
 }
 
 abi UpdateData {
-    fn data_updated(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) {
+    fn data_updated(
+        name: String,
+        resolver: Identity,
+        asset: AssetId,
+        metadata: Option<Bytes>,
+    );
+}
+
+impl UpdateData for Contract {
+    fn data_updated(
+        name: String,
+        resolver: Identity,
+        asset: AssetId,
+        metadata: Option<Bytes>,
+    ) {
         // NOTE: There are no checks for whether someone has the permission to do this. 
         // It is suggested to add some administrative controls such as the Sway-Libs Ownership Library.
         let event = SRC17NameEvent::new(name, resolver, asset, metadata);
