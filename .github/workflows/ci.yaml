@@ -78,8 +78,8 @@ jobs:
                 "examples/src12-contract-factory",
                 "examples/src14-simple-proxy",
                 "examples/src15-offchain-metadata",
-                "example/src16-typed-data",
-                "example/src17-naming-verification",
+                "examples/src16-typed-data",
+                "examples/src17-naming-verification",
                 "examples/src20-native-asset",
               ]
       

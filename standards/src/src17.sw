@@ -37,7 +37,7 @@ impl AbiDecode for AltBn128Proof {
 
 /// The error log used something in the SRC-17 verification process fails.
 pub enum SRC17VerificationError {
-    /// Emitted when verification of a SRC-17 proof fails. 
+    /// Emitted when verification of a SRC-17 proof fails.
     VerificationFailed: (),
 }
 
@@ -171,7 +171,13 @@ abi SRC17 {
     /// }
     /// ```
     #[storage(read)]
-    fn verify(proof: SRC17Proof, name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) -> Result<(), SRC17VerificationError>;
+    fn verify(
+        proof: SRC17Proof,
+        name: String,
+        resolver: Identity,
+        asset: AssetId,
+        metadata: Option<Bytes>,
+    ) -> Result<(), SRC17VerificationError>;
 }
 
 /// The event used when a data change occurs.
@@ -183,7 +189,7 @@ pub struct SRC17NameEvent {
     /// The asset which represents ownership of the name.
     pub asset: AssetId,
     /// Any metadata associated with the name.
-    pub metadata: Option<Bytes>
+    pub metadata: Option<Bytes>,
 }
 
 impl SRC17NameEvent {
@@ -210,8 +216,18 @@ impl SRC17NameEvent {
     ///     my_event.log();
     /// }
     /// ```
-    pub fn new(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) -> Self {
-        Self { name, resolver, asset, metadata }
+    pub fn new(
+        name: String,
+        resolver: Identity,
+        asset: AssetId,
+        metadata: Option<Bytes>,
+    ) -> Self {
+        Self {
+            name,
+            resolver,
+            asset,
+            metadata,
+        }
     }
 
     /// Returns the name associated with the `SRC17NameEvent`.
@@ -227,7 +243,7 @@ impl SRC17NameEvent {
     ///
     /// fn foo(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) {
     ///     let my_event = SRC17NameEvent::new(name, resolver, asset, metadata);
-    ///     
+    ///
     ///     let returned_name: String = my_event.name();
     ///     assert(returned_name == name);
     /// }
@@ -249,7 +265,7 @@ impl SRC17NameEvent {
     ///
     /// fn foo(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) {
     ///     let my_event = SRC17NameEvent::new(name, resolver, asset, metadata);
-    ///     
+    ///
     ///     let returned_resolver: String = my_event.resolver();
     ///     assert(returned_resolver == resolver);
     /// }
@@ -271,7 +287,7 @@ impl SRC17NameEvent {
     ///
     /// fn foo(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) {
     ///     let my_event = SRC17NameEvent::new(name, resolver, asset, metadata);
-    ///     
+    ///
     ///     let returned_asset: String = my_event.asset();
     ///     assert(returned_asset == asset);
     /// }
@@ -293,7 +309,7 @@ impl SRC17NameEvent {
     ///
     /// fn foo(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) {
     ///     let my_event = SRC17NameEvent::new(name, resolver, asset, metadata);
-    ///     
+    ///
     ///     let returned_metadata: String = my_event.metadata();
     ///     assert(returned_metadata == metadata);
     /// }
@@ -311,7 +327,7 @@ impl SRC17NameEvent {
     ///
     /// fn foo(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) {
     ///     let my_event = SRC17NameEvent::new(name, resolver, asset, metadata);
-    ///     
+    ///
     ///     my_event.log();
     /// }
     /// ```
