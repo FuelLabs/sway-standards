@@ -1,6 +1,6 @@
 # SRC-17: Naming Verification Standard
 
-The following standard defines a naming verification standard for onchain identities. 
+The following standard defines a naming verification standard for onchain identities.
 
 ## Motivation
 
@@ -10,7 +10,7 @@ A standard interface for names on Fuel allows external applications to verify an
 
 A number of existing name service platforms already existed prior to the development of this standard. Notably the most well-known on the Ethereum Blockchain is the [Ethereum Name Service(ENS)](https://ens.domains/). This domain service has a major influence on other name services across multiple platforms. ENS pioneered name service platforms and this standard takes some inspiration from their resolver design.
 
-On Fuel, we have 2 existing name service platforms. These are [Bako ID](https://www.bako.id/) and [Fuel Name Serice(FNS)](https://fuelname.com/). This standard was developed in close collaboration with these two platforms to ensure compatibility and ease of upgrade.
+On Fuel, we have 2 existing name service platforms. These are [Bako ID](https://www.bako.id/) and [Fuel Name Service(FNS)](https://fuelname.com/). This standard was developed in close collaboration with these two platforms to ensure compatibility and ease of upgrade.
 
 ## Specification
 
@@ -56,7 +56,7 @@ The following describes an enum that wraps various proof types into a single inp
 
 The `AltBn128Proof` variant SHALL be used for AltBn128 proofs.
 
-##### `SparseMerkleProof` 
+##### `SparseMerkleProof`
 
 The `SparseMerkleProof` variant SHALL be used for Sparse Merkle Tree proofs.
 
@@ -90,10 +90,10 @@ The `SRC17NameEvent` MUST be emitted when ANY data changes occur.
 
 There SHALL be the following fields in the `SRC17UpdateEvent` struct:
 
-* `name`: The `name` field SHALL be used for the corresponding `String` which represents the name.
-* `resolver`: The `resolver` field SHALL be used for the corresponding `Identity` to which the name points.
-* `asset`: The `asset` field SHALL be used for the corresponding `AssetId` that represents ownership of a name.
-* `metadata`: The `metadata` field MUST contain `Some` bytes associated with the name or MUST be `None`.
+- `name`: The `name` field SHALL be used for the corresponding `String` which represents the name.
+- `resolver`: The `resolver` field SHALL be used for the corresponding `Identity` to which the name points.
+- `asset`: The `asset` field SHALL be used for the corresponding `AssetId` that represents ownership of a name.
+- `metadata`: The `metadata` field MUST contain `Some` bytes associated with the name or MUST be `None`.
 
 Example:
 
@@ -108,7 +108,7 @@ pub struct SRC17NameEvent {
 
 ## Rationale
 
-The development and implementation of this standard should enable the verification of names for infrastructure providers such as explorers, wallets, and more. Standardizing the verification method and leaving the implementation up to interpretation shall leave room for experimentation and differentiating designs between projects. 
+The development and implementation of this standard should enable the verification of names for infrastructure providers such as explorers, wallets, and more. Standardizing the verification method and leaving the implementation up to interpretation shall leave room for experimentation and differentiating designs between projects.
 
 Additionally, the use of proofs should reduce the onchain footprint and minimize state. This standard notably has no expiry, a feature of most name service platforms. Should a project wish to implement an expiry, it should be included as part of the metadata.
 
