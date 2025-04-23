@@ -41,6 +41,18 @@ pub enum SRC17VerificationError {
     VerificationFailed: (),
 }
 
+impl PartialEq for SRC17VerificationError {
+    fn eq(self, other: Self) -> bool {
+        match (self, other) {
+            (Self::VerificationFailed, Self::VerificationFailed) => {
+                true
+            },
+        }
+    }
+}
+
+impl Eq for SRC17VerificationError {}
+
 /// A SRC-17 proof, either an AltBN128 proof or a Sparse Merkle Tree proof.
 pub enum SRC17Proof {
     /// An AltBN128 proof.
@@ -48,6 +60,29 @@ pub enum SRC17Proof {
     /// A Sparse Merkle Tree proof.
     SparseMerkleProof: SparseMerkleProof,
 }
+
+impl PartialEq for SRC17Proof {
+    fn eq(self, other: Self) -> bool {
+        match (self, other) {
+            (Self::AltBn128Proof(proof_1), Self::AltBn128Proof(proof_2)) => {
+                let mut i = 1;
+                while i < 288 {
+                    if proof_1[i] != proof_2[i] {
+                        return false
+                    }
+                    i += 1;
+                }
+                true
+            },
+            (Self::SparseMerkleProof(proof_1), Self::SparseMerkleProof(proof_2)) => {
+                proof_1 == proof_2
+            },
+            _ => false,
+        }
+    }
+}
+
+impl Eq for SRC17Proof {}
 
 impl SRC17Proof {
     /// Returns whether the `SRC17Proof` is an AltBN128 proof.
@@ -335,3 +370,11 @@ impl SRC17NameEvent {
         log(self);
     }
 }
+
+impl PartialEq for SRC17NameEvent {
+    fn eq(self, other: Self) -> bool {
+        self.name == other.name && self.asset == other.asset && self.resolver == other.resolver && self.metadata == other.metadata
+    }
+}
+
+impl Eq for SRC17NameEvent {}
