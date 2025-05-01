@@ -6,4 +6,4 @@ name = "sparse_merkle_proof"
 
 [dependencies]
 standards = { path = "../../../standards" }
-sway_libs = { git = "https://github.com/FuelLabs/sway-libs", tag = "v0.25.1" }
+sway_libs = { git = "https://github.com/FuelLabs/sway-libs", tag = "v0.25.2" }
