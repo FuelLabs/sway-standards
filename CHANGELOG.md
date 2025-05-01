@@ -14,8 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- Some change here.
-- Some change here.
+- [#176](https://github.com/FuelLabs/sway-standards/pull/176) Updates the repository to forc `v0.68.1`, fuel-core `v0.43.1`, and Sway-Libs `v0.25.1`.
 
 ### Fixed
 
