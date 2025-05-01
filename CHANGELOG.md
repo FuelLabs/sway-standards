@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - [#176](https://github.com/FuelLabs/sway-standards/pull/176) Updates the repository to forc `v0.68.1`, fuel-core `v0.43.1`, and Sway-Libs `v0.25.2`.
 - [#174](https://github.com/FuelLabs/sway-standards/pull/174) Updates CODEOWNERS from SwayEx to Onchain.
+- [#177](https://github.com/FuelLabs/sway-standards/pull/177) Prepares for the `v0.7.1` release.
 
 ### Fixed v0.7.1
 
