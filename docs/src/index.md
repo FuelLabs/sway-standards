@@ -41,11 +41,16 @@ use standards::src20::SRC20;
 - [SRC-6; Vault Standard](./src-6-vault.md) defines the implementation of a standard API for asset vaults developed in Sway.
 - [SRC-13; Soulbound Address](./src-13-soulbound-address.md) defines the implementation of a soulbound address.
 
-### Metadata
+### Onchain Data
 
 - [SRC-7; Onchain Asset Metadata Standard](./src-7-asset-metadata.md) is used to store metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
 - [SRC-9; Metadata Keys Standard](./src-9-metadata-keys.md) is used to store standardized metadata keys for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) in combination with the SRC-7 standard.
+
+
+### Offchain Data
+
 - [SRC-15; Offchain Asset Metadata Standard](./src-15-offchain-asset-metadata.md) is used to associated metadata with [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) offchain.
+- [SRC-17; Naming Verification Standard](./src-17-naming-verification.md) defines a naming verification standard for onchain identities using offchain data.
 
 ### Security and Access Control
 
