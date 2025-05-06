@@ -1,6 +1,6 @@
 # SRC-17: Naming Verification Standard
 
-The following standard defines a naming verification standard for onchain identities.
+The following standard defines a naming verification standard for onchain identities using offchain data.
 
 ## Motivation
 

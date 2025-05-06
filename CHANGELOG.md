@@ -9,8 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Some addition here.
-- Some addition here.
+- [#178](https://github.com/FuelLabs/sway-standards/pull/178) Creates a Offchain Data section in the docs and README.
 
 ### Changed
 
