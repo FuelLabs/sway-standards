@@ -275,3 +275,8 @@ injective
 encodings
 endian
 DeFi
+frontends
+Bako
+FNS
+AltBn
+NameEvent

@@ -27,6 +27,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Some breaking change here.
 - Some breaking change here.
 
+## [Version 0.7.1]
+
+### Added v0.7.1
+
+- [#175](https://github.com/FuelLabs/sway-standards/pull/175) Introduces the SRC-17; Naming Verification Standard.
+- [#178](https://github.com/FuelLabs/sway-standards/pull/178) Creates a Offchain Data section in the docs and README.
+
+### Changed v0.7.1
+
+- [#176](https://github.com/FuelLabs/sway-standards/pull/176) Updates the repository to forc `v0.68.1`, fuel-core `v0.43.1`, and Sway-Libs `v0.25.2`.
+- [#174](https://github.com/FuelLabs/sway-standards/pull/174) Updates CODEOWNERS from SwayEx to Onchain.
+- [#177](https://github.com/FuelLabs/sway-standards/pull/177) Prepares for the `v0.7.1` release.
+
+### Fixed v0.7.1
+
+- None
+
+### Breaking v0.7.1
+
+- None
+
 ## [Version 0.7.0]
 
 ### Added v0.7.0

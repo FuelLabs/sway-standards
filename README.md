@@ -9,8 +9,8 @@
     <a href="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yaml" alt="CI">
         <img src="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yaml/badge.svg" />
     </a>
-    <a href="https://crates.io/crates/forc/0.67.0" alt="forc">
-        <img src="https://img.shields.io/badge/forc-v0.67.0-orange" />
+    <a href="https://crates.io/crates/forc/0.68.1" alt="forc">
+        <img src="https://img.shields.io/badge/forc-v0.68.1-orange" />
     </a>
     <a href="./LICENSE" alt="forc">
         <img src="https://img.shields.io/github/license/FuelLabs/sway-standards" />
@@ -36,7 +36,7 @@ If you don't find what you're looking for, feel free to create an issue and prop
 To import a standard the following should be added to the project's `Forc.toml` file under `[dependencies]` with the most recent release:
 
 ```toml
-standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.7.0" }
+standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.7.1" }
 ```
 
 > **NOTE:**
@@ -63,11 +63,17 @@ use standards::src20::SRC20;
 - [SRC-6; Vault Standard](https://docs.fuel.network/docs/sway-standards/src-6-vault/) defines the implementation of a standard API for asset vaults developed in Sway.
 - [SRC-13; Soulbound Address](https://docs.fuel.network/docs/sway-standards/src-13-soulbound-address/) provides a predicate interface to lock [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) as soulbound.
 
-### Metadata
+### Onchain Data
 
 - [SRC-7; Onchain Asset Metadata Standard](https://docs.fuel.network/docs/sway-standards/src-7-asset-metadata/) is used to store metadata for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
 - [SRC-9; Metadata Keys Standard](https://docs.fuel.network/docs/sway-standards/src-9-metadata-keys/) is used to store standardized metadata keys for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) in combination with the SRC-7 standard.
+
+### Offchain Data
+
 - [SRC-15; Offchain Asset Metadata Standard](https://docs.fuel.network/docs/sway-standards/src-15-offchain-asset-metadata/) enables arbitrary metadata that is not required by other contracts onchain, in a stateless manner for [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets).
+<!-- TODO:
+- [SRC-17; Naming Verification Standard](https://docs.fuel.network/docs/sway-standards/src-17-naming-verification/) defines a naming verification standard for onchain identities using offchain data.
+-->
 
 ### Security and Access Control
 
@@ -171,7 +177,7 @@ Example of a minimal SRC-14 implementation with no access control.
 Example of a SRC-14 implementation that also implements [SRC-5](https://docs.fuel.network/docs/sway-standards/src-5-ownership/).
 
 > **Note**
-> All standards currently use `forc v0.67.0`.
+> All standards currently use `forc v0.68.1`.
 
 <!-- TODO:
 ## Contributing
