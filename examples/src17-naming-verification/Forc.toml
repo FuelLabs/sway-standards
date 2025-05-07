@@ -1,0 +1,2 @@
+[workspace]
+members = ["sparse_merkle_proof"]

@@ -1,8 +1,9 @@
 [project]
 authors = ["Fuel Labs <contact@fuel.sh>"]
-entry = "standards.sw"
+entry = "main.sw"
 license = "Apache-2.0"
-name = "standards"
+name = "sparse_merkle_proof"
 
 [dependencies]
+standards = { path = "../../../standards" }
 sway_libs = { git = "https://github.com/FuelLabs/sway-libs", tag = "v0.25.2" }
