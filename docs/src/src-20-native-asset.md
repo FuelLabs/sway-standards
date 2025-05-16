@@ -172,7 +172,7 @@ abi SRC20 {
 Example of the SRC-20 implementation where a contract contains a single asset with one `SubId`. This implementation is recommended for users that intend to deploy a single asset with their contract.
 
 ```sway
-{{#include ../examples/src20-native-asset/multi_asset/src/multi_asset.sw}}
+{{#include ../examples/src20-native-asset/single_asset/src/single_asset.sw}}
 ```
 
 ### Multi Native Asset
@@ -180,5 +180,5 @@ Example of the SRC-20 implementation where a contract contains a single asset wi
 Example of the SRC-20 implementation where a contract contains multiple assets with differing `SubId`s. This implementation is recommended for users that intend to deploy multiple assets with their contract.
 
 ```sway
-{{#include ../examples/src20-native-asset/single_asset/src/single_asset.sw}}
+{{#include ../examples/src20-native-asset/multi_asset/src/multi_asset.sw}}
 ```
