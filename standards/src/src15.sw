@@ -141,9 +141,7 @@ impl SRC15GlobalMetadataEvent {
     /// }
     /// ```
     pub fn new(metadata: Metadata) -> Self {
-        Self {
-            metadata,
-        }
+        Self { metadata }
     }
 
     /// Returns the metadata of the `SRC15GlobalMetadataEvent` event.
