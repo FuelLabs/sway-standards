@@ -16,6 +16,20 @@ The following keys are reserved for the SRC-9 standard. Use of the keys should f
 
 All keys SHALL use snake case.
 
+### Quick Links
+
+[Social](#social)
+[Contact](#contact)
+[External Links](#external-links)
+[Resources](#resources)
+[Images](#images)
+[Video](#video)
+[Audio](#audio)
+[Media](#media)
+[Logos](#logos)
+[Attributes](#attributes)
+[Global](#global)
+
 ### Social
 
 The social prefix SHALL be used for any social media platform and SHALL return usernames.
@@ -342,6 +356,17 @@ Any attribute metadata keys SHALL follow the following syntax `attr:type` where:
 
 There are no standardized types of attributes.
 Example: `attr:eyes`.
+
+### Global
+
+The `global` prefix SHALL be used for any attributes associated with ALL assets minted by a contract.
+
+Any global metadata keys SHALL follow the following syntax `global:key` where:
+
+- The `global` keyword must be prepended to denote this is a global metadata
+- The `key` keyword must be the type of metadata using a SRC-9 key defined above
+
+Example: `global:image:png`.
 
 ## Rationale
 
