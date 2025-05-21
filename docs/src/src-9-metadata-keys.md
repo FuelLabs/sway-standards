@@ -1,6 +1,6 @@
 # SRC-9: Native Asset
 
-The following standard attempts to define the keys of relevant onchain metadata for any [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-9 standard MUST implement the [SRC-7](./src-7-asset-metadata.md) and [SRC-20](./src-20-native-asset.md) standards. This is a living standard where revisions may be made as the ecosystem evolves. 
+The following standard attempts to define the keys of relevant onchain metadata for any [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-9 standard MUST implement the [SRC-7](./src-7-asset-metadata.md) and [SRC-20](./src-20-native-asset.md) standards. This is a living standard where revisions may be made as the ecosystem evolves.
 
 > **NOTE** If data is not needed onchain, it is recommended to use the [SRC-15; Offchain Asset Metadata Standard](./src-15-offchain-asset-metadata.md).
 
