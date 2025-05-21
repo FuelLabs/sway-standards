@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - [#178](https://github.com/FuelLabs/sway-standards/pull/178) Creates a Offchain Data section in the docs and README.
+- [#181](https://github.com/FuelLabs/sway-standards/pull/181) Adds the `global` key to the SRC-9 standard.
+- [#182](https://github.com/FuelLabs/sway-standards/pull/182) Adds the `SRC15GlobalMetadataEvent` event to the SRC-15 Standard.
 
 ### Changed
 
