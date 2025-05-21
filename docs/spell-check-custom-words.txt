@@ -280,3 +280,4 @@ Bako
 FNS
 AltBn
 NameEvent
+GlobalMetadataEvent
