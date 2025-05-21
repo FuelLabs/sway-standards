@@ -1,6 +1,8 @@
 # SRC-15: Off-Chain Native Asset Metadata
 
-The following standard attempts to define arbitrary metadata for any [Native Asset](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) that is not required by other contracts onchain, in a stateless manner. Any contract that implements the SRC-15 standard MUST implement the [SRC-20](./src-20-native-asset.md) standard.
+The following standard attempts to define arbitrary offchain metadata for any [Native Asset](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) that is not required by other contracts onchain, in a stateless manner. Any contract that implements the SRC-15 standard MUST implement the [SRC-20](./src-20-native-asset.md) standard.
+
+> **NOTE** If data is  needed onchain, use the [SRC-7; Onchain Asset Metadata Standard](./src-7-asset-metadata.md).
 
 ## Motivation
 

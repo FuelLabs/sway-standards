@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- [#183](https://github.com/FuelLabs/sway-standards/pull/183) Adds additional comments and recommended cases on when to use the SRC-7 vs the SRC-15 standard.
 - [#178](https://github.com/FuelLabs/sway-standards/pull/178) Creates a Offchain Data section in the docs and README.
 
 ### Changed
