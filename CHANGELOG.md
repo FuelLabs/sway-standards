@@ -19,8 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- Some fix here.
-- Some fix here.
+- [#180](https://github.com/FuelLabs/sway-standards/pull/180) Fixes SRC-20 Multi and Single Asset example ordering.
 
 ### Breaking
 
