@@ -134,7 +134,8 @@ impl SRC16Domain {
     /// * [b256] - The Keccak256 hash of the encoded domain parameters
     ///
     pub fn domain_hash(self) -> b256 {
-        let encoded = encode(self);
+        let buffer = self.abi_encode(Buffer::new());
+        let encoded = buffer.as_raw_slice();
         let bytes = Bytes::from(encoded);
         keccak256(bytes)
     }
@@ -230,7 +231,8 @@ impl EIP712Domain {
     /// * [b256] - The Keccak256 hash of the encoded domain parameters
     ///
     pub fn domain_hash(self) -> b256 {
-        let encoded = encode(self);
+        let buffer = self.abi_encode(Buffer::new());
+        let encoded = buffer.as_raw_slice();
         let bytes = Bytes::from(encoded);
         keccak256(bytes)
     }
