@@ -1,10 +1,12 @@
 # SRC-9: Native Asset
 
-The following standard attempts to define the keys of relevant on-chain metadata for any [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-9 standard MUST implement the [SRC-7](./src-7-asset-metadata.md) and [SRC-20](./src-20-native-asset.md) standards. This is a living standard where revisions may be made as the ecosystem evolves.
+The following standard attempts to define the keys of relevant onchain metadata for any [Native Assets](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). Any contract that implements the SRC-9 standard MUST implement the [SRC-7](./src-7-asset-metadata.md) and [SRC-20](./src-20-native-asset.md) standards. This is a living standard where revisions may be made as the ecosystem evolves.
+
+> **NOTE** If data is not needed onchain, it is recommended to use the [SRC-15; Offchain Asset Metadata Standard](./src-15-offchain-asset-metadata.md).
 
 ## Motivation
 
-The SRC-9 standard seeks to enable relevant data for assets on the Fuel Network. This data may include images, text, contact, or all of the above. All metadata queries are done through a single function to facilitate cross-contract calls.
+The SRC-9 standard seeks to enable relevant onchain data for assets on the Fuel Network. This data may include images, text, contact, or all of the above. All metadata queries are done through a single function to facilitate cross-contract calls.
 
 ## Prior Art
 
@@ -15,6 +17,20 @@ The use of generic metadata for [Native Assets](https://docs.fuel.network/docs/s
 The following keys are reserved for the SRC-9 standard. Use of the keys should follow the SRC-9 specification.
 
 All keys SHALL use snake case.
+
+### Quick Links
+
+[Social](#social)
+[Contact](#contact)
+[External Links](#external-links)
+[Resources](#resources)
+[Images](#images)
+[Video](#video)
+[Audio](#audio)
+[Media](#media)
+[Logos](#logos)
+[Attributes](#attributes)
+[Global](#global)
 
 ### Social
 
@@ -195,6 +211,8 @@ Any image metadata keys SHALL follow the following syntax `image:type` where:
 - The `image` keyword must be prepended to denote this is an image
 - The `type` keyword must be the file type of the image
 
+> **NOTE** If using an ifps hash to store an image offchain, it is recommended to use the [SRC-15; Offchain Asset Metadata Standard](./src-15-offchain-asset-metadata.md).
+
 #### `image:svg`
 
 The key `image:svg` SHALL return a `String` variant of an SVG image.
@@ -228,6 +246,8 @@ Any video metadata keys SHALL follow the following syntax `video:type` where:
 - The `video` keyword must be prepended to denote this is a video
 - The `type` keyword must be the file type of the video
 
+> **NOTE** If using an ifps hash to store a video offchain, it is recommended to use the [SRC-15; Offchain Asset Metadata Standard](./src-15-offchain-asset-metadata.md).
+
 #### `video:mp4`
 
 The key `video:mp4` SHALL return a `String` variant of a URI for an MP4 video.
@@ -257,6 +277,8 @@ Any audio metadata keys SHALL follow the following syntax `audio:type` where:
 - The `audio` keyword must be prepended to denote this is audio metadata
 - The `type` keyword must be the file type of the audio
 
+> **NOTE** If using an ifps hash to store audio offchain, it is recommended to use the [SRC-15; Offchain Asset Metadata Standard](./src-15-offchain-asset-metadata.md).
+
 #### `audio:mp3`
 
 The key `audio:mp3` SHALL return a `String` variant of a URI for an MP3 file.
@@ -277,6 +299,8 @@ Any media metadata keys SHALL follow the following syntax `media:type` where:
 
 - The `media` keyword must be prepended to denote this is a video
 - The `type` keyword must be the file type of the media
+
+> **NOTE** If using an ifps hash to store media offchain, it is recommended to use the [SRC-15; Offchain Asset Metadata Standard](./src-15-offchain-asset-metadata.md).
 
 #### `media:gltf`
 
@@ -342,6 +366,17 @@ Any attribute metadata keys SHALL follow the following syntax `attr:type` where:
 
 There are no standardized types of attributes.
 Example: `attr:eyes`.
+
+### Global
+
+The `global` prefix SHALL be used for any attributes associated with ALL assets minted by a contract.
+
+Any global metadata keys SHALL follow the following syntax `global:key` where:
+
+- The `global` keyword must be prepended to denote this is a global metadata
+- The `key` keyword must be the type of metadata using a SRC-9 key defined above
+
+Example: `global:image:png`.
 
 ## Rationale
 
