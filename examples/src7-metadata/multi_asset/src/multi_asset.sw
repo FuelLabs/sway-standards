@@ -1,17 +1,7 @@
 contract;
 
-use src20::{
-    SetDecimalsEvent,
-    SetNameEvent,
-    SetSymbolEvent,
-    SRC20,
-    TotalSupplyEvent,
-};
-use src7::{
-    Metadata,
-    SetMetadataEvent,
-    SRC7,
-};
+use src20::{SetDecimalsEvent, SetNameEvent, SetSymbolEvent, SRC20, TotalSupplyEvent};
+use src7::{Metadata, SetMetadataEvent, SRC7};
 
 use std::{hash::Hash, storage::storage_string::*, string::String};
 
