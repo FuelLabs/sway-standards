@@ -1,7 +1,7 @@
 contract;
 
 use std::{bytes::Bytes, hash::{Hash, sha256}, string::String};
-use standards::src17::*;
+use src17::*;
 use sway_libs::merkle::{common::MerkleRoot, sparse::*};
 
 storage {

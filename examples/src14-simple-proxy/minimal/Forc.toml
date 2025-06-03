@@ -5,4 +5,4 @@ license = "Apache-2.0"
 name = "minimal_src14"
 
 [dependencies]
-standards = { path = "../../../standards" }
+src14 = { path = "../../../standards/src14" }

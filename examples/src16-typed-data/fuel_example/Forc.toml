@@ -5,4 +5,4 @@ license = "Apache-2.0"
 name = "src16_fuel_typed_data"
 
 [dependencies]
-standards = { path = "../../../standards" }
+src16 = { path = "../../../standards/src16" }

@@ -1,7 +1,7 @@
 contract;
 
 use std::execution::run_external;
-use standards::src14::{SRC14, SRC14_TARGET_STORAGE};
+use src14::{SRC14, SRC14_TARGET_STORAGE};
 
 storage {
     SRC14 {

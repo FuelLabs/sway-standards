@@ -1,19 +1,17 @@
 contract;
 
-use standards::{
-    src15::{
-        SRC15MetadataEvent,
-    },
-    src20::{
-        SetDecimalsEvent,
-        SetNameEvent,
-        SetSymbolEvent,
-        SRC20,
-        TotalSupplyEvent,
-    },
-    src7::{
-        Metadata,
-    },
+use src15::{
+    SRC15MetadataEvent,
+};
+use src20::{
+    SetDecimalsEvent,
+    SetNameEvent,
+    SetSymbolEvent,
+    SRC20,
+    TotalSupplyEvent,
+};
+use src7::{
+    Metadata,
 };
 
 use std::string::String;
