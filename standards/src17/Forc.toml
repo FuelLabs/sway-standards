@@ -1,0 +1,16 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "src17.sw"
+license = "Apache-2.0"
+name = "src17"
+version = "0.8.0"
+description = "The SRC-17 Standard defines a naming verification standard for onchain identities using offchain data."
+homepage = "https://github.com/FuelLabs/sway-standards"
+repository = "https://github.com/FuelLabs/sway-standards"
+documentation = "https://docs.fuel.network/docs/sway-standards/src-17-naming-verification/"
+organization = "FuelLabs"
+categories = ["Standards", "Authentication", "Metadata"]
+keywords = ["standard", "library"]
+
+[dependencies]
+sway_libs = { git = "https://github.com/FuelLabs/sway-libs", tag = "v0.25.2" }

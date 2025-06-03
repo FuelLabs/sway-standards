@@ -147,7 +147,7 @@ impl SecurityInformation {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src11::SecurityInformation;
+    /// use src11::SecurityInformation;
     ///
     /// fn foo(
     ///     name: String,
@@ -230,7 +230,7 @@ impl SecurityInformation {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src11::SecurityInformation;
+    /// use src11::SecurityInformation;
     ///
     /// fn foo(
     ///     name: String,
@@ -276,7 +276,7 @@ impl SecurityInformation {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src11::SecurityInformation;
+    /// use src11::SecurityInformation;
     ///
     /// fn foo(
     ///     name: String,
@@ -322,7 +322,7 @@ impl SecurityInformation {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src11::SecurityInformation;
+    /// use src11::SecurityInformation;
     ///
     /// fn foo(
     ///     name: String,
@@ -368,7 +368,7 @@ impl SecurityInformation {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src11::SecurityInformation;
+    /// use src11::SecurityInformation;
     ///
     /// fn foo(
     ///     name: String,
@@ -414,7 +414,7 @@ impl SecurityInformation {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src11::SecurityInformation;
+    /// use src11::SecurityInformation;
     ///
     /// fn foo(
     ///     name: String,
@@ -460,7 +460,7 @@ impl SecurityInformation {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src11::SecurityInformation;
+    /// use src11::SecurityInformation;
     ///
     /// fn foo(
     ///     name: String,
@@ -506,7 +506,7 @@ impl SecurityInformation {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src11::SecurityInformation;
+    /// use src11::SecurityInformation;
     ///
     /// fn foo(
     ///     name: String,
@@ -552,7 +552,7 @@ impl SecurityInformation {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src11::SecurityInformation;
+    /// use src11::SecurityInformation;
     ///
     /// fn foo(
     ///     name: String,
@@ -598,7 +598,7 @@ impl SecurityInformation {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src11::SecurityInformation;
+    /// use src11::SecurityInformation;
     ///
     /// fn foo(
     ///     name: String,
@@ -644,7 +644,7 @@ impl SecurityInformation {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src11::SecurityInformation;
+    /// use src11::SecurityInformation;
     ///
     /// fn foo(
     ///     name: String,
@@ -690,7 +690,7 @@ impl SecurityInformation {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src11::SecurityInformation;
+    /// use src11::SecurityInformation;
     ///
     /// fn foo(
     ///     name: String,
@@ -736,7 +736,7 @@ impl SecurityInformation {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src11::SecurityInformation;
+    /// use src11::SecurityInformation;
     ///
     /// fn foo(
     ///     name: String,

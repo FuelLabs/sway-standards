@@ -12,7 +12,7 @@ abi SRC20 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SRC20;
+    /// use src20::SRC20;
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC20, contract_id.bits());
@@ -36,7 +36,7 @@ abi SRC20 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SRC20;
+    /// use src20::SRC20;
     ///
     /// fn foo(contract_id: ContractId, asset: AssetId) {
     ///     let contract_abi = abi(SRC20, contract_id.bits());
@@ -60,7 +60,7 @@ abi SRC20 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SRC20;
+    /// use src20::SRC20;
     /// use std::string::String;
     ///
     /// fn foo(contract_id: ContractId, asset: AssetId) {
@@ -84,7 +84,7 @@ abi SRC20 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SRC20;
+    /// use src20::SRC20;
     /// use std::string::String;
     ///
     /// fn foo(contract_id: ContractId, asset: AssetId) {
@@ -112,7 +112,7 @@ abi SRC20 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SRC20;
+    /// use src20::SRC20;
     ///
     /// fn foo(contract_id: ContractId, asset: AssedId) {
     ///     let contract_abi = abi(SRC20, contract_id.bits());
@@ -188,7 +188,7 @@ impl SetNameEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetNameEvent;
+    /// use src20::SetNameEvent;
     ///
     /// fn foo(asset: AssetId, name: Option<String>, sender: Identity) {
     ///     let my_event = SetNameEvent::new(asset, name, sender);
@@ -213,7 +213,7 @@ impl SetNameEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetNameEvent;
+    /// use src20::SetNameEvent;
     ///
     /// fn foo(asset: AssetId, name: Option<String>, sender: Identity) {
     ///     let my_event = SetNameEvent::new(asset, name, sender);
@@ -232,7 +232,7 @@ impl SetNameEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetNameEvent;
+    /// use src20::SetNameEvent;
     ///
     /// fn foo(asset: AssetId, name: Option<String>, sender: Identity) {
     ///     let my_event = SetNameEvent::new(asset, name, sender);
@@ -251,7 +251,7 @@ impl SetNameEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetNameEvent;
+    /// use src20::SetNameEvent;
     ///
     /// fn foo(asset: AssetId, name: Option<String>, sender: Identity) {
     ///     let my_event = SetNameEvent::new(asset, name, sender);
@@ -266,7 +266,7 @@ impl SetNameEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetNameEvent;
+    /// use src20::SetNameEvent;
     ///
     /// fn foo(asset: AssetId, name: Option<String>, sender: Identity) {
     ///     let my_event = SetNameEvent::new(asset, name, sender);
@@ -301,7 +301,7 @@ impl SetSymbolEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetSymbolEvent;
+    /// use src20::SetSymbolEvent;
     ///
     /// fn foo(asset: AssetId, symbol: Option<String>, sender: Identity) {
     ///     let my_event = SetSymbolEvent::new(asset, symbol, sender);
@@ -326,7 +326,7 @@ impl SetSymbolEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetSymbolEvent;
+    /// use src20::SetSymbolEvent;
     ///
     /// fn foo(asset: AssetId, symbol: Option<String>, sender: Identity) {
     ///     let my_event = SetSymbolEvent::new(asset, symbol, sender);
@@ -345,7 +345,7 @@ impl SetSymbolEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetSymbolEvent;
+    /// use src20::SetSymbolEvent;
     ///
     /// fn foo(asset: AssetId, symbol: Option<String>, sender: Identity) {
     ///     let my_event = SetSymbolEvent::new(asset, symbol, sender);
@@ -364,7 +364,7 @@ impl SetSymbolEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetSymbolEvent;
+    /// use src20::SetSymbolEvent;
     ///
     /// fn foo(asset: AssetId, symbol: Option<String>, sender: Identity) {
     ///     let my_event = SetSymbolEvent::new(asset, symbol, sender);
@@ -379,7 +379,7 @@ impl SetSymbolEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetSymbolEvent;
+    /// use src20::SetSymbolEvent;
     ///
     /// fn foo(asset: AssetId, symbol: Option<String>, sender: Identity) {
     ///     let my_event = SetSymbolEvent::new(asset, symbol, sender);
@@ -414,7 +414,7 @@ impl SetDecimalsEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetDecimalsEvent;
+    /// use src20::SetDecimalsEvent;
     ///
     /// fn foo(asset: AssetId, decimals: u8, sender: Identity) {
     ///     let my_event = SetDecimalsEvent::new(asset, decimals, sender);
@@ -440,7 +440,7 @@ impl SetDecimalsEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetDecimalsEvent;
+    /// use src20::SetDecimalsEvent;
     ///
     /// fn foo(asset: AssetId, decimals: u8, sender: Identity) {
     ///     let my_event = SetDecimalsEvent::new(asset, decimals, sender);
@@ -460,7 +460,7 @@ impl SetDecimalsEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetDecimalsEvent;
+    /// use src20::SetDecimalsEvent;
     ///
     /// fn foo(asset: AssetId, decimals: u8, sender: Identity) {
     ///     let my_event = SetDecimalsEvent::new(asset, decimals, sender);
@@ -480,7 +480,7 @@ impl SetDecimalsEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetDecimalsEvent;
+    /// use src20::SetDecimalsEvent;
     ///
     /// fn foo(asset: AssetId, decimals: u8, sender: Identity) {
     ///     let my_event = SetDecimalsEvent::new(asset, decimals, sender);
@@ -496,7 +496,7 @@ impl SetDecimalsEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::SetDecimalsEvent;
+    /// use src20::SetDecimalsEvent;
     ///
     /// fn foo(asset: AssetId, decimals: u8, sender: Identity) {
     ///     let my_event = SetDecimalsEvent::new(asset, decimals, sender);
@@ -532,7 +532,7 @@ impl TotalSupplyEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::TotalSupplyEvent;
+    /// use src20::TotalSupplyEvent;
     ///
     /// fn foo(asset: AssetId, supply: u64, sender: Identity) {
     ///     let my_event = TotalSupplyEvent::new(asset, supply, sender);
@@ -558,7 +558,7 @@ impl TotalSupplyEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::TotalSupplyEvent;
+    /// use src20::TotalSupplyEvent;
     ///
     /// fn foo(asset: AssetId, supply: u64, sender: Identity) {
     ///     let my_event = TotalSupplyEvent::new(asset, supply, sender);
@@ -578,7 +578,7 @@ impl TotalSupplyEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::TotalSupplyEvent;
+    /// use src20::TotalSupplyEvent;
     ///
     /// fn foo(asset: AssetId, supply: u64, sender: Identity) {
     ///     let my_event = TotalSupplyEvent::new(asset, supply, sender);
@@ -598,7 +598,7 @@ impl TotalSupplyEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::TotalSupplyEvent;
+    /// use src20::TotalSupplyEvent;
     ///
     /// fn foo(asset: AssetId, supply: u64, sender: Identity) {
     ///     let my_event = TotalSupplyEvent::new(asset, supply, sender);
@@ -614,7 +614,7 @@ impl TotalSupplyEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src20::TotalSupplyEvent;
+    /// use src20::TotalSupplyEvent;
     ///
     /// fn foo(asset: AssetId, supply: u64, sender: Identity) {
     ///     let my_event = TotalSupplyEvent::new(asset, supply, sender);

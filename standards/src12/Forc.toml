@@ -1,0 +1,15 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "src12.sw"
+license = "Apache-2.0"
+name = "src12"
+version = "0.8.0"
+description = "The SRC-12 Standard allows for the implementation of a standard ABI for Contract Factories using the Sway Language. The standardized design designates how verification of newly deployed child contracts are handled."
+homepage = "https://github.com/FuelLabs/sway-standards"
+repository = "https://github.com/FuelLabs/sway-standards"
+documentation = "https://docs.fuel.network/docs/sway-standards/src-12-contract-factory/"
+organization = "FuelLabs"
+categories = ["Standards", "Security", "Contracts"]
+keywords = ["standard", "library"]
+
+[dependencies]

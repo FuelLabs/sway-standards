@@ -20,7 +20,7 @@ abi SRC12 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src12::SRC12;
+    /// use src12::SRC12;
     ///
     /// fn foo(src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
     ///     let src_12_contract_abi = abi(SRC12, src_12_contract.bits());
@@ -48,7 +48,7 @@ abi SRC12 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src12::SRC12;
+    /// use src12::SRC12;
     ///
     /// fn foo(src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
     ///     let src_12_contract_abi = abi(SRC12, src_12_contract.bits());
@@ -70,7 +70,7 @@ abi SRC12 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src12::SRC12;
+    /// use src12::SRC12;
     ///
     /// fn foo(src_12_contract: ContractId) {
     ///     let src_12_contract_abi = abi(SRC12, src_12_contract.bits());
@@ -96,7 +96,7 @@ abi SRC12_Extension {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src12::SRC12;
+    /// use src12::SRC12;
     ///
     /// fn foo(src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
     ///     let src_12_contract_abi = abi(SRC12, src_12_contract.bits());

@@ -94,7 +94,7 @@ impl SRC17Proof {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src17::SRC17Proof;
+    /// use src17::SRC17Proof;
     ///
     /// fn foo(my_proof: SRC17Proof) {
     ///     let result: bool = my_proof.is_alt_bn128_proof();
@@ -117,7 +117,7 @@ impl SRC17Proof {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src17::SRC17Proof;
+    /// use src17::SRC17Proof;
     ///
     /// fn foo(my_proof: SRC17Proof) {
     ///     let result: bool = my_proof.is_sparse_merkle_proof();
@@ -140,7 +140,7 @@ impl SRC17Proof {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src17::SRC17Proof;
+    /// use src17::SRC17Proof;
     ///
     /// fn foo(my_proof: SRC17Proof) {
     ///     let result: Option<AltBn128Proof> = my_proof.as_alt_bn128_proof();
@@ -163,7 +163,7 @@ impl SRC17Proof {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src17::SRC17Proof;
+    /// use src17::SRC17Proof;
     ///
     /// fn foo(my_proof: SRC17Proof) {
     ///     let result: Option<SparseMerkleProof> = my_proof.as_sparse_merkle_proof();
@@ -196,7 +196,7 @@ abi SRC17 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src17::SRC17;
+    /// use src17::SRC17;
     ///
     /// fn foo(contract_id: ContractId, proof: SRC17Proof, name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) {
     ///     let contract_abi = abi(SRC17, contract_id.bits());
@@ -244,7 +244,7 @@ impl SRC17NameEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src17::SRC17NameEvent;
+    /// use src17::SRC17NameEvent;
     ///
     /// fn foo(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) {
     ///     let my_event = SRC17NameEvent::new(name, resolver, asset, metadata);
@@ -274,7 +274,7 @@ impl SRC17NameEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src17::SRC17NameEvent;
+    /// use src17::SRC17NameEvent;
     ///
     /// fn foo(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) {
     ///     let my_event = SRC17NameEvent::new(name, resolver, asset, metadata);
@@ -296,7 +296,7 @@ impl SRC17NameEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src17::SRC17NameEvent;
+    /// use src17::SRC17NameEvent;
     ///
     /// fn foo(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) {
     ///     let my_event = SRC17NameEvent::new(name, resolver, asset, metadata);
@@ -318,7 +318,7 @@ impl SRC17NameEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src17::SRC17NameEvent;
+    /// use src17::SRC17NameEvent;
     ///
     /// fn foo(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) {
     ///     let my_event = SRC17NameEvent::new(name, resolver, asset, metadata);
@@ -340,7 +340,7 @@ impl SRC17NameEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src17::SRC17NameEvent;
+    /// use src17::SRC17NameEvent;
     ///
     /// fn foo(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) {
     ///     let my_event = SRC17NameEvent::new(name, resolver, asset, metadata);
@@ -358,7 +358,7 @@ impl SRC17NameEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src17::SRC17NameEvent;
+    /// use src17::SRC17NameEvent;
     ///
     /// fn foo(name: String, resolver: Identity, asset: AssetId, metadata: Option<Bytes>) {
     ///     let my_event = SRC17NameEvent::new(name, resolver, asset, metadata);
