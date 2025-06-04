@@ -64,14 +64,22 @@ jobs:
         id: current-version
         run: |
           grep -m1 '^version =' standards/${{ matrix.project }}/Forc.toml | cut -d '"' -f2 > current-version.txt
-          echo "CURRENT_VERSION=$(cat current-version.txt)" >> $GITHUB_ENV
+          if [ "$(wc -c < "current-version.txt")" -eq 0 ]; then 
+              exit 1
+          else
+              echo "CURRENT_VERSION=$(cat current-version.txt)" >> $GITHUB_ENV
+          fi
 
       - name: Get previous version
         id: previous-version
         run: |
           git show HEAD^:standards/${{ matrix.project }}/Forc.toml > previous.toml 2>/dev/null || touch previous.toml
           grep -m1 '^version =' previous.toml | cut -d '"' -f2 > previous-version.txt
-          echo "PREVIOUS_VERSION=$(cat previous-version.txt)" >> $GITHUB_ENV
+          if [ "$(wc -c < "previous-version.txt")" -eq 0 ]; then 
+              echo "PREVIOUS_VERSION=0.0.0" >> $GITHUB_ENV
+          else
+              echo "PREVIOUS_VERSION=$(cat previous-version.txt)" >> $GITHUB_ENV
+          fi
 
       - name: Compare versions
         id: version-check
