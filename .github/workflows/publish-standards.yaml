@@ -1,4 +1,4 @@
-name: Publish standards
+name: Publish Standards
 
 on:
   push:
@@ -100,7 +100,7 @@ jobs:
           name: my-toolchain
           components: forc@${{ env.FORC_VERSION }}, fuel-core@${{ env.CORE_VERSION }}
 
-      - name: Publish Library
+      - name: Publish Standards
         if: steps.version-check.outputs.changed == 'true'
         run: |
           cd standards/${{ matrix.project }}
