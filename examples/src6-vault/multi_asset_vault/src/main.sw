@@ -12,20 +12,8 @@ use std::{
     string::String,
 };
 
-use standards::{
-    src20::{
-        SetDecimalsEvent,
-        SetNameEvent,
-        SetSymbolEvent,
-        SRC20,
-        TotalSupplyEvent,
-    },
-    src6::{
-        Deposit,
-        SRC6,
-        Withdraw,
-    },
-};
+use src20::{SetDecimalsEvent, SetNameEvent, SetSymbolEvent, SRC20, TotalSupplyEvent};
+use src6::{Deposit, SRC6, Withdraw};
 
 pub struct VaultInfo {
     /// Amount of assets currently managed by this vault

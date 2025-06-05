@@ -3,7 +3,7 @@ contract;
 mod utils;
 
 use utils::{_compute_bytecode_root, _swap_configurables};
-use standards::src12::*;
+use src12::*;
 use std::{external::bytecode_root, hash::{Hash, sha256}, storage::storage_vec::*};
 
 configurable {

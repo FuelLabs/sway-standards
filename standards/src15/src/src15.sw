@@ -1,6 +1,6 @@
 library;
 
-use ::src7::Metadata;
+use src7::Metadata;
 
 /// The required event to be emitted for the SRC-15 standard.
 pub struct SRC15MetadataEvent {
@@ -33,7 +33,8 @@ impl SRC15MetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
+    /// use src7::Metadata;
+    /// use src15::SRC15MetadataEvent;
     ///
     /// fn foo(asset: AssetId, metadata: Metadata) {
     ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata);
@@ -57,7 +58,8 @@ impl SRC15MetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
+    /// use src7::Metadata;
+    /// use src15::SRC15MetadataEvent;
     ///
     /// fn foo(asset: AssetId, metadata: Metadata) {
     ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata);
@@ -77,7 +79,8 @@ impl SRC15MetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
+    /// use src7::Metadata;
+    /// use src15::SRC15MetadataEvent;
     ///
     /// fn foo(asset: AssetId, metadata: Metadata) {
     ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata);
@@ -93,7 +96,8 @@ impl SRC15MetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
+    /// use src7::Metadata;
+    /// use src15::SRC15MetadataEvent;
     ///
     /// fn foo(asset: AssetId, metadata: Metadata) {
     ///     let my_event = SRC15MetadataEvent::new(asset, metadata);
@@ -133,7 +137,8 @@ impl SRC15GlobalMetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::{src7::Metadata, src15::SRC15GlobalMetadataEvent};
+    /// use src7::Metadata;
+    /// use src15::SRC15GlobalMetadataEvent;
     ///
     /// fn foo(metadata: Metadata) {
     ///     let my_src15_metadata_event = SRC15GlobalMetadataEvent::new(metadata);
@@ -153,7 +158,8 @@ impl SRC15GlobalMetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::{src7::Metadata, src15::SRC15GlobalMetadataEvent};
+    /// use src7::Metadata;
+    /// use src15::SRC15GlobalMetadataEvent;
     ///
     /// fn foo(metadata: Metadata) {
     ///     let my_src15_metadata_event = SRC15GlobalMetadataEvent::new(metadata);
@@ -169,7 +175,8 @@ impl SRC15GlobalMetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::{src7::Metadata, src15::SRC15GlobalMetadataEvent};
+    /// use src7::Metadata;
+    /// use src15::SRC15GlobalMetadataEvent;
     ///
     /// fn foo(metadata: Metadata) {
     ///     let my_event = SRC15GlobalMetadataEvent::new(metadata);

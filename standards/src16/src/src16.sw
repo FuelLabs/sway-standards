@@ -263,7 +263,7 @@ pub trait TypedDataHash {
     /// # Example
     ///
     /// ```sway
-    /// use standards::src16::{SRC16, TypedDataHash};
+    /// use src16::{SRC16, TypedDataHash};
     ///
     /// impl TypedDataHash for <custom_struct> {
     ///     fn struct_hash(self) -> b256 {

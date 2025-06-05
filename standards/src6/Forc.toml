@@ -1,0 +1,15 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "src6.sw"
+license = "Apache-2.0"
+name = "src6"
+version = "0.8.0"
+description = "The SRC-6 Standard allows for the implementation of a standard API for asset vaults such as yield-bearing asset vaults or asset wrappers."
+homepage = "https://github.com/FuelLabs/sway-standards"
+repository = "https://github.com/FuelLabs/sway-standards"
+documentation = "https://docs.fuel.network/docs/sway-standards/src-6-vault/"
+organization = "FuelLabs"
+categories = ["Decentralized Finance", "Standards", "Native Assets"]
+keywords = ["standard", "library"]
+
+[dependencies]

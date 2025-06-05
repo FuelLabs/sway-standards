@@ -1,6 +1,6 @@
 contract;
 
-use standards::src5::{SRC5, State};
+use src5::{SRC5, State};
 
 storage {
     /// The owner in storage.

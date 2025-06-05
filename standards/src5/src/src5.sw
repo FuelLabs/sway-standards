@@ -26,7 +26,7 @@ abi SRC5 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src5::{SRC5, State};
+    /// use src5::{SRC5, State};
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC5, contract_id.bits());
@@ -77,7 +77,7 @@ impl State {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src5::{SRC5, State};
+    /// use src5::{SRC5, State};
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC5, contract_id.bits());
@@ -102,7 +102,7 @@ impl State {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src5::{SRC5, State};
+    /// use src5::{SRC5, State};
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC5, contract_id.bits());
@@ -127,7 +127,7 @@ impl State {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src5::{SRC5, State};
+    /// use src5::{SRC5, State};
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC5, contract_id.bits());
@@ -152,7 +152,7 @@ impl State {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src5::{SRC5, State};
+    /// use src5::{SRC5, State};
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC5, contract_id.bits());

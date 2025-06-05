@@ -5,5 +5,5 @@ license = "Apache-2.0"
 name = "sparse_merkle_proof"
 
 [dependencies]
-standards = { path = "../../../standards" }
-sway_libs = { git = "https://github.com/FuelLabs/sway-libs", tag = "v0.25.2" }
+src17 = { path = "../../../standards/src17" }
+merkle = { git = "https://github.com/FuelLabs/sway-libs", branch = "master" }

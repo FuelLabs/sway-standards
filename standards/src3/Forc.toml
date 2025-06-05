@@ -1,0 +1,15 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "src3.sw"
+license = "Apache-2.0"
+name = "src3"
+version = "0.8.0"
+description = "The SRC-3 Standard enables the minting and burning of native assets for any fungible assets within the Sway Language. It seeks to define mint and burn functions defined separately from the SRC-20 standard."
+homepage = "https://github.com/FuelLabs/sway-standards"
+repository = "https://github.com/FuelLabs/sway-standards"
+documentation = "https://docs.fuel.network/docs/sway-standards/src-3-minting-and-burning/"
+organization = "FuelLabs"
+categories = ["Native Assets", "Standards"]
+keywords = ["standard", "library"]
+
+[dependencies]

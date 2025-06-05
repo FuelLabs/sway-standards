@@ -1,0 +1,16 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "src14.sw"
+license = "Apache-2.0"
+name = "src14"
+version = "0.8.0"
+description = "The SRC-14 Standard proposes a standard for simple upgradeable proxies."
+homepage = "https://github.com/FuelLabs/sway-standards"
+repository = "https://github.com/FuelLabs/sway-standards"
+documentation = "https://docs.fuel.network/docs/sway-standards/src-14-simple-upgradeable-proxies/"
+organization = "FuelLabs"
+categories = ["Standards", "Security", "Contracts"]
+keywords = ["standard", "library"]
+
+[dependencies]
+src5 = { path = "../src5" }

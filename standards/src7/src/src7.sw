@@ -17,7 +17,7 @@ abi SRC7 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src7::{SRC7, Metadata};
+    /// use src7::{SRC7, Metadata};
     /// use std::string::String;
     ///
     /// fn foo(contract_id: ContractId, asset: AssetId) {
@@ -102,7 +102,7 @@ impl SetMetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src7::SetMetadataEvent;
+    /// use src7::SetMetadataEvent;
     ///
     /// fn foo(asset: AssetId, metadata: Option<Metadata>, key: String, sender: Identity) {
     ///     let my_set_metadata_event = SetMetadataEvent::new(asset, metadata, key, sender);
@@ -135,7 +135,7 @@ impl SetMetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src7::SetMetadataEvent;
+    /// use src7::SetMetadataEvent;
     ///
     /// fn foo(asset: AssetId, metadata: Option<Metadata>, key: String, sender: Identity) {
     ///     let my_set_metadata_event = SetMetadataEvent::new(asset, metadata, key, sender);
@@ -155,7 +155,7 @@ impl SetMetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src7::SetMetadataEvent;
+    /// use src7::SetMetadataEvent;
     ///
     /// fn foo(asset: AssetId, metadata: Option<Metadata>, key: String, sender: Identity) {
     ///     let my_set_metadata_event = SetMetadataEvent::new(asset, metadata, key, sender);
@@ -175,7 +175,7 @@ impl SetMetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src7::SetMetadataEvent;
+    /// use src7::SetMetadataEvent;
     ///
     /// fn foo(asset: AssetId, metadata: Option<Metadata>, key: String, sender: Identity) {
     ///     let my_set_metadata_event = SetMetadataEvent::new(asset, metadata, key, sender);
@@ -195,7 +195,7 @@ impl SetMetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src7::SetMetadataEvent;
+    /// use src7::SetMetadataEvent;
     ///
     /// fn foo(asset: AssetId, metadata: Option<Metadata>, key: String, sender: Identity) {
     ///     let my_set_metadata_event = SetMetadataEvent::new(asset, metadata, key, sender);
@@ -211,7 +211,7 @@ impl SetMetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src7::SetMetadataEvent;
+    /// use src7::SetMetadataEvent;
     ///
     /// fn foo(asset: AssetId, metadata: Option<Metadata>, key: String, sender: Identity) {
     ///     let my_event = SetMetadataEvent::new(asset, metadata, key, sender);
