@@ -1,0 +1,117 @@
+name: Publish Standards
+
+on:
+  push:
+    branches:
+      - release
+    paths:
+      - 'standards/**/Forc.toml'  # Only trigger when Forc.toml changes
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+  REGISTRY: ghcr.io
+  RUST_VERSION: 1.84.0
+  FORC_VERSION: 0.68.7
+  CORE_VERSION: 0.43.2
+
+jobs:
+  verify-branch:
+      runs-on: ubuntu-latest
+      outputs:
+        is-release: ${{ steps.check-branch.outputs.is-release }}
+      steps:
+        - name: Check current branch
+          id: check-branch
+          run: |
+            if [ "${{ github.ref_name }}" = "release" ]; then
+              echo "is-release=true" >> $GITHUB_OUTPUT
+            else
+              echo "is-release=false" >> $GITHUB_OUTPUT
+            fi
+
+  detect-version-change:
+    runs-on: ubuntu-latest
+    needs: verify-branch
+    if: needs.verify-branch.outputs.is-release == 'true'
+    strategy:
+          matrix:
+            project:
+              [
+                "src3",
+                "src5",
+                "src6",
+                "src7",
+                "src10",
+                "src11",
+                "src12",
+                "src14",
+                "src15",
+                "src16",
+                "src17",
+                "src20",
+              ]
+    steps:
+      - name: Checkout repository (with previous commit)
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2  # Required to access previous commit
+
+      - name: Get current version
+        id: current-version
+        run: |
+          grep -m1 '^version =' standards/${{ matrix.project }}/Forc.toml | cut -d '"' -f2 > current-version.txt
+          if [ "$(wc -c < "current-version.txt")" -eq 0 ]; then 
+              exit 1
+          else
+              echo "CURRENT_VERSION=$(cat current-version.txt)" >> $GITHUB_ENV
+          fi
+
+      - name: Get previous version
+        id: previous-version
+        run: |
+          git show HEAD^:standards/${{ matrix.project }}/Forc.toml > previous.toml 2>/dev/null || touch previous.toml
+          grep -m1 '^version =' previous.toml | cut -d '"' -f2 > previous-version.txt
+          if [ "$(wc -c < "previous-version.txt")" -eq 0 ]; then 
+              echo "PREVIOUS_VERSION=0.0.0" >> $GITHUB_ENV
+          else
+              echo "PREVIOUS_VERSION=$(cat previous-version.txt)" >> $GITHUB_ENV
+          fi
+
+      - name: Compare versions
+        id: version-check
+        run: |
+          if [ "${{ env.CURRENT_VERSION }}" != "${{ env.PREVIOUS_VERSION }}" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Install Rust toolchain
+        if: steps.version-check.outputs.changed == 'true'
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ env.RUST_VERSION }}
+          components: rustfmt
+
+      - name: Init cache
+        if: steps.version-check.outputs.changed == 'true'
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install Fuel toolchain
+        if: steps.version-check.outputs.changed == 'true'
+        uses: FuelLabs/action-fuel-toolchain@v0.6.0
+        with:
+          name: my-toolchain
+          components: forc@${{ env.FORC_VERSION }}, fuel-core@${{ env.CORE_VERSION }}
+
+      - name: Publish Standards
+        if: steps.version-check.outputs.changed == 'true'
+        run: |
+          cd standards/${{ matrix.project }}
+          forc publish
+        env:
+          FORC_PUB_TOKEN: ${{ secrets.FORCPUB_TOKEN }}    

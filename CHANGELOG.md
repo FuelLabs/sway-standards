@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - [#184](https://github.com/FuelLabs/sway-standards/pull/184) Updates documentation on adding libraries via `forc add`.
+- [#186](https://github.com/FuelLabs/sway-standards/pull/186) Updates to repository to forc `v0.68.7`.
 
 ### Fixed
 
