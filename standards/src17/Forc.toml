@@ -13,4 +13,4 @@ categories = ["Standards", "Authentication", "Metadata"]
 keywords = ["standard", "library"]
 
 [dependencies]
-sway_libs = { git = "https://github.com/FuelLabs/sway-libs", tag = "v0.25.2" }
+merkle = { git = "https://github.com/FuelLabs/sway-libs/", branch = "master" }

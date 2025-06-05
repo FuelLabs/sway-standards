@@ -1,7 +1,7 @@
 library;
 
 use std::{bytes::Bytes, string::String};
-use sway_libs::merkle::sparse::Proof;
+use merkle::sparse::Proof;
 
 /// AltBN128 proof data.
 pub type AltBn128Proof = [u8; 288];
