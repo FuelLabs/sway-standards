@@ -1,15 +1,7 @@
 contract;
 
-use standards::{
-    src20::{
-        SetDecimalsEvent,
-        SetNameEvent,
-        SetSymbolEvent,
-        SRC20,
-        TotalSupplyEvent,
-    },
-    src3::SRC3,
-};
+use src20::{SetDecimalsEvent, SetNameEvent, SetSymbolEvent, SRC20, TotalSupplyEvent};
+use src3::SRC3;
 use std::{
     asset::{
         burn,

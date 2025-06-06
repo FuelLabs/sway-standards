@@ -9,8 +9,8 @@
     <a href="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yaml" alt="CI">
         <img src="https://github.com/FuelLabs/sway-standards/actions/workflows/ci.yaml/badge.svg" />
     </a>
-    <a href="https://crates.io/crates/forc/0.68.1" alt="forc">
-        <img src="https://img.shields.io/badge/forc-v0.68.1-orange" />
+    <a href="https://crates.io/crates/forc/0.68.7" alt="forc">
+        <img src="https://img.shields.io/badge/forc-v0.68.7-orange" />
     </a>
     <a href="./LICENSE" alt="forc">
         <img src="https://img.shields.io/github/license/FuelLabs/sway-standards" />
@@ -33,10 +33,17 @@ If you don't find what you're looking for, feel free to create an issue and prop
 
 ## Using a standard
 
-To import a standard the following should be added to the project's `Forc.toml` file under `[dependencies]` with the most recent release:
+To import any standard, a dependency should be added to the project's `Forc.toml` file under `[dependencies]`.
 
-```toml
-standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.7.1" }
+```sway
+[dependencies]
+example = "0.0.0"
+```
+
+The standard you wish to use may be added as a dependency with the `forc add` command. For example, to import the SRC-20 Standard, use the following `forc` command:
+
+```bash
+forc add src20@0.8.0
 ```
 
 > **NOTE:**
@@ -45,13 +52,13 @@ standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.7.1"
 You may then import your desired standard in your Sway Smart Contract as so:
 
 ```sway
-use standards::<standard>::<standard_abi>;
+use <standard>::<standard_abi>;
 ```
 
 For example, to import the SRC-20 Native Asset Standard use the following statement in your Sway Smart Contract file:
 
 ```sway
-use standards::src20::SRC20;
+use src20::SRC20;
 ```
 
 ## Standards
@@ -177,7 +184,7 @@ Example of a minimal SRC-14 implementation with no access control.
 Example of a SRC-14 implementation that also implements [SRC-5](https://docs.fuel.network/docs/sway-standards/src-5-ownership/).
 
 > **Note**
-> All standards currently use `forc v0.68.1`.
+> All standards currently use `forc v0.68.7`.
 
 <!-- TODO:
 ## Contributing

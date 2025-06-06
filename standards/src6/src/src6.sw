@@ -57,7 +57,7 @@ abi SRC6 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::SRC6;
+    /// use src6::SRC6;
     ///
     /// fn foo(
     ///     contract_id: ContractId,
@@ -105,7 +105,7 @@ abi SRC6 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::SRC6;
+    /// use src6::SRC6;
     ///
     /// fn foo(
     ///     contract_id: ContractId,
@@ -144,7 +144,7 @@ abi SRC6 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::SRC6;
+    /// use src6::SRC6;
     ///
     /// fn foo(
     ///     contract_id: ContractId,
@@ -179,7 +179,7 @@ abi SRC6 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::SRC6;
+    /// use src6::SRC6;
     ///
     /// fn foo(
     ///     contract_id: ContractId,
@@ -218,7 +218,7 @@ abi SRC6 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::SRC6;
+    /// use src6::SRC6;
     ///
     /// fn foo(
     ///     contract_id: ContractId,
@@ -269,7 +269,7 @@ impl Deposit {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Deposit;
+    /// use src6::Deposit;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -315,7 +315,7 @@ impl Deposit {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Deposit;
+    /// use src6::Deposit;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -342,7 +342,7 @@ impl Deposit {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Deposit;
+    /// use src6::Deposit;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -369,7 +369,7 @@ impl Deposit {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Deposit;
+    /// use src6::Deposit;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -396,7 +396,7 @@ impl Deposit {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Deposit;
+    /// use src6::Deposit;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -423,7 +423,7 @@ impl Deposit {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Deposit;
+    /// use src6::Deposit;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -450,7 +450,7 @@ impl Deposit {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Deposit;
+    /// use src6::Deposit;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -473,7 +473,7 @@ impl Deposit {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Deposit;
+    /// use src6::Deposit;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -511,7 +511,7 @@ impl Withdraw {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Withdraw;
+    /// use src6::Withdraw;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -557,7 +557,7 @@ impl Withdraw {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Withdraw;
+    /// use src6::Withdraw;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -584,7 +584,7 @@ impl Withdraw {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Withdraw;
+    /// use src6::Withdraw;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -611,7 +611,7 @@ impl Withdraw {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Withdraw;
+    /// use src6::Withdraw;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -638,7 +638,7 @@ impl Withdraw {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Withdraw;
+    /// use src6::Withdraw;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -665,7 +665,7 @@ impl Withdraw {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Withdraw;
+    /// use src6::Withdraw;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -692,7 +692,7 @@ impl Withdraw {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Withdraw;
+    /// use src6::Withdraw;
     ///
     /// fn foo(
     ///     caller: Identity,
@@ -715,7 +715,7 @@ impl Withdraw {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src6::Withdraw;
+    /// use src6::Withdraw;
     ///
     /// fn foo(
     ///     caller: Identity,

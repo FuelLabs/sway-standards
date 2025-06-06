@@ -1,0 +1,16 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "src15.sw"
+license = "Apache-2.0"
+name = "src15"
+version = "0.8.0"
+description = "The SRC-15 Standard defines arbitrary metadata for any Native Asset that is not required by other contracts onchain, in a stateless manner."
+homepage = "https://github.com/FuelLabs/sway-standards"
+repository = "https://github.com/FuelLabs/sway-standards"
+documentation = "https://docs.fuel.network/docs/sway-standards/src-15-offchain-asset-metadata/"
+organization = "FuelLabs"
+categories = ["Standards", "Metadata", "Native Assets"]
+keywords = ["standard", "library"]
+
+[dependencies]
+src7 = { path = "../src7" }

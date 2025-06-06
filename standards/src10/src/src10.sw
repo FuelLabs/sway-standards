@@ -51,7 +51,7 @@ abi SRC10 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::SRC10;
+    /// use src10::SRC10;
     ///
     /// fn foo(message_index: u64, bridge: ContractId) {
     ///     let bridge_abi = abi(SRC10, bridge.bits());
@@ -72,7 +72,7 @@ abi SRC10 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::SRC10;
+    /// use src10::SRC10;
     ///
     /// fn foo(to_address: b256, bridge: ContractId, bridged_asset: AssetId) {
     ///     let bridge_abi = abi(SRC10, bridge.bits());
@@ -98,7 +98,7 @@ abi SRC10 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::SRC10;
+    /// use src10::SRC10;
     ///
     /// fn foo(to_address: b256, token_address: b256, token_id: b256, gateway_contract: b256, bridge: ContractId) {
     ///     let bridge_abi = abi(SRC10, bridge.bits());
@@ -163,7 +163,7 @@ impl DepositMessage {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::DepositMessage;
+    /// use src10::DepositMessage;
     ///
     /// fn foo(
     ///     amount: b256,
@@ -221,7 +221,7 @@ impl DepositMessage {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::DepositMessage;
+    /// use src10::DepositMessage;
     ///
     /// fn foo(
     ///     amount: b256,
@@ -257,7 +257,7 @@ impl DepositMessage {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::DepositMessage;
+    /// use src10::DepositMessage;
     ///
     /// fn foo(
     ///     amount: b256,
@@ -293,7 +293,7 @@ impl DepositMessage {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::DepositMessage;
+    /// use src10::DepositMessage;
     ///
     /// fn foo(
     ///     amount: b256,
@@ -329,7 +329,7 @@ impl DepositMessage {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::DepositMessage;
+    /// use src10::DepositMessage;
     ///
     /// fn foo(
     ///     amount: b256,
@@ -365,7 +365,7 @@ impl DepositMessage {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::DepositMessage;
+    /// use src10::DepositMessage;
     ///
     /// fn foo(
     ///     amount: b256,
@@ -401,7 +401,7 @@ impl DepositMessage {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::DepositMessage;
+    /// use src10::DepositMessage;
     ///
     /// fn foo(
     ///     amount: b256,
@@ -437,7 +437,7 @@ impl DepositMessage {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::DepositMessage;
+    /// use src10::DepositMessage;
     ///
     /// fn foo(
     ///     amount: b256,
@@ -482,7 +482,7 @@ impl MetadataMessage {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::MetadataMessage;
+    /// use src10::MetadataMessage;
     ///
     /// fn foo(token_address: b256, token_id: b256, name: String, symbol: String) {
     ///     let metadata_message = MetadataMessage::new(token_address, token_id, name, symbol);
@@ -515,7 +515,7 @@ impl MetadataMessage {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::MetadataMessage;
+    /// use src10::MetadataMessage;
     ///
     /// fn foo(token_address: b256, token_id: b256, name: String, symbol: String) {
     ///     let metadata_message = MetadataMessage::new(token_address, token_id, name, symbol);
@@ -535,7 +535,7 @@ impl MetadataMessage {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::MetadataMessage;
+    /// use src10::MetadataMessage;
     ///
     /// fn foo(token_address: b256, token_id: b256, name: String, symbol: String) {
     ///     let metadata_message = MetadataMessage::new(token_address, token_id, name, symbol);
@@ -555,7 +555,7 @@ impl MetadataMessage {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::MetadataMessage;
+    /// use src10::MetadataMessage;
     ///
     /// fn foo(token_address: b256, token_id: b256, name: String, symbol: String) {
     ///     let metadata_message = MetadataMessage::new(token_address, token_id, name, symbol);
@@ -575,7 +575,7 @@ impl MetadataMessage {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::MetadataMessage;
+    /// use src10::MetadataMessage;
     ///
     /// fn foo(token_address: b256, token_id: b256, name: String, symbol: String) {
     ///     let metadata_message = MetadataMessage::new(token_address, token_id, name, symbol);
@@ -597,7 +597,7 @@ impl DepositType {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::DepositType;
+    /// use src10::DepositType;
     ///
     /// fn foo(deposit_type: DepositType) {
     ///     assert(DepositType.is_address());
@@ -619,7 +619,7 @@ impl DepositType {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::DepositType;
+    /// use src10::DepositType;
     ///
     /// fn foo(deposit_type: DepositType) {
     ///     assert(DepositType.is_contract());
@@ -641,7 +641,7 @@ impl DepositType {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src10::DepositType;
+    /// use src10::DepositType;
     ///
     /// fn foo(deposit_type: DepositType) {
     ///     assert(DepositType.is_contract_with_data());

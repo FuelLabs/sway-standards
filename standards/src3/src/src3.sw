@@ -12,7 +12,7 @@ abi SRC3 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src3::SRC3;
+    /// use src3::SRC3;
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC3, contract_id.bits());
@@ -37,7 +37,7 @@ abi SRC3 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src3::SRC3;
+    /// use src3::SRC3;
     ///
     /// fn foo(contract_id: ContractId, asset_id: AssetId) {
     ///     let contract_abi = abi(SRC3, contract_id.bits());

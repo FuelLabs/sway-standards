@@ -1,0 +1,15 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "src5.sw"
+license = "Apache-2.0"
+name = "src5"
+version = "0.8.0"
+description = "The SRC-5 Standard intends to enable the use of administrators or owners in Sway contracts."
+homepage = "https://github.com/FuelLabs/sway-standards"
+repository = "https://github.com/FuelLabs/sway-standards"
+documentation = "https://docs.fuel.network/docs/sway-standards/src-5-ownership/"
+organization = "FuelLabs"
+categories = ["Authentication", "Standards", "Security"]
+keywords = ["standard", "library"]
+
+[dependencies]

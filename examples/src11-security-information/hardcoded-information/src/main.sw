@@ -1,6 +1,6 @@
 contract;
 
-use standards::src11::{SecurityInformation, SRC11};
+use src11::{SecurityInformation, SRC11};
 
 use std::{string::String, vec::Vec};
 

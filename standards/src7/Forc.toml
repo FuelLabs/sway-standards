@@ -1,0 +1,15 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "src7.sw"
+license = "Apache-2.0"
+name = "src7"
+version = "0.8.0"
+description = "The SRC-7 Standard defines the retrieval of on-chain arbitrary metadata for any Native Asset. This standard should be used if a stateful approach is needed."
+homepage = "https://github.com/FuelLabs/sway-standards"
+repository = "https://github.com/FuelLabs/sway-standards"
+documentation = "https://docs.fuel.network/docs/sway-standards/src-7-asset-metadata/"
+organization = "FuelLabs"
+categories = ["Filesystem", "Standards", "Native Assets", "Metadata"]
+keywords = ["standard", "library"]
+
+[dependencies]

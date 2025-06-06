@@ -5,4 +5,4 @@ license = "Apache-2.0"
 name = "multi_src20_asset"
 
 [dependencies]
-standards = { path = "../../../standards" }
+src20 = { path = "../../../standards/src20" }

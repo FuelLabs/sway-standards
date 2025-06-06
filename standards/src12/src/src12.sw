@@ -20,7 +20,7 @@ abi SRC12 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src12::SRC12;
+    /// use src12::SRC12;
     ///
     /// fn foo(src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
     ///     let src_12_contract_abi = abi(SRC12, src_12_contract.bits());
@@ -48,7 +48,7 @@ abi SRC12 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src12::SRC12;
+    /// use src12::SRC12;
     ///
     /// fn foo(src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
     ///     let src_12_contract_abi = abi(SRC12, src_12_contract.bits());
@@ -70,7 +70,7 @@ abi SRC12 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src12::SRC12;
+    /// use src12::SRC12;
     ///
     /// fn foo(src_12_contract: ContractId) {
     ///     let src_12_contract_abi = abi(SRC12, src_12_contract.bits());
@@ -96,7 +96,7 @@ abi SRC12_Extension {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src12::SRC12;
+    /// use src12::SRC12;
     ///
     /// fn foo(src_12_contract: ContractId, my_deployed_contract: ContractId, my_configurables: Option<ContractConfigurables>) {
     ///     let src_12_contract_abi = abi(SRC12, src_12_contract.bits());
@@ -108,25 +108,4 @@ abi SRC12_Extension {
     /// ```
     #[storage(read)]
     fn get_contract_id(configurables: Option<ContractConfigurables>) -> Option<ContractId>;
-}
-
-impl Hash for ContractConfigurables {
-    fn hash(self, ref mut state: Hasher) {
-        // Iterate over every configurable
-        let mut configurable_iterator = 0;
-        while configurable_iterator < self.len() {
-            let (offset, data) = self.get(configurable_iterator).unwrap();
-            let buffer = alloc_bytes(data.len() + 4);
-            let offset_ptr = asm(input: offset) {
-                input: raw_ptr
-            };
-
-            // Overwrite the configurable data into the buffer
-            offset_ptr.copy_bytes_to(buffer, 4);
-            data.ptr().copy_bytes_to(buffer.add::<u8>(4), data.len());
-
-            state.write(Bytes::from(raw_slice::from_parts::<u8>(buffer, data.len() + 4)));
-            configurable_iterator += 1;
-        }
-    }
 }
