@@ -1,6 +1,6 @@
 library;
 
-use ::src5::State;
+use src5::State;
 
 abi SRC14 {
     /// Change the target contract of a proxy contract.
@@ -12,7 +12,7 @@ abi SRC14 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src14::SRC14;
+    /// use src14::SRC14;
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC14, contract_id.bits());
@@ -32,7 +32,7 @@ abi SRC14 {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::src14::SRC14;
+    /// use src14::SRC14;
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC14, contract_id.bits());
@@ -54,7 +54,8 @@ abi SRC14Extension {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::{src5::State, src14::{SRC14Extension, proxy_owner}};
+    /// use src5::State;
+    /// use src14::{SRC14Extension, proxy_owner};
     ///
     /// fn foo(contract_id: ContractId) {
     ///     let contract_abi = abi(SRC14Extension, contract_id.bits());

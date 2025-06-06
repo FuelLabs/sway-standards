@@ -1,8 +1,15 @@
 contract;
 
 use std::{bytes::Bytes, hash::{Hash, sha256}, string::String};
-use standards::src17::*;
-use sway_libs::merkle::{common::MerkleRoot, sparse::*};
+use src17::{
+    AltBn128Proof,
+    SparseMerkleProof,
+    SRC17,
+    SRC17NameEvent,
+    SRC17Proof,
+    SRC17VerificationError,
+};
+use merkle::{common::MerkleRoot, sparse::MerkleTreeKey};
 
 storage {
     merkle_root: MerkleRoot = MerkleRoot::zero(),
@@ -23,7 +30,7 @@ impl SRC17 for Contract {
                 let key: MerkleTreeKey = sha256(name);
 
                 match proof {
-                    Proof::Inclusion => {
+                    SparseMerkleProof::Inclusion => {
                         // Combine the resolver, asset, and metadata into to a single Byte array.
                         let mut leaf_bytes = Bytes::new();
                         leaf_bytes.append(resolver.bits().into());
@@ -42,7 +49,7 @@ impl SRC17 for Contract {
                             Err(SRC17VerificationError::VerificationFailed)
                         }
                     },
-                    Proof::Exclusion => {
+                    SparseMerkleProof::Exclusion => {
                         if proof.verify(storage.merkle_root.read(), key, None) {
                             Ok(())
                         } else {

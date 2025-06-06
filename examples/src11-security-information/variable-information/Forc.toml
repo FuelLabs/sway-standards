@@ -5,4 +5,4 @@ license = "Apache-2.0"
 name = "variable-information"
 
 [dependencies]
-standards = { path = "../../../standards" }
+src11 = { path = "../../../standards/src11" }

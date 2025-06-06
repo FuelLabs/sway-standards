@@ -1,6 +1,8 @@
 # SRC-15: Off-Chain Native Asset Metadata
 
-The following standard attempts to define arbitrary metadata for any [Native Asset](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) that is not required by other contracts onchain, in a stateless manner. Any contract that implements the SRC-15 standard MUST implement the [SRC-20](./src-20-native-asset.md) standard.
+The following standard attempts to define arbitrary offchain metadata for any [Native Asset](https://docs.fuel.network/docs/sway/blockchain-development/native_assets) that is not required by other contracts onchain, in a stateless manner. Any contract that implements the SRC-15 standard MUST implement the [SRC-20](./src-20-native-asset.md) standard.
+
+> **NOTE** If data is  needed onchain, use the [SRC-7; Onchain Asset Metadata Standard](./src-7-asset-metadata.md).
 
 ## Motivation
 
@@ -26,7 +28,7 @@ The following logs MUST be implemented and emitted to follow the SRC-15 standard
 
 #### SRC15MetadataEvent
 
-The `SRC15MetadataEvent` MUST be emitted at least once for each distinct piece of metadata. The latest emitted `SRC15MetadataEvent` is determined to be the current metadata.
+The `SRC15MetadataEvent` MUST be emitted at least once for each distinct piece of metadata and each distinct asset. The latest emitted `SRC15MetadataEvent` is determined to be the current metadata.
 
 There SHALL be the following fields in the `SRC15MetadataEvent` struct:
 
@@ -38,6 +40,22 @@ Example:
 ```sway
 pub struct SRC15MetadataEvent {
     pub asset: AssetId,
+    pub metadata: Metadata,
+}
+```
+
+#### SRC15GlobalMetadataEvent
+
+The `SRC15GlobalMetadataEvent` MUST be emitted at least once for each distinct piece of metadata for *all* assets minted by a contract. The latest emitted `SRC15GlobalMetadataEvent` is determined to be the current metadata.
+
+There SHALL be the following fields in the `SRC15GlobalMetadataEvent` struct:
+
+* `metadata`: The `metadata` field SHALL be used for the corresponding `Metadata` which represents the metadata associated with all assets minted by the contract.
+
+Example:
+
+```sway
+pub struct SRC15GlobalMetadataEvent {
     pub metadata: Metadata,
 }
 ```
@@ -70,4 +88,12 @@ Example of the SRC-15 implementation where metadata exists for multiple assets w
 
 ```sway
 {{#include ../examples/src15-offchain-metadata/multi_asset/src/multi_asset.sw}}
+```
+
+### Global
+
+Example of the SRC-15 implementation where global metadata exists for all assets.
+
+```sway
+{{#include ../examples/src15-offchain-metadata/global/src/global.sw}}
 ```

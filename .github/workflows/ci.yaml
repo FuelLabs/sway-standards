@@ -16,14 +16,31 @@ env:
   CARGO_TERM_COLOR: always
   REGISTRY: ghcr.io
   RUST_VERSION: 1.80.1
-  FORC_VERSION: 0.68.1
+  FORC_VERSION: 0.68.7
   CORE_VERSION: 0.43.1
   PATH_TO_SCRIPTS: .github/scripts
 
 jobs:
   build-sway-standards:
       runs-on: ubuntu-latest
-      
+      strategy:
+          matrix:
+            project:
+              [
+                "standards/src3",
+                "standards/src5",
+                "standards/src6",
+                "standards/src7",
+                "standards/src10",
+                "standards/src11",
+                "standards/src12",
+                "standards/src14",
+                "standards/src15",
+                "standards/src16",
+                "standards/src17",
+                "standards/src20",
+              ]
+
       steps:
         - name: Checkout repository
           uses: actions/checkout@v2
@@ -58,10 +75,10 @@ jobs:
             components: forc@${{ env.FORC_VERSION }}, fuel-core@${{ env.CORE_VERSION }}
 
         - name: Check Sway Formatting Standards
-          run: forc fmt --path standards --check
+          run: forc fmt --path ${{ matrix.project }} --check
 
         - name: Build All Standards
-          run: forc build --error-on-warnings --path standards --release
+          run: forc build --error-on-warnings --path ${{ matrix.project }} --release
 
   build-examples:
       runs-on: ubuntu-latest

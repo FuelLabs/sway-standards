@@ -1,6 +1,6 @@
 contract;
 
-use standards::src16::{
+use src16::{
     DataEncoder,
     DomainHash,
     SRC16,

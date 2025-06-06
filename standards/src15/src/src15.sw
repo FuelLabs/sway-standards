@@ -1,6 +1,6 @@
 library;
 
-use ::src7::Metadata;
+use src7::Metadata;
 
 /// The required event to be emitted for the SRC-15 standard.
 pub struct SRC15MetadataEvent {
@@ -33,7 +33,8 @@ impl SRC15MetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
+    /// use src7::Metadata;
+    /// use src15::SRC15MetadataEvent;
     ///
     /// fn foo(asset: AssetId, metadata: Metadata) {
     ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata);
@@ -57,7 +58,8 @@ impl SRC15MetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
+    /// use src7::Metadata;
+    /// use src15::SRC15MetadataEvent;
     ///
     /// fn foo(asset: AssetId, metadata: Metadata) {
     ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata);
@@ -77,7 +79,8 @@ impl SRC15MetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
+    /// use src7::Metadata;
+    /// use src15::SRC15MetadataEvent;
     ///
     /// fn foo(asset: AssetId, metadata: Metadata) {
     ///     let my_src15_metadata_event = SRC15MetadataEvent::new(asset, metadata);
@@ -93,10 +96,90 @@ impl SRC15MetadataEvent {
     /// # Examples
     ///
     /// ```sway
-    /// use standards::{src7::Metadata, src15::SRC15MetadataEvent};
+    /// use src7::Metadata;
+    /// use src15::SRC15MetadataEvent;
     ///
     /// fn foo(asset: AssetId, metadata: Metadata) {
     ///     let my_event = SRC15MetadataEvent::new(asset, metadata);
+    ///     my_event.log();
+    /// }
+    /// ```
+    pub fn log(self) {
+        log(self);
+    }
+}
+
+/// The required event to be emitted for the SRC-15 standard.
+pub struct SRC15GlobalMetadataEvent {
+    /// The Metadata of the SRC-15 event.
+    pub metadata: Metadata,
+}
+
+impl PartialEq for SRC15GlobalMetadataEvent {
+    fn eq(self, other: Self) -> bool {
+        self.metadata == other.metadata
+    }
+}
+
+impl Eq for SRC15GlobalMetadataEvent {}
+
+impl SRC15GlobalMetadataEvent {
+    /// Returns a new `SRC15GlobalMetadataEvent` event.
+    ///
+    /// # Arguments
+    ///
+    /// * `metadata`: [Option<Metdata>] - The Metadata that is set.
+    ///
+    /// # Returns
+    ///
+    /// * [SRC15GlobalMetadataEvent] - The new `SRC15GlobalMetadataEvent` event.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use src7::Metadata;
+    /// use src15::SRC15GlobalMetadataEvent;
+    ///
+    /// fn foo(metadata: Metadata) {
+    ///     let my_src15_metadata_event = SRC15GlobalMetadataEvent::new(metadata);
+    ///     assert(my_src15_metadata_event.metadata == metadata);
+    /// }
+    /// ```
+    pub fn new(metadata: Metadata) -> Self {
+        Self { metadata }
+    }
+
+    /// Returns the metadata of the `SRC15GlobalMetadataEvent` event.
+    ///
+    /// # Returns
+    ///
+    /// * [Option<Metadata>] - The metadata for the event.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use src7::Metadata;
+    /// use src15::SRC15GlobalMetadataEvent;
+    ///
+    /// fn foo(metadata: Metadata) {
+    ///     let my_src15_metadata_event = SRC15GlobalMetadataEvent::new(metadata);
+    ///     assert(my_src15_metadata_event.metadata() == metadata);
+    /// }
+    /// ```
+    pub fn metadata(self) -> Metadata {
+        self.metadata
+    }
+
+    /// Logs the `SRC15GlobalMetadataEvent`.
+    ///
+    /// # Examples
+    ///
+    /// ```sway
+    /// use src7::Metadata;
+    /// use src15::SRC15GlobalMetadataEvent;
+    ///
+    /// fn foo(metadata: Metadata) {
+    ///     let my_event = SRC15GlobalMetadataEvent::new(metadata);
     ///     my_event.log();
     /// }
     /// ```

@@ -1,0 +1,15 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "src16.sw"
+license = "Apache-2.0"
+name = "src16"
+version = "0.8.0"
+description = "The SRC-16 Standard sets out to standardize encoding and hashing of typed structured data. This enables secure off-chain message signing with human-readable data structures."
+homepage = "https://github.com/FuelLabs/sway-standards"
+repository = "https://github.com/FuelLabs/sway-standards"
+documentation = "https://docs.fuel.network/docs/sway-standards/src-16-typed-structured-data/"
+organization = "FuelLabs"
+categories = ["Standards", "Data Structures", "Interoperability"]
+keywords = ["standard", "library"]
+
+[dependencies]

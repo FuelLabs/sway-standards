@@ -5,34 +5,221 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [Version 0.8.0]
 
-### Added
+### Added v0.8.0
 
-- Some addition here.
-- Some addition here.
+- [#183](https://github.com/FuelLabs/sway-standards/pull/183) Adds additional comments and recommended cases on when to use the SRC-7 vs the SRC-15 standard.
+- [#178](https://github.com/FuelLabs/sway-standards/pull/178) Creates a Offchain Data section in the docs and README.
+- [#181](https://github.com/FuelLabs/sway-standards/pull/181) Adds the `global` key to the SRC-9 standard.
+- [#182](https://github.com/FuelLabs/sway-standards/pull/182) Adds the `SRC15GlobalMetadataEvent` event to the SRC-15 Standard.
+- [#185](https://github.com/FuelLabs/sway-standards/pull/185) Adds CI job to run `forc publish` on version changes in the release branch.
 
-### Changed
+### Changed v0.8.0
 
-- Some change here.
-- Some change here.
+- [#184](https://github.com/FuelLabs/sway-standards/pull/184) Updates documentation on adding libraries via `forc add`.
+- [#186](https://github.com/FuelLabs/sway-standards/pull/186) Updates to repository to forc `v0.68.7`.
 
-### Fixed
+### Fixed v0.8.0
 
-- Some fix here.
-- Some fix here.
+- [#180](https://github.com/FuelLabs/sway-standards/pull/180) Fixes SRC-20 Multi and Single Asset example ordering.
 
-### Breaking
+### Breaking v0.8.0
 
-- Some breaking change here.
-- Some breaking change here.
+- [#184](https://github.com/FuelLabs/sway-standards/pull/184) Refactors the repository such that each standard is a separate project to be imported with `forc add`.
+
+1. The dependencies in your `Forc.toml` file must be updated.
+
+    Before:
+
+    ```sway
+    [dependencies]
+    standards = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.7.1" }
+    ```
+
+    After:
+
+    ```sway
+    [dependencies]
+    src20 = "0.8.0"
+    src7 = "0.8.0"
+    ```
+
+2. The following imports have changed:
+
+    SRC-3
+
+    Before:
+
+    ```sway
+    use standards::src3::*;
+    ```
+
+    After:
+
+    ```sway
+    use src3::*;
+    ```
+
+    SRC-5
+
+    Before:
+
+    ```sway
+    use standards::src5::*;
+    ```
+
+    After:
+
+    ```sway
+    use src5::*;
+    ```
+
+    SRC-6
+
+    Before:
+
+    ```sway
+    use standards::src6::*;
+    ```
+
+    After:
+
+    ```sway
+    use src6::*;
+    ```
+
+    SRC-7
+
+    Before:
+
+    ```sway
+    use standards::src7::*;
+    ```
+
+    After:
+
+    ```sway
+    use src7::*;
+    ```
+
+    SRC-10
+
+    Before:
+
+    ```sway
+    use standards::src10::*;
+    ```
+
+    After:
+
+    ```sway
+    use src10::*;
+    ```
+
+    SRC-11
+
+    Before:
+
+    ```sway
+    use standards::src11::*;
+    ```
+
+    After:
+
+    ```sway
+    use src11::*;
+    ```
+
+    SRC-12
+
+    Before:
+
+    ```sway
+    use standards::src12::*;
+    ```
+
+    After:
+
+    ```sway
+    use src12::*;
+    ```
+
+    SRC-14
+
+    Before:
+
+    ```sway
+    use standards::src14::*;
+    ```
+
+    After:
+
+    ```sway
+    use src14::*;
+    ```
+
+    SRC-15
+
+    Before:
+
+    ```sway
+    use standards::src15::*;
+    ```
+
+    After:
+
+    ```sway
+    use src15::*;
+    ```
+
+    SRC-16
+
+    Before:
+
+    ```sway
+    use standards::src16::*;
+    ```
+
+    After:
+
+    ```sway
+    use src16::*;
+    ```
+
+    SRC-17
+
+    Before:
+
+    ```sway
+    use standards::src17::*;
+    ```
+
+    After:
+
+    ```sway
+    use src17::*;
+    ```
+
+    SRC-20
+
+    Before:
+
+    ```sway
+    use standards::src20::*;
+    ```
+
+    After:
+
+    ```sway
+    use src20::*;
+    ```
 
 ## [Version 0.7.1]
 
 ### Added v0.7.1
 
 - [#175](https://github.com/FuelLabs/sway-standards/pull/175) Introduces the SRC-17; Naming Verification Standard.
-- [#178](https://github.com/FuelLabs/sway-standards/pull/178) Creates a Offchain Data section in the docs and README.
 
 ### Changed v0.7.1
 

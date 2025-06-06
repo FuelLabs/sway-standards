@@ -1,6 +1,6 @@
 contract;
 
-use standards::src12::*;
+use src12::*;
 use std::{external::bytecode_root, hash::Hash};
 
 configurable {

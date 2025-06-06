@@ -1,6 +1,8 @@
 # SRC-7: Onchain Native Asset Metadata
 
-The following standard attempts to define the retrieval of on-chain arbitrary metadata for any [Native Asset](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). This standard should be used if a stateful approach is needed. Any contract that implements the SRC-7 standard MUST implement the [SRC-20](./src-20-native-asset.md) standard.
+The following standard attempts to define the retrieval of onchain arbitrary metadata for any [Native Asset](https://docs.fuel.network/docs/sway/blockchain-development/native_assets). This standard should be used if a stateful approach is needed. Any contract that implements the SRC-7 standard MUST implement the [SRC-20](./src-20-native-asset.md) standard.
+
+> **NOTE** If data is not needed onchain, it is recommended to use the [SRC-15; Offchain Asset Metadata Standard](./src-15-offchain-asset-metadata.md).
 
 ## Motivation
 
