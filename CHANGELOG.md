@@ -5,9 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [Version 0.8.0]
 
-### Added
+### Added v0.8.0
 
 - [#183](https://github.com/FuelLabs/sway-standards/pull/183) Adds additional comments and recommended cases on when to use the SRC-7 vs the SRC-15 standard.
 - [#178](https://github.com/FuelLabs/sway-standards/pull/178) Creates a Offchain Data section in the docs and README.
@@ -15,16 +15,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [#182](https://github.com/FuelLabs/sway-standards/pull/182) Adds the `SRC15GlobalMetadataEvent` event to the SRC-15 Standard.
 - [#185](https://github.com/FuelLabs/sway-standards/pull/185) Adds CI job to run `forc publish` on version changes in the release branch.
 
-### Changed
+### Changed v0.8.0
 
 - [#184](https://github.com/FuelLabs/sway-standards/pull/184) Updates documentation on adding libraries via `forc add`.
 - [#186](https://github.com/FuelLabs/sway-standards/pull/186) Updates to repository to forc `v0.68.7`.
 
-### Fixed
+### Fixed v0.8.0
 
 - [#180](https://github.com/FuelLabs/sway-standards/pull/180) Fixes SRC-20 Multi and Single Asset example ordering.
 
-### Breaking
+### Breaking v0.8.0
 
 - [#184](https://github.com/FuelLabs/sway-standards/pull/184) Refactors the repository such that each standard is a separate project to be imported with `forc add`.
 
