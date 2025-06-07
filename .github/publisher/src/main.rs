@@ -121,8 +121,6 @@ fn main() -> Result<()> {
 
         let output = Command::new("forc")
             .arg("publish")
-            .arg("--registry-url")
-            .arg("http://localhost:8080")
             .current_dir(&project_dir)
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
@@ -145,8 +143,7 @@ fn main() -> Result<()> {
 
         // Clone the version string to release the immutable borrow on `all_packages_data`,
         // allowing us to pass it mutably to `update_dependents`.
-        let published_version = all_packages_data[project_name.as_str()]
-            .0["project"]["version"]
+        let published_version = all_packages_data[project_name.as_str()].0["project"]["version"]
             .as_str()
             .context("Could not find project version in Forc.toml")?
             .to_string();
