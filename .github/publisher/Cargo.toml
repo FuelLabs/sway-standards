@@ -3,7 +3,7 @@
 [package]
 name = "publisher"
 version = "0.0.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
 anyhow = "1.0"
