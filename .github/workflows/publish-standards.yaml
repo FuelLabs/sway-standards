@@ -83,4 +83,4 @@ jobs:
       - name: Publish Standards
         run: ./.github/publisher/target/release/publisher ${{ needs.detect-changes.outputs.changed_projects }}
         env:
-          FORC_PUB_TOKEN: ${{ secrets.FORCPUB_TOKEN }}
+          FORC_PUB_TOKEN: ${{ secrets.FORCPUB_TOKEN }}    
