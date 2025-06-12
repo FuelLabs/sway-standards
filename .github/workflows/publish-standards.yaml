@@ -9,7 +9,6 @@ on:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
 
 env:
   CARGO_TERM_COLOR: always
@@ -48,6 +47,8 @@ jobs:
                 "src10",
                 "src11",
                 "src12",
+                "src14",
+                "src15",
                 "src16",
                 "src20",
               ]
