@@ -7,4 +7,4 @@ name = "multi_src15_asset"
 [dependencies]
 src15 = { path = "../../../standards/src15" }
 src20 = { path = "../../../standards/src20" }
-src7 = { path = "../../../standards/src7" }
+src7 = "0.8.0"
