@@ -16,8 +16,8 @@ env:
   CARGO_TERM_COLOR: always
   REGISTRY: ghcr.io
   RUST_VERSION: 1.80.1
-  FORC_VERSION: 0.68.7
-  CORE_VERSION: 0.43.1
+  FORC_VERSION: 0.69.0
+  CORE_VERSION: 0.44.0
   PATH_TO_SCRIPTS: .github/scripts
 
 jobs:
