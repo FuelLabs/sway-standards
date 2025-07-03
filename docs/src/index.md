@@ -7,7 +7,7 @@ Standards in this repository may be in various stages of development. Use of dra
 If you don't find what you're looking for, feel free to create an issue and propose a new standard!
 
 > **Note**
-> All standards currently use `forc v0.68.7`.
+> All standards currently use `forc v0.69.0`.
 
 ## Using a standard
 
