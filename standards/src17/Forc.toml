@@ -13,4 +13,4 @@ repository = "https://github.com/FuelLabs/sway-standards"
 version = "0.8.2"
 
 [dependencies]
-ownership = "0.26.0"
+merkle = "0.26.0"
