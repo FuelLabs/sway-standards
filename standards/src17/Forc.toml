@@ -10,7 +10,7 @@ license = "Apache-2.0"
 name = "src17"
 organization = "FuelLabs"
 repository = "https://github.com/FuelLabs/sway-standards"
-version = "0.8.2"
+version = "0.8.1"
 
 [dependencies]
 merkle = "0.26.0"
