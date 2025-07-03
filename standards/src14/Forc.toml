@@ -13,4 +13,4 @@ categories = ["Standards", "Security", "Contracts"]
 keywords = ["standard", "library"]
 
 [dependencies]
-src5 = { path = "../src5" }
+src5 = "0.8.0"

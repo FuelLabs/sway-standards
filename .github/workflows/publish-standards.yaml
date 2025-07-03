@@ -5,82 +5,112 @@ on:
     branches:
       - release
     paths:
-      - 'standards/**/Forc.toml'
+      - 'standards/**/Forc.toml'  # Only trigger when Forc.toml changes
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
 
 env:
   CARGO_TERM_COLOR: always
+  REGISTRY: ghcr.io
   RUST_VERSION: 1.84.0
-  FORC_VERSION: 0.68.7
-  CORE_VERSION: 0.43.2
-  # A list of all standard projects, used by the detection job.
-  PROJECTS: '["src3", "src5", "src6", "src7", "src10", "src11", "src12", "src14", "src15", "src16", "src17", "src20"]'
+  FORC_VERSION: 0.69.0
+  CORE_VERSION: 0.44.0
 
 jobs:
-  detect-changes:
+  verify-branch:
+      runs-on: ubuntu-latest
+      outputs:
+        is-release: ${{ steps.check-branch.outputs.is-release }}
+      steps:
+        - name: Check current branch
+          id: check-branch
+          run: |
+            if [ "${{ github.ref_name }}" = "release" ]; then
+              echo "is-release=true" >> $GITHUB_OUTPUT
+            else
+              echo "is-release=false" >> $GITHUB_OUTPUT
+            fi
+
+  detect-version-change:
     runs-on: ubuntu-latest
-    outputs:
-      changed_projects: ${{ steps.changes.outputs.changed_projects }}
-      has_changes: ${{ steps.changes.outputs.has_changes }}
+    needs: verify-branch
+    if: needs.verify-branch.outputs.is-release == 'true'
+    strategy:
+          matrix:
+            project:
+              [
+                "src3",
+                "src5",
+                "src6",
+                "src7",
+                "src10",
+                "src11",
+                "src12",
+                "src14",
+                "src15",
+                "src16",
+                "src17",
+                "src20",
+              ]
     steps:
-      - name: Checkout repository
+      - name: Checkout repository (with previous commit)
         uses: actions/checkout@v3
         with:
-          fetch-depth: 2 # Required to access the previous commit
+          fetch-depth: 2  # Required to access previous commit
 
-      - name: Detect changed projects
-        id: changes
+      - name: Get current version
+        id: current-version
         run: |
-          PROJECT_LIST=$(echo $PROJECTS | jq -r '.[]')
-          CHANGED_PROJECTS=""
-          for project in $PROJECT_LIST; do
-            CURRENT_VERSION=$(grep -m1 '^version =' "standards/$project/Forc.toml" | cut -d '"' -f2)
-            PREVIOUS_VERSION=$(git show HEAD^:"standards/$project/Forc.toml" 2>/dev/null | grep -m1 '^version =' | cut -d '"' -f2 || echo "0.0.0")
-            if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ]; then
-              echo "Version changed for $project: $PREVIOUS_VERSION -> $CURRENT_VERSION"
-              CHANGED_PROJECTS="$CHANGED_PROJECTS $project"
-            fi
-          done
-          CHANGED_PROJECTS=$(echo "$CHANGED_PROJECTS" | xargs)
-          echo "changed_projects=$CHANGED_PROJECTS" >> $GITHUB_OUTPUT
-          if [ -z "$CHANGED_PROJECTS" ]; then
-            echo "has_changes=false" >> $GITHUB_OUTPUT
+          grep -m1 '^version =' standards/${{ matrix.project }}/Forc.toml | cut -d '"' -f2 > current-version.txt
+          if [ "$(wc -c < "current-version.txt")" -eq 0 ]; then 
+              exit 1
           else
-            echo "has_changes=true" >> $GITHUB_OUTPUT
+              echo "CURRENT_VERSION=$(cat current-version.txt)" >> $GITHUB_ENV
           fi
-  
-  publish-standards:
-    needs: detect-changes
-    if: needs.detect-changes.outputs.has_changes == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+
+      - name: Get previous version
+        id: previous-version
+        run: |
+          git show HEAD^:standards/${{ matrix.project }}/Forc.toml > previous.toml 2>/dev/null || touch previous.toml
+          grep -m1 '^version =' previous.toml | cut -d '"' -f2 > previous-version.txt
+          if [ "$(wc -c < "previous-version.txt")" -eq 0 ]; then 
+              echo "PREVIOUS_VERSION=0.0.0" >> $GITHUB_ENV
+          else
+              echo "PREVIOUS_VERSION=$(cat previous-version.txt)" >> $GITHUB_ENV
+          fi
+
+      - name: Compare versions
+        id: version-check
+        run: |
+          if [ "${{ env.CURRENT_VERSION }}" != "${{ env.PREVIOUS_VERSION }}" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Install Rust toolchain
+        if: steps.version-check.outputs.changed == 'true'
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ env.RUST_VERSION }}
+          components: rustfmt
 
-      - name: Init Rust cache
+      - name: Init cache
+        if: steps.version-check.outputs.changed == 'true'
         uses: Swatinem/rust-cache@v2
-        with:
-          key: publisher-build
-          workspaces: .github/publisher -> target
 
       - name: Install Fuel toolchain
+        if: steps.version-check.outputs.changed == 'true'
         uses: FuelLabs/action-fuel-toolchain@v0.6.0
         with:
           name: my-toolchain
           components: forc@${{ env.FORC_VERSION }}, fuel-core@${{ env.CORE_VERSION }}
 
-      - name: Build Publisher
-        run: cargo build --release --manifest-path .github/publisher/Cargo.toml
-
       - name: Publish Standards
-        run: ./.github/publisher/target/release/publisher ${{ needs.detect-changes.outputs.changed_projects }}
+        if: steps.version-check.outputs.changed == 'true'
+        run: |
+          cd standards/${{ matrix.project }}
+          forc publish
         env:
-          FORC_PUB_TOKEN: ${{ secrets.FORCPUB_TOKEN }}    
+          FORC_PUB_TOKEN: ${{ secrets.FORCPUB_TOKEN }}

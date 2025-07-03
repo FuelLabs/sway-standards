@@ -7,7 +7,7 @@ Standards in this repository may be in various stages of development. Use of dra
 If you don't find what you're looking for, feel free to create an issue and propose a new standard!
 
 > **Note**
-> All standards currently use `forc v0.68.7`.
+> All standards currently use `forc v0.69.0`.
 
 ## Using a standard
 
@@ -21,7 +21,7 @@ example = "0.0.0"
 The standard you wish to use may be added as a dependency with the `forc add` command. For example, to import the SRC-20 Standard, use the following `forc` command:
 
 ```bash
-forc add src20@0.8.1
+forc add src20@0.8.0
 ```
 
 > **NOTE:**

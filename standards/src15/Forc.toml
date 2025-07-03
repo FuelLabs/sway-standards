@@ -13,4 +13,4 @@ categories = ["Standards", "Metadata", "Native Assets"]
 keywords = ["standard", "library"]
 
 [dependencies]
-src7 = { path = "../src7" }
+src7 = "0.8.0"
