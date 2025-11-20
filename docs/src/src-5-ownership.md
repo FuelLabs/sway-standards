@@ -10,7 +10,7 @@ The standard seeks to provide a method for restricting access to particular user
 
 The [sway-libs](https://docs.fuel.network/docs/sway-libs/ownership/) repository contains a pre-existing Ownership library.
 
-Ownership libraries exist for other ecosystems such as OpenZeppelin's [Ownership library](https://docs.openzeppelin.com/contracts/2.x/api/ownership).
+Ownership libraries exist for other ecosystems such as OpenZeppelin's [Ownership library](https://docs.openzeppelin.com/contracts/5.x/access-control#ownership-and-ownable).
 
 ## Specification
 
