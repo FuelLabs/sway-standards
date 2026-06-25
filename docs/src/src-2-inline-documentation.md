@@ -272,7 +272,7 @@ Example:
 
 ### Other Sections
 
-If the above described sections are not relevant for the information that needs to documented, a custom section with a arbitrary `h1` header may be utilized.
+If the above described sections are not relevant for the information that needs to documented, a custom section with an arbitrary `h1` header may be utilized.
 
 Example:
 

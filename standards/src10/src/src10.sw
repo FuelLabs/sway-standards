@@ -8,11 +8,11 @@ pub enum DepositType {
     Address: (),
     /// The deposit was made to a Contract.
     Contract: (),
-    /// The deposit was made to a Contract and contains additioanl data for the Fuel chain.
+    /// The deposit was made to a Contract and contains additional data for the Fuel chain.
     ContractWithData: (),
 }
 
-/// Enscapsultes metadata sent between the canonical chain and Fuel when a deposit is made.
+/// Encapsulates metadata sent between the canonical chain and Fuel when a deposit is made.
 pub struct DepositMessage {
     /// The number of tokens.
     pub amount: b256,
@@ -510,7 +510,7 @@ impl MetadataMessage {
     ///
     /// # Returns
     ///
-    /// * [b256] - The token address for the metdata message.
+    /// * [b256] - The token address for the metadata message.
     ///
     /// # Examples
     ///
@@ -530,7 +530,7 @@ impl MetadataMessage {
     ///
     /// # Returns
     ///
-    /// * [b256] - The token id for the metdata message.
+    /// * [b256] - The token id for the metadata message.
     ///
     /// # Examples
     ///
@@ -550,7 +550,7 @@ impl MetadataMessage {
     ///
     /// # Returns
     ///
-    /// * [String] - The name for the metdata message.
+    /// * [String] - The name for the metadata message.
     ///
     /// # Examples
     ///
@@ -570,7 +570,7 @@ impl MetadataMessage {
     ///
     /// # Returns
     ///
-    /// * [String] - The symbol for the metdata message.
+    /// * [String] - The symbol for the metadata message.
     ///
     /// # Examples
     ///
