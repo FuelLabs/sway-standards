@@ -24,7 +24,7 @@ impl SRC15MetadataEvent {
     /// # Arguments
     ///
     /// * `asset`: [AssetId] - The asset for which metadata is set.
-    /// * `metadata`: [Option<Metdata>] - The Metadata that is set.
+    /// * `metadata`: [Option<Metadata>] - The Metadata that is set.
     ///
     /// # Returns
     ///
@@ -128,7 +128,7 @@ impl SRC15GlobalMetadataEvent {
     ///
     /// # Arguments
     ///
-    /// * `metadata`: [Option<Metdata>] - The Metadata that is set.
+    /// * `metadata`: [Option<Metadata>] - The Metadata that is set.
     ///
     /// # Returns
     ///
