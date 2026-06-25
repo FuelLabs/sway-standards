@@ -131,6 +131,11 @@ start_time=${SECONDS}
 
 for i in "${!project_names[@]}"; do
     # Throttle: wait for a free slot before launching the next build.
+    # Note: `jobs` reads Bash's job table, which is maintained even in
+    # non-interactive shells where job control (monitor mode) is off, as is the
+    # case when these scripts run under `just`. So `jobs -rp` reliably counts
+    # the running background builds here and the limit is enforced; this does
+    # not depend on monitor mode (`set -m`) being enabled.
     while (( $(jobs -rp | wc -l) >= PARALLEL_JOBS )); do
         wait_for_slot
     done
