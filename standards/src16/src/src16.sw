@@ -83,6 +83,10 @@ pub const SRC16_DOMAIN_TYPE_HASH: b256 = 0x10f132d1adc99105bb9ad0d98956a93f35bda
 /// 5. add Verifying contract address as 32-bytes
 ///
 impl AbiEncode for SRC16Domain {
+    fn is_encode_trivial() -> bool {
+        false
+    }
+
     fn abi_encode(self, buffer: Buffer) -> Buffer {
         let buffer = SRC16_DOMAIN_TYPE_HASH.abi_encode(buffer);
         let buffer = keccak256(Bytes::from(self.name)).abi_encode(buffer);
@@ -172,11 +176,15 @@ pub const EIP712_DOMAIN_TYPE_HASH: b256 = 0x8b73c3c69bb8fe3d512ecc4cf759cc79239f
 /// 5. add Verifying contract address as 32-bytes
 ///
 impl AbiEncode for EIP712Domain {
+    fn is_encode_trivial() -> bool {
+        false
+    }
+
     fn abi_encode(self, buffer: Buffer) -> Buffer {
         let buffer = EIP712_DOMAIN_TYPE_HASH.abi_encode(buffer);
         let buffer = keccak256(Bytes::from(self.name)).abi_encode(buffer);
         let buffer = keccak256(Bytes::from(self.version)).abi_encode(buffer);
-        let buffer = (self.chain_id).abi_encode(buffer);
+        let buffer = self.chain_id.abi_encode(buffer);
         let buffer = self.verifying_contract.abi_encode(buffer);
         buffer
     }
