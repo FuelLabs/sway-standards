@@ -36,7 +36,7 @@ fi
 
 # The expected `forc` version. If the installed `forc` differs, a warning is
 # printed before and after building all the projects.
-FORC_VERSION="0.70.2"
+FORC_VERSION="0.71.2"
 
 SUBDIR="$1"
 LABEL="$2"
