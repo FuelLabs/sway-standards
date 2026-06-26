@@ -1,0 +1,7 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "benchmarking.sw"
+license = "Apache-2.0"
+name = "benchmarking"
+
+[dependencies]

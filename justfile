@@ -15,3 +15,8 @@ build-examples *args:
 alias ba := build-all
 # builds the standards and the examples; e.g.: `just ba --release`
 build-all *args: (build-standards args) (build-examples args)
+
+alias b := bench
+# runs a benchmark project and prints the results; e.g.: `just b -p benchmarks/src16 -f ascii`
+bench *args:
+    ./scripts/forc-bench.sh {{ args }}
