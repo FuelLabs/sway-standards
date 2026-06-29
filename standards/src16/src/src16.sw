@@ -121,9 +121,9 @@ impl SRC16Domain {
     ) -> SRC16Domain {
         SRC16Domain {
             name: domain_name,
-            version: version,
-            chain_id: chain_id,
-            verifying_contract: verifying_contract,
+            version,
+            chain_id,
+            verifying_contract,
         }
     }
 
