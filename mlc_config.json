@@ -5,9 +5,6 @@
         },
         {
             "pattern": "https://github.com/FuelLabs/devrel-requests/issues/new/choose"
-        },
-        {
-            "pattern": "\\.sw$"
         }
     ]
 }
