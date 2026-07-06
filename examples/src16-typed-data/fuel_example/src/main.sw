@@ -103,7 +103,9 @@ fn _get_domain_separator() -> SRC16Domain {
     SRC16Domain::new(
         Some(String::from_ascii_str(from_str_array(DOMAIN))),
         Some(String::from_ascii_str(from_str_array(VERSION))),
-        Some((asm(r1: (0, 0, 0, CHAIN_ID)) { r1: u256 })),
+        Some((asm(r1: (0, 0, 0, CHAIN_ID)) {
+            r1: u256
+        })),
         Some(ContractId::this()),
         None,
     )

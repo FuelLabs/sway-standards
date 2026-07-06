@@ -4,7 +4,6 @@ use benchmarking::*;
 use src16::*;
 use std::string::*;
 
-
 #[inline(never)]
 pub fn fixture_create_eip712_domain() -> EIP712Domain {
     EIP712Domain::new(

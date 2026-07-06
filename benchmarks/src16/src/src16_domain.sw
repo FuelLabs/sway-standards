@@ -4,7 +4,6 @@ use benchmarking::*;
 use src16::*;
 use std::string::*;
 
-
 #[inline(never)]
 pub fn fixture_create_src16_domain() -> SRC16Domain {
     SRC16Domain::new(

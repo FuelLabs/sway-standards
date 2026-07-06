@@ -489,13 +489,25 @@ pub trait SRC16Encode {
         };
 
         // domain separator hash at offset 2
-        asm(dst: encoded, src: domain_separator_bytes, bytes: 32, offset_bytes: 2, offset_ptr) {
+        asm(
+            dst: encoded,
+            src: domain_separator_bytes,
+            bytes: 32,
+            offset_bytes: 2,
+            offset_ptr,
+        ) {
             add offset_ptr dst offset_bytes;
             mcp offset_ptr src bytes;
         };
 
         // struct hash at offset 34
-        asm(dst: encoded, src: data_hash_bytes, bytes: 32, offset_bytes: 34, offset_ptr) {
+        asm(
+            dst: encoded,
+            src: data_hash_bytes,
+            bytes: 32,
+            offset_bytes: 34,
+            offset_ptr,
+        ) {
             add offset_ptr dst offset_bytes;
             mcp offset_ptr src bytes;
         };
@@ -562,7 +574,11 @@ impl TypedDataEncoder for DataEncoder {
     /// Encodes a String value by taking the Keccak256 hash of its raw bytes.
     fn encode_string(value: String) -> b256 {
         let result_buffer: b256 = 0x0000000000000000000000000000000000000000000000000000000000000000;
-        asm(hash: result_buffer, ptr: value.ptr(), len: value.as_str().len()) {
+        asm(
+            hash: result_buffer,
+            ptr: value.ptr(),
+            len: value.as_str().len(),
+        ) {
             k256 hash ptr len;
             hash: b256
         }
