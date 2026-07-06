@@ -51,7 +51,10 @@ impl SRC16Encode for Mail {
 
 impl SRC16 for Contract {
     fn domain_separator_hash(encoding: Encoding) -> b256 {
-        _get_domain_separator().domain_hash()
+        match encoding {
+            Encoding::SRC16 => _get_domain_separator().domain_hash(),
+            Encoding::EIP712 => revert(0),
+        }
     }
 
     fn data_type_hash(encoding: Encoding) -> b256 {
@@ -59,7 +62,10 @@ impl SRC16 for Contract {
     }
 
     fn domain_separator(encoding: Encoding) -> Domain {
-        Domain::SRC16Domain(_get_domain_separator())
+        match encoding {
+            Encoding::SRC16 => Domain::SRC16Domain(_get_domain_separator()),
+            Encoding::EIP712 => revert(0),
+        }
     }
 }
 
