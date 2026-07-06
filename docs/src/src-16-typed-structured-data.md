@@ -184,7 +184,7 @@ impl SRC16Encode for Mail {
 
 The default `encode` method is provided automatically and produces the final signed hash:
 
-```
+```text
 keccak256("\x19\x01" ‖ domain_hash ‖ struct_hash)
 ```
 
