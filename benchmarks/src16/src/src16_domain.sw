@@ -4,32 +4,16 @@ use benchmarking::*;
 use src16::*;
 use std::string::*;
 
-use ::common::fixture_create_buffer;
 
 #[inline(never)]
 pub fn fixture_create_src16_domain() -> SRC16Domain {
     SRC16Domain::new(
-        String::from_ascii_str("SampleDomain"),
-        String::from_ascii_str("1"),
-        0,
-        ContractId::zero(),
+        Some(String::from_ascii_str("SampleDomain")),
+        Some(String::from_ascii_str("1")),
+        Some(0),
+        Some(ContractId::zero()),
+        None,
     )
-}
-
-#[test]
-fn baseline__src16_domain__abi_encode() {
-    let _ = fixture_create_src16_domain();
-    let _ = fixture_create_buffer();
-    keep_ref_type(); // encoded
-}
-
-#[test]
-fn bench__src16_domain__abi_encode() {
-    let domain = fixture_create_src16_domain();
-    let buffer = fixture_create_buffer();
-
-    let encoded = domain.abi_encode(buffer);
-    keep(encoded);
 }
 
 #[test]

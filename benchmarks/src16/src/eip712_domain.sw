@@ -4,25 +4,26 @@ use benchmarking::*;
 use src16::*;
 use std::string::*;
 
-use ::common::fixture_create_buffer;
 
 #[inline(never)]
 pub fn fixture_create_eip712_domain() -> EIP712Domain {
     EIP712Domain::new(
-        String::from_ascii_str("SampleDomain"),
-        String::from_ascii_str("1"),
-        0,
-        ContractId::zero(),
+        Some(String::from_ascii_str("SampleDomain")),
+        Some(String::from_ascii_str("1")),
+        Some(0),
+        Some(ContractId::zero()),
+        None,
     )
 }
 
 #[inline(never)]
-pub fn fixture_create_eip712_domain_args() -> (String, String, u256, ContractId) {
+pub fn fixture_create_eip712_domain_args() -> (Option<String>, Option<String>, Option<u256>, Option<ContractId>, Option<b256>) {
     (
-        String::from_ascii_str("SampleDomain"),
-        String::from_ascii_str("1"),
-        0,
-        ContractId::zero(),
+        Some(String::from_ascii_str("SampleDomain")),
+        Some(String::from_ascii_str("1")),
+        Some(0),
+        Some(ContractId::zero()),
+        None,
     )
 }
 
@@ -34,26 +35,10 @@ fn baseline__eip712_domain__new() {
 
 #[test]
 fn bench__eip712_domain__new() {
-    let (name, version, chain_id, verifying_contract) = fixture_create_eip712_domain_args();
+    let (name, version, chain_id, verifying_contract, salt) = fixture_create_eip712_domain_args();
 
-    let domain = EIP712Domain::new(name, version, chain_id, verifying_contract);
+    let domain = EIP712Domain::new(name, version, chain_id, verifying_contract, salt);
     keep(domain);
-}
-
-#[test]
-fn baseline__eip712_domain__abi_encode() {
-    let _ = fixture_create_eip712_domain();
-    let _ = fixture_create_buffer();
-    keep_ref_type(); // encoded
-}
-
-#[test]
-fn bench__eip712_domain__abi_encode() {
-    let domain = fixture_create_eip712_domain();
-    let buffer = fixture_create_buffer();
-
-    let encoded = domain.abi_encode(buffer);
-    keep(encoded);
 }
 
 #[test]
