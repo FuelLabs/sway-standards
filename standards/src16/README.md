@@ -293,7 +293,7 @@ Fuel-native (SRC16Domain):
 ```sway
 contract;
 
-use src16::{DataEncoder, Domain, Encoding, SRC16Base, SRC16Domain, SRC16Encode};
+use src16::{DataEncoder, Domain, Encoding, SRC16, SRC16Domain, SRC16Encode};
 use std::{bytes::Bytes, contract_id::*, hash::*, string::String};
 
 configurable {
@@ -326,7 +326,7 @@ impl SRC16Encode for Mail {
     }
 }
 
-impl SRC16Base for Contract {
+impl SRC16 for Contract {
     fn domain_separator_hash(encoding: Encoding) -> b256 {
         _get_domain_separator().domain_hash()
     }
@@ -368,7 +368,7 @@ Ethereum-compatible (EIP712Domain):
 ```sway
 contract;
 
-use src16::{DataEncoder, Domain, EIP712Domain, Encoding, SRC16Base, SRC16Encode};
+use src16::{DataEncoder, Domain, EIP712Domain, Encoding, SRC16, SRC16Encode};
 use std::{bytes::Bytes, contract_id::*, hash::*, string::String};
 
 configurable {
@@ -401,7 +401,7 @@ impl SRC16Encode for Mail {
     }
 }
 
-impl SRC16Base for Contract {
+impl SRC16 for Contract {
     fn domain_separator_hash(encoding: Encoding) -> b256 {
         _get_domain_separator().domain_hash()
     }

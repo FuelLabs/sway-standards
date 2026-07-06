@@ -416,7 +416,7 @@ impl Domain {
 }
 
 /// Standard ABI for contracts that support SRC16 typed structured data signing.
-abi SRC16Base {
+abi SRC16 {
     /// Returns the Keccak256 hash of the domain separator for the given encoding.
     fn domain_separator_hash(encoding: Encoding) -> b256;
 
