@@ -520,18 +520,6 @@ pub trait SRC16Encode {
     }
 }
 
-/// Trait for managing a u64 replay protection nonce on a typed data struct.
-pub trait Nonce {
-    fn set_nonce(ref mut self, nonce: u64);
-    fn get_nonce(self) -> u64;
-}
-
-/// Trait for managing a u256 replay protection nonce on a typed data struct.
-pub trait ExtendedNonce {
-    fn set_nonce(ref mut self, nonce: u256);
-    fn get_nonce(self) -> u256;
-}
-
 /// This trait provides common encoding methods for different data types.
 ///
 /// # Additional Information
