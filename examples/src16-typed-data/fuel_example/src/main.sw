@@ -1,6 +1,6 @@
 contract;
 
-use src16::{DataEncoder, Domain, Encoding, SRC16, SRC16Domain, SRC16Encode};
+use src16::{DataEncoder, Domain, EIP712Domain, Encoding, SRC16, SRC16Domain, SRC16Encode};
 use std::{bytes::Bytes, contract_id::*, hash::*, string::String};
 
 configurable {
@@ -22,22 +22,36 @@ pub struct Mail {
     pub contents: String,
 }
 
-/// The Keccak256 hash of the type Mail as UTF8 encoded bytes.
+/// The Keccak256 hash of the Mail type string for SRC16 (Fuel-native) encoding.
 ///
 /// "Mail(address from,address to,string contents)"
 ///
 /// 536e54c54e6699204b424f41f6dea846ee38ac369afec3e7c141d2c92c65e67f
 ///
-const MAIL_TYPE_HASH: b256 = 0x536e54c54e6699204b424f41f6dea846ee38ac369afec3e7c141d2c92c65e67f;
+const MAIL_SRC16_TYPE_HASH: b256 = 0x536e54c54e6699204b424f41f6dea846ee38ac369afec3e7c141d2c92c65e67f;
+
+/// The Keccak256 hash of the Mail type string for EIP712 (Ethereum-compatible) encoding.
+///
+/// Fuel's 32-byte Address maps to bytes32 since EVM has no 32-byte address primitive.
+///
+/// "Mail(bytes32 from,bytes32 to,string contents)"
+///
+/// cfc972d321844e0304c5a752957425d5df13c3b09c563624a806b517155d7056
+///
+const MAIL_EIP712_TYPE_HASH: b256 = 0xcfc972d321844e0304c5a752957425d5df13c3b09c563624a806b517155d7056;
 
 impl SRC16Encode for Mail {
     fn type_hash(encoding: Encoding) -> b256 {
-        MAIL_TYPE_HASH
+        match encoding {
+            Encoding::SRC16 => MAIL_SRC16_TYPE_HASH,
+            Encoding::EIP712 => MAIL_EIP712_TYPE_HASH,
+        }
     }
 
     fn struct_hash(self, encoding: Encoding) -> b256 {
+        let type_hash = Self::type_hash(encoding);
         let mut encoded = Bytes::new();
-        encoded.append(MAIL_TYPE_HASH.to_be_bytes());
+        encoded.append(type_hash.to_be_bytes());
         encoded.append(DataEncoder::encode_address(self.from).to_be_bytes());
         encoded.append(DataEncoder::encode_address(self.to).to_be_bytes());
         encoded.append(DataEncoder::encode_string(self.contents).to_be_bytes());
@@ -52,8 +66,8 @@ impl SRC16Encode for Mail {
 impl SRC16 for Contract {
     fn domain_separator_hash(encoding: Encoding) -> b256 {
         match encoding {
-            Encoding::SRC16 => _get_domain_separator().domain_hash(),
-            Encoding::EIP712 => revert(0),
+            Encoding::SRC16 => Domain::SRC16Domain(_get_src16_domain()).domain_hash(),
+            Encoding::EIP712 => Domain::EIP712Domain(_get_eip712_domain()).domain_hash(),
         }
     }
 
@@ -63,14 +77,19 @@ impl SRC16 for Contract {
 
     fn domain_separator(encoding: Encoding) -> Domain {
         match encoding {
-            Encoding::SRC16 => Domain::SRC16Domain(_get_domain_separator()),
-            Encoding::EIP712 => revert(0),
+            Encoding::SRC16 => Domain::SRC16Domain(_get_src16_domain()),
+            Encoding::EIP712 => Domain::EIP712Domain(_get_eip712_domain()),
         }
     }
 }
 
 abi MailMe {
-    fn send_mail_get_hash(from_addr: Address, to_addr: Address, contents: String) -> b256;
+    fn send_mail_get_hash(
+        from_addr: Address,
+        to_addr: Address,
+        contents: String,
+        encoding: Encoding,
+    ) -> b256;
 }
 
 impl MailMe for Contract {
@@ -81,18 +100,27 @@ impl MailMe for Contract {
     /// * `from_addr`: [Address] - The sender's address
     /// * `to_addr`: [Address] - The recipient's address
     /// * `contents`: [String] - The message contents
+    /// * `encoding`: [Encoding] - Whether to produce an SRC16 or EIP712 hash
     ///
     /// # Returns
     ///
     /// * [b256] - The encoded hash of the mail data
     ///
-    fn send_mail_get_hash(from_addr: Address, to_addr: Address, contents: String) -> b256 {
+    fn send_mail_get_hash(
+        from_addr: Address,
+        to_addr: Address,
+        contents: String,
+        encoding: Encoding,
+    ) -> b256 {
         let some_mail = Mail {
             from: from_addr,
             to: to_addr,
             contents: contents,
         };
-        let domain = Domain::SRC16Domain(_get_domain_separator());
+        let domain = match encoding {
+            Encoding::SRC16 => Domain::SRC16Domain(_get_src16_domain()),
+            Encoding::EIP712 => Domain::EIP712Domain(_get_eip712_domain()),
+        };
         some_mail.encode(domain)
     }
 }
@@ -105,8 +133,28 @@ impl MailMe for Contract {
 /// use the code root if they wish to constrain the validation to a
 /// specific program.
 ///
-fn _get_domain_separator() -> SRC16Domain {
+fn _get_src16_domain() -> SRC16Domain {
     SRC16Domain::new(
+        Some(String::from_ascii_str(from_str_array(DOMAIN))),
+        Some(String::from_ascii_str(from_str_array(VERSION))),
+        Some((asm(r1: (0, 0, 0, CHAIN_ID)) {
+            r1: u256
+        })),
+        Some(ContractId::this()),
+        None,
+    )
+}
+
+/// Returns the Ethereum EIP712Domain for this contract.
+///
+/// In a Contract the ContractId can be obtained with ContractId::this()
+///
+/// In a Predicate or Script it is at the implementor's discretion to
+/// use the code root if they wish to constrain the validation to a
+/// specific program.
+///
+fn _get_eip712_domain() -> EIP712Domain {
+    EIP712Domain::new(
         Some(String::from_ascii_str(from_str_array(DOMAIN))),
         Some(String::from_ascii_str(from_str_array(VERSION))),
         Some((asm(r1: (0, 0, 0, CHAIN_ID)) {

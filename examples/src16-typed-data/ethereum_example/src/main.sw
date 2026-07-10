@@ -32,12 +32,16 @@ const MAIL_TYPE_HASH: b256 = 0xcfc972d321844e0304c5a752957425d5df13c3b09c563624a
 
 impl SRC16Encode for Mail {
     fn type_hash(encoding: Encoding) -> b256 {
-        MAIL_TYPE_HASH
+        match encoding {
+            Encoding::EIP712 => MAIL_TYPE_HASH,
+            Encoding::SRC16 => revert(0),
+        }
     }
 
     fn struct_hash(self, encoding: Encoding) -> b256 {
+        let type_hash = Self::type_hash(encoding);
         let mut encoded = Bytes::new();
-        encoded.append(MAIL_TYPE_HASH.to_be_bytes());
+        encoded.append(type_hash.to_be_bytes());
         encoded.append(DataEncoder::encode_b256(self.from).to_be_bytes());
         encoded.append(DataEncoder::encode_b256(self.to).to_be_bytes());
         encoded.append(DataEncoder::encode_string(self.contents).to_be_bytes());

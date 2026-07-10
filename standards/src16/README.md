@@ -164,16 +164,21 @@ pub enum Domain {
 ## Example implementation
 
 ```sway
+// keccak256("Mail(address from,address to,string contents)")
 const MAIL_TYPE_HASH: b256 = 0x536e54c54e6699204b424f41f6dea846ee38ac369afec3e7c141d2c92c65e67f;
 
 impl SRC16Encode for Mail {
     fn type_hash(encoding: Encoding) -> b256 {
-        MAIL_TYPE_HASH
+        match encoding {
+            Encoding::SRC16 => MAIL_TYPE_HASH,
+            Encoding::EIP712 => revert(0),
+        }
     }
 
     fn struct_hash(self, encoding: Encoding) -> b256 {
+        let type_hash = Self::type_hash(encoding);
         let mut encoded = Bytes::new();
-        encoded.append(MAIL_TYPE_HASH.to_be_bytes());
+        encoded.append(type_hash.to_be_bytes());
         encoded.append(DataEncoder::encode_address(self.from).to_be_bytes());
         encoded.append(DataEncoder::encode_address(self.to).to_be_bytes());
         encoded.append(DataEncoder::encode_string(self.contents).to_be_bytes());
@@ -313,12 +318,16 @@ const MAIL_TYPE_HASH: b256 = 0x536e54c54e6699204b424f41f6dea846ee38ac369afec3e7c
 
 impl SRC16Encode for Mail {
     fn type_hash(encoding: Encoding) -> b256 {
-        MAIL_TYPE_HASH
+        match encoding {
+            Encoding::SRC16 => MAIL_TYPE_HASH,
+            Encoding::EIP712 => revert(0),
+        }
     }
 
     fn struct_hash(self, encoding: Encoding) -> b256 {
+        let type_hash = Self::type_hash(encoding);
         let mut encoded = Bytes::new();
-        encoded.append(MAIL_TYPE_HASH.to_be_bytes());
+        encoded.append(type_hash.to_be_bytes());
         encoded.append(DataEncoder::encode_address(self.from).to_be_bytes());
         encoded.append(DataEncoder::encode_address(self.to).to_be_bytes());
         encoded.append(DataEncoder::encode_string(self.contents).to_be_bytes());
@@ -328,7 +337,10 @@ impl SRC16Encode for Mail {
 
 impl SRC16 for Contract {
     fn domain_separator_hash(encoding: Encoding) -> b256 {
-        _get_domain_separator().domain_hash()
+        match encoding {
+            Encoding::SRC16 => _get_domain_separator().domain_hash(),
+            Encoding::EIP712 => revert(0),
+        }
     }
 
     fn data_type_hash(encoding: Encoding) -> b256 {
@@ -336,7 +348,10 @@ impl SRC16 for Contract {
     }
 
     fn domain_separator(encoding: Encoding) -> Domain {
-        Domain::SRC16Domain(_get_domain_separator())
+        match encoding {
+            Encoding::SRC16 => Domain::SRC16Domain(_get_domain_separator()),
+            Encoding::EIP712 => revert(0),
+        }
     }
 }
 
@@ -388,22 +403,33 @@ const MAIL_TYPE_HASH: b256 = 0xcfc972d321844e0304c5a752957425d5df13c3b09c563624a
 
 impl SRC16Encode for Mail {
     fn type_hash(encoding: Encoding) -> b256 {
-        MAIL_TYPE_HASH
+        match encoding {
+            Encoding::EIP712 => MAIL_TYPE_HASH,
+            Encoding::SRC16 => revert(0),
+        }
     }
 
     fn struct_hash(self, encoding: Encoding) -> b256 {
+        let type_hash = Self::type_hash(encoding);
         let mut encoded = Bytes::new();
-        encoded.append(MAIL_TYPE_HASH.to_be_bytes());
+        encoded.append(type_hash.to_be_bytes());
         encoded.append(DataEncoder::encode_b256(self.from).to_be_bytes());
         encoded.append(DataEncoder::encode_b256(self.to).to_be_bytes());
         encoded.append(DataEncoder::encode_string(self.contents).to_be_bytes());
-        keccak256(encoded)
+        let result_buffer: b256 = 0x0000000000000000000000000000000000000000000000000000000000000000;
+        asm(hash: result_buffer, ptr: encoded.ptr(), len: encoded.len()) {
+            k256 hash ptr len;
+            hash: b256
+        }
     }
 }
 
 impl SRC16 for Contract {
     fn domain_separator_hash(encoding: Encoding) -> b256 {
-        _get_domain_separator().domain_hash()
+        match encoding {
+            Encoding::EIP712 => _get_domain_separator().domain_hash(),
+            Encoding::SRC16 => revert(0),
+        }
     }
 
     fn data_type_hash(encoding: Encoding) -> b256 {
@@ -411,7 +437,10 @@ impl SRC16 for Contract {
     }
 
     fn domain_separator(encoding: Encoding) -> Domain {
-        Domain::EIP712Domain(_get_domain_separator())
+        match encoding {
+            Encoding::EIP712 => Domain::EIP712Domain(_get_domain_separator()),
+            Encoding::SRC16 => revert(0),
+        }
     }
 }
 

@@ -483,7 +483,7 @@ pub trait SRC16Encode {
         ];
 
         // \x19\x01 prefix
-        asm(dst: encoded, src_1: 0x19, src_2: 0x01, bytes: 1) {
+        asm(dst: encoded, src_1: 0x19, src_2: 0x01) {
             sb dst src_1 i0;
             sb dst src_2 i1;
         };
