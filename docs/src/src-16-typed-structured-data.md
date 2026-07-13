@@ -61,22 +61,26 @@ The domain separator provides context for the signing operation, preventing cros
 
 ```sway
 pub struct SRC16Domain {
-    name: String,                   // The protocol name (e.g., "MyProtocol")
-    version: String,                // The protocol version (e.g., "1")
-    chain_id: u64,                  // The Fuel chain ID
-    verifying_contract: ContractId, // The contract id that will verify the signature
+    name: Option<String>,                   // The protocol name (e.g., "MyProtocol")
+    version: Option<String>,                // The protocol version (e.g., "1")
+    chain_id: Option<u256>,                 // The Fuel chain ID
+    verifying_contract: Option<ContractId>, // The contract id that will verify the signature
+    salt: Option<b256>,                     // An optional disambiguating salt
 }
 ```
 
-The `chain_id` field is a u64 that must be encoded by left-padding with zeros and packed in big-endian order to fill a 32-byte value.
+All fields are optional. Only the fields that are `Some` are included in both the domain type hash string and the encoded data. This mirrors the EIP712 specification which allows the domain to be constructed with only the fields relevant to the application.
+
+The `chain_id` field is a `u256` encoded as 32 bytes big-endian.
 
 The domain separator encoding follows this scheme:
 
-* Add SRC16_DOMAIN_TYPE_HASH
-* Add Keccak256 hash of name string
-* Add Keccak256 hash of version string
-* Add chain ID as 32-byte big-endian
-* Add verifying contract id as 32 bytes
+* Dynamically build the type hash string from only the present fields (e.g. `"SRC16Domain(string name,u256 chain_id)"`)
+* Compute the type hash as the Keccak256 of the type hash string (stored at position 0 of the encoded buffer)
+* For each present field in order: append its encoded 32-byte value to the buffer
+* Compute the final domain hash as Keccak256 of the entire encoded buffer
+
+All hashing is performed using raw `k256` assembly to avoid length-prefixed stdlib encoding.
 
 ## Type Encoding
 
@@ -122,7 +126,7 @@ Reference Types:
 * Arrays (both fixed and dynamic) are encoded as the Keccak256 hash of their concatenated encodings
 * Struct values are encoded recursively as hash_struct(value)
 
-The implementation of `TypedDataHash` for `𝕊` SHALL utilize the `DataEncoder` for encoding each element of the struct based on its type.
+The implementation of `SRC16Encode` for `𝕊` SHALL utilize the `DataEncoder` for encoding each element of the struct based on its type.
 
 ## Final Message Encoding
 
@@ -137,36 +141,66 @@ where:
 * `domain_separator` is the 32-byte hash of the domain parameters
 * `hash_struct`(message) is the 32-byte hash of the structured data
 
+## Encoding and Domain Enums
+
+The `Encoding` enum selects between the Fuel-native and Ethereum-compatible encoding variants:
+
+```sway
+pub enum Encoding {
+    SRC16: (),
+    EIP712: (),
+}
+```
+
+The `Domain` enum wraps either a Fuel-native or Ethereum-compatible domain separator. The encoding variant is derived from the domain type:
+
+```sway
+pub enum Domain {
+    SRC16Domain: SRC16Domain,
+    EIP712Domain: EIP712Domain,
+}
+```
+
 ## Example implementation
 
 ```sway
-const MAIL_TYPE_HASH: b256 = 0x536e54c54e6699204b424f41f6dea846ee38ac369afec3e7c141d2c92c65e67f;
+// keccak256("Mail(address from,address to,string contents)")
+const MAIL_SRC16_TYPE_HASH: b256 = 0x536e54c54e6699204b424f41f6dea846ee38ac369afec3e7c141d2c92c65e67f;
+// keccak256("Mail(bytes32 from,bytes32 to,string contents)")
+// Fuel's 32-byte Address maps to bytes32 in EIP712 since EVM has no 32-byte address primitive.
+const MAIL_EIP712_TYPE_HASH: b256 = 0xcfc972d321844e0304c5a752957425d5df13c3b09c563624a806b517155d7056;
 
-impl TypedDataHash for Mail {
-
-    fn type_hash() -> b256 {
-        MAIL_TYPE_HASH
+impl SRC16Encode for Mail {
+    fn type_hash(encoding: Encoding) -> b256 {
+        match encoding {
+            Encoding::SRC16 => MAIL_SRC16_TYPE_HASH,
+            Encoding::EIP712 => MAIL_EIP712_TYPE_HASH,
+        }
     }
 
-    fn struct_hash(self) -> b256 {
+    fn struct_hash(self, encoding: Encoding) -> b256 {
+        let type_hash = Self::type_hash(encoding);
         let mut encoded = Bytes::new();
-        encoded.append(
-            MAIL_TYPE_HASH.to_be_bytes()
-        );
-        encoded.append(
-            DataEncoder::encode_address(self.from).to_be_bytes()
-        );
-        encoded.append(
-            DataEncoder::encode_address(self.to).to_be_bytes()
-        );
-        encoded.append(
-            DataEncoder::encode_string(self.contents).to_be_bytes()
-        );
-
-        keccak256(encoded)
+        encoded.append(type_hash.to_be_bytes());
+        encoded.append(DataEncoder::encode_address(self.from).to_be_bytes());
+        encoded.append(DataEncoder::encode_address(self.to).to_be_bytes());
+        encoded.append(DataEncoder::encode_string(self.contents).to_be_bytes());
+        let result_buffer: b256 = 0x0000000000000000000000000000000000000000000000000000000000000000;
+        asm(hash: result_buffer, ptr: encoded.ptr(), len: encoded.len()) {
+            k256 hash ptr len;
+            hash: b256
+        }
     }
 }
 ```
+
+The default `encode` method is provided automatically and produces the final signed hash:
+
+```text
+keccak256("\x19\x01" ‖ domain_hash ‖ struct_hash)
+```
+
+To sign a message, call `mail.encode(domain)` where `domain` is a `Domain::SRC16Domain(...)` or `Domain::EIP712Domain(...)` value.
 
 ## Rationale
 
@@ -214,24 +248,26 @@ When implementing SRC16 in relation to EIP712, the following type mappings and c
 #### Domain Separator Compatibility
 
 ```sway
-// SRC16 Domain (Fuel native)
+// SRC16 Domain (Fuel native) — all fields optional
 pub struct SRC16Domain {
-    name: String,                   // Same as EIP712
-    version: String,                // Same as EIP712
-    chain_id: u64,                  // Fuel chain ID
-    verifying_contract: ContractId, // Full 32-byte ContractId
+    name: Option<String>,                   // Same as EIP712
+    version: Option<String>,                // Same as EIP712
+    chain_id: Option<u256>,                 // Fuel chain ID
+    verifying_contract: Option<ContractId>, // Full 32-byte ContractId
+    salt: Option<b256>,                     // Optional disambiguating salt
 }
 
-// EIP712 Domain (Ethereum compatible)
+// EIP712 Domain (Ethereum compatible) — all fields optional
 pub struct EIP712Domain {
-    name: String,
-    version: String,
-    chain_id: u256,
-    verifying_contract: b256,      // Only rightmost 20 bytes used
+    name: Option<String>,
+    version: Option<String>,
+    chain_id: Option<u256>,
+    verifying_contract: Option<b256>,       // Only rightmost 20 bytes used
+    salt: Option<b256>,                     // Optional disambiguating salt
 }
 ```
 
-Note on `verifying_contract` field; When implementing EIP712 compatibility within SRC16, the `verifying_contract` address in the `EIP712Domain` must be constructed by taking only the rightmost 20 bytes from either a Fuel `ContractId`. This ensures proper compatibility with Ethereum's 20-byte addressing scheme in the domain separator.
+Note on `verifying_contract` field; When implementing EIP712 compatibility within SRC16, the `verifying_contract` address in the `EIP712Domain` must be constructed by taking only the rightmost 20 bytes from a Fuel `ContractId`. The `EIP712Domain::new` constructor handles this automatically. This ensures proper compatibility with Ethereum's 20-byte addressing scheme in the domain separator.
 
 ```sway
 // Example ContractId conversion:
@@ -244,7 +280,7 @@ Note on `verifying_contract` field; When implementing EIP712 compatibility withi
 //    └─────────────── 20 bytes ───────────────┘
 ```
 
-Note on EIP712 Domain Separator `salt`; Within EIP712 the field `salt` is an optional field to be used at the discretion of the protocol designer. Within SRC16 the `EIP712Domain` does not use the `salt` field. The other fields in `EIP712Domain` are mandatory within SRC16.
+Note on `salt`; Both `SRC16Domain` and `EIP712Domain` support an optional `salt` field at the discretion of the protocol designer. When `salt` is `None` it is omitted from the type hash string and encoded data entirely.
 
 ## Security Considerations
 
