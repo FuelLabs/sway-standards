@@ -1,0 +1,9 @@
+[project]
+authors = ["Fuel Labs <contact@fuel.sh>"]
+entry = "src16.sw"
+license = "Apache-2.0"
+name = "src16_benchmarks"
+
+[dependencies]
+benchmarking = { path = "../benchmarking" }
+src16 = { path = "../../standards/src16" }

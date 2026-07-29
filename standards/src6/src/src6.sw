@@ -99,7 +99,7 @@ abi SRC6 {
     ///
     /// * If the asset is not supported by the contract.
     /// * If the amount of shares is zero.
-    /// * If the transferred shares do not corresspond to the given asset.
+    /// * If the transferred shares do not correspond to the given asset.
     /// * The user crosses any global or user specific withdrawal limits.
     ///
     /// # Examples

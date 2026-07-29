@@ -11,11 +11,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
 
 env:
-  CARGO_TERM_COLOR: always
   REGISTRY: ghcr.io
-  RUST_VERSION: 1.84.0
-  FORC_VERSION: 0.70.2
-  CORE_VERSION: 0.44.0
+  FORC_VERSION: 0.72.0
+  CORE_VERSION: 0.48.2
 
 jobs:
   verify-branch:
@@ -88,17 +86,6 @@ jobs:
           else
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
-
-      - name: Install Rust toolchain
-        if: steps.version-check.outputs.changed == 'true'
-        uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: ${{ env.RUST_VERSION }}
-          components: rustfmt
-
-      - name: Init cache
-        if: steps.version-check.outputs.changed == 'true'
-        uses: Swatinem/rust-cache@v2
 
       - name: Install Fuel toolchain
         if: steps.version-check.outputs.changed == 'true'

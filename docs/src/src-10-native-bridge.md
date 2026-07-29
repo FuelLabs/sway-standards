@@ -45,7 +45,7 @@ The `claim_refund()` function is called if something goes wrong in the bridging 
 
 #### `DepositType`
 
-The `DepositType` enum describes whether the bridged deposit is made to a address, contract, or contract and contains additional metadata. There MUST be the following variants in the `DepositType` enum:
+The `DepositType` enum describes whether the bridged deposit is made to an address, contract, or contract and contains additional metadata. There MUST be the following variants in the `DepositType` enum:
 
 **`Address`: `()`**
 
@@ -53,11 +53,11 @@ The `Address` variant MUST represent when the deposit is made to an address on t
 
 **`Contract`: `()`**
 
-The `Contract` variant MUST represent when the deposit is made to an contract on the Fuel chain.
+The `Contract` variant MUST represent when the deposit is made to a contract on the Fuel chain.
 
 **`ContractWithData`: `()`**
 
-The `ContractWithData` variant MUST represent when the deposit is made to an contract and contains additional metadata for the Fuel chain.
+The `ContractWithData` variant MUST represent when the deposit is made to a contract and contains additional metadata for the Fuel chain.
 
 ##### Example Deposit Type
 

@@ -8,33 +8,6 @@ pub type AltBn128Proof = [u8; 288];
 /// Sparse Merkle Tree proof data.
 pub type SparseMerkleProof = Proof;
 
-#[cfg(experimental_const_generics = false)]
-impl AbiEncode for AltBn128Proof {
-    fn abi_encode(self, buffer: Buffer) -> Buffer {
-        let mut buffer = buffer;
-        let mut i = 0;
-        while i < 288 {
-            buffer = self[i].abi_encode(buffer);
-            i += 1;
-        };
-        buffer
-    }
-}
-
-#[cfg(experimental_const_generics = false)]
-impl AbiDecode for AltBn128Proof {
-    fn abi_decode(ref mut buffer: BufferReader) -> [u8; 288] {
-        let first: u8 = buffer.decode::<u8>();
-        let mut array = [first; 288];
-        let mut i = 1;
-        while i < 288 {
-            array[i] = buffer.decode::<u8>();
-            i += 1;
-        };
-        array
-    }
-}
-
 /// The error log used something in the SRC-17 verification process fails.
 pub enum SRC17VerificationError {
     /// Emitted when verification of a SRC-17 proof fails.

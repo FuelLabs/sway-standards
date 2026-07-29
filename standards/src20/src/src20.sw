@@ -114,7 +114,7 @@ abi SRC20 {
     /// ```sway
     /// use src20::SRC20;
     ///
-    /// fn foo(contract_id: ContractId, asset: AssedId) {
+    /// fn foo(contract_id: ContractId, asset: AssetId) {
     ///     let contract_abi = abi(SRC20, contract_id.bits());
     ///     let decimals: Option<u8> = contract_abi.decimals(asset);
     ///     assert(decimals.unwrap() == 8u8);
