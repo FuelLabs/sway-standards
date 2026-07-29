@@ -59,7 +59,7 @@ set -u
 
 # The expected `forc` version. If the installed `forc` differs, a warning is
 # printed (to stderr) before running the benchmarks.
-FORC_VERSION="0.71.2"
+FORC_VERSION="0.72.0"
 
 VALID_FORMATS="raw csv ascii md json"
 
