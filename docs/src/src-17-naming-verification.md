@@ -10,7 +10,7 @@ A standard interface for names on Fuel allows external applications to verify an
 
 A number of existing name service platforms already existed prior to the development of this standard. Notably the most well-known on the Ethereum Blockchain is the [Ethereum Name Service(ENS)](https://ens.domains/). This domain service has a major influence on other name services across multiple platforms. ENS pioneered name service platforms and this standard takes some inspiration from their resolver design.
 
-On Fuel, we have 2 existing name service platforms. These are [Bako ID](https://www.bako.id/) and [Fuel Name Service(FNS)](https://fuelname.com/). This standard was developed in close collaboration with these two platforms to ensure compatibility and ease of upgrade.
+On Fuel, we have 2 existing name service platforms. These are [Bako ID](https://app.bako.id/) and [Fuel Name Service(FNS)](https://fuelname.com/). This standard was developed in close collaboration with these two platforms to ensure compatibility and ease of upgrade.
 
 ## Specification
 

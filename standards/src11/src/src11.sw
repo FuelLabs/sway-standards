@@ -66,7 +66,7 @@ impl PartialEq for SecurityInformation {
             return false;
         }
 
-        // If both prefered languages info contain data, check each string
+        // If both preferred languages info contain data, check each string
         if self.preferred_languages.is_some() && other.preferred_languages.is_some() {
             let self_preferred_languages = self.preferred_languages.unwrap();
             let other_preferred_languages = self.preferred_languages.unwrap();
