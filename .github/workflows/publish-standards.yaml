@@ -98,20 +98,44 @@ jobs:
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Install Fuel toolchain
+      - name: Skip if version already published
+        id: publish-check
         if: steps.version-check.outputs.changed == 'true'
+        run: |
+          # forc.pub accepts or rejects a publish based on its package database, so querying it tells us
+          # reliably whether `forc publish` would reject this version as already published. Skipping in that
+          # case makes the job idempotent: re-running after a partial or failed release skips the standards
+          # that were already published and proceeds with the rest, instead of failing on "already exists"
+          # and (with fail-fast) cancelling the standards still waiting to be published.
+          #
+          # We parse with grep rather than jq: only base-system tools (bash, curl, grep) are reliably present
+          # on the runner; jq is documented as preinstalled but not contractually guaranteed. The API returns
+          # compact JSON, and matching the exact `"version":"X.Y.Z"` (with surrounding quotes) is an exact test
+          # (the closing quote stops e.g. 0.8.2 from matching 0.8.20). `|| true` keeps a failed request from
+          # aborting the step: it yields an empty result, so we fall through to publishing (forc publish would
+          # reject a true duplicate anyway) rather than wrongly skipping.
+          versions="$(curl -fsSL "https://api.forc.pub/package/versions?name=${{ matrix.project }}" || true)"
+          if printf '%s' "$versions" | grep -Fq "\"version\":\"${{ env.CURRENT_VERSION }}\""; then
+            echo "already-published=true" >> "$GITHUB_OUTPUT"
+            echo "${{ matrix.project }} ${{ env.CURRENT_VERSION }} is already published on forc.pub; skipping."
+          else
+            echo "already-published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install Fuel toolchain
+        if: steps.version-check.outputs.changed == 'true' && steps.publish-check.outputs.already-published == 'false'
         uses: FuelLabs/action-fuel-toolchain@v0.6.0
         with:
           name: my-toolchain
           components: forc@${{ env.FORC_VERSION }}, fuel-core@${{ env.CORE_VERSION }}
 
       - name: Publish Standards
-        if: steps.version-check.outputs.changed == 'true'
+        if: steps.version-check.outputs.changed == 'true' && steps.publish-check.outputs.already-published == 'false'
         run: |
           cd standards/${{ matrix.project }}
-          # Retry to ride out transient registry/index push errors. If forc publish keeps failing
-          # (e.g. the version already exists from a previous partial publish), fail loudly rather
-          # than leaving a silent gap.
+          # Already-published versions are skipped by the "Skip if version already published" step above,
+          # so a failure here is a genuine error (e.g. a transient registry/index push error). Retry a few
+          # times and, if it still fails, fail loudly rather than leaving a silent gap.
           attempts=3
           n=1
           until forc publish; do
