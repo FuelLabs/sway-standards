@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Version 0.9.0]
+
+### Fixed v0.9.0
+
+- [#XXX](https://github.com/FuelLabs/sway-standards/pull/XXX) Fixes `PartialEq for SRC17Proof` skipping the first byte when comparing two `AltBn128Proof` values, so proofs that differ only in byte 0 are no longer reported as equal.
+- [#XXX](https://github.com/FuelLabs/sway-standards/pull/XXX) Fixes `PartialEq for SecurityInformation` comparing `preferred_languages` and `auditors` against `self` instead of `other`, and not requiring `contact_information` to have equal length, so unequal `SecurityInformation` values are no longer reported as equal.
+
 ## [Version 0.8.0]
 
 ### Added v0.8.0

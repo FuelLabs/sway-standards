@@ -49,27 +49,26 @@ abi SRC11 {
 
 impl PartialEq for SecurityInformation {
     fn eq(self, other: Self) -> bool {
-        // If both contact info contain data, check each string
+        // Contact information must match element-by-element (same length, same entries).
         let self_contact_information_len = self.contact_information.len();
         let other_contact_information_len = other.contact_information.len();
-        if self_contact_information_len > 0 && other_contact_information_len > 0 {
-            // Check each string matches
-            let mut iter = 0;
-            while iter < self_contact_information_len {
-                if self.contact_information.get(iter) != other.contact_information.get(iter)
-                {
-                    return false;
-                }
-                iter += 1;
-            }
-        } else if !(self_contact_information_len == 0 && self_contact_information_len == 0) { // Otherwise both must contain nothing
+        if self_contact_information_len != other_contact_information_len
+        {
             return false;
+        }
+        let mut iter = 0;
+        while iter < self_contact_information_len {
+            if self.contact_information.get(iter) != other.contact_information.get(iter)
+            {
+                return false;
+            }
+            iter += 1;
         }
 
         // If both preferred languages info contain data, check each string
         if self.preferred_languages.is_some() && other.preferred_languages.is_some() {
             let self_preferred_languages = self.preferred_languages.unwrap();
-            let other_preferred_languages = self.preferred_languages.unwrap();
+            let other_preferred_languages = other.preferred_languages.unwrap();
 
             let self_preferred_languages_len = self_preferred_languages.len();
             let other_preferred_languages_len = other_preferred_languages.len();
@@ -95,7 +94,7 @@ impl PartialEq for SecurityInformation {
         // If both auditors info contain data, check each string
         if self.auditors.is_some() && other.auditors.is_some() {
             let self_auditors = self.auditors.unwrap();
-            let other_auditors = self.auditors.unwrap();
+            let other_auditors = other.auditors.unwrap();
 
             let self_auditors_len = self_auditors.len();
             let other_auditors_len = other_auditors.len();
@@ -772,4 +771,122 @@ impl SecurityInformation {
     pub fn additional_information(self) -> Option<String> {
         self.additional_information
     }
+}
+
+#[test]
+fn test_security_information_eq_checks_preferred_languages() {
+    let mut langs_en: Vec<String> = Vec::new();
+    langs_en.push(String::from_ascii_str("en"));
+    let mut langs_fr: Vec<String> = Vec::new();
+    langs_fr.push(String::from_ascii_str("fr"));
+
+    let a = SecurityInformation::new(
+        String::from_ascii_str("proj"),
+        None,
+        Vec::new(),
+        String::from_ascii_str("policy"),
+        Some(langs_en),
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+    );
+    let b = SecurityInformation::new(
+        String::from_ascii_str("proj"),
+        None,
+        Vec::new(),
+        String::from_ascii_str("policy"),
+        Some(langs_fr),
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+    );
+
+    // `a` and `b` differ only in `preferred_languages` and must not be equal.
+    assert(a != b);
+}
+
+#[test]
+fn test_security_information_eq_checks_auditors() {
+    let mut auditors_a: Vec<String> = Vec::new();
+    auditors_a.push(String::from_ascii_str("auditor-a"));
+    let mut auditors_b: Vec<String> = Vec::new();
+    auditors_b.push(String::from_ascii_str("auditor-b"));
+
+    let a = SecurityInformation::new(
+        String::from_ascii_str("proj"),
+        None,
+        Vec::new(),
+        String::from_ascii_str("policy"),
+        None,
+        None,
+        None,
+        None,
+        None,
+        Some(auditors_a),
+        None,
+        None,
+    );
+    let b = SecurityInformation::new(
+        String::from_ascii_str("proj"),
+        None,
+        Vec::new(),
+        String::from_ascii_str("policy"),
+        None,
+        None,
+        None,
+        None,
+        None,
+        Some(auditors_b),
+        None,
+        None,
+    );
+
+    // `a` and `b` differ only in `auditors` and must not be equal.
+    assert(a != b);
+}
+
+#[test]
+fn test_security_information_eq_checks_contact_information_length() {
+    let mut one: Vec<String> = Vec::new();
+    one.push(String::from_ascii_str("email:a@example.com"));
+
+    let empty_contacts = SecurityInformation::new(
+        String::from_ascii_str("proj"),
+        None,
+        Vec::new(),
+        String::from_ascii_str("policy"),
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+    );
+    let one_contact = SecurityInformation::new(
+        String::from_ascii_str("proj"),
+        None,
+        one,
+        String::from_ascii_str("policy"),
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+    );
+
+    // Lists of different length must never compare equal.
+    assert(empty_contacts != one_contact);
 }
