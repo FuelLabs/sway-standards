@@ -49,73 +49,7 @@ abi SRC11 {
 
 impl PartialEq for SecurityInformation {
     fn eq(self, other: Self) -> bool {
-        // Contact information must match element-by-element (same length, same entries).
-        let self_contact_information_len = self.contact_information.len();
-        let other_contact_information_len = other.contact_information.len();
-        if self_contact_information_len != other_contact_information_len
-        {
-            return false;
-        }
-        let mut iter = 0;
-        while iter < self_contact_information_len {
-            if self.contact_information.get(iter) != other.contact_information.get(iter)
-            {
-                return false;
-            }
-            iter += 1;
-        }
-
-        // If both preferred languages info contain data, check each string
-        if self.preferred_languages.is_some() && other.preferred_languages.is_some() {
-            let self_preferred_languages = self.preferred_languages.unwrap();
-            let other_preferred_languages = other.preferred_languages.unwrap();
-
-            let self_preferred_languages_len = self_preferred_languages.len();
-            let other_preferred_languages_len = other_preferred_languages.len();
-            // If lengths do not match, we do not need to iterate over the strings
-            if self_preferred_languages_len != other_preferred_languages_len
-            {
-                return false;
-            }
-
-            // Check each string matches
-            let mut iter = 0;
-            while iter < self_preferred_languages_len {
-                if self_preferred_languages.get(iter) != other_preferred_languages.get(iter)
-                {
-                    return false;
-                }
-                iter += 1;
-            }
-        } else if !(self.preferred_languages.is_none() && other.preferred_languages.is_none()) { // Otherwise both must be none
-            return false;
-        }
-
-        // If both auditors info contain data, check each string
-        if self.auditors.is_some() && other.auditors.is_some() {
-            let self_auditors = self.auditors.unwrap();
-            let other_auditors = other.auditors.unwrap();
-
-            let self_auditors_len = self_auditors.len();
-            let other_auditors_len = other_auditors.len();
-            // If lengths do not match, we do not need to iterate over the strings
-            if self_auditors_len != other_auditors_len {
-                return false;
-            }
-
-            // Check each string matches
-            let mut iter = 0;
-            while iter < self_auditors_len {
-                if self_auditors.get(iter) != other_auditors.get(iter) {
-                    return false;
-                }
-                iter += 1;
-            }
-        } else if !(self.auditors.is_none() && other.auditors.is_none()) { // Otherwise both must be none
-            return false;
-        }
-
-        self.name == other.name && self.project_url == other.project_url && self.policy == other.policy && self.encryption == other.encryption && self.source_code == other.source_code && self.source_release == other.source_release && self.source_revision == other.source_revision && self.acknowledgments == other.acknowledgments && self.additional_information == other.additional_information
+        self.name == other.name && self.project_url == other.project_url && self.contact_information == other.contact_information && self.policy == other.policy && self.preferred_languages == other.preferred_languages && self.encryption == other.encryption && self.source_code == other.source_code && self.source_release == other.source_release && self.source_revision == other.source_revision && self.auditors == other.auditors && self.acknowledgments == other.acknowledgments && self.additional_information == other.additional_information
     }
 }
 
@@ -810,7 +744,7 @@ fn test_security_information_eq_checks_preferred_languages() {
     );
 
     // `a` and `b` differ only in `preferred_languages` and must not be equal.
-    assert(a != b);
+    assert_ne(a, b);
 }
 
 #[test]
@@ -850,7 +784,7 @@ fn test_security_information_eq_checks_auditors() {
     );
 
     // `a` and `b` differ only in `auditors` and must not be equal.
-    assert(a != b);
+    assert_ne(a, b);
 }
 
 #[test]
@@ -888,5 +822,5 @@ fn test_security_information_eq_checks_contact_information_length() {
     );
 
     // Lists of different length must never compare equal.
-    assert(empty_contacts != one_contact);
+    assert_ne(empty_contacts, one_contact);
 }
