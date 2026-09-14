@@ -38,12 +38,14 @@ impl PartialEq for SRC17Proof {
     fn eq(self, other: Self) -> bool {
         match (self, other) {
             (Self::AltBn128Proof(proof_1), Self::AltBn128Proof(proof_2)) => {
-                // NOTE: `proof_1 == proof_2` (relying on the stdlib's generic
+                // TODO: `proof_1 == proof_2` (relying on the stdlib's generic
                 // `PartialEq` for `[T; N]`) would be simpler, but on the CI-pinned
                 // `forc 0.72.0` it triggers an internal compiler error ("Const
                 // generic not materialized") specifically when this file also uses
                 // `merkle::sparse::Proof`'s `PartialEq` in the sibling match arm
-                // below. Keeping the explicit loop until that's fixed upstream.
+                // below. This is a known compiler bug:
+                //     https://github.com/FuelLabs/sway/issues/7604
+                // Replace with `proof_1 == proof_2` once the bug is fixed.
                 let mut i = 0;
                 while i < 288 {
                     if proof_1[i] != proof_2[i] {
@@ -360,11 +362,12 @@ impl Eq for SRC17NameEvent {}
 
 #[test]
 fn test_alt_bn128_proof_eq_compares_every_byte() {
-    // NOTE: uses `assert(x == y)` / `assert(x != y)` rather than the preferred
+    // TODO: uses `assert(x == y)` / `assert(x != y)` rather than the preferred
     // `assert_eq`/`assert_ne` here: those need to `abi_encode` their arguments
     // for the failure path, and encoding a `[u8; 288]` in a crate that also
-    // uses `merkle::sparse::Proof` hits the same `forc 0.72.0` "Const generic
-    // not materialized" internal compiler error described above.
+    // uses `merkle::sparse::Proof` hits the same compiler bug described above
+    // (https://github.com/FuelLabs/sway/issues/7604). Switch to `assert_eq`/
+    // `assert_ne` once it's fixed.
 
     // Proofs that differ only in the first byte must not be considered equal.
     let a: AltBn128Proof = [0u8; 288];
