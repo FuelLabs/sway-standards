@@ -38,7 +38,15 @@ impl PartialEq for SRC17Proof {
     fn eq(self, other: Self) -> bool {
         match (self, other) {
             (Self::AltBn128Proof(proof_1), Self::AltBn128Proof(proof_2)) => {
-                let mut i = 1;
+                // TODO: `proof_1 == proof_2` (relying on the stdlib's generic
+                // `PartialEq` for `[T; N]`) would be simpler, but on the CI-pinned
+                // `forc 0.72.0` it triggers an internal compiler error ("Const
+                // generic not materialized") specifically when this file also uses
+                // `merkle::sparse::Proof`'s `PartialEq` in the sibling match arm
+                // below. This is a known compiler bug:
+                //     https://github.com/FuelLabs/sway/issues/7604
+                // Replace with `proof_1 == proof_2` once the bug is fixed.
+                let mut i = 0;
                 while i < 288 {
                     if proof_1[i] != proof_2[i] {
                         return false
@@ -351,3 +359,30 @@ impl PartialEq for SRC17NameEvent {
 }
 
 impl Eq for SRC17NameEvent {}
+
+#[test]
+fn test_alt_bn128_proof_eq_compares_every_byte() {
+    // TODO: uses `assert(x == y)` / `assert(x != y)` rather than the preferred
+    // `assert_eq`/`assert_ne` here: those need to `abi_encode` their arguments
+    // for the failure path, and encoding a `[u8; 288]` in a crate that also
+    // uses `merkle::sparse::Proof` hits the same compiler bug described above
+    // (https://github.com/FuelLabs/sway/issues/7604). Switch to `assert_eq`/
+    // `assert_ne` once it's fixed.
+
+    // Proofs that differ only in the first byte must not be considered equal.
+    let a: AltBn128Proof = [0u8; 288];
+    let mut b: AltBn128Proof = [0u8; 288];
+    b[0] = 1u8;
+    assert(SRC17Proof::AltBn128Proof(a) != SRC17Proof::AltBn128Proof(b));
+
+    // Proofs that differ only in the last byte must not be considered equal.
+    let c: AltBn128Proof = [0u8; 288];
+    let mut d: AltBn128Proof = [0u8; 288];
+    d[287] = 1u8;
+    assert(SRC17Proof::AltBn128Proof(c) != SRC17Proof::AltBn128Proof(d));
+
+    // Identical proofs must be considered equal.
+    let e: AltBn128Proof = [7u8; 288];
+    let f: AltBn128Proof = [7u8; 288];
+    assert(SRC17Proof::AltBn128Proof(e) == SRC17Proof::AltBn128Proof(f));
+}
