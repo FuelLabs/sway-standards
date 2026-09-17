@@ -115,7 +115,10 @@ build_one() {
     local project_dir="$2"
     local log_file="${logs_dir}/${project_name}.log"
 
-    if forc build --path "${project_dir}" "${FORC_BUILD_ARGS[@]}" > "${log_file}" 2>&1; then
+    # `${arr[@]+"${arr[@]}"}` guards against `set -u` aborting on an empty
+    # array: on Bash 3.2 (stock macOS) expanding an empty array with `[@]` is
+    # treated as an unbound variable and would abort the build.
+    if forc build --path "${project_dir}" ${FORC_BUILD_ARGS[@]+"${FORC_BUILD_ARGS[@]}"} > "${log_file}" 2>&1; then
         printf '%b %s\n' "${GREEN}✓${NC}" "${project_name}"
         echo "pass" > "${logs_dir}/${project_name}.status"
     else
