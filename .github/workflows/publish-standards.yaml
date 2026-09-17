@@ -5,7 +5,7 @@ on:
     branches:
       - release
     paths:
-      - 'standards/**/Forc.toml'  # Only trigger when Forc.toml changes
+      - 'standards/**/Forc.toml'  # Only trigger when Forc.toml changes.
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -35,7 +35,18 @@ jobs:
     needs: verify-branch
     if: needs.verify-branch.outputs.is-release == 'true'
     strategy:
+          # Serialize publishes and stop on first failure. `forc publish` appends a commit to the single
+          # FuelLabs/forc.pub-index git repo; running the matrix in parallel makes those index writes race.
+          # Also, dependencies must be published before their dependents.
+          max-parallel: 1
+          # Stop the line on the first failure so we never publish a dependent whose dependency failed.
+          fail-fast: true
           matrix:
+            # Keep in dependency order: a standard MUST appear AFTER anything it depends on, so that with
+            # max-parallel: 1 the dependency is published before its dependent (src14 -> src5, src15 -> src7).
+            # GitHub running projects with `max-parallel: 1` in listed order is not contractually guaranteed,
+            # but is reliable in practice. We will not complicate here with a two-job (leaves -> dependents)
+            # split.
             project:
               [
                 "src3",
@@ -45,11 +56,11 @@ jobs:
                 "src10",
                 "src11",
                 "src12",
-                "src14",
-                "src15",
                 "src16",
                 "src17",
                 "src20",
+                "src14",
+                "src15",
               ]
     steps:
       - name: Checkout repository (with previous commit)
@@ -87,17 +98,54 @@ jobs:
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Install Fuel toolchain
+      - name: Skip if version already published
+        id: publish-check
         if: steps.version-check.outputs.changed == 'true'
+        run: |
+          # forc.pub accepts or rejects a publish based on its package database, so querying it tells us
+          # reliably whether `forc publish` would reject this version as already published. Skipping in that
+          # case makes the job idempotent: re-running after a partial or failed release skips the standards
+          # that were already published and proceeds with the rest, instead of failing on "already exists"
+          # and (with fail-fast) cancelling the standards still waiting to be published.
+          #
+          # We parse with grep rather than jq: only base-system tools (bash, curl, grep) are reliably present
+          # on the runner; jq is documented as preinstalled but not contractually guaranteed. The API returns
+          # compact JSON, and matching the exact `"version":"X.Y.Z"` (with surrounding quotes) is an exact test
+          # (the closing quote stops e.g. 0.8.2 from matching 0.8.20). `|| true` keeps a failed request from
+          # aborting the step: it yields an empty result, so we fall through to publishing (forc publish would
+          # reject a true duplicate anyway) rather than wrongly skipping.
+          versions="$(curl -fsSL "https://api.forc.pub/package/versions?name=${{ matrix.project }}" || true)"
+          if printf '%s' "$versions" | grep -Fq "\"version\":\"${{ env.CURRENT_VERSION }}\""; then
+            echo "already-published=true" >> "$GITHUB_OUTPUT"
+            echo "${{ matrix.project }} ${{ env.CURRENT_VERSION }} is already published on forc.pub; skipping."
+          else
+            echo "already-published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install Fuel toolchain
+        if: steps.version-check.outputs.changed == 'true' && steps.publish-check.outputs.already-published == 'false'
         uses: FuelLabs/action-fuel-toolchain@v0.6.0
         with:
           name: my-toolchain
           components: forc@${{ env.FORC_VERSION }}, fuel-core@${{ env.CORE_VERSION }}
 
       - name: Publish Standards
-        if: steps.version-check.outputs.changed == 'true'
+        if: steps.version-check.outputs.changed == 'true' && steps.publish-check.outputs.already-published == 'false'
         run: |
           cd standards/${{ matrix.project }}
-          forc publish
+          # Already-published versions are skipped by the "Skip if version already published" step above,
+          # so a failure here is a genuine error (e.g. a transient registry/index push error). Retry a few
+          # times and, if it still fails, fail loudly rather than leaving a silent gap.
+          attempts=3
+          n=1
+          until forc publish; do
+            if [ "$n" -ge "$attempts" ]; then
+              echo "::error::forc publish for ${{ matrix.project }} failed after $attempts attempts"
+              exit 1
+            fi
+            echo "forc publish failed (attempt $n/$attempts); retrying in 10s..."
+            n=$((n + 1))
+            sleep 10
+          done
         env:
           FORC_PUB_TOKEN: ${{ secrets.FORCPUB_TOKEN }}
